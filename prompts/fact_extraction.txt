@@ -1,0 +1,13 @@
+Below is a conversation between {speaker_a} and {speaker_b} (session time: {session_time}).
+Extract all relevant facts and preferences about these two users and, if applicable, other people mentioned in the dialogue.
+Write every fact in English as a concise standalone sentence.
+
+Return only one JSON object with key "facts" whose value is an array of strings. No markdown or other text.
+
+Transcript:
+```
+{transcript}
+```
+
+Example:
+{{"facts": ["fact one", "fact two"]}}

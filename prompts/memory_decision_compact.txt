@@ -1,0 +1,12 @@
+Update memories for speaker "{speaker_name}" only (ignore facts about other people unless they describe this speaker).
+
+Old memory (JSON array):
+{old_memory_json}
+
+New facts this session (JSON array of strings):
+{new_facts_json}
+
+Use events ADD, UPDATE, DELETE, or NONE. Keep stable ids on UPDATE. If old memory is empty, ADD all relevant new facts. Write memory text in English.
+
+Return only JSON:
+{{"memory": [{{"id": "0", "text": "...", "event": "ADD|UPDATE|DELETE|NONE"}}]}}

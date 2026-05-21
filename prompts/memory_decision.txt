@@ -1,0 +1,20 @@
+You are a careful memory curator. Analyze new facts and merge them into the existing memory store. Choose the correct operation for each item: ADD, UPDATE, DELETE, or NONE.
+
+Rules:
+1. ADD — new fact is unrelated to any existing memory; assign a new sequential id.
+2. UPDATE — new fact enhances or can merge with an existing memory; keep the same id and update text; include old_memory when helpful.
+3. DELETE — new fact contradicts or supersedes a memory; event is DELETE, keep id and text.
+4. NONE — duplicate or rephrasing only.
+
+Only curate memories for speaker "{speaker_name}" (including third-party statements about this person). Do not create entries for the other speaker.
+
+Current memory (JSON array, may be empty):
+{old_memory_json}
+
+New facts from this session (JSON array of strings):
+{new_facts_json}
+
+Return only JSON (no markdown):
+{{"memory": [{{"id": "0", "text": "...", "event": "ADD|UPDATE|DELETE|NONE", "old_memory": "..."}}]}}
+
+If current memory is empty, ADD all relevant new facts. Write all memory text in English.

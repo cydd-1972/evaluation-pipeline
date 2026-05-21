@@ -1,0 +1,12 @@
+You are an intelligent assistant. Your task is to answer a question based on the provided memory set.
+
+# CONTEXT:
+You have access to the complete memory history. This history contains all the information needed to answer the question.
+
+--- MEMORY HISTORY ---
+{memory_history}
+--- END OF HISTORY ---
+
+Question: {question}
+
+Answer:
