@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+configs/matrix_secrets.yaml
 
 # Python
 __pycache__/
@@ -18,6 +19,9 @@ build/
 epipe/
 venv/
 .venv/
+
+# Local one-off / ops scripts (not part of the published pipeline)
+scripts/
 
 # Pipeline artifacts (regenerated locally)
 workspaces/

@@ -12,14 +12,18 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, Awaitable, Callable, TypeVar
 
 import asyncpg
 
 from lib.data_loader import load_locomo_dataset
-from lib.db import clear_user_memories, insert_memories, provision_workspace_database
+from lib.checkpoint import load_json_list, write_json_list
+from lib.db import backfill_memory_embeddings, clear_user_memories, insert_memories, provision_workspace_database
+from lib.embedding import EmbeddingClient
 from lib.ids import build_speaker_user_id
 from lib.llm_client import PipelineLLM
 from lib.progress import ProgressBar
@@ -30,6 +34,70 @@ FACT_PROMPT_PATH = PIPELINE_DIR / "prompts" / "fact_extraction.txt"
 MEMORY_PROMPT_PATH = PIPELINE_DIR / "prompts" / "memory_decision.txt"
 MEMORY_COMPACT_PATH = PIPELINE_DIR / "prompts" / "memory_decision_compact.txt"
 MEMORY_PROMPT_MAX_ITEMS = 60
+
+T = TypeVar("T")
+R = TypeVar("R")
+
+
+async def _run_batched(
+    items: list[T],
+    *,
+    batch_size: int,
+    worker: Callable[[T], Awaitable[R]],
+) -> list[R]:
+    """一批最多 batch_size 个 LLM API，全部返回后再发下一批。"""
+    if not items:
+        return []
+    size = max(1, int(batch_size))
+    out: list[R] = []
+    for start in range(0, len(items), size):
+        chunk = items[start : start + size]
+        out.extend(await asyncio.gather(*[worker(item) for item in chunk]))
+    return out
+
+
+def _extract_facts_sync(
+    llm: PipelineLLM,
+    fact_template: str,
+    *,
+    speaker_a: str,
+    speaker_b: str,
+    session: Any,
+    transcript: str,
+) -> list[str]:
+    fact_prompt = fact_template.format(
+        speaker_a=speaker_a,
+        speaker_b=speaker_b,
+        session_time=session.date_time or "unknown",
+        transcript=transcript,
+    )
+    fact_payload = llm.chat_json_object(fact_prompt, required_key="facts")
+    return [
+        text
+        for item in (fact_payload.get("facts") or [])
+        for text in [_coerce_fact_text(item)]
+        if text
+    ]
+
+
+@dataclass
+class _ConvAddState:
+    conversation: Any
+    sessions: list[Any]
+    speaker_specs: list[tuple[str, str]]
+    memory_by_speaker: dict[str, list[dict[str, Any]]] = field(default_factory=dict)
+    conv_entry: dict[str, Any] = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        if not self.memory_by_speaker:
+            self.memory_by_speaker = {role: [] for role, _ in self.speaker_specs}
+        if not self.conv_entry:
+            self.conv_entry = {
+                "conversation_idx": self.conversation.idx,
+                "speaker_a": self.conversation.speaker_a,
+                "speaker_b": self.conversation.speaker_b,
+                "sessions": [],
+            }
 
 
 def _load_template(path: Path) -> str:
@@ -184,18 +252,31 @@ async def run_add_mem0(
     max_conversations: int | None,
     max_sessions_per_conversation: int | None,
     llm: PipelineLLM | None = None,
+    progress_label: str | None = None,
+    add_llm_concurrency: int = 1,
 ) -> dict[str, Any]:
     """执行完整 add：建库、按对话/session 写记忆、返回 database_url 与 add_snapshot 路径。"""
     resolved_llm = llm or PipelineLLM()
     fact_template = _load_template(FACT_PROMPT_PATH)
     memory_template = _load_template(MEMORY_PROMPT_PATH)
     memory_compact_template = _load_template(MEMORY_COMPACT_PATH)
+    llm_batch = max(1, int(add_llm_concurrency or 1))
+
+    add_snapshot_path = workspace_dir / "add_snapshot.json"
+    snapshot_for_reset = load_json_list(add_snapshot_path) if add_snapshot_path.exists() else []
+    effective_reset = bool(reset_database) and not snapshot_for_reset
+    if reset_database and snapshot_for_reset:
+        print(
+            f"[add] reset_database_on_add=true ignored: {add_snapshot_path.name} exists "
+            f"({len(snapshot_for_reset)} conversation(s)) — resume mode",
+            flush=True,
+        )
 
     db_url = await provision_workspace_database(
         workspace_name=workspace_name,
         database_prefix=database_prefix,
         base_database_url=database_url,
-        reset=reset_database,
+        reset=effective_reset,
     )
     workspace_dir.mkdir(parents=True, exist_ok=True)
     (workspace_dir / "workspace.json").write_text(
@@ -211,95 +292,142 @@ async def run_add_mem0(
     ]
     print(
         f"[add] conversations={len(conversations)} sessions={len(session_plans)} "
-        f"(~{len(session_plans) * 3} LLM calls: facts + 2x memory/speaker)",
+        f"(~{len(session_plans) * 3} LLM calls: facts + 2x memory/speaker) llm_batch={llm_batch}",
         flush=True,
     )
     snapshot: list[dict[str, Any]] = []
+    completed_conv_ids: set[int] = set()
+    if not effective_reset:
+        snapshot = load_json_list(add_snapshot_path)
+        completed_conv_ids = {
+            int(item.get("conversation_idx"))
+            for item in snapshot
+            if item.get("conversation_idx") is not None
+        }
+        if completed_conv_ids:
+            print(
+                f"[add] resume: skip {len(completed_conv_ids)} completed conversation(s) "
+                f"from {add_snapshot_path.name}",
+                flush=True,
+            )
+
+    conv_states: list[_ConvAddState] = []
+    for conversation in conversations:
+        if int(conversation.idx) in completed_conv_ids:
+            print(f"[add] conv{conversation.idx} skipped (already in add_snapshot)", flush=True)
+            continue
+        conv_states.append(
+            _ConvAddState(
+                conversation=conversation,
+                sessions=iter_sessions(conversation, max_sessions=max_sessions_per_conversation),
+                speaker_specs=[
+                    ("speaker_a", conversation.speaker_a),
+                    ("speaker_b", conversation.speaker_b),
+                ],
+            )
+        )
 
     conn = await asyncpg.connect(db_url)
-    progress = ProgressBar("add", total=len(session_plans) or None, unit="session")
+    progress = ProgressBar("add", total=len(session_plans) or None, unit="session", label=progress_label)
+    if completed_conv_ids:
+        done_sessions = sum(
+            len(iter_sessions(c, max_sessions=max_sessions_per_conversation))
+            for c in conversations
+            if int(c.idx) in completed_conv_ids
+        )
+        progress.update(done_sessions)
     try:
-        sessions_by_conv: dict[int, list[Any]] = {}
-        for conversation, session in session_plans:
-            sessions_by_conv.setdefault(conversation.idx, []).append((conversation, session))
-
-        for conversation in conversations:
-            conv_entry: dict[str, Any] = {
-                "conversation_idx": conversation.idx,
-                "speaker_a": conversation.speaker_a,
-                "speaker_b": conversation.speaker_b,
-                "sessions": [],
-            }
-            speaker_specs = [
-                ("speaker_a", conversation.speaker_a),
-                ("speaker_b", conversation.speaker_b),
+        max_session_count = max((len(cs.sessions) for cs in conv_states), default=0)
+        for session_index in range(max_session_count):
+            session_work: list[tuple[_ConvAddState, Any]] = [
+                (cs, cs.sessions[session_index])
+                for cs in conv_states
+                if session_index < len(cs.sessions)
             ]
-            # 每个 speaker 在内存中维护一份 mem0 风格 memory 列表，按 session 递增更新
-            memory_by_speaker: dict[str, list[dict[str, Any]]] = {
-                role: [] for role, _ in speaker_specs
-            }
+            if not session_work:
+                continue
 
-            for _conv, session in sessions_by_conv.get(conversation.idx, []):
-                progress.set_description(
-                    f"add conv{conversation.idx} session{session.index}"
-                )
-                progress.set_postfix_str(
-                    f"{conversation.speaker_a} & {conversation.speaker_b}"
-                )
+            for cs, session in session_work:
+                progress.set_description(f"add conv{cs.conversation.idx} session{session.index}")
+                progress.set_postfix_str(f"{cs.conversation.speaker_a} & {cs.conversation.speaker_b}")
+
+            async def _facts_job(item: tuple[_ConvAddState, Any]) -> tuple[_ConvAddState, Any, list[str]]:
+                cs, session = item
                 transcript = format_session_transcript(session)
-                fact_prompt = fact_template.format(
-                    speaker_a=conversation.speaker_a,
-                    speaker_b=conversation.speaker_b,
-                    session_time=session.date_time or "unknown",
+                facts = await asyncio.to_thread(
+                    _extract_facts_sync,
+                    resolved_llm,
+                    fact_template,
+                    speaker_a=cs.conversation.speaker_a,
+                    speaker_b=cs.conversation.speaker_b,
+                    session=session,
                     transcript=transcript,
                 )
-                fact_payload = resolved_llm.chat_json_object(
-                    fact_prompt,
-                    required_key="facts",
-                )
-                facts = [
-                    text
-                    for item in (fact_payload.get("facts") or [])
-                    for text in [_coerce_fact_text(item)]
-                    if text
-                ]
+                return cs, session, facts
+
+            fact_rows = await _run_batched(session_work, batch_size=llm_batch, worker=_facts_job)
+
+            memory_jobs: list[tuple[_ConvAddState, Any, str, str, list[str], dict[str, Any]]] = []
+            for cs, session, facts in fact_rows:
                 session_log: dict[str, Any] = {
                     "session_index": session.index,
                     "session_time": session.date_time,
                     "fact_count": len(facts),
                     "speakers": {},
                 }
-
-                for speaker_role, speaker_name in speaker_specs:
-                    old_memory = memory_by_speaker[speaker_role]
-                    if not facts:
-                        memory_by_speaker[speaker_role] = old_memory
+                if not facts:
+                    for speaker_role, _speaker_name in cs.speaker_specs:
                         session_log["speakers"][speaker_role] = {
-                            "memory_count": len(old_memory),
+                            "memory_count": len(cs.memory_by_speaker[speaker_role]),
                             "skipped": "no_new_facts",
                         }
-                        continue
+                    cs.conv_entry["sessions"].append(session_log)
+                    progress.update(1)
+                    continue
+                for speaker_role, speaker_name in cs.speaker_specs:
+                    memory_jobs.append((cs, session, speaker_role, speaker_name, facts, session_log))
 
-                    updated, memory_meta = _decide_speaker_memory(
-                        resolved_llm,
-                        speaker_name=speaker_name,
-                        old_memory=old_memory,
-                        facts=facts,
-                        memory_template=memory_template,
-                        memory_compact_template=memory_compact_template,
-                    )
-                    memory_by_speaker[speaker_role] = updated
-                    session_log["speakers"][speaker_role] = {
-                        "memory_count": len(updated),
-                        **memory_meta,
-                    }
-                conv_entry["sessions"].append(session_log)
-                progress.update(1)
+            async def _memory_job(
+                item: tuple[_ConvAddState, Any, str, str, list[str], dict[str, Any]],
+            ) -> tuple[_ConvAddState, Any, str, list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
+                cs, session, speaker_role, speaker_name, facts, session_log = item
+                updated, memory_meta = await asyncio.to_thread(
+                    _decide_speaker_memory,
+                    resolved_llm,
+                    speaker_name=speaker_name,
+                    old_memory=cs.memory_by_speaker[speaker_role],
+                    facts=facts,
+                    memory_template=memory_template,
+                    memory_compact_template=memory_compact_template,
+                )
+                return cs, session, speaker_role, updated, memory_meta, session_log
 
+            memory_rows = await _run_batched(memory_jobs, batch_size=llm_batch, worker=_memory_job)
+
+            logs_by_session: dict[tuple[int, int], dict[str, Any]] = {}
+            for cs, session, speaker_role, updated, memory_meta, session_log in memory_rows:
+                cs.memory_by_speaker[speaker_role] = updated
+                key = (int(cs.conversation.idx), int(session.index))
+                if key not in logs_by_session:
+                    logs_by_session[key] = session_log
+                logs_by_session[key]["speakers"][speaker_role] = {
+                    "memory_count": len(updated),
+                    **memory_meta,
+                }
+
+            for key, session_log in logs_by_session.items():
+                conv_idx, _session_index = key
+                for cs in conv_states:
+                    if int(cs.conversation.idx) == conv_idx:
+                        cs.conv_entry["sessions"].append(session_log)
+                        progress.update(1)
+                        break
+
+        for cs in conv_states:
+            conversation = cs.conversation
             progress.set_description(f"add conv{conversation.idx} write-db")
             progress.set_postfix_str("postgres")
-            # 2) 整段对话结束后一次性落库（先清空该 user_id 再 insert）
-            for speaker_role, speaker_name in speaker_specs:
+            for speaker_role, speaker_name in cs.speaker_specs:
                 user_id = build_speaker_user_id(
                     conv_idx=conversation.idx,
                     speaker_role=speaker_role,
@@ -310,24 +438,32 @@ async def run_add_mem0(
                 written = await insert_memories(
                     conn,
                     user_id=user_id_str,
-                    items=memory_by_speaker[speaker_role],
+                    items=cs.memory_by_speaker[speaker_role],
                 )
-                conv_entry[f"{speaker_role}_user_id"] = user_id_str
-                conv_entry[f"{speaker_role}_memory_count"] = written
+                cs.conv_entry[f"{speaker_role}_user_id"] = user_id_str
+                cs.conv_entry[f"{speaker_role}_memory_count"] = written
 
-            snapshot.append(conv_entry)
+            snapshot.append(cs.conv_entry)
+            write_json_list(add_snapshot_path, snapshot)
             print(
                 f"[add] conv{conversation.idx} done: "
-                f"{conv_entry.get('speaker_a_memory_count', 0)}+"
-                f"{conv_entry.get('speaker_b_memory_count', 0)} memories written",
+                f"{cs.conv_entry.get('speaker_a_memory_count', 0)}+"
+                f"{cs.conv_entry.get('speaker_b_memory_count', 0)} memories written",
                 flush=True,
             )
+
+        embedder = EmbeddingClient()
+        print(
+            f"[add] embedding memories with {embedder.model} (dim={embedder.dimensions}) ...",
+            flush=True,
+        )
+        embedded_count = await backfill_memory_embeddings(conn, embedder=embedder)
+        print(f"[add] embeddings written: {embedded_count}", flush=True)
     finally:
         progress.close()
         await conn.close()
 
-    add_snapshot_path = workspace_dir / "add_snapshot.json"
-    add_snapshot_path.write_text(json.dumps(snapshot, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json_list(add_snapshot_path, snapshot)
     return {
         "database_url": db_url,
         "add_snapshot_path": str(add_snapshot_path),

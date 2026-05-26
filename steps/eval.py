@@ -16,6 +16,7 @@ import re
 from pathlib import Path
 from typing import Any, Sequence
 
+from lib.checkpoint import has_eval_scores, load_json_list, write_json_list
 from lib.metrics.bleu_f1 import compute_bleu1, compute_token_f1
 from lib.metrics.llm_judge import configure_evaluator, evaluate_llm_judge, shutdown_evaluator
 from lib.progress import ProgressBar
@@ -69,6 +70,7 @@ async def evaluate_records(
     evaluator_model: str | None = None,
     evaluator_base_url: str | None = None,
     evaluator_api_key: str | None = None,
+    progress_label: str | None = None,
 ) -> list[dict[str, Any]]:
     """并发评测 JSON 列表中每条记录，可选写入 output_path。"""
     enabled = {str(m).strip().lower() for m in (metrics or ["llm", "f1", "bleu"])} & SUPPORTED_METRICS
@@ -87,17 +89,41 @@ async def evaluate_records(
             api_key=evaluator_api_key,
         )
 
+    output_file = Path(output_path) if output_path is not None else None
+    results: list[dict[str, Any] | None] = [None] * len(payload)
+    resumed = 0
+    if output_file is not None and output_file.exists():
+        existing = load_json_list(output_file)
+        for index, item in enumerate(existing):
+            if index < len(results) and has_eval_scores(item, enabled):
+                results[index] = item
+                resumed += 1
+    pending = sum(1 for item in results if item is None)
     print(
-        f"[eval] records={len(payload)} metrics={sorted(enabled)} concurrency={concurrency}",
+        f"[eval] records={len(payload)} metrics={sorted(enabled)} concurrency={concurrency} "
+        f"resumed={resumed} pending={pending}",
         flush=True,
     )
     semaphore = asyncio.Semaphore(max(1, concurrency))
-    progress = ProgressBar("eval", total=len(payload) or None, unit="qa")
+    progress = ProgressBar("eval", total=len(payload) or None, unit="qa", label=progress_label)
+    if resumed:
+        progress.update(resumed)
     progress_lock = asyncio.Lock()
-    results: list[dict[str, Any] | None] = [None] * len(payload)
+    write_lock = asyncio.Lock()
+    completed_since_save = 0
+
+    async def _flush_partial() -> None:
+        if output_file is None:
+            return
+        snapshot = [item if item is not None else payload[i] for i, item in enumerate(results)]
+        async with write_lock:
+            write_json_list(output_file, snapshot)
 
     async def _evaluate_record(index: int, record: dict[str, Any]) -> None:
         """信号量包装的单条评测任务。"""
+        if results[index] is not None:
+            return
+        nonlocal completed_since_save
         async with semaphore:
             async with progress_lock:
                 progress.set_description(
@@ -106,6 +132,10 @@ async def evaluate_records(
             results[index] = await _evaluate_one(record, enabled_metrics=enabled)
             async with progress_lock:
                 progress.update(1)
+            completed_since_save += 1
+            if completed_since_save >= 5:
+                completed_since_save = 0
+                await _flush_partial()
 
     try:
         await asyncio.gather(
@@ -116,12 +146,8 @@ async def evaluate_records(
         if "llm" in enabled:
             shutdown_evaluator()
 
-    evaluated = [item for item in results if item is not None]
-
-    if output_path is not None:
-        output_file = Path(output_path)
-        output_file.parent.mkdir(parents=True, exist_ok=True)
-        output_file.write_text(json.dumps(evaluated, ensure_ascii=False, indent=2), encoding="utf-8")
+    evaluated = [item if item is not None else payload[i] for i, item in enumerate(results)]
+    await _flush_partial()
     return evaluated
 
 

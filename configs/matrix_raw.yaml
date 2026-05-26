@@ -1,0 +1,49 @@
+# raw add 基线：对话按 session 原文入库（无 LLM add），再跑 llm/rag search
+#   1 add + 2 search = 3 runs
+# search/answer 使用 pipeline_llm_model_id 的 API 凭据
+
+add_mode: raw
+add_backend: raw
+
+matrix_base_dir: workspaces/matrix
+database_prefix: eval_pipeline
+
+dataset_path: datasets/locomo_refined.json
+max_conversations: null
+max_questions_per_conversation: null
+max_sessions_per_conversation: null
+
+answer_prompt_mode: history
+search_top_k: 30
+concurrency: 1
+search_llm_concurrency: 4
+
+# raw add 无 LLM；search_llm / answer 用此模型的 key/base
+pipeline_llm_model_id: gemini
+
+parallel_models: 1
+parallel_search: 2
+matrix_log_mode: session
+matrix_log_prefix: matrix_raw_run
+
+reset_database_on_add: true
+
+eval:
+  metrics:
+    - llm
+    - f1
+    - bleu
+  dataset_name: locomo
+
+# 供 parse_add_models 读取 pipeline LLM 凭据（add 本身不用这些模型）
+add_models:
+  - id: gemini
+    model: gemini-3.1-flash-lite-preview
+  - id: minimax
+    model: MiniMax-M2.7
+  - id: deepseek
+    model: deepseek-v4-flash
+
+search_backends:
+  - llm
+  - rag

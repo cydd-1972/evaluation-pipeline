@@ -1,6 +1,6 @@
 """Postgres：workspace 建库 + memories 表读写。
 
-表结构见 sql/init.sql（轻量版，无 pgvector）。
+表结构见 sql/init.sql（含 pgvector embedding 列，供 search_backend=rag）。
 - provision_workspace_database：按 workspace_name 派生库名并执行 init.sql
 - insert_memories：summary 存记忆文本，metadata 存 memory_key / event
 - list_memories_for_user：search 步骤列举某 speaker 的全部记忆
@@ -130,6 +130,98 @@ async def list_memories_for_user(conn: asyncpg.Connection, user_id: str) -> list
             }
         )
     return items
+
+
+def vector_literal(values: list[float]) -> str:
+    """把 Python 浮点列表转成 pgvector 字面量。"""
+    return "[" + ",".join(f"{float(v):.8f}" for v in values) + "]"
+
+
+async def backfill_memory_embeddings(
+    conn: asyncpg.Connection,
+    *,
+    embedder: Any,
+    batch_size: int = 16,
+) -> int:
+    """为 embedding 为空的记忆批量写入向量；返回更新条数。"""
+    rows = await conn.fetch(
+        """
+        SELECT id, summary
+        FROM memories
+        WHERE embedding IS NULL
+        ORDER BY created_at ASC
+        """
+    )
+    if not rows:
+        return 0
+    updated = 0
+    for start in range(0, len(rows), batch_size):
+        chunk = rows[start : start + batch_size]
+        texts = [str(row["summary"] or "") for row in chunk]
+        vectors = embedder.embed_texts(texts)
+        for row, vector in zip(chunk, vectors):
+            await conn.execute(
+                """
+                UPDATE memories
+                SET embedding = $2::vector, updated_at = NOW()
+                WHERE id = $1
+                """,
+                row["id"],
+                vector_literal(vector),
+            )
+            updated += 1
+    return updated
+
+
+async def search_memories_by_vector(
+    conn: asyncpg.Connection,
+    *,
+    user_id: str,
+    query_vector: list[float],
+    top_k: int,
+) -> tuple[list[dict[str, Any]], dict[str, float]]:
+    """按 cosine 距离检索 top_k；返回 (memory 列表, id->相似度分数)。"""
+    limit = max(0, int(top_k))
+    if limit <= 0:
+        return [], {}
+    records = await conn.fetch(
+        """
+        SELECT id, summary, metadata, created_at,
+               (1 - (embedding <=> $2::vector)) AS similarity
+        FROM memories
+        WHERE user_id = $1 AND embedding IS NOT NULL
+        ORDER BY embedding <=> $2::vector
+        LIMIT $3
+        """,
+        user_id,
+        vector_literal(query_vector),
+        limit,
+    )
+    items: list[dict[str, Any]] = []
+    scores: dict[str, float] = {}
+    for row in records:
+        metadata = row["metadata"]
+        if isinstance(metadata, str):
+            try:
+                metadata = json.loads(metadata)
+            except json.JSONDecodeError:
+                metadata = {}
+        memory_key = ""
+        if isinstance(metadata, dict):
+            memory_key = str(metadata.get("memory_key") or "")
+        memory_id = memory_key or str(row["id"])
+        similarity = float(row["similarity"] or 0.0)
+        scores[memory_id] = similarity
+        items.append(
+            {
+                "id": memory_id,
+                "db_id": str(row["id"]),
+                "text": str(row["summary"] or ""),
+                "created_at": row["created_at"].isoformat() if row["created_at"] else "",
+                "meta": metadata if isinstance(metadata, dict) else {},
+            }
+        )
+    return items, scores
 
 
 def _stable_memory_uuid(*, user_id: str, memory_key: str) -> UUID:

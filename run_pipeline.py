@@ -34,7 +34,9 @@ if str(PIPELINE_DIR) not in sys.path:
     sys.path.insert(0, str(PIPELINE_DIR))
 
 from backends.add import run_add_mem0
+from backends.add_raw import run_add_raw
 from backends.search_llm import run_search_llm
+from backends.search_rag import run_search_rag
 from lib.env import evaluator_settings, load_runtime_env
 from lib.flat_export import (
     flattened_eval_output_path,
@@ -63,12 +65,21 @@ def _resolve_path(raw: str | Path) -> Path:
     return path if path.is_absolute() else PIPELINE_DIR / path
 
 
-def _resolve_steps(start_from: str) -> tuple[str, ...]:
-    """例如 start_from=search → (search, answer, eval, score)。"""
+def _resolve_steps(start_from: str, *, end_at: str | None = None) -> tuple[str, ...]:
+    """例如 start_from=search → (search, answer, eval, score)；end_at=add 则只跑 add。"""
     normalized = str(start_from or "add").strip().lower()
     if normalized not in PIPELINE_STEPS:
         raise ValueError(f"unsupported start step: {start_from}")
-    return PIPELINE_STEPS[PIPELINE_STEPS.index(normalized) :]
+    start_idx = PIPELINE_STEPS.index(normalized)
+    if end_at is not None:
+        end_normalized = str(end_at).strip().lower()
+        if end_normalized not in PIPELINE_STEPS:
+            raise ValueError(f"unsupported end step: {end_at}")
+        end_idx = PIPELINE_STEPS.index(end_normalized)
+        if end_idx < start_idx:
+            raise ValueError(f"end_at {end_at} must not be before start_from {start_from}")
+        return PIPELINE_STEPS[start_idx : end_idx + 1]
+    return PIPELINE_STEPS[start_idx:]
 
 
 def _workspace_dir(config: dict[str, Any]) -> Path:
@@ -105,36 +116,50 @@ def _read_database_url(workspace_dir: Path) -> str:
 
 
 async def _run_add(config: dict[str, Any], workspace_dir: Path) -> dict[str, Any]:
-    """调度 backends.add.run_add_mem0。"""
-    print("[pipeline] step=add (mem0-style, per-session, dual speaker)")
-    return await run_add_mem0(
-        dataset_path=_resolve_path(str(config["dataset_path"])),
-        workspace_dir=workspace_dir,
-        database_url=os.getenv("EVAL_DATABASE_URL") or os.getenv("DATABASE_URL"),
-        workspace_name=str(config["workspace_name"]),
-        database_prefix=str(config.get("database_prefix") or "eval_pipeline"),
-        reset_database=bool(config.get("reset_database_on_add", True)),
-        max_conversations=config.get("max_conversations"),
-        max_sessions_per_conversation=config.get("max_sessions_per_conversation"),
-    )
+    """调度 add backend：mem0（LLM 抽取）或 raw（session 原文入库）。"""
+    db_workspace_name = str(config.get("workspace_db_name") or config["workspace_name"])
+    add_kwargs = {
+        "dataset_path": _resolve_path(str(config["dataset_path"])),
+        "workspace_dir": workspace_dir,
+        "database_url": os.getenv("EVAL_DATABASE_URL") or os.getenv("DATABASE_URL"),
+        "workspace_name": db_workspace_name,
+        "database_prefix": str(config.get("database_prefix") or "eval_pipeline"),
+        "reset_database": bool(config.get("reset_database_on_add", True)),
+        "max_conversations": config.get("max_conversations"),
+        "max_sessions_per_conversation": config.get("max_sessions_per_conversation"),
+        "progress_label": config.get("progress_label"),
+    }
+    backend = str(config.get("add_backend") or "mem0").strip().lower()
+    if backend == "raw":
+        print("[pipeline] step=add (raw: session transcript → postgres + embedding, no LLM)")
+        return await run_add_raw(**add_kwargs)
+    batch = int(config.get("add_llm_concurrency") or 1)
+    print(f"[pipeline] step=add (mem0-style, batch={batch})")
+    return await run_add_mem0(**add_kwargs, add_llm_concurrency=batch)
 
 
 async def _run_search(config: dict[str, Any], workspace_dir: Path) -> list[dict[str, Any]]:
-    """调度 backends.search_llm；需 workspace.json 中的 database_url。"""
+    """调度 search_llm 或 search_rag；需 workspace.json 中的 database_url。"""
     backend = str(config.get("search_backend") or "llm").strip().lower()
-    if backend != "llm":
-        raise ValueError(f"unsupported search_backend for v1: {backend}")
-    print("[pipeline] step=search (llm)")
     database_url = _read_database_url(workspace_dir)
     os.environ["EVAL_DATABASE_URL"] = database_url
-    return await run_search_llm(
-        dataset_path=_resolve_path(str(config["dataset_path"])),
-        workspace_dir=workspace_dir,
-        database_url=database_url,
-        max_conversations=config.get("max_conversations"),
-        max_questions_per_conversation=config.get("max_questions_per_conversation"),
-        top_k=int(config.get("search_top_k") or 30),
-    )
+    search_kwargs = {
+        "dataset_path": _resolve_path(str(config["dataset_path"])),
+        "workspace_dir": workspace_dir,
+        "database_url": database_url,
+        "max_conversations": config.get("max_conversations"),
+        "max_questions_per_conversation": config.get("max_questions_per_conversation"),
+        "top_k": int(config.get("search_top_k") or 30),
+        "progress_label": config.get("progress_label"),
+    }
+    if backend == "llm":
+        batch = int(config.get("search_llm_concurrency") or 1)
+        print(f"[pipeline] step=search (llm, batch={batch})")
+        return await run_search_llm(**search_kwargs, search_llm_concurrency=batch)
+    if backend == "rag":
+        print("[pipeline] step=search (rag, text-embedding-v4 + pgvector)")
+        return await run_search_rag(**search_kwargs)
+    raise ValueError(f"unsupported search_backend: {backend} (use llm or rag)")
 
 
 async def _run_answer(config: dict[str, Any], workspace_dir: Path) -> list[dict[str, Any]]:
@@ -148,6 +173,7 @@ async def _run_answer(config: dict[str, Any], workspace_dir: Path) -> list[dict[
         output_path=answer_output,
         concurrency=int(config.get("concurrency") or 2),
         answer_prompt_mode=answer_mode,
+        progress_label=config.get("progress_label"),
     )
 
 
@@ -167,6 +193,7 @@ async def _run_eval(config: dict[str, Any], workspace_dir: Path) -> list[dict[st
         evaluator_model=evaluator_model,
         evaluator_base_url=evaluator_base_url,
         evaluator_api_key=evaluator_api_key,
+        progress_label=config.get("progress_label"),
     )
     write_flattened_eval_records(records=evaluated, output_path=flattened_eval_output_path(eval_output))
     return evaluated
@@ -184,30 +211,33 @@ async def _run_score(config: dict[str, Any], workspace_dir: Path) -> dict[str, A
     return summary
 
 
-async def run_pipeline(
+async def run_pipeline_from_config(
+    config: dict[str, Any],
     *,
-    config_path: Path,
     start_from_step: str = "add",
+    end_at_step: str | None = None,
+    config_path: Path | None = None,
+    load_env: bool = True,
 ) -> None:
-    """加载配置，按 steps 顺序执行；快照写入 pipeline_config.json。"""
-    load_runtime_env()
-    config = _load_config(config_path)
+    """使用内存中的 config dict 跑流水线（供 run_matrix 等批量脚本调用）。"""
+    if load_env:
+        load_runtime_env()
     workspace_dir = _workspace_dir(config)
     workspace_dir.mkdir(parents=True, exist_ok=True)
+    resolved_end = end_at_step if end_at_step is not None else config.get("end_at_step")
+    snapshot: dict[str, Any] = {
+        "start_from_step": start_from_step,
+        "end_at_step": resolved_end,
+        **config,
+    }
+    if config_path is not None:
+        snapshot["config_path"] = str(config_path)
     (workspace_dir / "pipeline_config.json").write_text(
-        json.dumps(
-            {
-                "config_path": str(config_path),
-                "start_from_step": start_from_step,
-                **config,
-            },
-            ensure_ascii=False,
-            indent=2,
-        ),
+        json.dumps(snapshot, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
 
-    steps = _resolve_steps(start_from_step)
+    steps = _resolve_steps(start_from_step, end_at=resolved_end)
     print(f"[pipeline] workspace={workspace_dir}")
     print(f"[pipeline] dataset={config.get('dataset_path')}")
     print(f"[pipeline] steps={' → '.join(steps)}")
@@ -238,6 +268,21 @@ async def run_pipeline(
         print(f"[pipeline] <<< {step} finished in {elapsed:.1f}s", flush=True)
 
     print("\n[pipeline] all steps completed.", flush=True)
+
+
+async def run_pipeline(
+    *,
+    config_path: Path,
+    start_from_step: str = "add",
+) -> None:
+    """加载 YAML 配置并执行流水线。"""
+    load_runtime_env()
+    config = _load_config(config_path)
+    await run_pipeline_from_config(
+        config,
+        start_from_step=start_from_step,
+        config_path=config_path,
+    )
 
 
 def main() -> None:

@@ -9,18 +9,18 @@ max_sessions_per_conversation: null  # null = 每个对话的全部 session
 workspace_base_dir: workspaces
 workspace_name: locomo_refined_smoke
 database_prefix: eval_pipeline
-reset_database_on_add: true       # true 时 add 会 DROP 并重建该 workspace 库
+reset_database_on_add: false      # false=可断点续跑 add；要清空重来请改 true 或删库/add_snapshot.json
 
 # ========== search / answer ==========
 answer_prompt_mode: "history"      # prompts/answer_history.txt（单块 memory_history）
 search_top_k: 30                   # LLM search 每 speaker 最多选几条记忆
-search_backend: llm                # v1 仅支持 llm
+search_backend: rag                # llm | rag（rag= text-embedding-v4 + pgvector）
 concurrency: 2                     # answer / eval 并发数
 
 # ========== eval 指标 ==========
 eval:
   metrics:
-    - llm    # 千问/SiliconFlow 二分类裁判，需 EVALUATOR_* 环境变量
+    - llm    # Qwen3-14B 裁判（EVALUATOR_*，见主仓库 .env.example）
     - f1
     - bleu
   dataset_name: locomo

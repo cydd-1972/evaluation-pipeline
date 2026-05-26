@@ -148,6 +148,7 @@ async def reanswer_dataset(
     concurrency: int = 2,
     answer_prompt_mode: str = "history",
     llm: PipelineLLM | None = None,
+    progress_label: str | None = None,
 ) -> list[dict[str, Any]]:
     """并发对 search 结果逐条生成答案并写入 output_path。"""
     mode = str(answer_prompt_mode or "history").strip()
@@ -183,7 +184,7 @@ async def reanswer_dataset(
         flush=True,
     )
     semaphore = asyncio.Semaphore(max(1, concurrency))
-    progress = ProgressBar("answer", total=len(payload) or None, unit="qa")
+    progress = ProgressBar("answer", total=len(payload) or None, unit="qa", label=progress_label)
     if resumed:
         progress.update(resumed)
     progress_lock = asyncio.Lock()
