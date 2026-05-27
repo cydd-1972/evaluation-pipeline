@@ -41,7 +41,6 @@ from lib.transcript import (
 
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
 MEMORY_PROMPT_PATH = PIPELINE_DIR / "prompts" / "memory_decision_global.txt"
-MEMORY_COMPACT_PATH = PIPELINE_DIR / "prompts" / "memory_decision_global_compact.txt"
 MEMORY_PROMPT_MAX_ITEMS = 60
 
 
@@ -124,37 +123,30 @@ def _decide_global_memory_sync(
     history_sessions: list[Any],
     current_session: Any,
     memory_template: str,
-    memory_compact_template: str,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     meta: dict[str, Any] = {}
     old_trim = _truncate_memory_for_prompt(old_memory, limit=MEMORY_PROMPT_MAX_ITEMS)
     history_json = format_sessions_structured_json(history_sessions)
     current_json = format_session_structured_json(current_session)
 
-    prompt_specs: list[tuple[str, str]] = [("compact", memory_compact_template)]
-    if not llm._is_gemini_model():
-        prompt_specs.append(("full", memory_template))
-
-    failed: list[str] = []
-    for spec_name, template in prompt_specs:
-        prompt = template.format(
-            speaker_a=speaker_a,
-            speaker_b=speaker_b,
-            old_memory_json=json.dumps(old_trim, ensure_ascii=False, indent=2),
-            history_sessions_json=history_json,
-            current_session_json=current_json,
-        )
-        try:
-            payload = llm.chat_json_object(prompt, required_key="memory", max_attempts=6)
-            updated = _parse_memory_items(payload)
-            if updated:
-                meta["memory_prompt"] = spec_name
-                return _active_memories(updated), meta
-        except ValueError:
-            failed.append(spec_name)
+    prompt = memory_template.format(
+        speaker_a=speaker_a,
+        speaker_b=speaker_b,
+        old_memory_json=json.dumps(old_trim, ensure_ascii=False, indent=2),
+        history_sessions_json=history_json,
+        current_session_json=current_json,
+    )
+    try:
+        payload = llm.chat_json_object(prompt, required_key="memory", max_attempts=6)
+        updated = _parse_memory_items(payload)
+        if updated:
+            meta["memory_prompt"] = "full"
+            return _active_memories(updated), meta
+    except ValueError:
+        pass
 
     meta["memory_fallback"] = True
-    meta["failed_prompts"] = failed
+    meta["failed_prompts"] = ["full"]
     return _active_memories(_fallback_memory_from_session(old_memory, current_session)), meta
 
 
@@ -215,7 +207,6 @@ async def run_add_global(
     """global add：structured D/M，每 session 更新 M_n 并 flush DB 快照。"""
     resolved_llm = llm or PipelineLLM()
     memory_template = _load_template(MEMORY_PROMPT_PATH)
-    memory_compact_template = _load_template(MEMORY_COMPACT_PATH)
     llm_batch = max(1, int(add_llm_concurrency or 1))
     history_window = max(0, int(add_history_window or 0))
 
@@ -343,7 +334,6 @@ async def run_add_global(
                     history_sessions=history_sessions,
                     current_session=session,
                     memory_template=memory_template,
-                    memory_compact_template=memory_compact_template,
                 )
                 return cs, session, updated, meta
 
