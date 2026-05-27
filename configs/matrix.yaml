@@ -1,5 +1,5 @@
-# 矩阵实验（修正版）：
-#   3 模型 × add 3 次 × search 2 种(llm/rag) 各 1 次 = 27 runs
+# 矩阵实验：add 仅 MiniMax；eval 裁判用 .env 的 EVALUATOR_*（Qwen）
+#   1 模型 × add 3 次 × search 2 种(llm/rag) 各 1 次 = 9 runs
 #   add_run01 复用旧 workspaces/matrix/<model>/_add（已跑过 1 次 add）
 # 密钥：configs/matrix_secrets.yaml（gitignore，勿提交）
 
@@ -19,7 +19,7 @@ search_llm_concurrency: 4
 add_llm_concurrency: 4
 
 # 并行编排（run_matrix 默认）
-parallel_models: 3      # 三模型 add 同时跑
+parallel_models: 1      # 当前仅 minimax add
 parallel_search: 2      # search+answer 并行上限（降低 Postgres / embedding 争抢）
 # session=每次 run 写入新文件 matrix_run_YYYYMMDD_HHMMSS.log；append=追加到 matrix_log_file
 matrix_log_mode: session
@@ -38,13 +38,11 @@ eval:
     - bleu
   dataset_name: locomo
 
+pipeline_llm_model_id: minimax
+
 add_models:
-  - id: gemini
-    model: gemini-3.1-flash-lite-preview
   - id: minimax
     model: MiniMax-M2.7
-  - id: deepseek
-    model: deepseek-v4-flash
 
 search_backends:
   - llm

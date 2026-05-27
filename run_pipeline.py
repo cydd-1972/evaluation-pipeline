@@ -34,9 +34,12 @@ if str(PIPELINE_DIR) not in sys.path:
     sys.path.insert(0, str(PIPELINE_DIR))
 
 from backends.add import run_add_mem0
+from backends.add_global import run_add_global
 from backends.add_raw import run_add_raw
 from backends.search_llm import run_search_llm
+from backends.search_llm_global import run_search_llm_global
 from backends.search_rag import run_search_rag
+from backends.search_rag_global import run_search_rag_global
 from lib.env import evaluator_settings, load_runtime_env
 from lib.flat_export import (
     flattened_eval_output_path,
@@ -133,14 +136,35 @@ async def _run_add(config: dict[str, Any], workspace_dir: Path) -> dict[str, Any
     if backend == "raw":
         print("[pipeline] step=add (raw: session transcript → postgres + embedding, no LLM)")
         return await run_add_raw(**add_kwargs)
+    if backend == "global":
+        batch = int(config.get("add_llm_concurrency") or 1)
+        history_window = int(config.get("add_history_window") or 2)
+        flush_per_session = bool(config.get("add_flush_per_session", True))
+        print(
+            f"[pipeline] step=add (global session state machine, batch={batch}, "
+            f"history_window={history_window})",
+        )
+        return await run_add_global(
+            **add_kwargs,
+            add_llm_concurrency=batch,
+            add_history_window=history_window,
+            add_flush_per_session=flush_per_session,
+        )
     batch = int(config.get("add_llm_concurrency") or 1)
     print(f"[pipeline] step=add (mem0-style, batch={batch})")
     return await run_add_mem0(**add_kwargs, add_llm_concurrency=batch)
 
 
+def _is_global_search(config: dict[str, Any]) -> bool:
+    search_mode = str(config.get("search_mode") or "").strip().lower()
+    add_backend = str(config.get("add_backend") or "mem0").strip().lower()
+    return search_mode == "global" or add_backend == "global"
+
+
 async def _run_search(config: dict[str, Any], workspace_dir: Path) -> list[dict[str, Any]]:
     """调度 search_llm 或 search_rag；需 workspace.json 中的 database_url。"""
     backend = str(config.get("search_backend") or "llm").strip().lower()
+    is_global = _is_global_search(config)
     database_url = _read_database_url(workspace_dir)
     os.environ["EVAL_DATABASE_URL"] = database_url
     search_kwargs = {
@@ -154,9 +178,15 @@ async def _run_search(config: dict[str, Any], workspace_dir: Path) -> list[dict[
     }
     if backend == "llm":
         batch = int(config.get("search_llm_concurrency") or 1)
+        if is_global:
+            print(f"[pipeline] step=search (global llm, batch={batch})")
+            return await run_search_llm_global(**search_kwargs, search_llm_concurrency=batch)
         print(f"[pipeline] step=search (llm, batch={batch})")
         return await run_search_llm(**search_kwargs, search_llm_concurrency=batch)
     if backend == "rag":
+        if is_global:
+            print("[pipeline] step=search (global rag, text-embedding-v4 + pgvector)")
+            return await run_search_rag_global(**search_kwargs)
         print("[pipeline] step=search (rag, text-embedding-v4 + pgvector)")
         return await run_search_rag(**search_kwargs)
     raise ValueError(f"unsupported search_backend: {backend} (use llm or rag)")

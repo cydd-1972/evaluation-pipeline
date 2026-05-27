@@ -44,6 +44,13 @@ def flatten_eval_record(record: dict[str, Any]) -> dict[str, Any]:
     """单条 eval 记录 → 扁平行（问题、答案、分数、记忆条数等）。"""
     response = str(record.get("response") or record.get("predicted_answer") or "")
     answer = str(record.get("answer") or record.get("reference_answer") or "")
+    global_retrieval = record.get("retrieval")
+    if isinstance(global_retrieval, dict):
+        memory_count = len(_selected_items(global_retrieval))
+    else:
+        memory_count = len(_selected_items(record.get("speaker_a_retrieval"))) + len(
+            _selected_items(record.get("speaker_b_retrieval"))
+        )
     return {
         "conversation_idx": record.get("conversation_idx"),
         "qa_index": record.get("qa_index"),
@@ -55,6 +62,7 @@ def flatten_eval_record(record: dict[str, Any]) -> dict[str, Any]:
         "predicted_answer": str(record.get("predicted_answer") or response),
         "success": bool(record.get("success", True)),
         "judgement": _build_judgement(record),
+        "memory_count": memory_count,
         "speaker_a_memory_count": len(_selected_items(record.get("speaker_a_retrieval"))),
         "speaker_b_memory_count": len(_selected_items(record.get("speaker_b_retrieval"))),
         "evidence": record.get("evidence") if isinstance(record.get("evidence"), list) else [],

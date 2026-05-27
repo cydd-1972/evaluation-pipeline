@@ -33,7 +33,10 @@ def index_by_qa(records: list[dict[str, Any]]) -> dict[tuple[int, int], dict[str
 
 
 def has_retrieval(record: dict[str, Any]) -> bool:
-    """search 步骤：任一 speaker 有 selected 记忆即视为完成。"""
+    """search 步骤：global retrieval 块存在，或任一 speaker 有 selected 记忆即视为完成。"""
+    global_block = record.get("retrieval")
+    if isinstance(global_block, dict):
+        return True
     for field in ("speaker_a_retrieval", "speaker_b_retrieval"):
         block = record.get(field)
         if not isinstance(block, dict):

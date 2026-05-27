@@ -72,6 +72,9 @@ async def insert_memories(
             "memory_key": memory_key,
             "event": str(item.get("event") or "ADD"),
         }
+        for key in ("source_session_index", "source_session_time"):
+            if item.get(key) is not None and str(item.get(key)).strip():
+                metadata[key] = item[key]
         rows.append(
             (
                 row_id,

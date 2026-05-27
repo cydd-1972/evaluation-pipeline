@@ -18,8 +18,8 @@ search_top_k: 30
 concurrency: 1
 search_llm_concurrency: 4
 
-# raw add 无 LLM；search_llm / answer 用此模型的 key/base
-pipeline_llm_model_id: gemini
+# search/answer 使用 pipeline_llm_model_id 的 API 凭据（eval 裁判仍用 EVALUATOR_* / Qwen）
+pipeline_llm_model_id: minimax
 
 parallel_models: 1
 parallel_search: 2
@@ -35,14 +35,10 @@ eval:
     - bleu
   dataset_name: locomo
 
-# 供 parse_add_models 读取 pipeline LLM 凭据（add 本身不用这些模型）
+# 供 parse_add_models / pipeline_llm_model_id 读取凭据
 add_models:
-  - id: gemini
-    model: gemini-3.1-flash-lite-preview
   - id: minimax
     model: MiniMax-M2.7
-  - id: deepseek
-    model: deepseek-v4-flash
 
 search_backends:
   - llm

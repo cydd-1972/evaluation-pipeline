@@ -7,6 +7,7 @@ chat_json()→ 从回复中抠 JSON 对象（支持 ```json 围栏）
 from __future__ import annotations
 
 import json
+import os
 import re
 import time
 from typing import Any
@@ -79,7 +80,13 @@ class PipelineLLM:
         if api_key and api_base and model:
             resolved_key, resolved_base, resolved_model = api_key, api_base, model
         else:
-            resolved_key, resolved_base, resolved_model = require_openai_env()
+            preset_key = os.getenv("OPENAI_API_KEY", "").strip()
+            preset_base = os.getenv("OPENAI_API_BASE", "").strip()
+            preset_model = os.getenv("OPENAI_MODEL", "").strip()
+            if preset_key and preset_base and preset_model:
+                resolved_key, resolved_base, resolved_model = preset_key, preset_base, preset_model
+            else:
+                resolved_key, resolved_base, resolved_model = require_openai_env()
         self.model = resolved_model
         self._client = OpenAI(api_key=resolved_key, base_url=resolved_base)
         self.max_tokens = max_tokens
@@ -129,10 +136,7 @@ class PipelineLLM:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
         response = self._create_completion(
-            model=self.model,
-            messages=messages,
-            temperature=temperature,
-            max_tokens=self.max_tokens,
+            **self._completion_kwargs(messages=messages, temperature=temperature),
         )
         content = response.choices[0].message.content
         return str(content or "").strip()
@@ -140,6 +144,23 @@ class PipelineLLM:
     def _is_gemini_model(self) -> bool:
         """gptplus5 上 Gemini 需 json_object 模式，否则会回寒暄而非 JSON。"""
         return "gemini" in self.model.lower()
+
+    def _is_deepseek_v4_model(self) -> bool:
+        """官方 DeepSeek v4：默认带 reasoning_content，结构化任务需关 thinking。"""
+        name = self.model.lower()
+        return "deepseek" in name and ("v4" in name or "deepseek-v4" in name)
+
+    def _completion_kwargs(self, *, messages: list[dict[str, str]], temperature: float) -> dict[str, Any]:
+        """按模型附加 API 参数（Gemini json_object / DeepSeek v4 关 thinking）。"""
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": self.max_tokens,
+        }
+        if self._is_deepseek_v4_model():
+            kwargs["extra_body"] = {"thinking": {"type": "disabled"}}
+        return kwargs
 
     def chat_json(self, prompt: str, *, temperature: float = 0.0) -> dict[str, Any]:
         """要求模型只返回 JSON 对象（fact/memory/search 步骤用）；Gemini 失败时自动重试。"""
@@ -152,12 +173,7 @@ class PipelineLLM:
                 {"role": "system", "content": _JSON_SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ]
-            kwargs: dict[str, Any] = {
-                "model": self.model,
-                "messages": messages,
-                "temperature": temperature,
-                "max_tokens": self.max_tokens,
-            }
+            kwargs = self._completion_kwargs(messages=messages, temperature=temperature)
             try:
                 if self._is_gemini_model():
                     response = self._create_completion(

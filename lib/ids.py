@@ -15,3 +15,8 @@ def build_speaker_user_id(conv_idx: int, speaker_role: str, speaker_name: str) -
         NAMESPACE_URL,
         f"locomo:{conv_idx}:{speaker_role.strip().lower()}:{speaker_name.strip()}",
     )
+
+
+def build_conversation_user_id(conv_idx: int) -> UUID:
+    """方案③ global add/search：每 conversation 一个 user_id（非 per-speaker）。"""
+    return uuid5(NAMESPACE_URL, f"locomo:conv:{int(conv_idx)}")

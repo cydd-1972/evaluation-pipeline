@@ -1,0 +1,31 @@
+# global 方案 smoke：1 conv × 2 sessions × 3 QA，跑通 add → search → answer
+workspace_base_dir: workspaces
+workspace_name: global_smoke
+database_prefix: eval_pipeline_global
+
+add_backend: global
+search_mode: global
+
+dataset_path: datasets/locomo_refined.json
+max_conversations: 1
+max_sessions_per_conversation: 2
+max_questions_per_conversation: 3
+
+answer_prompt_mode: history
+search_top_k: 10
+search_backend: rag
+concurrency: 2
+search_llm_concurrency: 2
+add_llm_concurrency: 2
+
+add_history_window: 2
+add_flush_per_session: true
+reset_database_on_add: true
+
+end_at_step: answer
+
+eval:
+  metrics:
+    - f1
+    - bleu
+  dataset_name: locomo

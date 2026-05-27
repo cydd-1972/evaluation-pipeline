@@ -52,7 +52,11 @@ def _format_selected_memories(retrieval: dict[str, Any] | None) -> str:
 
 
 def _format_memory_history(record: dict[str, Any]) -> str:
-    """合并双 speaker 的 selected 记忆为一块 MEMORY HISTORY 文本。"""
+    """合并 global 或双 speaker 的 selected 记忆为一块 MEMORY HISTORY 文本。"""
+    global_block = record.get("retrieval")
+    if isinstance(global_block, dict):
+        block = _format_selected_memories(global_block)
+        return block if block.strip() else "(no memories)"
     sections: list[str] = []
     pairs = (
         (str(record.get("speaker_a_name") or "speaker_a"), record.get("speaker_a_retrieval")),
@@ -63,6 +67,19 @@ def _format_memory_history(record: dict[str, Any]) -> str:
         if block.strip():
             sections.append(f"Memories for {speaker_name}:\n{block}")
     return "\n\n".join(sections) if sections else "(no memories)"
+
+
+def _record_has_memories(record: dict[str, Any]) -> bool:
+    """判断 search 记录是否含可用于 answer 的 selected 记忆。"""
+    global_block = record.get("retrieval")
+    if isinstance(global_block, dict):
+        return bool(_format_selected_memories(global_block).strip())
+    speaker_a = record.get("speaker_a_retrieval")
+    speaker_b = record.get("speaker_b_retrieval")
+    return bool(
+        _format_selected_memories(speaker_a if isinstance(speaker_a, dict) else None)
+        or _format_selected_memories(speaker_b if isinstance(speaker_b, dict) else None)
+    )
 
 
 def _postprocess_answer_minimal(answer: str) -> str:
@@ -210,12 +227,7 @@ async def reanswer_dataset(
             qa_index = record.get("qa_index")
             async with progress_lock:
                 progress.set_description(f"answer conv{conv_idx} qa{qa_index}")
-            speaker_a = record.get("speaker_a_retrieval")
-            speaker_b = record.get("speaker_b_retrieval")
-            has_memories = bool(
-                _format_selected_memories(speaker_a if isinstance(speaker_a, dict) else None)
-                or _format_selected_memories(speaker_b if isinstance(speaker_b, dict) else None)
-            )
+            has_memories = _record_has_memories(record)
             predicted = ""
             if has_memories:
                 prompt = _build_answer_prompt(

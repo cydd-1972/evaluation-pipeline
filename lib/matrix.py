@@ -174,6 +174,9 @@ def build_base_pipeline_config(matrix_cfg: dict[str, Any]) -> dict[str, Any]:
         "matrix_experiment": True,
         "reuse_legacy_add_run01": bool(matrix_cfg.get("reuse_legacy_add_run01", True)),
         "add_backend": str(matrix_cfg.get("add_backend") or "mem0").strip().lower(),
+        "search_mode": str(matrix_cfg.get("search_mode") or "").strip().lower() or None,
+        "add_history_window": int(matrix_cfg.get("add_history_window") or 2),
+        "add_flush_per_session": bool(matrix_cfg.get("add_flush_per_session", True)),
         "pipeline_llm_model_id": str(matrix_cfg.get("pipeline_llm_model_id") or "gemini").strip(),
     }
 
@@ -213,7 +216,10 @@ def config_for_add_run(
     cfg["workspace_db_name"] = db_workspace_name
     cfg["add_model_id"] = model.id
     cfg["add_model"] = model.model
-    cfg["add_backend"] = "mem0"
+    cfg["add_backend"] = str(base.get("add_backend") or "mem0").strip().lower()
+    cfg["search_mode"] = base.get("search_mode")
+    cfg["add_history_window"] = base.get("add_history_window", 2)
+    cfg["add_flush_per_session"] = base.get("add_flush_per_session", True)
     cfg["add_repeat_index"] = add_repeat_index
     cfg["search_backend"] = None
     cfg["progress_label"] = f"{model.id}/add_run{add_repeat_index:02d}"
@@ -277,6 +283,8 @@ def config_for_search_run(
     cfg["workspace_db_name"] = db_workspace_name
     cfg["add_model_id"] = model_id
     cfg["add_model"] = add_model
+    cfg["add_backend"] = str(base.get("add_backend") or "mem0").strip().lower()
+    cfg["search_mode"] = base.get("search_mode")
     cfg["search_backend"] = search_backend
     cfg["add_repeat_index"] = add_repeat_index
     cfg["search_repeat"] = 1
