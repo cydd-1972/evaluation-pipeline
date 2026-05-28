@@ -22,6 +22,7 @@ class AddModelSpec:
     model: str
     api_key: str = ""
     api_base: str = ""
+    llm_thinking_mode: str = ""  # split | disabled | 空=默认
 
 
 @dataclass(frozen=True)
@@ -93,6 +94,7 @@ def parse_add_models(matrix_cfg: dict[str, Any], secrets: dict[str, Any]) -> lis
                 model=str(raw.get("model") or "").strip(),
                 api_key=api_key,
                 api_base=api_base,
+                llm_thinking_mode=str(raw.get("llm_thinking_mode") or "").strip().lower(),
             )
         )
     if not models:
@@ -155,6 +157,34 @@ def resolve_pipeline_llm_model(matrix_cfg: dict[str, Any], models: list[AddModel
     raise ValueError("no add_models configured for pipeline_llm_model_id")
 
 
+def apply_run_model_env(
+    matrix_cfg: dict[str, Any],
+    models: list[AddModelSpec],
+    run: MatrixRunSpec,
+) -> None:
+    """add 用各自 add 模型；search_llm 用 pipeline_llm_model_id（如 deepseek）；rag 的 answer 仍用 add 模型。"""
+    if run.is_add:
+        if run.add_model_id == RAW_ADD_MODEL_ID:
+            raise ValueError("raw add should not call apply_run_model_env")
+        for model in models:
+            if model.id == run.add_model_id:
+                apply_add_model_env(model)
+                return
+        raise KeyError(f"unknown add model id: {run.add_model_id}")
+    if run.add_model_id == RAW_ADD_MODEL_ID:
+        apply_add_model_env(resolve_pipeline_llm_model(matrix_cfg, models))
+        return
+    if str(run.search_backend or "").strip().lower() == "llm":
+        pipeline = resolve_pipeline_llm_model(matrix_cfg, models)
+        apply_add_model_env(pipeline)
+        return
+    for model in models:
+        if model.id == run.add_model_id:
+            apply_add_model_env(model)
+            return
+    raise KeyError(f"unknown add model id: {run.add_model_id}")
+
+
 def build_base_pipeline_config(matrix_cfg: dict[str, Any]) -> dict[str, Any]:
     """从 matrix.yaml 生成与 run_pipeline 兼容的配置骨架。"""
     return {
@@ -178,6 +208,7 @@ def build_base_pipeline_config(matrix_cfg: dict[str, Any]) -> dict[str, Any]:
         "add_history_window": int(matrix_cfg.get("add_history_window") or 2),
         "add_flush_per_session": bool(matrix_cfg.get("add_flush_per_session", True)),
         "pipeline_llm_model_id": str(matrix_cfg.get("pipeline_llm_model_id") or "gemini").strip(),
+        "memory_decision_prompt": str(matrix_cfg.get("memory_decision_prompt") or "").strip() or None,
     }
 
 
@@ -194,6 +225,10 @@ def apply_add_model_env(model: AddModelSpec) -> dict[str, str]:
     os.environ["key"] = model.api_key
     os.environ["api_base"] = model.api_base
     os.environ["model_name"] = model.model
+    if model.llm_thinking_mode:
+        os.environ["PIPELINE_LLM_THINKING_MODE"] = model.llm_thinking_mode
+    else:
+        os.environ.pop("PIPELINE_LLM_THINKING_MODE", None)
     return {
         "OPENAI_API_KEY": model.api_key,
         "OPENAI_API_BASE": model.api_base,

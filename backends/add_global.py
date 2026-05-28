@@ -40,8 +40,20 @@ from lib.transcript import (
 )
 
 PIPELINE_DIR = Path(__file__).resolve().parents[1]
-MEMORY_PROMPT_PATH = PIPELINE_DIR / "prompts" / "memory_decision_global.txt"
+DEFAULT_MEMORY_PROMPT_PATH = PIPELINE_DIR / "prompts" / "memory_decision_global.txt"
 MEMORY_PROMPT_MAX_ITEMS = 60
+
+
+def resolve_memory_prompt_path(raw: str | Path | None) -> Path:
+    """prompts/ 下文件名或相对路径；空则默认 memory_decision_global.txt。"""
+    if raw is None or not str(raw).strip():
+        return DEFAULT_MEMORY_PROMPT_PATH
+    path = Path(str(raw).strip())
+    if path.is_absolute():
+        return path
+    if path.parent == Path("."):
+        return PIPELINE_DIR / "prompts" / path.name
+    return PIPELINE_DIR / path
 
 
 @dataclass
@@ -150,6 +162,22 @@ def _decide_global_memory_sync(
     return _active_memories(_fallback_memory_from_session(old_memory, current_session)), meta
 
 
+def _serialize_memory_snapshot(memory: list[dict[str, Any]]) -> list[dict[str, str]]:
+    """add_snapshot 中记录每 session 增量后的 M_n（id/text/event）。"""
+    rows: list[dict[str, str]] = []
+    for item in memory:
+        text = str(item.get("text") or "").strip()
+        if not text:
+            continue
+        row = {
+            "id": str(item.get("id") or ""),
+            "text": text,
+            "event": str(item.get("event") or "ADD"),
+        }
+        rows.append(row)
+    return rows
+
+
 async def _flush_memory_snapshot(
     conn: asyncpg.Connection,
     *,
@@ -203,10 +231,13 @@ async def run_add_global(
     add_llm_concurrency: int = 1,
     add_history_window: int = 2,
     add_flush_per_session: bool = True,
+    memory_prompt_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """global add：structured D/M，每 session 更新 M_n 并 flush DB 快照。"""
     resolved_llm = llm or PipelineLLM()
-    memory_template = _load_template(MEMORY_PROMPT_PATH)
+    prompt_path = resolve_memory_prompt_path(memory_prompt_path)
+    memory_template = _load_template(prompt_path)
+    print(f"[add-global] memory_prompt={prompt_path.name}", flush=True)
     llm_batch = max(1, int(add_llm_concurrency or 1))
     history_window = max(0, int(add_history_window or 0))
 
@@ -355,6 +386,7 @@ async def run_add_global(
                     "session_time": session.date_time,
                     "memory_count": len(updated),
                     "written": written,
+                    "memory": _serialize_memory_snapshot(updated),
                     **meta,
                 }
                 cs.conv_entry.setdefault("conversation_idx", cs.conversation.idx)

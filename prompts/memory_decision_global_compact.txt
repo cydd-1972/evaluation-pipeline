@@ -1,22 +1,26 @@
-Update ONE shared memory store for {speaker_a} and {speaker_b}.
+Update ONE shared memory store for {speaker_a} and {speaker_b}. Goal: **retrieval-ready** facts for later QA.
+
+# Memory = one atomic English sentence with **explicit names** (no bare I/you/he/she), specific fact, retrievable who/what/when.
+
+# Entity: map dialogue pronouns → names ({speaker_a}, {speaker_b}, or named third party). Never store "She went recently."
 
 INPUT (JSON):
-M_{{n-1}} (memory array):
+M_{{n-1}}:
 {old_memory_json}
 
-Prior sessions (context only, JSON array):
+Prior sessions (context + time anchor):
 {history_sessions_json}
 
-Current session D_n (JSON object):
+Current session D_n:
 {current_session_json}
 
-Apply ADD / UPDATE / DELETE / NONE. Return the FULL updated memory list.
+Operations: **ADD | UPDATE | NONE only** (no DELETE — supersede/correct via UPDATE, same id).
 
 Rules:
-- ADD: new numeric string id (smallest unused).
-- UPDATE / DELETE / NONE: reuse existing id; never renumber.
-- English standalone memory sentences; preserve time info from sessions.
-- Do not invent unsupported facts.
+- ADD: new numeric id. UPDATE/NONE: reuse id; return FULL list (all prior ids + new).
+- Dates: anchor relative time to **absolute dates** via D_n.session_time.
+- Keep separate memories for multi-hop facts; merge only true duplicates.
+- Contradiction → UPDATE text to corrected fact, do not remove id.
 
 OUTPUT only (JSON):
-{{"memory": [{{"id": "0", "text": "...", "event": "ADD|UPDATE|DELETE|NONE"}}]}}
+{{"memory": [{{"id": "0", "text": "...", "event": "ADD|UPDATE|NONE"}}]}}

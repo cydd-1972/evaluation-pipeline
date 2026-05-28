@@ -1,9 +1,9 @@
-# 方案③ global add：单 conv 记忆库 + session 状态机 + 全局 search（见 matrix_global 编排）
-# 密钥：configs/matrix_secrets.yaml（gitignore）
-# 产物目录：workspaces/matrix_global/（与 workspaces/matrix 完全隔离）
+# MiniMax global add（无 thinking 实验线）：与 matrix_global/minimax 完全隔离
+# - 独立 workspace / DB / status / 日志
+# - llm_thinking_mode: disabled（API 仍可能内部推理，pipeline 只用 strip 后的 content）
 
-matrix_base_dir: workspaces/matrix_global
-database_prefix: eval_pipeline_global
+matrix_base_dir: workspaces/matrix_global_minimax_nothink
+database_prefix: eval_pipeline_global_mm_nt
 
 add_backend: global
 search_mode: global
@@ -25,7 +25,7 @@ add_flush_per_session: true
 parallel_models: 1
 parallel_search: 2
 matrix_log_mode: session
-matrix_log_prefix: matrix_global_run
+matrix_log_prefix: matrix_global_minimax_nothink
 
 add_repeats: 3
 search_repeats: 1
@@ -39,14 +39,12 @@ eval:
     - bleu
   dataset_name: locomo
 
-pipeline_llm_model_id: deepseek
+pipeline_llm_model_id: minimax
 
 add_models:
-  - id: deepseek
-    model: deepseek-v4-flash
   - id: minimax
     model: MiniMax-M2.7
-    llm_thinking_mode: split  # run01 基线：reasoning_split + content strip
+    llm_thinking_mode: disabled
 
 search_backends:
   - llm

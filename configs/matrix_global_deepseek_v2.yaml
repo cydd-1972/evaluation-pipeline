@@ -1,9 +1,8 @@
-# 方案③ global add：单 conv 记忆库 + session 状态机 + 全局 search（见 matrix_global 编排）
-# 密钥：configs/matrix_secrets.yaml（gitignore）
-# 产物目录：workspaces/matrix_global/（与 workspaces/matrix 完全隔离）
+# DeepSeek 新提示词单次全流程（独立目录，勿与 matrix_global 混用）
+# 1×add + llm/rag search = 3 runs；不清理 matrix_global 历史数据
 
-matrix_base_dir: workspaces/matrix_global
-database_prefix: eval_pipeline_global
+matrix_base_dir: workspaces/matrix_global_deepseek_v2
+database_prefix: eval_pipeline_global_v2
 
 add_backend: global
 search_mode: global
@@ -25,9 +24,9 @@ add_flush_per_session: true
 parallel_models: 1
 parallel_search: 2
 matrix_log_mode: session
-matrix_log_prefix: matrix_global_run
+matrix_log_prefix: matrix_global_deepseek_v2
 
-add_repeats: 3
+add_repeats: 1
 search_repeats: 1
 reuse_legacy_add_run01: false
 reset_database_on_add: true
@@ -44,9 +43,6 @@ pipeline_llm_model_id: deepseek
 add_models:
   - id: deepseek
     model: deepseek-v4-flash
-  - id: minimax
-    model: MiniMax-M2.7
-    llm_thinking_mode: split  # run01 基线：reasoning_split + content strip
 
 search_backends:
   - llm

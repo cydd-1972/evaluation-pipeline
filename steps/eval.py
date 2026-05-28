@@ -12,13 +12,21 @@ from __future__ import annotations
 import asyncio
 import ast
 import json
+import os
 import re
 from pathlib import Path
 from typing import Any, Sequence
 
 from lib.checkpoint import has_eval_scores, load_json_list, write_json_list
+from lib.env import load_runtime_env
 from lib.metrics.bleu_f1 import compute_bleu1, compute_token_f1
-from lib.metrics.llm_judge import configure_evaluator, evaluate_llm_judge, shutdown_evaluator
+from lib.api_failure_budget import ApiFailureBudgetExceeded, reset_eval_budget
+from lib.metrics.llm_judge import (
+    configure_evaluator,
+    evaluate_llm_judge,
+    recommended_eval_concurrency,
+    shutdown_evaluator,
+)
 from lib.progress import ProgressBar
 
 SUPPORTED_METRICS = frozenset({"llm", "f1", "bleu"})
@@ -83,10 +91,17 @@ async def evaluate_records(
         raise ValueError("eval step expects a JSON list")
 
     if "llm" in enabled:
-        configure_evaluator(
+        reset_eval_budget()
+        base_concurrency = concurrency
+        key_count = configure_evaluator(
             model=evaluator_model,
             base_url=evaluator_base_url,
             api_key=evaluator_api_key,
+        )
+        concurrency = recommended_eval_concurrency(base_concurrency=base_concurrency, key_count=key_count)
+        print(
+            f"[eval] effective concurrency={concurrency} (keys={key_count}, base={base_concurrency})",
+            flush=True,
         )
 
     output_file = Path(output_path) if output_path is not None else None
@@ -119,17 +134,30 @@ async def evaluate_records(
         async with write_lock:
             write_json_list(output_file, snapshot)
 
+    abort_event = asyncio.Event()
+
     async def _evaluate_record(index: int, record: dict[str, Any]) -> None:
         """信号量包装的单条评测任务。"""
-        if results[index] is not None:
+        if results[index] is not None or abort_event.is_set():
             return
         nonlocal completed_since_save
         async with semaphore:
+            if abort_event.is_set():
+                return
             async with progress_lock:
                 progress.set_description(
                     f"eval conv{record.get('conversation_idx')} qa{record.get('qa_index')}"
                 )
-            results[index] = await _evaluate_one(record, enabled_metrics=enabled)
+            try:
+                results[index] = await _evaluate_one(record, enabled_metrics=enabled)
+            except ApiFailureBudgetExceeded as exc:
+                abort_event.set()
+                print(f"[eval] abort: {exc}", flush=True)
+                return
+            except Exception:
+                if abort_event.is_set():
+                    return
+                raise
             async with progress_lock:
                 progress.update(1)
             completed_since_save += 1
@@ -141,6 +169,8 @@ async def evaluate_records(
         await asyncio.gather(
             *[_evaluate_record(index, record) for index, record in enumerate(payload)]
         )
+    except ApiFailureBudgetExceeded as exc:
+        print(f"[eval] stopped after API failure budget: {exc}", flush=True)
     finally:
         progress.close()
         if "llm" in enabled:
@@ -148,6 +178,11 @@ async def evaluate_records(
 
     evaluated = [item if item is not None else payload[i] for i, item in enumerate(results)]
     await _flush_partial()
+    if abort_event.is_set():
+        pending = sum(1 for item in results if item is None)
+        raise ApiFailureBudgetExceeded(
+            f"eval incomplete: {pending} record(s) pending after API failure budget exhausted"
+        )
     return evaluated
 
 

@@ -3,15 +3,18 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from lib.matrix import MatrixRunSpec, plan_matrix_runs
 from lib.scoring import load_and_summarize
 
 PHASES = ("add", "search", "answer", "eval", "score")
+_TIMING_LOCK_RETRIES = 120
+_TIMING_LOCK_SLEEP_S = 0.25
 
 
 def summarize_timings(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -77,6 +80,52 @@ def save_timings(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _timing_lock_path(path: Path) -> Path:
+    return path.with_name(f"{path.name}.lock")
+
+
+def with_timing_file_lock(path: Path, fn: Callable[[], Any]) -> Any:
+    """跨进程互斥更新 matrix_timings（add-only 与 run_matrix 可并行写）。"""
+    lock_path = _timing_lock_path(path)
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    last_error: Exception | None = None
+    for _ in range(_TIMING_LOCK_RETRIES):
+        try:
+            fd = os.open(str(lock_path), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            try:
+                os.write(fd, str(os.getpid()).encode("utf-8"))
+            finally:
+                os.close(fd)
+            try:
+                return fn()
+            finally:
+                lock_path.unlink(missing_ok=True)
+        except FileExistsError as exc:
+            last_error = exc
+            time.sleep(_TIMING_LOCK_SLEEP_S)
+        except OSError as exc:
+            last_error = exc
+            time.sleep(_TIMING_LOCK_SLEEP_S)
+    raise TimeoutError(f"could not acquire timing lock: {lock_path}") from last_error
+
+
+def merge_timing_record(path: Path, entry: dict[str, Any]) -> None:
+    """按 run_id+phase 合并一条耗时记录（带文件锁）。"""
+
+    def _merge() -> None:
+        data = load_timings(path)
+        index = {
+            _entry_key(str(item.get("run_id")), str(item.get("phase"))): item
+            for item in data.get("entries", [])
+            if isinstance(item, dict)
+        }
+        index[_entry_key(str(entry.get("run_id")), str(entry.get("phase")))] = entry
+        data["entries"] = list(index.values())
+        save_timings(path, data)
+
+    with_timing_file_lock(path, _merge)
+
+
 def _entry_key(run_id: str, phase: str) -> str:
     return f"{run_id}::{phase}"
 
@@ -96,11 +145,14 @@ class TimingStore:
     def __init__(self, path: Path) -> None:
         self.path = path
         self._lock = asyncio.Lock()
-        self._data = load_timings(path)
+        self._reload_index()
+
+    def _reload_index(self) -> None:
+        self._data = load_timings(self.path)
         self._index = {
-            _entry_key(str(e.get("run_id")), str(e.get("phase"))): e
-            for e in self._data.get("entries", [])
-            if isinstance(e, dict)
+            _entry_key(str(entry.get("run_id")), str(entry.get("phase"))): entry
+            for entry in self._data.get("entries", [])
+            if isinstance(entry, dict)
         }
 
     async def record(
@@ -123,16 +175,21 @@ class TimingStore:
         }
         if error:
             entry["error"] = error
+
+        def _persist() -> None:
+            merge_timing_record(self.path, entry)
+
         async with self._lock:
-            self._index[_entry_key(run.run_id, phase)] = entry
-            self._data["entries"] = list(self._index.values())
-            save_timings(self.path, self._data)
+            await asyncio.to_thread(_persist)
+            self._reload_index()
 
     def has_ok(self, run_id: str, phase: str) -> bool:
+        self._reload_index()
         entry = self._index.get(_entry_key(run_id, phase))
         return bool(entry and entry.get("status") == "ok")
 
     def phases_done(self, run_id: str, phases: tuple[str, ...]) -> bool:
+        self._reload_index()
         if self.has_ok(run_id, "full"):
             return True
         return all(self.has_ok(run_id, phase) for phase in phases)
@@ -144,6 +201,7 @@ class TimingStore:
         status: dict[str, Any],
     ) -> None:
         """把 matrix_status 里已完成 run 的总耗时写入 timings（历史无分环节时记为 phase=full）。"""
+        self._reload_index()
         completed = status.get("completed") or {}
         for run in runs:
             block = completed.get(run.run_id)
@@ -160,17 +218,56 @@ class TimingStore:
                 key = _entry_key(run.run_id, phase)
                 if key in self._index:
                     continue
-                self._index[key] = {
+                entry = {
                     **_run_meta(run),
                     "phase": phase,
                     "elapsed_s": float(block.get("elapsed_s") or 0),
                     "finished_at": str(block.get("finished_at") or ""),
                     "status": "ok",
                     "source": str(block.get("migrated_from") or "matrix_status"),
-                    "note": "legacy total; per-phase not available" if phase == "full" else None,
                 }
-        self._data["entries"] = list(self._index.values())
-        save_timings(self.path, self._data)
+                note = "legacy total; per-phase not available" if phase == "full" else None
+                if note:
+                    entry["note"] = note
+                merge_timing_record(self.path, entry)
+                self._index[key] = entry
+        self._reload_index()
+
+
+def print_timing_summary(root: Path) -> None:
+    """打印 matrix_timings.json 按 run 汇总（add/search/answer/eval/score）。"""
+    path = timings_path(root)
+    if not path.exists():
+        print(f"[timings] missing {path}")
+        return
+    payload = load_timings(path)
+    rows = summarize_timings(payload.get("entries") or [])
+    print(f"[timings] {path} runs={len(rows)} updated_at={payload.get('updated_at')}")
+    for row in rows:
+        phases = row.get("phases") or {}
+        parts = []
+        for phase in PHASES:
+            block = phases.get(phase)
+            if not block:
+                continue
+            parts.append(f"{phase}={block.get('elapsed_s')}s({block.get('status')})")
+        print(f"  {row.get('run_id')}: " + ", ".join(parts))
+
+
+def backfill_timings_from_status_files(
+    *,
+    root: Path,
+    runs: list[MatrixRunSpec],
+    status_paths: list[Path],
+) -> None:
+    """从 matrix_status*.json 补写缺失的 add / full 耗时（不覆盖已有分环节记录）。"""
+    from lib.matrix_status import load_status
+
+    store = TimingStore(timings_path(root))
+    for status_path in status_paths:
+        if not status_path.exists():
+            continue
+        store.backfill_from_status(runs=runs, status=load_status(status_path))
 
 
 def rebuild_final_scores(*, root: Path, runs: list[MatrixRunSpec], answer_mode: str = "history") -> dict[str, Any]:

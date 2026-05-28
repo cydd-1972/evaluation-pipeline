@@ -14,6 +14,7 @@ from lib.matrix import (
     add_workspace_dir,
     add_db_workspace_name,
     apply_add_model_env,
+    apply_run_model_env,
     config_for_add_run,
     config_for_raw_add_run,
     config_for_raw_search_run,
@@ -23,7 +24,14 @@ from lib.matrix import (
     resolve_pipeline_llm_model,
 )
 from lib.matrix_status import load_status, mark_run_completed, mark_run_failed, save_status
-from lib.matrix_telemetry import PhaseTimer, TimingStore, rebuild_final_scores
+from lib.matrix_telemetry import (
+    PhaseTimer,
+    TimingStore,
+    backfill_timings_from_status_files,
+    print_timing_summary,
+    rebuild_final_scores,
+    timings_path,
+)
 from run_pipeline import run_pipeline_from_config
 
 
@@ -47,10 +55,7 @@ async def execute_phase(
         if run.add_model_id != RAW_ADD_MODEL_ID:
             apply_add_model_env(model_by_id(models, run.add_model_id))
     else:
-        if run.add_model_id == RAW_ADD_MODEL_ID:
-            apply_add_model_env(resolve_pipeline_llm_model(matrix_cfg, models))
-        else:
-            apply_add_model_env(model_by_id(models, run.add_model_id))
+        apply_run_model_env(matrix_cfg, models, run)
 
     if run.is_add:
         if phase != "add":
@@ -201,7 +206,9 @@ async def run_matrix_parallel(
     parallel_search: int,
 ) -> None:
     status = load_status(status_path)
-    store = TimingStore(root / "matrix_timings.json")
+    store = TimingStore(timings_path(root))
+    add_status_paths = [status_path] + sorted(root.glob("matrix_status_*_add.json"))
+    backfill_timings_from_status_files(root=root, runs=all_runs, status_paths=add_status_paths)
 
     answer_mode = str(base_config.get("answer_prompt_mode") or "history")
     add_repeats = sorted({int(r.add_repeat_index or 1) for r in runs})
@@ -305,12 +312,12 @@ async def run_matrix_parallel(
         for run in wave_search:
             if _skip_run(run):
                 continue
-            if run.run_id in status.get("failed", {}):
-                continue
             if store.phases_done(run.run_id, ("eval", "score")):
                 if run.run_id not in status.get("completed", {}):
                     await _mark_ok(run, 0.0)
                 continue
+            if run.run_id in status.get("failed", {}):
+                _clear_failed(run.run_id)
             started = time.perf_counter()
             try:
                 await _run_phases_serial(
@@ -332,8 +339,9 @@ async def run_matrix_parallel(
 
     rebuild_final_scores(root=root, runs=all_runs, answer_mode=answer_mode)
     failed = len(status.get("failed", {}))
-    print(f"[matrix] timings={root / 'matrix_timings.json'}", flush=True)
+    print(f"[matrix] timings={timings_path(root)}", flush=True)
     print(f"[matrix] final_scores={root / 'matrix_final_scores.json'}", flush=True)
+    print_timing_summary(root)
     if failed:
         print(f"[matrix] finished with {failed} failed run(s)", flush=True)
     print(f"[matrix] done. status={status_path}", flush=True)

@@ -15,9 +15,10 @@ from typing import Any
 from openai import APIConnectionError, APIStatusError, OpenAI, RateLimitError
 
 from lib.env import require_openai_env
+from lib.api_failure_budget import is_countable_api_error
 
-# 长跑时 gptplus5 可能 500/429/no_available_key，自动退避重试
-_API_RETRY_ATTEMPTS = 8
+# 长跑时 gptplus5 可能 500/429/no_available_key，单请求最多重试 10 次
+_API_RETRY_ATTEMPTS = 10
 _API_RETRY_BASE_SEC = 3.0
 _API_RETRY_MAX_SEC = 90.0
 
@@ -30,6 +31,12 @@ _JSON_SYSTEM_PROMPT = (
 _BAD_JSON_REPLY = re.compile(
     r"(?i)(how can i help|hello!|assist you today|^\s*hi\b)",
 )
+
+_THINKING_BLOCK_RE = re.compile(
+    r"<think>.*?</think>",
+    re.DOTALL | re.IGNORECASE,
+)
+_THINKING_OPEN_RE = re.compile(r"<think>.*", re.DOTALL | re.IGNORECASE)
 
 _STUB_PAYLOAD_KEYS = frozenset({"status", "message", "timestamp", "error"})
 
@@ -46,9 +53,44 @@ def _is_stub_payload(payload: dict[str, Any], *, required_key: str | None = None
     return False
 
 
+def _strip_thinking_tags(text: str) -> str:
+    """去掉 MiniMax/Qwen 等模型嵌在 content 里的 thinking 块。"""
+    cleaned = (text or "").strip()
+    if not cleaned:
+        return cleaned
+    cleaned = _THINKING_BLOCK_RE.sub("", cleaned).strip()
+    cleaned = _THINKING_OPEN_RE.sub("", cleaned).strip()
+    return cleaned
+
+
+def _llm_thinking_mode() -> str:
+    return os.getenv("PIPELINE_LLM_THINKING_MODE", "").strip().lower()
+
+
+def _message_text(message: Any) -> str:
+    """合并 assistant 正文；MiniMax reasoning_split 时 content 应已是答案部分。"""
+    content = _strip_thinking_tags(str(getattr(message, "content", None) or ""))
+    if _llm_thinking_mode() == "disabled":
+        return content
+    reasoning = getattr(message, "reasoning_content", None)
+    if reasoning and not content.strip():
+        return _strip_thinking_tags(str(reasoning))
+    return content
+
+
+def _message_text_for_json(message: Any) -> str:
+    """结构化输出：优先取含 JSON 的字段（MiniMax 有时把思考写在 content）。"""
+    content = _strip_thinking_tags(str(getattr(message, "content", None) or ""))
+    reasoning = _strip_thinking_tags(str(getattr(message, "reasoning_content", None) or ""))
+    for part in (content, reasoning):
+        if "{" in part:
+            return part
+    return content or reasoning
+
+
 def _extract_json_object(text: str) -> dict[str, Any]:
     """从模型回复中提取第一个 JSON 对象。"""
-    cleaned = (text or "").strip()
+    cleaned = _strip_thinking_tags(text)
     if not cleaned:
         raise ValueError("empty LLM response")
     fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", cleaned, re.DOTALL | re.IGNORECASE)
@@ -92,17 +134,8 @@ class PipelineLLM:
         self.max_tokens = max_tokens
 
     def _should_retry_api_error(self, exc: Exception) -> bool:
-        """是否对网关瞬时错误退避重试。"""
-        if isinstance(exc, (APIConnectionError, RateLimitError)):
-            return True
-        if isinstance(exc, APIStatusError):
-            code = int(getattr(exc, "status_code", 0) or 0)
-            if code in {408, 409, 429, 500, 502, 503, 504}:
-                return True
-            message = str(exc).lower()
-            if "no_available_key" in message or "no enabled keys" in message:
-                return True
-        return False
+        """是否对网关瞬时错误退避重试（403 余额不足等会计入次数上限）。"""
+        return is_countable_api_error(exc)
 
     def _create_completion(self, **kwargs: Any) -> Any:
         """带退避的 chat.completions.create。"""
@@ -138,8 +171,7 @@ class PipelineLLM:
         response = self._create_completion(
             **self._completion_kwargs(messages=messages, temperature=temperature),
         )
-        content = response.choices[0].message.content
-        return str(content or "").strip()
+        return _message_text(response.choices[0].message)
 
     def _is_gemini_model(self) -> bool:
         """gptplus5 上 Gemini 需 json_object 模式，否则会回寒暄而非 JSON。"""
@@ -150,16 +182,35 @@ class PipelineLLM:
         name = self.model.lower()
         return "deepseek" in name and ("v4" in name or "deepseek-v4" in name)
 
-    def _completion_kwargs(self, *, messages: list[dict[str, str]], temperature: float) -> dict[str, Any]:
-        """按模型附加 API 参数（Gemini json_object / DeepSeek v4 关 thinking）。"""
+    def _is_minimax_model(self) -> bool:
+        return "minimax" in self.model.lower()
+
+    def _completion_kwargs(
+        self,
+        *,
+        messages: list[dict[str, str]],
+        temperature: float,
+        json_task: bool = False,
+    ) -> dict[str, Any]:
+        """按模型附加 API 参数（Gemini json_object / DeepSeek v4 / MiniMax thinking）。"""
         kwargs: dict[str, Any] = {
             "model": self.model,
             "messages": messages,
             "temperature": temperature,
             "max_tokens": self.max_tokens,
         }
+        extra_body: dict[str, Any] = {}
         if self._is_deepseek_v4_model():
-            kwargs["extra_body"] = {"thinking": {"type": "disabled"}}
+            extra_body["thinking"] = {"type": "disabled"}
+        if self._is_minimax_model():
+            mode = _llm_thinking_mode()
+            extra_body["reasoning_split"] = True
+            # search/add 等 JSON 任务：强制关 thinking，避免 prose 占满 content
+            if json_task or mode == "disabled":
+                extra_body["thinking"] = {"type": "disabled"}
+                extra_body["enable_thinking"] = False
+        if extra_body:
+            kwargs["extra_body"] = extra_body
         return kwargs
 
     def chat_json(self, prompt: str, *, temperature: float = 0.0) -> dict[str, Any]:
@@ -173,7 +224,7 @@ class PipelineLLM:
                 {"role": "system", "content": _JSON_SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ]
-            kwargs = self._completion_kwargs(messages=messages, temperature=temperature)
+            kwargs = self._completion_kwargs(messages=messages, temperature=temperature, json_task=True)
             try:
                 if self._is_gemini_model():
                     response = self._create_completion(
@@ -196,7 +247,7 @@ class PipelineLLM:
                 )
                 continue
 
-            last_raw = str(response.choices[0].message.content or "").strip()
+            last_raw = _message_text_for_json(response.choices[0].message)
             if _BAD_JSON_REPLY.search(last_raw) or "{" not in last_raw:
                 user_prompt = (
                     f"{prompt}\n\n"

@@ -40,6 +40,7 @@ from lib.matrix import (
     add_workspace_dir,
     add_db_workspace_name,
     apply_add_model_env,
+    apply_run_model_env,
     build_base_pipeline_config,
     config_for_add_run,
     config_for_raw_add_run,
@@ -124,10 +125,7 @@ async def _execute_run(
         if run.add_model_id != RAW_ADD_MODEL_ID:
             apply_add_model_env(_model_by_id(models, run.add_model_id))
     else:
-        if run.add_model_id == RAW_ADD_MODEL_ID:
-            apply_add_model_env(resolve_pipeline_llm_model(matrix_cfg, models))
-        else:
-            apply_add_model_env(_model_by_id(models, run.add_model_id))
+        apply_run_model_env(matrix_cfg, models, run)
 
     async def _run_pipeline(cfg: dict[str, Any], *, phase: str | None = None) -> None:
         step_start = start_from_step or phase or ("add" if run.is_add else "search")
@@ -357,6 +355,7 @@ def run_matrix(
     skip_completed: bool = True,
     continue_on_error: bool = True,
     serial: bool = False,
+    no_lock: bool = False,
 ) -> None:
     load_runtime_env()
     matrix_cfg, secrets = load_matrix_bundle(matrix_config_path=matrix_config_path)
@@ -393,7 +392,8 @@ def run_matrix(
         return
 
     lock_path = root / "matrix_run.lock"
-    with MatrixProcessLock(lock_path):
+
+    def _run() -> None:
         with matrix_file_logging(log_file, open_mode=log_open_mode):
             asyncio.run(
                 _run_matrix_body(
@@ -411,6 +411,13 @@ def run_matrix(
                     parallel_search=parallel_search,
                 )
             )
+
+    if no_lock:
+        print("[matrix] no-lock mode (parallel add-only safe)", flush=True)
+        _run()
+    else:
+        with MatrixProcessLock(lock_path):
+            _run()
 
     print(f"[matrix] session log: {log_file}")
 
@@ -435,6 +442,11 @@ def main() -> None:
         action="store_true",
         help="逐 run 串行（默认并行编排：add 并行、search+answer 并行、eval 串行）",
     )
+    parser.add_argument(
+        "--no-lock",
+        action="store_true",
+        help="不占用 matrix_run.lock（仅建议 --only-add 单模型并行跑 add 时用）",
+    )
     args = parser.parse_args()
 
     config_path = args.config if args.config.is_absolute() else PIPELINE_DIR / args.config
@@ -449,6 +461,7 @@ def main() -> None:
             skip_completed=not args.no_skip_completed,
             continue_on_error=not args.stop_on_error,
             serial=args.serial,
+            no_lock=args.no_lock,
         )
 
 

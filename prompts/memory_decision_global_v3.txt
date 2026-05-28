@@ -6,7 +6,7 @@ Your goal is **retrieval-ready coverage**: a later QA step will pick memory ids 
 
 # WHAT IS A MEMORY?
 
-A **memory** is one **atomic, self-contained English sentence** that could be used alone to answer a future question without reading the dialogue.
+A **memory** is one **atomic, self-contained English sentence** — ideally describing **one discrete event (一件事)** or one stable fact — that could be used alone to answer a future question without reading the dialogue.
 
 Each memory must:
 - Name the **subject explicitly** (never bare pronouns — see Entity rules below).
@@ -15,6 +15,42 @@ Each memory must:
 
 Bad memory: "She went there recently." (no who, no date, no place)
 Good memory: "On 7 May 2023, Caroline attended an LGBTQ support group."
+
+# MEMORY GRANULARITY — one item = one event (一件事)
+
+Default unit: **one memory item = one discrete event** — a bounded happening in the dialogue, not a whole session summary and not a life-long trait lumped with a one-off action.
+
+When the dialogue describes something that happened, think in terms of **one event (一件事)** and capture as many of the **six elements** as the transcript supports (do not invent missing parts):
+
+| Element | What to capture | In memory text |
+|---------|-----------------|----------------|
+| **Time** (时间) | Calendar date/time anchored from session_time | "On 7 May 2023", "In June 2023" |
+| **Place** (地点) | Venue, city, home, online, etc. | "at the LGBTQ youth center in Boston" |
+| **People** (人物) | Actor(s), addressee(s), third parties — explicit names | "Caroline", "{speaker_a} and {speaker_b}" |
+| **Cause / motive** (起因) | Why it happened, trigger, reason — only if stated | "because Melanie suggested it" |
+| **Process / action** (经过) | The core action or state change | "attended a support group", "adopted a rescue dog" |
+| **Result / outcome** (结果) | Stated consequence, feeling, or follow-up — only if stated | "and felt welcomed", "which strained John's budget" |
+
+**How to decide item boundaries (critical):**
+
+1. **One memory item** — same incident: one core action at one time anchor involving the same participant set.
+   - Pack time + place + people + action (+ cause/result when known) into **one** standalone sentence when they belong to the **same** event.
+   - Good (one event, one item): "On 7 May 2023, Caroline attended an LGBTQ support group at the youth center in Boston and felt welcomed."
+   - Bad (one event split into six thin items): separate ids for only the date, only the place, only "she went" with no names — unless later QA must retrieve them independently (see rule 3).
+
+2. **Split into multiple memory items** when facts are **different events** or **different QA targets**:
+   - Different calendar dates or clearly separate incidents (trip in May vs appointment in July → two items).
+   - Different protagonists with unrelated actions in the same session (Caroline's surgery vs John's job loss → two items).
+   - **Stable attribute vs one-time event**: ongoing trait, preference, relationship, or possession vs a dated happening (keep separate).
+   - **Multi-hop chains**: if a later question might ask only for the date, only for a linked person, or only for a location of the **same** event, you may keep **separate** items — but each must still be a full explicit sentence, not a fragment.
+
+3. **Do NOT** merge multiple distinct events into one vague summary ("They had a busy month with many life changes").
+4. **Do NOT** force six items per event just to checklist the six elements; prefer **one rich event sentence** unless splitting improves retrieval for distinct questions.
+5. **Non-event facts** (preferences, relationships, counts, plans without a fixed date yet): one item = one atomic fact; use the six-element frame only when the dialogue presents them as part of a specific happening.
+
+Bad granularity: "Caroline did several things in May." (too coarse — multiple events)
+Bad granularity: id-12: "7 May 2023." / id-13: "support group." (too fine — fragments, not retrievable alone)
+Good granularity: one item per distinct dated event; traits and relationships as separate items when they answer different questions.
 
 # ENTITY DISAMBIGUATION (critical)
 
@@ -88,6 +124,7 @@ Do **not** use DELETE. Anything you would DELETE should be an **UPDATE** (correc
 - If dialogue corrects a date, **UPDATE** the existing memory to the corrected date; do not drop the memory entry.
 
 ## Multi-hop and attribute facts (critical for reasoning questions)
+- Apply the **granularity rules above**: default to one item per event; split only when events differ or when separate items serve different QA hops.
 - Keep **separate** memories for facts that may chain in later questions (event A, date of A, person linked to A, location, preferences, counts, relationships).
 - Do **not** collapse multiple distinct events into one vague summary if each could answer a different question.
 - Preserve: names, roles, objects, places, quantities, before/after relations, and "X did Y because Z" when stated.

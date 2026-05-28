@@ -1,12 +1,13 @@
-# 方案③ global add：单 conv 记忆库 + session 状态机 + 全局 search（见 matrix_global 编排）
-# 密钥：configs/matrix_secrets.yaml（gitignore）
-# 产物目录：workspaces/matrix_global/（与 workspaces/matrix 完全隔离）
+# v3 提示词 + Gemini add（1×add + llm/rag），与 matrix_global / dsv2 完全隔离
+# workspace: workspaces/v3/minimax/gemini/...
+# search_llm 用 deepseek；eval 由 scripts/run_v3_gemini_matrix.py 注入百炼 key
 
-matrix_base_dir: workspaces/matrix_global
-database_prefix: eval_pipeline_global
+matrix_base_dir: workspaces/v3/minimax
+database_prefix: eval_pipeline_v3_minimax
 
 add_backend: global
 search_mode: global
+memory_decision_prompt: memory_decision_global_v3.txt
 
 dataset_path: datasets/locomo_refined.json
 max_conversations: null
@@ -25,9 +26,9 @@ add_flush_per_session: true
 parallel_models: 1
 parallel_search: 2
 matrix_log_mode: session
-matrix_log_prefix: matrix_global_run
+matrix_log_prefix: matrix_v3_minimax_gemini
 
-add_repeats: 3
+add_repeats: 1
 search_repeats: 1
 reuse_legacy_add_run01: false
 reset_database_on_add: true
@@ -42,11 +43,8 @@ eval:
 pipeline_llm_model_id: deepseek
 
 add_models:
-  - id: deepseek
-    model: deepseek-v4-flash
-  - id: minimax
-    model: MiniMax-M2.7
-    llm_thinking_mode: split  # run01 基线：reasoning_split + content strip
+  - id: gemini
+    model: gemini-3.1-flash-lite-preview
 
 search_backends:
   - llm

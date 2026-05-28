@@ -57,12 +57,17 @@ class _TimestampWriter:
         return False
 
 
-def resolve_session_log_path(root: Path, *, prefix: str = "matrix_run") -> Path:
+def resolve_session_log_path(
+    root: Path,
+    *,
+    prefix: str = "matrix_run",
+    pointer_name: str = "matrix_log_current.txt",
+) -> Path:
     """每次 session 使用独立日志文件，并写入 pointer 供编辑器打开。"""
     root.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_path = root / f"{prefix}_{ts}.log"
-    pointer = root / "matrix_log_current.txt"
+    pointer = root / pointer_name
     pointer.write_text(f"{log_path.resolve()}\n", encoding="utf-8")
     return log_path
 

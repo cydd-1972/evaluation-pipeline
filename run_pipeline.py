@@ -40,7 +40,7 @@ from backends.search_llm import run_search_llm
 from backends.search_llm_global import run_search_llm_global
 from backends.search_rag import run_search_rag
 from backends.search_rag_global import run_search_rag_global
-from lib.env import evaluator_settings, load_runtime_env
+from lib.env import evaluator_api_keys, evaluator_settings, load_runtime_env
 from lib.flat_export import (
     flattened_eval_output_path,
     write_flattened_eval_records,
@@ -149,6 +149,7 @@ async def _run_add(config: dict[str, Any], workspace_dir: Path) -> dict[str, Any
             add_llm_concurrency=batch,
             add_history_window=history_window,
             add_flush_per_session=flush_per_session,
+            memory_prompt_path=config.get("memory_decision_prompt"),
         )
     batch = int(config.get("add_llm_concurrency") or 1)
     print(f"[pipeline] step=add (mem0-style, batch={batch})")
