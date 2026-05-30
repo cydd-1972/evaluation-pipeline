@@ -18,20 +18,33 @@ add → search → answer → eval → score
 
 ### v2_raw — 无压缩的 session 原文基线
 
-- **问题设定**：**不做任何记忆归纳**，把「说话人参与过的每个 session」整段 transcript（含双方发言）当作一条可检索块。
+**不做任何记忆归纳**，把「说话人参与过的每个 session」整段 transcript（含双方发言）当作一条可检索块。
 - **写入方式**：**无 LLM**；按 session 切块 → embedding → 入库，成本最低、行为最可复现。
 - **检索粒度**：仍是 **per-speaker `user_id`**，但每条记忆是一大段原文而非原子 fact。
-- **适用场景**：作为 **上限参考**（检索命中时信息最全），用来判断 v1/v3 的「压缩记忆」是否反而丢信息；矩阵里常作为 `add_mode: raw` 单独一条线。
 - **典型现象**：cat4 等多跳题分数往往最高，但库体积大、检索噪声也多。
 
 ### v3_global — 整段对话一份全局记忆快照
+**思路说明**：  
+D是对话，M是记忆  
+- 第 1 轮：输入 D_1 → 输出 M_1  
+- 第 2 轮：输入 D_2 + D_1(窗口) + M_1 → 输出 M_2  
+- 第 n 轮：输入（t可以设置）  
+D_n + (D_{n-t} … D_{n-1}) + M_{n-1} → 输出 M_n  
 
-- **问题设定**：**一个 conversation 只有一个记忆库**，记忆是带 id 的结构化 JSON 列表（`M_n`），由模型根据 **历史若干 session + 当前 session** 整体重写/增删，而不是按 speaker 分裂。
-- **写入方式**：按 session **时间顺序串行** 更新（`M_n = f(D_window, M_{n-1})`）；每 session 结束后 **flush 全量快照** 到 DB。提示词可选 `memory_decision_global_v1/v2/v3.txt` 做消融。
-- **检索粒度**：**每个 conversation 一个 `user_id`**；`search_mode: global` 时从这份全局列表里选 id，再交给统一的 answer / eval。
-- **实现要点**：prompt 只喂最近 N 条旧记忆时，flush 前会 **merge 保留模型未输出的 id**，避免早期条目被截断 + 全量覆盖删掉（见 `memory_prompt_max_items`）。
-- **适用场景**：验证「全局状态机式记忆 + 二次检索」是否比 per-speaker 原子记忆更适合长对话；也是当前与 raw 差距分析的主战场。
 
+**提示词**  ：
+
+可选 `memory_decision_global_v1/v2/v3.txt` 。
+
+v2：
+- delete--》update
+- 实体消歧规则
+- 根据之前很多空search，让提示词注意别压缩太狠  
+
+v3：
+- 原子事件  ：v3 add 要求每条记忆是 一条独立的英文完整句，理想形态是「一件事」：  
+On 20 May 2023, Melanie ran a charity race for mental health awareness.
+- 原子设计会把 人 / 时间 / 事 / 结果 拆成多条，或只留其中几条。
 
 
 ## 目录结构
@@ -111,11 +124,92 @@ python v3_global/run.py --matrix
 
 密钥：`configs/matrix_secrets.yaml`。
 
-## eval 并发
+---
 
-- 3 个 API key **固定分片**（`index % 3`），每分片独立 TPM gate，429 时仅该 key 退避（不轮询抢 key）。
-- 日志应出现 `keys=3` 与 `shard mode: 3 workers`。
+## 分环节耗时记录（三版本通用）
 
-## 迁移说明
+三版本走同一套 `core/telemetry.py` / `core/matrix/matrix_telemetry.py`，**按环节记墙钟时间**，不区分版本实现细节；差异主要体现在 **add** 阶段（v2 无 LLM 通常最短，v1 调用最多，v3 每 session 一次全局决策）。
 
-旧路径 `lib/`、`backends/`、`steps/`、`run_pipeline.py`、`run_matrix.py` 已移除。历史产物仍在 `workspaces/matrix*`、`workspaces/v3` 等，新实验写入各版本下 `workspaces/`。
+### 记在哪里
+
+| 运行方式 | 文件 | 粒度 |
+|----------|------|------|
+| 单次 pipeline | `{version}/workspaces/<workspace_name>/run_timings.json` | `add` / `search` / `answer` / `eval` / `score` 各一条 |
+| 矩阵 `--matrix` | `{version}/workspaces/matrix_timings.json` | 每个 `run_id` × 每个 `phase` 一条 |
+| 终端 + 日志 | `workspaces/logs/run_*.log`（单次）或 `matrix_*_*.log`（矩阵） | 含 `[pipeline] OK phase=… (Xs)`、`[eval] effective concurrency=…` |
+
+单次 `run_timings.json` 示例：
+
+```json
+{
+  "updated_at": "2026-05-26T12:00:00",
+  "phases": {
+    "add":    { "elapsed_s": 3720.5, "status": "ok", "finished_at": "..." },
+    "search": { "elapsed_s": 1623.7, "status": "ok", "finished_at": "..." },
+    "answer": { "elapsed_s": 890.2,  "status": "ok", "finished_at": "..." },
+    "eval":   { "elapsed_s": 7200.0, "status": "ok", "finished_at": "..." },
+    "score":  { "elapsed_s": 1.2,    "status": "ok", "finished_at": "..." }
+  }
+}
+```
+
+矩阵跑完后可在日志末尾看到按 run 汇总（`print_timing_summary`），或打开 `matrix_timings.json` 的 `entries[]`（字段含 `run_id`、`phase`、`elapsed_s`、`model_id`、`search_backend`）。
+
+**当前未写入 JSON 的字段**（需结合 `pipeline_config.json`、当次 config 与日志判断）：`eval_concurrency`、裁判 key 数、是否开启 TPM、是否分片。下文说明如何从日志辨认。
+
+### 全量 LoCoMo 规模（估算基准）
+
+`datasets/locomo_refined.json`：**10 个 conversation，1382 道 QA**（`max_conversations: null` 时）。下列耗时为在本仓库历史 `workspaces/matrix*`、`workspaces/v3` 等跑数上的 **经验区间**，实际随模型、API 限速、网络波动变化。
+
+| 环节 | v1_mem0 | v2_raw | v3_global | 主要并发 / 配置 |
+|------|---------|--------|-----------|-----------------|
+| **add** | 约 **1–2.5 h** | 约 **5–20 min** | 约 **0.5–1.5 h** | v1/v3：`add_llm_concurrency: 4`；v2：仅 embedding |
+| **search (llm)** | 约 **25–80 min** | 同左 | 同左（global 一次列全库记忆） | `search_llm_concurrency: 4` |
+| **search (rag)** | 约 **20–135 min** | 同左 | 同左 | 含 embedding 检索，常比 llm search 慢 |
+| **answer** | 约 **15–45 min** | 同左 | 同左 | 默认 `concurrency: 2` |
+| **eval (llm 裁判)** | 见下表 | 同左 | 同左 | 与 TPM / key 数强相关 |
+| **score** | 不足 5 秒 | 同左 | 同左 | 本地汇总 JSON |
+
+历史单次 run 总耗时（含 search+answer+eval+score，**约 3.5 h/条**）在 `matrix_status.json` 里常见 **~12700 s**，与 eval 占主导一致。
+
+### eval：限流 × 并发（四种组合）
+
+eval 只在使用指标 `llm` 时调用裁判 API；`f1` / `bleu` 为本地计算，可忽略耗时。
+
+| 模式 | 环境 / 配置 | 行为 | 全量 1382 题 **粗算耗时** | 日志特征 |
+|------|-------------|------|---------------------------|----------|
+| **A. 限流 + 3 key 分片**（推荐默认） | `EVALUATOR_TPM_LIMIT=40000`（非 0/off）；`EVALUATOR_DASHSCOPE_API_KEYS` 等与 SF key 共 **3 slot**；`eval_concurrency: 6` | `index % 3` 固定分片，**每 key 独立 TPM 窗口**；有效并发通常被压到 **≤6**（常约 **2/分片**） | 约 **2.5–4 h**（~6–10 s/题，含等待窗口） | `keys=3`、`shard mode: 3 workers`、`TPM gate enabled … per key` |
+| **B. 限流 + 单 key** | 仅 1 个 `EVALUATOR_API_KEY`；TPM 开启 | 单 gate + 有效并发 **≤2**（`EVALUATOR_CONCURRENCY_MAX` 默认） | 约 **4–6 h** 或更久 | `keys=1`、`effective concurrency=2`、大量 `TPM budget … wait 50s` |
+| **C. 不限流 + 3 key 分片** | `EVALUATOR_TPM_LIMIT=0` 或 `off` | 分片仍生效，并发可达 **~6**，直至接口 429 | 理想 **~40–90 min**；429 多时退回 ~2 h+ | 无 TPM gate 行；仍有 `shard mode` |
+| **D. 不限流 + 单 key 低并发** | TPM 关；仅 1 key；`eval_concurrency: 2` | 串行化最严重 | 约 **3–5 h**（~8–12 s/题） | `keys=1`，无 shard |
+
+说明：
+
+- **限流**：`EvaluatorTpmGate` 按 `EVALUATOR_TPM_LIMIT`（默认 40k input tokens/min）× `EVALUATOR_TPM_BUFFER`（0.85）÷ `EVALUATOR_EST_INPUT_TOKENS`（默认 5000，跑前会用样本校准）估算每分钟可发请求数；超预算会 **主动 sleep**（日志 `TPM budget … wait …`），与 429 退避不同。
+- **并发**：`config.yaml` 的 `eval_concurrency` 是上限；实际值见日志 `effective concurrency=`（由 `recommended_eval_concurrency` 与 key 数、TPM 共同决定）。
+- **分片 vs 轮询**：当前实现为 **固定分片**（每题只属于一个 key），429 时 **该 key 退避重试**，不会抢其他 key。
+
+关闭 TPM 示例：
+
+```env
+EVALUATOR_TPM_LIMIT=0
+```
+
+### 三版本端到端粗算（全量 + eval 模式 A）
+
+| 版本 | add | search→score（llm） | + eval (A) | **合计约** |
+|------|-----|---------------------|------------|------------|
+| v1_mem0 | 1–2.5 h | 1–2 h | 2.5–4 h | **5–8.5 h** |
+| v2_raw | 0.1–0.3 h | 1–2 h | 2.5–4 h | **4–6.5 h** |
+| v3_global | 0.5–1.5 h | 1–2 h | 2.5–4 h | **4.5–7.5 h** |
+
+矩阵（例如 v1：1 模型 × 3 次 add × 2 种 search）在 **模式 A** 下，仅 eval 串行阶段往往还要 **×6 条 search run** 量级，总日历时间需再乘并行度（`parallel_models` / `parallel_search`），详见各版本 `config.matrix.yaml`。
+
+### 如何核对一次 run
+
+1. 打开 `{version}/workspaces/<name>/run_timings.json` 看五步 `elapsed_s`。
+2. 打开同目录 `pipeline_config.json` 看当次 `eval_concurrency`、`search_backend`、`add_backend`。
+3. 打开 `workspaces/logs/run_*.log`，搜索：`effective concurrency`、`keys=`、`shard mode`、`TPM gate`、`TPM budget`。
+
+新重组后的路径（`v1_mem0/workspaces/` 等）在**首次全量跑通前**可能没有 `run_timings.json`；旧实验的分环节数据在 `evaluation_pipeline/workspaces/matrix*/matrix_status.json`（多为 **整 run 总耗时**，无分 phase 时以 `matrix_timings.json` 为准，若缺失则只有总 `elapsed_s`）。
+
