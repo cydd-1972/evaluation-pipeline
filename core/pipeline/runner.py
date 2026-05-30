@@ -25,12 +25,14 @@ from core.pipeline.steps.eval import evaluate_records
 from core.run_log import LogOpenMode, matrix_file_logging, resolve_run_log_path
 from core.search.search_llm import run_search_llm
 from core.search.search_llm_global import run_search_llm_global
+from core.search.search_hybrid_llm_global import run_search_hybrid_llm_global
 from core.search.search_rag import run_search_rag
 from core.search.search_rag_global import run_search_rag_global
 from core.telemetry import PipelinePhaseTimer, RunTimingStore
 from v1_mem0.add import run_add_mem0
 from v2_raw.add import run_add_raw
 from v3_global.add import run_add_global
+from v4_global.add import run_add_global_v4
 
 PIPELINE_STEPS = ("add", "search", "answer", "eval", "score")
 
@@ -106,7 +108,7 @@ def _read_database_url(workspace_dir: Path) -> str:
 def _is_global_search(config: dict[str, Any]) -> bool:
     search_mode = str(config.get("search_mode") or "").strip().lower()
     add_backend = str(config.get("add_backend") or "mem0").strip().lower()
-    return search_mode == "global" or add_backend == "global"
+    return search_mode == "global" or add_backend in {"global", "global_v4"}
 
 
 def _search_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
@@ -119,6 +121,35 @@ def _search_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
     if not (api_key and api_base and model):
         return None
     return PipelineLLM(api_key=api_key, api_base=api_base, model=model)
+
+
+def _resolve_search_prompt_path(config: dict[str, Any], *, pipeline_dir: Path) -> Path | None:
+    raw = config.get("search_llm_prompt")
+    if raw is None or not str(raw).strip():
+        return None
+    path = Path(str(raw).strip())
+    if path.is_absolute():
+        return path
+    return pipeline_dir / path
+
+
+def _search_llm_require_non_empty(config: dict[str, Any]) -> bool:
+    return bool(config.get("search_llm_require_non_empty"))
+
+
+def _search_hybrid_settings(config: dict[str, Any]) -> tuple[int, int]:
+    hybrid_cfg = config.get("search_hybrid")
+    recall_k = config.get("search_hybrid_recall_k")
+    rrf_k = config.get("search_hybrid_rrf_k")
+    if isinstance(hybrid_cfg, dict):
+        if recall_k is None:
+            recall_k = hybrid_cfg.get("recall_k")
+        if rrf_k is None:
+            rrf_k = hybrid_cfg.get("rrf_k")
+    return (
+        int(recall_k or 80),
+        int(rrf_k or 60),
+    )
 
 
 async def _run_add(
@@ -143,6 +174,22 @@ async def _run_add(
     if backend == "raw":
         print("[pipeline] step=add (raw: session transcript → postgres + embedding, no LLM)")
         return await run_add_raw(**add_kwargs)
+    if backend == "global_v4":
+        batch = int(config.get("add_llm_concurrency") or 1)
+        history_window = int(config.get("add_history_window") or 2)
+        flush_per_session = bool(config.get("add_flush_per_session", True))
+        print(
+            f"[pipeline] step=add (global v4 incremental, batch={batch}, "
+            f"history_window={history_window})",
+        )
+        return await run_add_global_v4(
+            **add_kwargs,
+            add_llm_concurrency=batch,
+            add_history_window=history_window,
+            add_flush_per_session=flush_per_session,
+            memory_prompt_path=config.get("memory_decision_prompt"),
+            memory_prompt_max_items=config.get("memory_prompt_max_items"),
+        )
     if backend == "global":
         batch = int(config.get("add_llm_concurrency") or 1)
         history_window = int(config.get("add_history_window") or 2)
@@ -160,8 +207,13 @@ async def _run_add(
             memory_prompt_max_items=config.get("memory_prompt_max_items"),
         )
     batch = int(config.get("add_llm_concurrency") or 1)
+    prompt_max = config.get("memory_prompt_max_items")
     print(f"[pipeline] step=add (mem0-style, batch={batch})")
-    return await run_add_mem0(**add_kwargs, add_llm_concurrency=batch)
+    return await run_add_mem0(
+        **add_kwargs,
+        add_llm_concurrency=batch,
+        memory_prompt_max_items=prompt_max,
+    )
 
 
 async def _run_search(
@@ -183,9 +235,30 @@ async def _run_search(
         "top_k": int(config.get("search_top_k") or 30),
         "progress_label": config.get("progress_label"),
     }
-    if backend == "llm":
-        batch = int(config.get("search_llm_concurrency") or 1)
-        search_llm = _search_llm_from_config(config)
+    batch = int(config.get("search_llm_concurrency") or 1)
+    search_llm = _search_llm_from_config(config)
+    search_prompt_path = _resolve_search_prompt_path(config, pipeline_dir=pipeline_dir)
+    require_non_empty = _search_llm_require_non_empty(config)
+    hybrid_recall_k, hybrid_rrf_k = _search_hybrid_settings(config)
+
+    if backend in {"llm", "hybrid_llm"}:
+        if backend == "hybrid_llm":
+            if not is_global:
+                raise ValueError("search_backend hybrid_llm requires search_mode global or add_backend global_v4")
+            frozen = f" frozen={search_llm.model}" if search_llm else ""
+            print(
+                f"[pipeline] step=search (global hybrid_llm: BM25+vector RRF→LLM, "
+                f"recall_k={hybrid_recall_k}, batch={batch}{frozen})",
+            )
+            return await run_search_hybrid_llm_global(
+                **search_kwargs,
+                llm=search_llm,
+                search_llm_concurrency=batch,
+                search_prompt_path=search_prompt_path,
+                search_llm_require_non_empty=require_non_empty,
+                search_hybrid_recall_k=hybrid_recall_k,
+                search_hybrid_rrf_k=hybrid_rrf_k,
+            )
         if is_global:
             frozen = f" frozen={search_llm.model}" if search_llm else ""
             print(f"[pipeline] step=search (global llm, batch={batch}{frozen})")
@@ -193,6 +266,8 @@ async def _run_search(
                 **search_kwargs,
                 llm=search_llm,
                 search_llm_concurrency=batch,
+                search_prompt_path=search_prompt_path,
+                search_llm_require_non_empty=require_non_empty,
             )
         frozen = f" frozen={search_llm.model}" if search_llm else ""
         print(f"[pipeline] step=search (llm, batch={batch}{frozen})")
@@ -200,6 +275,8 @@ async def _run_search(
             **search_kwargs,
             llm=search_llm,
             search_llm_concurrency=batch,
+            search_prompt_path=search_prompt_path,
+            search_llm_require_non_empty=require_non_empty,
         )
     if backend == "rag":
         if is_global:
@@ -207,7 +284,7 @@ async def _run_search(
             return await run_search_rag_global(**search_kwargs)
         print("[pipeline] step=search (rag, text-embedding-v4 + pgvector)")
         return await run_search_rag(**search_kwargs)
-    raise ValueError(f"unsupported search_backend: {backend} (use llm or rag)")
+    raise ValueError(f"unsupported search_backend: {backend} (use llm, hybrid_llm, or rag)")
 
 
 async def _run_answer(config: dict[str, Any], workspace_dir: Path) -> list[dict[str, Any]]:

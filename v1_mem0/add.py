@@ -134,15 +134,29 @@ def _coerce_fact_text(item: Any) -> str:
     return str(item).strip()
 
 
+def _resolve_memory_prompt_limit(raw: int | None, *, default: int | None = 60) -> int | None:
+    """None 沿用 default；<=0 表示不截断；正整数为 prompt 中 old_memory 条数上限。"""
+    if raw is None:
+        if default is None:
+            return None
+        default_value = int(default)
+        return None if default_value <= 0 else default_value
+    value = int(raw)
+    return None if value <= 0 else value
+
+
 def _truncate_memory_for_prompt(
     memory_items: list[dict[str, Any]],
     *,
-    limit: int = MEMORY_PROMPT_MAX_ITEMS,
+    limit: int | None = MEMORY_PROMPT_MAX_ITEMS,
 ) -> list[dict[str, Any]]:
-    """避免 old_memory 过长导致 Gemini 返回占位 JSON。"""
-    if len(memory_items) <= limit:
+    """可选截断 old_memory（仅影响 ADD prompt，不影响 DB / search 全量列举）。"""
+    resolved = _resolve_memory_prompt_limit(limit)
+    if resolved is None:
         return memory_items
-    return memory_items[-limit:]
+    if len(memory_items) <= resolved:
+        return memory_items
+    return memory_items[-resolved:]
 
 
 def _facts_for_speaker(facts: list[str], speaker_name: str) -> list[str]:
@@ -185,10 +199,11 @@ def _decide_speaker_memory(
     facts: list[str],
     memory_template: str,
     memory_compact_template: str,
+    memory_prompt_max_items: int | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """compact English prompt → full English prompt → rule-based fallback."""
     meta: dict[str, Any] = {}
-    old_trim = _truncate_memory_for_prompt(old_memory)
+    old_trim = _truncate_memory_for_prompt(old_memory, limit=memory_prompt_max_items)
     speaker_facts = _facts_for_speaker(facts, speaker_name)
     meta["facts_for_speaker"] = len(speaker_facts)
 
@@ -254,9 +269,12 @@ async def run_add_mem0(
     llm: PipelineLLM | None = None,
     progress_label: str | None = None,
     add_llm_concurrency: int = 1,
+    memory_prompt_max_items: int | None = None,
 ) -> dict[str, Any]:
     """执行完整 add：建库、按对话/session 写记忆、返回 database_url 与 add_snapshot 路径。"""
     resolved_llm = llm or PipelineLLM()
+    prompt_limit = _resolve_memory_prompt_limit(memory_prompt_max_items)
+    limit_label = "unlimited" if prompt_limit is None else str(prompt_limit)
     fact_template = _load_template(FACT_PROMPT_PATH)
     memory_template = _load_template(MEMORY_PROMPT_PATH)
     memory_compact_template = _load_template(MEMORY_COMPACT_PATH)
@@ -292,7 +310,8 @@ async def run_add_mem0(
     ]
     print(
         f"[add] conversations={len(conversations)} sessions={len(session_plans)} "
-        f"(~{len(session_plans) * 3} LLM calls: facts + 2x memory/speaker) llm_batch={llm_batch}",
+        f"(~{len(session_plans) * 3} LLM calls: facts + 2x memory/speaker) llm_batch={llm_batch} "
+        f"memory_prompt_max_items={limit_label}",
         flush=True,
     )
     snapshot: list[dict[str, Any]] = []
@@ -399,6 +418,7 @@ async def run_add_mem0(
                     facts=facts,
                     memory_template=memory_template,
                     memory_compact_template=memory_compact_template,
+                    memory_prompt_max_items=memory_prompt_max_items,
                 )
                 return cs, session, speaker_role, updated, memory_meta, session_log
 

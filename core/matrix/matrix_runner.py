@@ -22,6 +22,7 @@ from core.matrix.matrix import (
     link_add_database_to_search_run,
     raw_add_dir,
     resolve_pipeline_llm_model,
+    search_backend_uses_llm,
 )
 from core.matrix.matrix_status import load_status, mark_run_completed, mark_run_failed, save_status
 from core.matrix.matrix_telemetry import (
@@ -130,7 +131,7 @@ async def execute_phase(
     db_workspace_name = add_db_workspace_name(matrix_cfg, run.add_model_id, add_repeat)
     pipeline_llm = (
         resolve_pipeline_llm_model(matrix_cfg, models)
-        if str(run.search_backend or "").strip().lower() == "llm"
+        if search_backend_uses_llm(run.search_backend)
         else None
     )
     cfg = config_for_search_run(

@@ -24,7 +24,7 @@ from core.infra.db import list_memories_for_user
 from core.infra.ids import build_conversation_user_id
 from core.infra.llm_client import PipelineLLM
 from core.infra.progress import ProgressBar
-from core.infra.retrieval import build_retrieval_payload
+from core.infra.retrieval import build_retrieval_payload, lexical_fallback_memory_ids
 
 from core.paths import EVAL_PIPELINE_ROOT as PIPELINE_DIR
 SEARCH_PROMPT_PATH = PIPELINE_DIR / "prompts" / "search_llm.txt"
@@ -51,9 +51,11 @@ def _select_memories_sync(
     question: str,
     memories: list[dict[str, Any]],
     top_k: int,
-) -> list[str]:
+    *,
+    require_non_empty: bool = False,
+) -> tuple[list[str], bool]:
     if not memories:
-        return []
+        return [], False
     prompt = template.format(
         question=question,
         memory_list=_format_memory_list(memories),
@@ -62,7 +64,7 @@ def _select_memories_sync(
     payload = llm.chat_json_object(prompt, required_key="ids")
     raw_ids = payload.get("ids") or []
     if not isinstance(raw_ids, list):
-        return []
+        raw_ids = []
     valid = {str(item.get("id") or "") for item in memories}
     selected: list[str] = []
     for raw in raw_ids:
@@ -71,7 +73,11 @@ def _select_memories_sync(
             selected.append(memory_id)
         if len(selected) >= top_k:
             break
-    return selected
+    fallback = False
+    if require_non_empty and not selected:
+        selected = lexical_fallback_memory_ids(question=question, memories=memories, top_k=top_k)
+        fallback = bool(selected)
+    return selected, fallback
 
 
 async def _select_memories_async(
@@ -80,7 +86,9 @@ async def _select_memories_async(
     question: str,
     memories: list[dict[str, Any]],
     top_k: int,
-) -> list[str]:
+    *,
+    require_non_empty: bool = False,
+) -> tuple[list[str], bool]:
     return await asyncio.to_thread(
         _select_memories_sync,
         llm,
@@ -88,6 +96,7 @@ async def _select_memories_async(
         question,
         memories,
         top_k,
+        require_non_empty=require_non_empty,
     )
 
 
@@ -99,6 +108,7 @@ def _build_search_entry(
     user_id: str,
     memories: list[dict[str, Any]],
     selected: list[str],
+    llm_empty_fallback: bool = False,
 ) -> dict[str, Any]:
     return {
         "conversation_idx": conversation.idx,
@@ -131,6 +141,7 @@ def _build_search_entry(
             selected_ids=selected,
             search_mode="llm",
             score_key="llm_select",
+            metadata_extra={"llm_empty_fallback": True} if llm_empty_fallback else None,
         ),
         "system_prompt": conversation.system_prompt,
     }
@@ -144,20 +155,28 @@ async def _run_llm_select_batches(
     pending: list[tuple[int, Any]],
     memories: list[dict[str, Any]],
     concurrency: int,
-) -> dict[int, list[str]]:
+    require_non_empty: bool = False,
+) -> dict[int, tuple[list[str], bool]]:
     if not pending:
         return {}
     batch_size = max(1, int(concurrency))
-    selections: dict[int, list[str]] = {}
+    selections: dict[int, tuple[list[str], bool]] = {}
     for start in range(0, len(pending), batch_size):
         batch = pending[start : start + batch_size]
         tasks = [
-            _select_memories_async(llm, template, qa.question, memories, top_k)
+            _select_memories_async(
+                llm,
+                template,
+                qa.question,
+                memories,
+                top_k,
+                require_non_empty=require_non_empty,
+            )
             for _qa_index, qa in batch
         ]
         results = await asyncio.gather(*tasks)
-        for (qa_index, _qa), selected in zip(batch, results):
-            selections[qa_index] = selected
+        for (qa_index, _qa), result in zip(batch, results):
+            selections[qa_index] = result
     return selections
 
 
@@ -172,15 +191,22 @@ async def run_search_llm_global(
     llm: PipelineLLM | None = None,
     progress_label: str | None = None,
     search_llm_concurrency: int = 1,
+    search_prompt_path: Path | str | None = None,
+    search_llm_require_non_empty: bool = False,
 ) -> list[dict[str, Any]]:
     """遍历 QA，对每 conv 全局记忆库做一次 LLM select。"""
     resolved_llm = llm or PipelineLLM()
     frozen = "yes" if llm is not None else "no"
+    prompt_path = Path(search_prompt_path) if search_prompt_path else SEARCH_PROMPT_PATH
+    if not prompt_path.is_absolute():
+        prompt_path = PIPELINE_DIR / prompt_path
+    require_non_empty = bool(search_llm_require_non_empty)
     print(
-        f"[search-global-llm] llm model={resolved_llm.model} frozen_client={frozen}",
+        f"[search-global-llm] llm model={resolved_llm.model} frozen_client={frozen} "
+        f"prompt={prompt_path.name} require_non_empty={require_non_empty}",
         flush=True,
     )
-    template = SEARCH_PROMPT_PATH.read_text(encoding="utf-8")
+    template = prompt_path.read_text(encoding="utf-8")
     llm_batch = max(1, int(search_llm_concurrency or 1))
     conversations = load_locomo_dataset(dataset_path, max_conversations=max_conversations)
     qa_plans: list[tuple[Any, int, Any]] = []
@@ -239,10 +265,11 @@ async def run_search_llm_global(
                 pending=pending,
                 memories=memories,
                 concurrency=llm_batch,
+                require_non_empty=require_non_empty,
             )
 
             for qa_index, qa in pending:
-                selected = selected_by_qa.get(qa_index, [])
+                selected, used_fallback = selected_by_qa.get(qa_index, ([], False))
                 key = (int(conversation.idx), int(qa_index))
                 indexed[key] = _build_search_entry(
                     conversation=conversation,
@@ -251,6 +278,7 @@ async def run_search_llm_global(
                     user_id=user_id,
                     memories=memories,
                     selected=selected,
+                    llm_empty_fallback=used_fallback,
                 )
                 progress.set_description(f"search-global conv{conversation.idx} qa{qa_index}")
                 progress.update(1)

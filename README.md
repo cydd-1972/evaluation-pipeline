@@ -46,6 +46,19 @@ v3：
 On 20 May 2023, Melanie ran a charity race for mental health awareness.
 - 原子设计会把 人 / 时间 / 事 / 结果 拆成多条，或只留其中几条。
 
+### v4_global — v3 原子记忆 + 全量 ADD prompt + 非空 search + **增量 DB 写入**
+
+在 v3 基础上，v4 的 pipeline 差异：
+
+| 环节 | v3 | v4 |
+|------|----|----|
+| ADD prompt | 可截断 60 条；要求返回**完整** memory 列表 | 不截断；返回**增量** ADD/UPDATE 即可 |
+| 内存合并 | `_merge_memory_preserving_ids`（防模型漏 id） | `apply_global_memory_delta`（未提及 id **自动保留**） |
+| DB 写入 | `clear_user_memories` + 全量 `insert`（快照 flush） | 仅 `UPSERT` 本 session 变更；**不清库** |
+| search | 允许空选 | **BM25+向量 RRF 召回 → LLM 重排**（`hybrid_llm`），非空兜底 |
+
+配置：`add_backend: global_v4`，`search_backend: hybrid_llm`，`memory_prompt_max_items: 0`，`search_llm_require_non_empty: true`，`search_hybrid_recall_k: 80`。
+
 
 ## 目录结构
 
@@ -53,26 +66,28 @@ On 20 May 2023, Melanie ran a charity race for mental health awareness.
 evaluation_pipeline/
 ├── core/                    # 共享：infra、search、pipeline/steps、metrics、matrix、telemetry
 │   ├── pipeline/runner.py   # 五步编排
-│   ├── search/              # search_llm / search_rag (+ global)
+│   ├── search/              # search_llm / search_rag / search_hybrid_llm (+ global)
 │   └── matrix/              # 矩阵并行编排
 ├── v1_mem0/                 # mem0 风格 add（fact + per-speaker memory）
 ├── v2_raw/                  # session 原文 add（无 LLM）
 ├── v3_global/               # conversation 级 global add + merge-guard
+├── v4_global/               # v3 + 全量 ADD prompt + 非空 LLM search
 ├── prompts/
 ├── datasets/
 ├── configs/matrix_secrets.yaml   # 矩阵 API 密钥（gitignore）
 └── sql/init.sql
 ```
 
-## 三版本对照
+## 版本对照
 
 | 版本 | add | search | 默认 DB 前缀 |
 |------|-----|--------|--------------|
 | **v1_mem0** | `fact_extraction.txt` + `memory_decision.txt` | per-speaker llm/rag | `eval_v1_mem0` |
 | **v2_raw** | session transcript 块 | per-speaker llm/rag | `eval_v2_raw` |
 | **v3_global** | `memory_decision_global_v{1,2,3}.txt` | `search_mode: global` | `eval_v3_global` |
+| **v4_global** | `memory_decision_global_v4.txt`，**增量 ADD/UPDATE** + 不截断 prompt | global **hybrid_llm**（RRF+LLM 非空） | `eval_v4_global` |
 
-v3 在 flush 前会 **merge 保留模型未返回的旧 id**，避免 60 条 prompt 截断 + 全量覆盖导致早期记忆丢失。`memory_prompt_max_items` 可在 config 中调整。
+v3 在 flush 前会 **merge 保留模型未返回的旧 id**，但 DB 仍是每 session **清库 + 全量 insert**。v4 改为 **增量 UPSERT**，未提及 id 在内存与 DB 中均保留。
 
 ## 环境变量（`.env`）
 
@@ -103,6 +118,7 @@ python v1_mem0/run.py
 python v2_raw/run.py
 python v3_global/run.py
 python v3_global/run.py --config config.v2.yaml
+python v4_global/run.py
 
 python v1_mem0/run.py --from search
 python v1_mem0/run.py --only add
@@ -118,6 +134,7 @@ python v1_mem0/run.py --matrix
 
 python v2_raw/run.py --matrix
 python v3_global/run.py --matrix
+python v4_global/run.py --matrix
 ```
 
 矩阵根目录：各版本 `config.matrix.yaml` 的 `matrix_base_dir: workspaces`（相对该版本目录）。

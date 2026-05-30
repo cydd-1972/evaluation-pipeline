@@ -21,6 +21,7 @@ add_llm_concurrency: 4
 
 add_history_window: 2
 add_flush_per_session: true
+memory_prompt_max_items: 60
 
 parallel_models: 1
 parallel_search: 2

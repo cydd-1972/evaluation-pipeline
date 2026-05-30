@@ -101,6 +101,71 @@ async def insert_memories(
     return len(rows)
 
 
+async def invalidate_embeddings_for_memory_keys(
+    conn: asyncpg.Connection,
+    *,
+    user_id: str,
+    memory_keys: list[str],
+) -> int:
+    """UPDATE 后清空 embedding，供 backfill 重算（RAG 检索）。"""
+    if not memory_keys:
+        return 0
+    row_ids = [
+        _stable_memory_uuid(user_id=user_id, memory_key=str(key).strip())
+        for key in memory_keys
+        if str(key).strip()
+    ]
+    if not row_ids:
+        return 0
+    result = await conn.execute(
+        """
+        UPDATE memories
+        SET embedding = NULL, updated_at = NOW()
+        WHERE user_id = $1 AND id = ANY($2::uuid[])
+        """,
+        user_id,
+        row_ids,
+    )
+    try:
+        return int(str(result).split()[-1])
+    except (ValueError, IndexError):
+        return len(row_ids)
+
+
+async def apply_memory_incremental_writes(
+    conn: asyncpg.Connection,
+    *,
+    user_id: str,
+    items: list[dict[str, Any]],
+    session: Any,
+) -> tuple[int, dict[str, int]]:
+    """增量 UPSERT（不清库）；返回 (写入条数, {added, updated})。"""
+    if not items:
+        return 0, {"added": 0, "updated": 0}
+    payload = [
+        {
+            "id": str(item.get("id") or ""),
+            "text": str(item.get("text") or ""),
+            "event": str(item.get("event") or "ADD"),
+            "source_session_index": int(session.index),
+            "source_session_time": str(session.date_time or ""),
+        }
+        for item in items
+        if str(item.get("text") or "").strip()
+    ]
+    added = sum(1 for item in payload if str(item.get("event") or "").upper() == "ADD")
+    updated = sum(1 for item in payload if str(item.get("event") or "").upper() == "UPDATE")
+    written = await insert_memories(conn, user_id=user_id, items=payload)
+    update_keys = [
+        str(item.get("id") or "")
+        for item in payload
+        if str(item.get("event") or "").upper() == "UPDATE" and str(item.get("id") or "").strip()
+    ]
+    if update_keys:
+        await invalidate_embeddings_for_memory_keys(conn, user_id=user_id, memory_keys=update_keys)
+    return written, {"added": added, "updated": updated}
+
+
 async def list_memories_for_user(conn: asyncpg.Connection, user_id: str) -> list[dict[str, Any]]:
     """列出某 user_id 全部记忆；id 字段优先用 metadata.memory_key 供 LLM search 引用。"""
     records = await conn.fetch(

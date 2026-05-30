@@ -30,6 +30,7 @@ from core.matrix.matrix import (
     plan_all_matrix_runs,
     raw_add_dir,
     resolve_pipeline_llm_model,
+    search_backend_uses_llm,
     write_manifest,
 )
 from core.matrix.matrix_lock import MatrixProcessLock
@@ -173,7 +174,7 @@ async def _execute_run(
         db_workspace_name = add_db_workspace_name(matrix_cfg, run.add_model_id, add_repeat)
         pipeline_llm = (
             resolve_pipeline_llm_model(matrix_cfg, models)
-            if str(run.search_backend or "").strip().lower() == "llm"
+            if search_backend_uses_llm(run.search_backend)
             else None
         )
         cfg = config_for_search_run(

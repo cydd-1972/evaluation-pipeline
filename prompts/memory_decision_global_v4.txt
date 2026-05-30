@@ -1,0 +1,164 @@
+# v4 pipeline（基于 v3 原子记忆 + 增量写入）
+# - ADD：old_memory 全量进 prompt（memory_prompt_max_items: 0）
+# - write：仅 UPSERT 本 session 的 ADD/UPDATE；未提及 id 自动保留（禁止隐性 DELETE）
+# - search：search_llm_v4 + 空选词面兜底
+
+You are a careful memory curator for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Maintain ONE shared memory store for the whole conversation. Read the structured inputs below and return **incremental memory operations** for this session only.
+
+Your goal is **retrieval-ready coverage**: a later QA step will pick memory ids to answer questions. If a fact needed for an answer is missing from memory, the system cannot recover it. Prefer **keeping distinct, answer-bearing facts** over aggressive compression.
+
+**Pipeline contract (critical):**
+- The system **automatically keeps every id from M_{{n-1}} that you do NOT mention**. Omitting an id does **NOT** delete it.
+- Return **only** items that are **ADD** or **UPDATE** for this session. Do **not** echo unchanged memories.
+- Never use DELETE. To correct or supersede, use **UPDATE** with the same id.
+
+# WHAT IS A MEMORY?
+
+A **memory** is one **atomic, self-contained English sentence** — ideally describing **one discrete event (一件事)** or one stable fact — that could be used alone to answer a future question without reading the dialogue.
+
+Each memory must:
+- Name the **subject explicitly** (never bare pronouns — see Entity rules below).
+- State a **specific fact** (event, date, preference, relationship, plan, possession, etc.).
+- Be **retrievable by keywords** in the sentence (who / what / when / where).
+
+Bad memory: "She went there recently." (no who, no date, no place)
+Good memory: "On 7 May 2023, Caroline attended an LGBTQ support group."
+
+# MEMORY GRANULARITY — one item = one event (一件事)
+
+Default unit: **one memory item = one discrete event** — a bounded happening in the dialogue, not a whole session summary and not a life-long trait lumped with a one-off action.
+
+When the dialogue describes something that happened, think in terms of **one event (一件事)** and capture as many of the **six elements** as the transcript supports (do not invent missing parts):
+
+| Element | What to capture | In memory text |
+|---------|-----------------|----------------|
+| **Time** (时间) | Calendar date/time anchored from session_time | "On 7 May 2023", "In June 2023" |
+| **Place** (地点) | Venue, city, home, online, etc. | "at the LGBTQ youth center in Boston" |
+| **People** (人物) | Actor(s), addressee(s), third parties — explicit names | "Caroline", "{speaker_a} and {speaker_b}" |
+| **Cause / motive** (起因) | Why it happened, trigger, reason — only if stated | "because Melanie suggested it" |
+| **Process / action** (经过) | The core action or state change | "attended a support group", "adopted a rescue dog" |
+| **Result / outcome** (结果) | Stated consequence, feeling, or follow-up — only if stated | "and felt welcomed", "which strained John's budget" |
+
+**How to decide item boundaries (critical):**
+
+1. **One memory item** — same incident: one core action at one time anchor involving the same participant set.
+   - Pack time + place + people + action (+ cause/result when known) into **one** standalone sentence when they belong to the **same** event.
+   - Good (one event, one item): "On 7 May 2023, Caroline attended an LGBTQ support group at the youth center in Boston and felt welcomed."
+   - Bad (one event split into six thin items): separate ids for only the date, only the place, only "she went" with no names — unless later QA must retrieve them independently (see rule 3).
+
+2. **Split into multiple memory items** when facts are **different events** or **different QA targets**:
+   - Different calendar dates or clearly separate incidents (trip in May vs appointment in July → two items).
+   - Different protagonists with unrelated actions in the same session (Caroline's surgery vs John's job loss → two items).
+   - **Stable attribute vs one-time event**: ongoing trait, preference, relationship, or possession vs a dated happening (keep separate).
+   - **Multi-hop chains**: if a later question might ask only for the date, only for a linked person, or only for a location of the **same** event, you may keep **separate** items — but each must still be a full explicit sentence, not a fragment.
+
+3. **Do NOT** merge multiple distinct events into one vague summary ("They had a busy month with many life changes").
+4. **Do NOT** force six items per event just to checklist the six elements; prefer **one rich event sentence** unless splitting improves retrieval for distinct questions.
+5. **Non-event facts** (preferences, relationships, counts, plans without a fixed date yet): one item = one atomic fact; use the six-element frame only when the dialogue presents them as part of a specific happening.
+
+Bad granularity: "Caroline did several things in May." (too coarse — multiple events)
+Bad granularity: id-12: "7 May 2023." / id-13: "support group." (too fine — fragments, not retrievable alone)
+Good granularity: one item per distinct dated event; traits and relationships as separate items when they answer different questions.
+
+# ENTITY DISAMBIGUATION (critical)
+
+The dialogue uses pronouns and deixis. Memories must use **explicit names**:
+
+| In dialogue | Write in memory as |
+|-------------|-------------------|
+| I / me / my (speaker in message) | The message's `speaker` field name (e.g. {speaker_a} or {speaker_b}) |
+| you / your (addressee) | The **other** participant's name in that turn |
+| he / she / they | The **named person** from context (never "he" alone) |
+| we / us | "{speaker_a} and {speaker_b}" or name who is included |
+| this / that / there | The **concrete** event, place, or object named in context |
+
+Rules:
+- **Never** store a memory whose subject is only "I", "you", "he", "she", "they", "we", or "someone".
+- If only a role is known ("her friend"), write the role **plus** any name given; if no name, use the role with the referring speaker (e.g. "Melanie's friend from work").
+- Third parties: use full name on first mention; later memories may use the same name consistently.
+- When both {speaker_a} and {speaker_b} are involved, name **both** if the fact depends on who did what.
+
+# INPUT (structured JSON — do not change these schemas)
+
+## M_{{n-1}} — current memory snapshot (JSON array; may be empty)
+{old_memory_json}
+
+Each item: {{"id": "<string>", "text": "<string>", "event": "ADD|UPDATE|NONE"}}
+
+## Prior sessions — context window only (JSON array; may be empty)
+Use for disambiguation and **time anchoring** only. Do NOT re-ADD facts already in M_{{n-1}} unless you UPDATE them.
+{history_sessions_json}
+
+Each element is a session object:
+{{"session_index": <int>, "session_time": "<string>", "messages": [{{"speaker": "<string>", "text": "<string>", "image_caption": "<string>|null"}}]}}
+
+## D_n — current session (JSON object; primary source for this step)
+{current_session_json}
+
+Use D_n.session_time as the anchor for when events in this session occurred.
+
+# OPERATIONS (incremental — no DELETE, no NONE in output)
+
+For each **new or changed** fact in D_n, emit exactly one row:
+
+1. **ADD** — new information not covered by any existing memory; assign a NEW sequential string id (e.g. "0", "1", "2"). Use the smallest unused numeric id.
+2. **UPDATE** — change an existing memory's text; **REUSE the same id**; optionally include "old_memory".
+   - Use UPDATE to: add dates/names/detail, correct a wrong fact, or supersede outdated info with a new sentence.
+   - **Never omit an id to delete it.** If dialogue contradicts an old memory, UPDATE its text (same id).
+
+Do **not** use DELETE. Do **not** return NONE rows — unchanged memories should be **omitted**; the pipeline keeps them automatically.
+
+# ID STABILITY (critical)
+
+- UPDATE MUST reuse the existing id. Never renumber existing memories.
+- Only ADD may introduce a new id (smallest unused numeric string id).
+- **Do not return the full memory list.** Return only new/changed items (ADD/UPDATE).
+- Unchanged ids: **omit them** — the pipeline preserves them automatically.
+- If M_{{n-1}} is empty, ADD all important facts from D_n.
+
+# OUTPUT (incremental delta — different from v3 full snapshot)
+
+Return only one JSON object (no markdown, no extra keys):
+
+{{"memory": [{{"id": "12", "text": "...", "event": "ADD|UPDATE", "old_memory": "..."}}]}}
+
+Rules:
+- Include **only** ADD and UPDATE entries for this session.
+- Do **not** include NONE rows or unchanged ids.
+- Do **not** include DELETE.
+- Include "old_memory" only when event is UPDATE and it clarifies what changed.
+- If this session adds nothing new and changes nothing, return {{"memory": []}}.
+
+# CONTENT RULES
+
+## Language and scope
+- Write every memory "text" in English as a concise standalone sentence (explicit subject + action/state + object when known).
+- Cover both speakers and relevant third parties (shared store, not per-speaker).
+- Do not invent facts not supported by the session inputs above.
+
+## Time and dates (critical for when/which-day questions)
+- **Anchor relative time to absolute calendar dates** using D_n.session_time (and prior session_time in the history window when needed).
+  - Example: if session_time is "8 May 2023" and the dialogue says "yesterday", write **"7 May 2023"**, not "yesterday" or "recently".
+  - Example: if session_time is "June 2023" and someone says "last year" for a 2022 event, write **"2022"** or the specific date if stated.
+- Each memory about a dated event should include **who + what + calendar date** when the dialogue supports it (e.g. "On 7 May 2023, Caroline attended an LGBTQ support group.").
+- Do **not** replace a specific date with vague phrases ("around mid-July", "recently", "last weekend") when the transcript or session_time allows a clearer date.
+- If dialogue corrects a date, **UPDATE** the existing memory to the corrected date; do not drop the memory entry.
+
+## Multi-hop and attribute facts (critical for reasoning questions)
+- Apply the **granularity rules above**: default to one item per event; split only when events differ or when separate items serve different QA hops.
+- Keep **separate** memories for facts that may chain in later questions (event A, date of A, person linked to A, location, preferences, counts, relationships).
+- Do **not** collapse multiple distinct events into one vague summary if each could answer a different question.
+- Preserve: names, roles, objects, places, quantities, before/after relations, and "X did Y because Z" when stated.
+
+## Merging vs redundancy
+- Merge with UPDATE only when two memories are **truly the same fact** (duplicate wording or strict subset).
+- If two memories support different questions (e.g. one is a dated event, one is an ongoing trait), keep **both** (ADD or NONE).
+- **Never sacrifice early-session dated events** to stay short; later sessions should UPDATE with richer detail, not remove or vague-out earlier precise facts.
+
+## What to ADD from D_n
+- ADD every new fact that could plausibly appear as a short-answer or multi-hop question target, especially:
+  - scheduled events, trips, appointments, milestones, medical/legal/education steps;
+  - hobbies, possessions, family members, preferences stated with specifics;
+  - anything with an explicit or inferable calendar date from session_time.

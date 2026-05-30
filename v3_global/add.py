@@ -17,6 +17,7 @@ import asyncpg
 from v1_mem0.add import (
     _active_memories,
     _parse_memory_items,
+    _resolve_memory_prompt_limit,
     _run_batched,
     _truncate_memory_for_prompt,
 )
@@ -42,7 +43,6 @@ from core.infra.transcript import (
 from core.paths import EVAL_PIPELINE_ROOT as PIPELINE_DIR
 
 DEFAULT_MEMORY_PROMPT_PATH = PIPELINE_DIR / "prompts" / "memory_decision_global.txt"
-DEFAULT_MEMORY_PROMPT_MAX_ITEMS = 60
 
 
 def _merge_memory_preserving_ids(
@@ -159,11 +159,10 @@ def _decide_global_memory_sync(
     history_sessions: list[Any],
     current_session: Any,
     memory_template: str,
-    memory_prompt_max_items: int = DEFAULT_MEMORY_PROMPT_MAX_ITEMS,
+    memory_prompt_max_items: int | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     meta: dict[str, Any] = {}
-    limit = max(1, int(memory_prompt_max_items or DEFAULT_MEMORY_PROMPT_MAX_ITEMS))
-    old_trim = _truncate_memory_for_prompt(old_memory, limit=limit)
+    old_trim = _truncate_memory_for_prompt(old_memory, limit=memory_prompt_max_items)
     history_json = format_sessions_structured_json(history_sessions)
     current_json = format_session_structured_json(current_session)
 
@@ -266,9 +265,10 @@ async def run_add_global(
     resolved_llm = llm or PipelineLLM()
     prompt_path = resolve_memory_prompt_path(memory_prompt_path)
     memory_template = _load_template(prompt_path)
-    prompt_max_items = int(memory_prompt_max_items or DEFAULT_MEMORY_PROMPT_MAX_ITEMS)
+    prompt_limit = _resolve_memory_prompt_limit(memory_prompt_max_items, default=60)
+    limit_label = "unlimited" if prompt_limit is None else str(prompt_limit)
     print(
-        f"[add-global] memory_prompt={prompt_path.name} prompt_max_items={prompt_max_items}",
+        f"[add-global] memory_prompt={prompt_path.name} memory_prompt_max_items={limit_label}",
         flush=True,
     )
     llm_batch = max(1, int(add_llm_concurrency or 1))
@@ -398,7 +398,7 @@ async def run_add_global(
                     history_sessions=history_sessions,
                     current_session=session,
                     memory_template=memory_template,
-                    memory_prompt_max_items=prompt_max_items,
+                    memory_prompt_max_items=memory_prompt_max_items,
                 )
                 return cs, session, updated, meta
 

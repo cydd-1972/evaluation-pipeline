@@ -30,6 +30,7 @@ from core.metrics.llm_judge import (
     shutdown_evaluator,
 )
 from core.infra.progress import ProgressBar
+from core.infra.scoring import apply_empty_answer_llm_score_rule
 
 SUPPORTED_METRICS = frozenset({"llm", "f1", "bleu"})
 
@@ -310,4 +311,4 @@ async def _evaluate_one(
         out["llm_reason"] = best_llm_reason
     if best_answer:
         out["scoring_answer"] = best_answer
-    return out
+    return apply_empty_answer_llm_score_rule(out)

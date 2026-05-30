@@ -177,7 +177,7 @@ def apply_run_model_env(
     if run.add_model_id == RAW_ADD_MODEL_ID:
         apply_add_model_env(resolve_pipeline_llm_model(matrix_cfg, models))
         return
-    if str(run.search_backend or "").strip().lower() == "llm":
+    if search_backend_uses_llm(run.search_backend):
         pipeline = resolve_pipeline_llm_model(matrix_cfg, models)
         apply_add_model_env(pipeline)
         return
@@ -186,6 +186,10 @@ def apply_run_model_env(
             apply_add_model_env(model)
             return
     raise KeyError(f"unknown add model id: {run.add_model_id}")
+
+
+def search_backend_uses_llm(backend: str | None) -> bool:
+    return str(backend or "").strip().lower() in {"llm", "hybrid_llm"}
 
 
 def build_base_pipeline_config(matrix_cfg: dict[str, Any]) -> dict[str, Any]:
@@ -212,6 +216,11 @@ def build_base_pipeline_config(matrix_cfg: dict[str, Any]) -> dict[str, Any]:
         "add_flush_per_session": bool(matrix_cfg.get("add_flush_per_session", True)),
         "pipeline_llm_model_id": str(matrix_cfg.get("pipeline_llm_model_id") or "gemini").strip(),
         "memory_decision_prompt": str(matrix_cfg.get("memory_decision_prompt") or "").strip() or None,
+        "memory_prompt_max_items": matrix_cfg.get("memory_prompt_max_items"),
+        "search_llm_prompt": matrix_cfg.get("search_llm_prompt"),
+        "search_llm_require_non_empty": matrix_cfg.get("search_llm_require_non_empty"),
+        "search_hybrid_recall_k": matrix_cfg.get("search_hybrid_recall_k"),
+        "search_hybrid_rrf_k": matrix_cfg.get("search_hybrid_rrf_k"),
     }
 
 
@@ -318,7 +327,7 @@ def config_for_raw_search_run(
     cfg["reset_database_on_add"] = False
     cfg["parent_add_workspace"] = parent_add_workspace
     cfg["progress_label"] = f"{RAW_ADD_MODEL_ID}/{search_backend}"
-    if str(search_backend).strip().lower() == "llm":
+    if search_backend_uses_llm(search_backend):
         cfg["search_llm_client"] = search_llm_client_spec(pipeline_model)
     return cfg
 
@@ -349,7 +358,7 @@ def config_for_search_run(
     cfg["reset_database_on_add"] = False
     cfg["parent_add_workspace"] = parent_add_workspace
     cfg["progress_label"] = f"{model_id}/{search_backend}"
-    if str(search_backend).strip().lower() == "llm" and pipeline_llm is not None:
+    if search_backend_uses_llm(search_backend) and pipeline_llm is not None:
         cfg["search_llm_client"] = search_llm_client_spec(pipeline_llm)
     return cfg
 

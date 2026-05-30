@@ -12,6 +12,25 @@ from pathlib import Path
 from typing import Any
 
 
+def prediction_text(record: dict[str, Any]) -> str:
+    """提取模型预测文本（predicted_answer 优先，其次 response）。"""
+    return str(record.get("predicted_answer") or record.get("response") or "").strip()
+
+
+def apply_empty_answer_llm_score_rule(record: dict[str, Any]) -> dict[str, Any]:
+    """空答案一律 llm_score=0；原 Judge 分数写入 llm_score_judge（仅首次）。"""
+    if not prediction_text(record):
+        if "llm_score" in record and "llm_score_judge" not in record:
+            record["llm_score_judge"] = record["llm_score"]
+        record["llm_score"] = 0.0
+    return record
+
+
+def reapply_empty_answer_llm_scores(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """对 eval 记录列表批量应用空答案 llm_score 规则。"""
+    return [apply_empty_answer_llm_score_rule(dict(record)) for record in records]
+
+
 def load_and_summarize(input_path: str | Path) -> dict[str, Any]:
     """读 eval JSON（list 或 dict-of-lists），返回 summarize_metrics 结构。"""
     input_file = Path(input_path)
