@@ -1,0 +1,53 @@
+# 方案③ global add：单 conv 记忆库 + session 状态机 + 全局 search（见 matrix_global 编排）
+# 密钥：configs/matrix_secrets.yaml（gitignore）
+# 产物目录：workspaces/matrix_global/（与 workspaces/matrix 完全隔离）
+
+matrix_base_dir: workspaces
+database_prefix: eval_pipeline_global
+
+add_backend: global
+search_mode: global
+
+dataset_path: datasets/locomo_refined.json
+max_conversations: null
+max_questions_per_conversation: null
+max_sessions_per_conversation: null
+
+answer_prompt_mode: history
+search_top_k: 30
+concurrency: 2
+search_llm_concurrency: 4
+add_llm_concurrency: 4
+
+add_history_window: 2
+add_flush_per_session: true
+
+parallel_models: 1
+parallel_search: 2
+matrix_log_mode: session
+matrix_log_prefix: matrix_global_run
+
+add_repeats: 3
+search_repeats: 1
+reuse_legacy_add_run01: false
+reset_database_on_add: true
+
+eval:
+  metrics:
+    - llm
+    - f1
+    - bleu
+  dataset_name: locomo
+
+pipeline_llm_model_id: deepseek
+
+add_models:
+  - id: deepseek
+    model: deepseek-v4-flash
+  - id: minimax
+    model: MiniMax-M2.7
+    llm_thinking_mode: split  # run01 基线：reasoning_split + content strip
+
+search_backends:
+  - llm
+  - rag

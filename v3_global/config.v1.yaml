@@ -1,0 +1,26 @@
+dataset_path: datasets/locomo_refined.json
+max_conversations: 1
+max_questions_per_conversation: null
+max_sessions_per_conversation: null
+
+workspace_base_dir: workspaces
+workspace_name: smoke_v1
+database_prefix: eval_v3_global
+reset_database_on_add: false
+
+add_backend: global
+search_mode: global
+search_backend: llm
+memory_decision_prompt: prompts/memory_decision_global_v1.txt
+memory_prompt_max_items: 60
+add_history_window: 2
+add_flush_per_session: true
+add_llm_concurrency: 4
+search_llm_concurrency: 4
+answer_prompt_mode: history
+search_top_k: 30
+eval_concurrency: 6
+
+eval:
+  metrics: [llm, f1, bleu]
+  dataset_name: locomo

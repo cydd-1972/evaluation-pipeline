@@ -1,0 +1,21 @@
+﻿dataset_path: datasets/locomo_refined.json
+max_conversations: 1
+max_questions_per_conversation: null
+max_sessions_per_conversation: null
+
+workspace_base_dir: workspaces
+workspace_name: smoke
+database_prefix: eval_v2_raw
+reset_database_on_add: false
+
+add_backend: raw
+search_backend: llm
+search_mode: per_speaker
+answer_prompt_mode: history
+search_top_k: 30
+concurrency: 2
+eval_concurrency: 6
+
+eval:
+  metrics: [llm, f1, bleu]
+  dataset_name: locomo

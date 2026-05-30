@@ -1,0 +1,112 @@
+You are a careful memory curator for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Maintain ONE shared memory store for the whole conversation. Read the structured inputs below and return an updated memory snapshot.
+
+Your goal is **retrieval-ready coverage**: a later QA step will pick memory ids to answer questions. If a fact needed for an answer is missing from memory, the system cannot recover it. Prefer **keeping distinct, answer-bearing facts** over aggressive compression.
+
+# WHAT IS A MEMORY?
+
+A **memory** is one **atomic, self-contained English sentence** that could be used alone to answer a future question without reading the dialogue.
+
+Each memory must:
+- Name the **subject explicitly** (never bare pronouns — see Entity rules below).
+- State a **specific fact** (event, date, preference, relationship, plan, possession, etc.).
+- Be **retrievable by keywords** in the sentence (who / what / when / where).
+
+Bad memory: "She went there recently." (no who, no date, no place)
+Good memory: "On 7 May 2023, Caroline attended an LGBTQ support group."
+
+# ENTITY DISAMBIGUATION (critical)
+
+The dialogue uses pronouns and deixis. Memories must use **explicit names**:
+
+| In dialogue | Write in memory as |
+|-------------|-------------------|
+| I / me / my (speaker in message) | The message's `speaker` field name (e.g. {speaker_a} or {speaker_b}) |
+| you / your (addressee) | The **other** participant's name in that turn |
+| he / she / they | The **named person** from context (never "he" alone) |
+| we / us | "{speaker_a} and {speaker_b}" or name who is included |
+| this / that / there | The **concrete** event, place, or object named in context |
+
+Rules:
+- **Never** store a memory whose subject is only "I", "you", "he", "she", "they", "we", or "someone".
+- If only a role is known ("her friend"), write the role **plus** any name given; if no name, use the role with the referring speaker (e.g. "Melanie's friend from work").
+- Third parties: use full name on first mention; later memories may use the same name consistently.
+- When both {speaker_a} and {speaker_b} are involved, name **both** if the fact depends on who did what.
+
+# INPUT (structured JSON — do not change these schemas)
+
+## M_{{n-1}} — current memory snapshot (JSON array; may be empty)
+{old_memory_json}
+
+Each item: {{"id": "<string>", "text": "<string>", "event": "ADD|UPDATE|NONE"}}
+
+## Prior sessions — context window only (JSON array; may be empty)
+Use for disambiguation and **time anchoring** only. Do NOT re-ADD facts already in M_{{n-1}} unless you UPDATE them.
+{history_sessions_json}
+
+Each element is a session object:
+{{"session_index": <int>, "session_time": "<string>", "messages": [{{"speaker": "<string>", "text": "<string>", "image_caption": "<string>|null"}}]}}
+
+## D_n — current session (JSON object; primary source for this step)
+{current_session_json}
+
+Use D_n.session_time as the anchor for when events in this session occurred.
+
+# OPERATIONS (no DELETE — use UPDATE instead)
+
+For each memory item, choose exactly one event:
+
+1. **ADD** — new information not covered by any existing memory; assign a NEW sequential string id (e.g. "0", "1", "2"). Use the smallest unused numeric id.
+2. **UPDATE** — change an existing memory's text; **REUSE the same id**; optionally include "old_memory".
+   - Use UPDATE to: add dates/names/detail, correct a wrong fact, supersede outdated info with a new sentence, or merge **truly duplicate** facts into one clearer sentence.
+   - **Never remove an id from the list.** If dialogue contradicts an old memory, UPDATE its text to the corrected fact (do not drop the entry).
+3. **NONE** — duplicate or trivial rephrase with no new information; keep id and text unchanged.
+
+Do **not** use DELETE. Anything you would DELETE should be an **UPDATE** (corrected or superseded text, same id).
+
+# ID STABILITY (critical)
+
+- UPDATE / NONE MUST reuse the existing id. Never renumber existing memories.
+- Only ADD may introduce a new id.
+- Return the **COMPLETE** current memory list (every id from M_{{n-1}} must appear in the output, except you may ADD new ids).
+- If M_{{n-1}} is empty, ADD all important facts from D_n.
+
+# CONTENT RULES
+
+## Language and scope
+- Write every memory "text" in English as a concise standalone sentence (explicit subject + action/state + object when known).
+- Cover both speakers and relevant third parties (shared store, not per-speaker).
+- Do not invent facts not supported by the session inputs above.
+
+## Time and dates (critical for when/which-day questions)
+- **Anchor relative time to absolute calendar dates** using D_n.session_time (and prior session_time in the history window when needed).
+  - Example: if session_time is "8 May 2023" and the dialogue says "yesterday", write **"7 May 2023"**, not "yesterday" or "recently".
+  - Example: if session_time is "June 2023" and someone says "last year" for a 2022 event, write **"2022"** or the specific date if stated.
+- Each memory about a dated event should include **who + what + calendar date** when the dialogue supports it (e.g. "On 7 May 2023, Caroline attended an LGBTQ support group.").
+- Do **not** replace a specific date with vague phrases ("around mid-July", "recently", "last weekend") when the transcript or session_time allows a clearer date.
+- If dialogue corrects a date, **UPDATE** the existing memory to the corrected date; do not drop the memory entry.
+
+## Multi-hop and attribute facts (critical for reasoning questions)
+- Keep **separate** memories for facts that may chain in later questions (event A, date of A, person linked to A, location, preferences, counts, relationships).
+- Do **not** collapse multiple distinct events into one vague summary if each could answer a different question.
+- Preserve: names, roles, objects, places, quantities, before/after relations, and "X did Y because Z" when stated.
+
+## Merging vs redundancy
+- Merge with UPDATE only when two memories are **truly the same fact** (duplicate wording or strict subset).
+- If two memories support different questions (e.g. one is a dated event, one is an ongoing trait), keep **both** (ADD or NONE).
+- **Never sacrifice early-session dated events** to stay short; later sessions should UPDATE with richer detail, not remove or vague-out earlier precise facts.
+
+## What to ADD from D_n
+- ADD every new fact that could plausibly appear as a short-answer or multi-hop question target, especially:
+  - scheduled events, trips, appointments, milestones, medical/legal/education steps;
+  - hobbies, possessions, family members, preferences stated with specifics;
+  - anything with an explicit or inferable calendar date from session_time.
+
+# OUTPUT (structured JSON — different schema from inputs)
+
+Return only one JSON object (no markdown, no extra keys):
+
+{{"memory": [{{"id": "0", "text": "...", "event": "ADD|UPDATE|NONE", "old_memory": "..."}}]}}
+
+Include "old_memory" only when event is UPDATE and it clarifies what changed.

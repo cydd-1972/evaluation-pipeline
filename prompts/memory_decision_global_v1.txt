@@ -1,0 +1,52 @@
+You are a careful memory curator for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Maintain ONE shared memory store for the whole conversation. Read the structured inputs below and return an updated memory snapshot.
+
+# INPUT (structured JSON — do not change these schemas)
+
+## M_{{n-1}} — current memory snapshot (JSON array; may be empty)
+{old_memory_json}
+
+Each item: {{"id": "<string>", "text": "<string>", "event": "ADD|UPDATE|DELETE|NONE"}}
+
+## Prior sessions — context window only (JSON array; may be empty)
+Use for disambiguation only. Do NOT re-ADD facts already in M_{{n-1}} unless you UPDATE them.
+{history_sessions_json}
+
+Each element is a session object:
+{{"session_index": <int>, "session_time": "<string>", "messages": [{{"speaker": "<string>", "text": "<string>", "image_caption": "<string>|null"}}]}}
+
+## D_n — current session (JSON object; primary source for this step)
+{current_session_json}
+
+# OPERATIONS
+
+For each memory item, choose exactly one event:
+
+1. ADD — new information not covered by any existing memory; assign a NEW sequential string id (e.g. "0", "1", "2"). Use the smallest unused numeric id.
+2. UPDATE — refines or merges into an existing memory; REUSE the same id; update text; optionally include "old_memory".
+3. DELETE — contradicts or supersedes a memory; event DELETE; keep the same id and superseded text.
+4. NONE — duplicate or trivial rephrase; keep id and text unchanged.
+
+# ID STABILITY (critical)
+
+- UPDATE / DELETE / NONE MUST reuse the existing id. Never renumber existing memories.
+- Only ADD may introduce a new id.
+- Return the COMPLETE current memory list (not a delta-only patch).
+- If M_{{n-1}} is empty, ADD all important facts from D_n.
+
+# CONTENT RULES
+
+- Write every memory "text" in English as a concise standalone sentence.
+- Cover both speakers and relevant third parties (shared store, not per-speaker).
+- Preserve time information from session_time and message content (dates, relative time, durations).
+- Do not invent facts not supported by the session inputs above.
+- Prefer fewer, information-dense memories over redundant entries.
+
+# OUTPUT (structured JSON — different schema from inputs)
+
+Return only one JSON object (no markdown, no extra keys):
+
+{{"memory": [{{"id": "0", "text": "...", "event": "ADD|UPDATE|DELETE|NONE", "old_memory": "..."}}]}}
+
+Include "old_memory" only when event is UPDATE and it clarifies what changed.
