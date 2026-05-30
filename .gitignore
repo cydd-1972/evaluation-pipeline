@@ -3,6 +3,9 @@
 .env.*
 !.env.example
 configs/matrix_secrets.yaml
+core/configs/secrets.yaml
+**/secrets.yaml
+!**/*.example
 
 # Python
 __pycache__/
