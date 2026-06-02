@@ -645,3 +645,114 @@ python v4_global/run.py --config config.smoke_small.yaml
 python v4_global/run.py --config config.conv1_allqa_hybrid_v4_slot_multihop.yaml
 ```
 
+
+## 14. Ablation Experiments
+
+当前 4 个 conversation 1 消融实验都放在独立目录中，不会改动 `v3_global` 或 `v4_global` 原始实现。
+
+> 说明：目前只使用 DeepSeek 环境做了代码级验证，主要是 `1 QA` + `--end-at-step search`，用于确认接线正确。
+> 等 `MiniMax-M2.7` 恢复可用后，正式对比分数时需要切回 MiniMax 的 `.env` / 配置重新跑。
+
+### 14.1 Ablation 1: `v3` replaced with `v4 add`
+
+- 目录：`v3_ablate_v4add/`
+- 含义：保留 `v3` 的 search / answer / eval，只把 add 换成 `v4`
+- 正式命令（conversation 1, all QA）：
+
+```bash
+cd evaluation_pipeline/v3_ablate_v4add
+python run.py --config config.conv1_v3search_v4add.yaml
+```
+
+- 当前代码验证命令：
+
+```bash
+cd evaluation_pipeline/v3_ablate_v4add
+python run.py --config config.conv1_v3search_v4add.yaml --end-at-step search
+```
+
+### 14.2 Ablation 2: `v3` replaced with `v4 search`
+
+- 目录：`v3_ablate_v4add/`
+- 含义：保留 `v3` 的 add，只把 search 换成 `v4` 的 `hybrid_llm + multihop`
+- 正式命令（conversation 1, all QA）：
+
+```bash
+cd evaluation_pipeline/v3_ablate_v4add
+python run.py --config config.conv1_v3add_v4search.yaml
+```
+
+- 当前代码验证命令：
+
+```bash
+cd evaluation_pipeline/v3_ablate_v4add
+python run.py --config config.conv1_v3add_v4search_validate_1qa.yaml --end-at-step search
+```
+
+### 14.3 Ablation 3: `v4` replaced with `v3 add`
+
+- 目录：`v4_ablate_v3add/`
+- 含义：保留 `v4` 的 search / answer / eval，只把 add 换成 `v3`
+- 正式命令（conversation 1, all QA）：
+
+```bash
+cd evaluation_pipeline/v4_ablate_v3add
+python run.py --config config.conv1_v4search_v3add.yaml
+```
+
+- 当前代码验证命令：
+
+```bash
+cd evaluation_pipeline/v4_ablate_v3add
+python run.py --config config.conv1_v4search_v3add_validate_1qa.yaml --end-at-step search
+```
+
+### 14.4 Ablation 4: `v4` without slot aggregate memories
+
+- 目录：`v4_ablate_nosearchslot/`
+- 含义：保留 `v4` 原有 search 链路不变，只关闭 add 阶段生成的 slot aggregate memories
+- 正式命令（conversation 1, all QA）：
+
+```bash
+cd evaluation_pipeline/v4_ablate_nosearchslot
+python run.py --config config.conv1_v4_noslot.yaml
+```
+
+- 当前代码验证命令：
+
+```bash
+cd evaluation_pipeline/v4_ablate_nosearchslot
+python run.py --config config.conv1_v4_noslot_validate_1qa.yaml --end-at-step search
+```
+
+### 14.5 Baselines for comparison
+
+- `v3` baseline:
+
+```bash
+cd evaluation_pipeline/v3_ablate_v4add
+python run.py --config config.conv1_v3_baseline.yaml
+```
+
+- `v4` baseline:
+
+```bash
+cd evaluation_pipeline/v4_ablate_v3add
+python run.py --config config.conv1_v4_baseline_validate_1qa.yaml --end-at-step search
+```
+
+- `v4` baseline for no-slot directory:
+
+```bash
+cd evaluation_pipeline/v4_ablate_nosearchslot
+python run.py --config config.conv1_v4_baseline_validate_1qa.yaml --end-at-step search
+```
+
+- 当前仓库里唯一明确命名为 MiniMax 的 baseline 配置：
+
+```bash
+cd evaluation_pipeline/v3_ablate_v4add
+python run.py --config config.conv1_v3_baseline_minimax.yaml
+```
+
+建议：等 MiniMax 可用后，先把 `evaluation_pipeline/.env` 切回 MiniMax，再按上面的正式命令完整重跑做最终对比。

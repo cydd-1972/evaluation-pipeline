@@ -472,6 +472,7 @@ def _decide_global_memory_v4_sync(
     current_session: Any,
     memory_template: str,
     memory_prompt_max_items: int | None = None,
+    enable_slot_aggregates: bool = True,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     meta: dict[str, Any] = {"add_write_mode": "incremental"}
     old_trim = _truncate_memory_for_prompt(old_memory, limit=memory_prompt_max_items)
@@ -503,24 +504,27 @@ def _decide_global_memory_v4_sync(
         meta.update(op_stats)
         merged, db_writes, delta_stats = apply_global_memory_delta(old_memory, ops)
         meta.update(delta_stats)
-        aggregate_ops, aggregate_stats = _derive_slot_aggregate_ops(
-            memory=merged,
-            session_anchor_time=session_anchor_time,
-        )
-        meta.update(aggregate_stats)
-        if aggregate_ops:
-            merged, aggregate_writes, aggregate_delta_stats = apply_global_memory_delta(merged, aggregate_ops)
-            db_writes.extend(aggregate_writes)
-            meta["aggregate_writes"] = len(aggregate_writes)
-            meta["delta_added"] = int(meta.get("delta_added") or 0) + int(
-                aggregate_delta_stats.get("delta_added") or 0
+        if enable_slot_aggregates:
+            aggregate_ops, aggregate_stats = _derive_slot_aggregate_ops(
+                memory=merged,
+                session_anchor_time=session_anchor_time,
             )
-            meta["delta_updated"] = int(meta.get("delta_updated") or 0) + int(
-                aggregate_delta_stats.get("delta_updated") or 0
-            )
-            meta["delta_none"] = int(meta.get("delta_none") or 0) + int(
-                aggregate_delta_stats.get("delta_none") or 0
-            )
+            meta.update(aggregate_stats)
+            if aggregate_ops:
+                merged, aggregate_writes, aggregate_delta_stats = apply_global_memory_delta(merged, aggregate_ops)
+                db_writes.extend(aggregate_writes)
+                meta["aggregate_writes"] = len(aggregate_writes)
+                meta["delta_added"] = int(meta.get("delta_added") or 0) + int(
+                    aggregate_delta_stats.get("delta_added") or 0
+                )
+                meta["delta_updated"] = int(meta.get("delta_updated") or 0) + int(
+                    aggregate_delta_stats.get("delta_updated") or 0
+                )
+                meta["delta_none"] = int(meta.get("delta_none") or 0) + int(
+                    aggregate_delta_stats.get("delta_none") or 0
+                )
+        else:
+            meta["slot_aggregates_disabled"] = True
         return merged, db_writes, meta
     except ValueError:
         pass
@@ -545,20 +549,23 @@ def _decide_global_memory_v4_sync(
     ]
     merged, db_writes, delta_stats = apply_global_memory_delta(old_memory, delta_items)
     meta.update(delta_stats)
-    aggregate_ops, aggregate_stats = _derive_slot_aggregate_ops(
-        memory=merged,
-        session_anchor_time=session_anchor_time,
-    )
-    meta.update(aggregate_stats)
-    if aggregate_ops:
-        merged, aggregate_writes, aggregate_delta_stats = apply_global_memory_delta(merged, aggregate_ops)
-        db_writes.extend(aggregate_writes)
-        meta["aggregate_writes"] = len(aggregate_writes)
-        meta["delta_added"] = int(meta.get("delta_added") or 0) + int(aggregate_delta_stats.get("delta_added") or 0)
-        meta["delta_updated"] = int(meta.get("delta_updated") or 0) + int(
-            aggregate_delta_stats.get("delta_updated") or 0
+    if enable_slot_aggregates:
+        aggregate_ops, aggregate_stats = _derive_slot_aggregate_ops(
+            memory=merged,
+            session_anchor_time=session_anchor_time,
         )
-        meta["delta_none"] = int(meta.get("delta_none") or 0) + int(aggregate_delta_stats.get("delta_none") or 0)
+        meta.update(aggregate_stats)
+        if aggregate_ops:
+            merged, aggregate_writes, aggregate_delta_stats = apply_global_memory_delta(merged, aggregate_ops)
+            db_writes.extend(aggregate_writes)
+            meta["aggregate_writes"] = len(aggregate_writes)
+            meta["delta_added"] = int(meta.get("delta_added") or 0) + int(aggregate_delta_stats.get("delta_added") or 0)
+            meta["delta_updated"] = int(meta.get("delta_updated") or 0) + int(
+                aggregate_delta_stats.get("delta_updated") or 0
+            )
+            meta["delta_none"] = int(meta.get("delta_none") or 0) + int(aggregate_delta_stats.get("delta_none") or 0)
+    else:
+        meta["slot_aggregates_disabled"] = True
     return merged, db_writes, meta
 
 
@@ -580,6 +587,7 @@ async def run_add_global_v4(
     memory_prompt_path: str | Path | None = None,
     memory_prompt_max_items: int | None = None,
     backfill_embeddings: bool = True,
+    enable_slot_aggregates: bool = True,
 ) -> dict[str, Any]:
     """global v4 add：structured D/M，每 session 增量 UPSERT（无 clear flush）。"""
     resolved_llm = llm or PipelineLLM()
@@ -589,7 +597,8 @@ async def run_add_global_v4(
     limit_label = "unlimited" if prompt_limit is None else str(prompt_limit)
     print(
         f"[add-global-v4] memory_prompt={prompt_path.name} "
-        f"memory_prompt_max_items={limit_label} write=incremental",
+        f"memory_prompt_max_items={limit_label} write=incremental "
+        f"slot_aggregates={'on' if enable_slot_aggregates else 'off'}",
         flush=True,
     )
     llm_batch = max(1, int(add_llm_concurrency or 1))
@@ -723,6 +732,7 @@ async def run_add_global_v4(
                     current_session=session,
                     memory_template=memory_template,
                     memory_prompt_max_items=memory_prompt_max_items,
+                    enable_slot_aggregates=enable_slot_aggregates,
                 )
                 return cs, session, updated, db_writes, meta
 

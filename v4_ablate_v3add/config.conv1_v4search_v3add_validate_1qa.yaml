@@ -1,0 +1,36 @@
+dataset_path: datasets/locomo_refined.json
+max_conversations: 1
+max_questions_per_conversation: 1
+max_sessions_per_conversation: null
+
+workspace_base_dir: workspaces
+workspace_name: conv1_v4search_v3add_validate_1qa
+database_prefix: eval_v4_ablate_v3add
+reset_database_on_add: true
+
+add_backend: global
+search_mode: global
+search_backend: hybrid_llm
+
+memory_decision_prompt: prompts/memory_decision_global_v3.txt
+memory_prompt_max_items: 60
+
+search_hybrid_recall_k: 80
+search_hybrid_rrf_k: 60
+search_multihop_max_hops: 2
+search_multihop_max_queries: 3
+search_llm_prompt: prompts/search_llm_v4.txt
+search_llm_require_non_empty: true
+
+add_history_window: 2
+add_flush_per_session: true
+add_llm_concurrency: 4
+search_llm_concurrency: 4
+answer_prompt_mode: history
+search_top_k: 30
+concurrency: 2
+eval_concurrency: 4
+
+eval:
+  metrics: [llm, f1, bleu]
+  dataset_name: locomo

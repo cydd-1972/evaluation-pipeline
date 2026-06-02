@@ -191,6 +191,7 @@ async def _run_add(
             memory_prompt_path=config.get("memory_decision_prompt"),
             memory_prompt_max_items=config.get("memory_prompt_max_items"),
             backfill_embeddings=backfill_embeddings,
+            enable_slot_aggregates=bool(config.get("enable_slot_aggregates", True)),
         )
     if backend == "global":
         batch = int(config.get("add_llm_concurrency") or 1)
