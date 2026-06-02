@@ -1,232 +1,647 @@
 # evaluation_pipeline
 
-```
+LoCoMo 记忆评测流水线。所有版本共用同一套下游流程：
+
+```text
 add → search → answer → eval → score
 ```
 
-共享 **search → answer → eval → score**；仅 **add** 按版本分叉。三版本的差别在于：**记忆如何写入、以什么粒度检索**；下游答题与打分逻辑一致，便于公平对比。
+不同版本的核心差异在 **add 阶段如何写记忆**，以及 search 阶段用什么粒度检索记忆。
 
-## 各版本核心思想
+## 1. 快速开始
 
-### v1_mem0 — 按说话人维护的原子记忆（Mem0 风格）
-
-- **问题设定**：每个人只关心「自己视角下」要记住什么；记忆是短句级 fact，带 ADD / UPDATE / DELETE，而不是整段 transcript。
-- **写入方式**：每个 session 先 **Fact Extraction**（从对话抽事实），再对 **speaker_a / speaker_b 各跑一遍 Memory Decision**，各自维护一条 memory 列表；对话全部 session 处理完后一次性落库。
-- **检索粒度**：Postgres 里 **每个 speaker 一个 `user_id`**；search 在「提问者对应 speaker 的记忆库」里用 LLM 或向量选 id。
-- **适用场景**：对齐经典 Mem0 / 双视角记忆方案，看「抽取 + 增量更新」能否支撑 LoCoMo 多跳与时间题。
-- **典型代价**：事实被拆碎、跨 speaker 信息需靠检索拼起来；add 阶段 LLM 调用多（每 session × 每 speaker）。
-
-### v2_raw — 无压缩的 session 原文基线
-
-**不做任何记忆归纳**，把「说话人参与过的每个 session」整段 transcript（含双方发言）当作一条可检索块。
-- **写入方式**：**无 LLM**；按 session 切块 → embedding → 入库，成本最低、行为最可复现。
-- **检索粒度**：仍是 **per-speaker `user_id`**，但每条记忆是一大段原文而非原子 fact。
-- **典型现象**：cat4 等多跳题分数往往最高，但库体积大、检索噪声也多。
-
-### v3_global — 整段对话一份全局记忆快照
-**思路说明**：  
-D是对话，M是记忆  
-- 第 1 轮：输入 D_1 → 输出 M_1  
-- 第 2 轮：输入 D_2 + D_1(窗口) + M_1 → 输出 M_2  
-- 第 n 轮：输入（t可以设置）  
-D_n + (D_{n-t} … D_{n-1}) + M_{n-1} → 输出 M_n  
-
-
-**提示词**  ：
-
-可选 `memory_decision_global_v1/v2/v3.txt` 。
-
-v2：
-- delete--》update
-- 实体消歧规则
-- 根据之前很多空search，让提示词注意别压缩太狠  
-
-v3：
-- 原子事件  ：v3 add 要求每条记忆是 一条独立的英文完整句，理想形态是「一件事」：  
-On 20 May 2023, Melanie ran a charity race for mental health awareness.
-- 原子设计会把 人 / 时间 / 事 / 结果 拆成多条，或只留其中几条。
-
-### v4_global — v3 原子记忆 + 全量 ADD prompt + 非空 search + **增量 DB 写入**
-
-在 v3 基础上，v4 的 pipeline 差异：
-
-| 环节 | v3 | v4 |
-|------|----|----|
-| ADD prompt | 可截断 60 条；要求返回**完整** memory 列表 | 不截断；返回**增量** ADD/UPDATE 即可 |
-| 内存合并 | `_merge_memory_preserving_ids`（防模型漏 id） | `apply_global_memory_delta`（未提及 id **自动保留**） |
-| DB 写入 | `clear_user_memories` + 全量 `insert`（快照 flush） | 仅 `UPSERT` 本 session 变更；**不清库** |
-| search | 允许空选 | **BM25+向量 RRF 召回 → LLM 重排**（`hybrid_llm`），非空兜底 |
-
-配置：`add_backend: global_v4`，`search_backend: hybrid_llm`，`memory_prompt_max_items: 0`，`search_llm_require_non_empty: true`，`search_hybrid_recall_k: 80`。
-
-
-## 目录结构
-
-```
-evaluation_pipeline/
-├── core/                    # 共享：infra、search、pipeline/steps、metrics、matrix、telemetry
-│   ├── pipeline/runner.py   # 五步编排
-│   ├── search/              # search_llm / search_rag / search_hybrid_llm (+ global)
-│   └── matrix/              # 矩阵并行编排
-├── v1_mem0/                 # mem0 风格 add（fact + per-speaker memory）
-├── v2_raw/                  # session 原文 add（无 LLM）
-├── v3_global/               # conversation 级 global add + merge-guard
-├── v4_global/               # v3 + 全量 ADD prompt + 非空 LLM search
-├── prompts/
-├── datasets/
-├── configs/matrix_secrets.yaml   # 矩阵 API 密钥（gitignore）
-└── sql/init.sql
+```bash
+cd evaluation_pipeline
+pip install -r requirements.txt
+copy .env.example .env
 ```
 
-## 版本对照
-
-| 版本 | add | search | 默认 DB 前缀 |
-|------|-----|--------|--------------|
-| **v1_mem0** | `fact_extraction.txt` + `memory_decision.txt` | per-speaker llm/rag | `eval_v1_mem0` |
-| **v2_raw** | session transcript 块 | per-speaker llm/rag | `eval_v2_raw` |
-| **v3_global** | `memory_decision_global_v{1,2,3}.txt` | `search_mode: global` | `eval_v3_global` |
-| **v4_global** | `memory_decision_global_v4.txt`，**增量 ADD/UPDATE** + 不截断 prompt | global **hybrid_llm**（RRF+LLM 非空） | `eval_v4_global` |
-
-v3 在 flush 前会 **merge 保留模型未返回的旧 id**，但 DB 仍是每 session **清库 + 全量 insert**。v4 改为 **增量 UPSERT**，未提及 id 在内存与 DB 中均保留。
-
-## 环境变量（`.env`）
+然后编辑 `.env`，至少配置：
 
 ```env
-OPENAI_API_KEY=...
-OPENAI_API_BASE=...
-OPENAI_MODEL=...
+# 主链路 LLM：add / search LLM select / answer
+OPENAI_API_KEY=your_chat_api_key
+OPENAI_API_BASE=https://your-openai-compatible-endpoint/v1
+OPENAI_MODEL=your_chat_model
 
-EVAL_DATABASE_URL=postgresql://memorax:memorax@localhost:5432/memorax_eval
+# Embedding：rag / hybrid_llm 需要
+OPENAI_EMBEDDING_API_KEY=your_embedding_api_key
+OPENAI_EMBEDDING_API_BASE=https://your-embedding-endpoint/v1
+OPENAI_EMBEDDING_MODEL=text-embedding-v4
+OPENAI_EMBEDDING_DIMENSIONS=1024
 
-# eval 裁判（建议 3 个 key：1× SiliconFlow + 2× DashScope）
-EVALUATOR_API_KEY=...
-EVALUATOR_DASHSCOPE_API_KEYS=key2,key3
+# Postgres：pipeline 会按 workspace 创建/写入数据库
+EVAL_DATABASE_URL=postgresql://user:password@localhost:5432/postgres
+
+# Eval LLM judge：只有 eval.metrics 包含 llm 时需要
+EVALUATOR_API_KEY=your_evaluator_key
 EVALUATOR_API_BASE=https://api.siliconflow.cn/v1
 EVALUATOR_MODEL=Qwen/Qwen3-14B
 EVALUATOR_TPM_LIMIT=40000
 ```
 
-`load_runtime_env()` 会 **合并** 已注入的 `EVALUATOR_*`，避免矩阵编排器写入的 DashScope keys 被 `.env` 覆盖。
+如果使用 DashScope embedding，可参考：
 
-## 运行（单次 smoke）
-
-```bash
-cd evaluation_pipeline
-pip install -r requirements.txt
-
-python v1_mem0/run.py
-python v2_raw/run.py
-python v3_global/run.py
-python v3_global/run.py --config config.v2.yaml
-python v4_global/run.py
-
-python v1_mem0/run.py --from search
-python v1_mem0/run.py --only add
+```env
+OPENAI_EMBEDDING_API_BASE=https://dashscope.aliyuncs.com/compatible-mode/v1
+OPENAI_EMBEDDING_MODEL=text-embedding-v4
+OPENAI_EMBEDDING_DIMENSIONS=1024
 ```
 
-产物：`{version}/workspaces/<workspace_name>/`，含 `run_timings.json`、`workspaces/logs/run_*.log`。
+> 注意：所有 API 都按 OpenAI-compatible 协议调用；变量名沿用 `OPENAI_*`，不代表必须使用 OpenAI 官方服务。
 
-## 矩阵实验
+## 2. 目录结构
+
+```text
+evaluation_pipeline/
+├── core/                    # 共享 runner / db / search / answer / eval / score
+├── datasets/                # LoCoMo 数据
+├── prompts/                 # add / search / answer 提示词
+├── v1_mem0/                 # v1：Mem0 风格 per-speaker 原子记忆
+├── v2_raw/                  # v2：raw session transcript baseline
+├── v3_global/               # v3：conversation-level global memory snapshot
+├── v4_global/               # v4：fact extraction + code decision + incremental DB writes
+├── workspaces/              # 历史 / matrix 产物
+├── .env.example
+└── requirements.txt
+```
+
+## 3. 版本说明
+
+| 版本 | add 写入方式 | search 粒度 | 典型用途 |
+|---|---|---|---|
+| `v1_mem0` | 先抽 facts，再按 speaker 做 memory decision | per-speaker memory | 对齐 Mem0 风格：双视角、短事实、ADD/UPDATE/DELETE |
+| `v2_raw` | 不做 LLM 抽取，直接写完整 session transcript | per-speaker session transcript | raw baseline；数量少但单条很长 |
+| `v3_global` | 每轮让 LLM 输出完整全局 memory snapshot | global memory | conversation 级压缩记忆 |
+| `v4_global` | LLM 只抽 facts；代码做 ADD/UPDATE/NONE；增量 UPSERT | global memory + hybrid search | 当前主力版本，支持 anchor_time、slot 聚合、二跳 search |
+
+## 4. 通用 CLI
+
+每个版本的 `run.py` 都支持同一套参数：
+
+```bash
+python <version>/run.py --config <config-file>
+python <version>/run.py --start-from-step search
+python <version>/run.py --from search
+python <version>/run.py --end-at-step add
+python <version>/run.py --only add
+python <version>/run.py --matrix
+python <version>/run.py --matrix --dry-run
+```
+
+步骤名固定为：
+
+```text
+add, search, answer, eval, score
+```
+
+常用例子：
+
+```bash
+# 从头完整跑
+python v4_global/run.py --config config.smoke_small.yaml
+
+# 只跑 add
+python v4_global/run.py --config config.smoke_small.yaml --only add
+
+# add 已完成，从 search 继续
+python v4_global/run.py --config config.smoke_small.yaml --from search
+```
+
+## 5. 各版本怎么跑
+
+### 5.1 v1_mem0
+
+默认配置：
+
+```bash
+python v1_mem0/run.py --config config.yaml
+```
+
+矩阵实验：
 
 ```bash
 python v1_mem0/run.py --matrix --dry-run
 python v1_mem0/run.py --matrix
+```
 
+配置文件：
+
+```text
+v1_mem0/config.yaml
+v1_mem0/config.matrix.yaml
+```
+
+特点：
+
+- add 阶段 LLM 调用较多：fact extraction + speaker_a decision + speaker_b decision。
+- 每个 speaker 独立 user_id。
+- 适合观察 Mem0 风格增量记忆。
+
+### 5.2 v2_raw
+
+默认配置：
+
+```bash
+python v2_raw/run.py --config config.yaml
+```
+
+矩阵实验：
+
+```bash
+python v2_raw/run.py --matrix --dry-run
 python v2_raw/run.py --matrix
+```
+
+配置文件：
+
+```text
+v2_raw/config.yaml
+v2_raw/config.matrix.yaml
+```
+
+特点：
+
+- add 阶段不用 LLM。
+- 每条记忆是一整个 session transcript。
+- 每个 speaker 存一份其参与过的 session transcript。
+- 数量少，但单条非常长。
+
+### 5.3 v3_global
+
+默认配置：
+
+```bash
+python v3_global/run.py --config config.yaml
+```
+
+不同 prompt 版本：
+
+```bash
+python v3_global/run.py --config config.v1.yaml
+python v3_global/run.py --config config.v2.yaml
+python v3_global/run.py --config config.v3.yaml
+```
+
+矩阵实验：
+
+```bash
+python v3_global/run.py --matrix --dry-run
 python v3_global/run.py --matrix
+```
+
+配置文件：
+
+```text
+v3_global/config.yaml
+v3_global/config.v1.yaml
+v3_global/config.v2.yaml
+v3_global/config.v3.yaml
+v3_global/config.matrix.yaml
+```
+
+特点：
+
+- 每个 conversation 一个 global user_id。
+- 每轮输入当前 session + 历史窗口 + 上一轮 memory。
+- LLM 返回完整 memory snapshot。
+- DB 写入通常是 clear + full insert。
+
+### 5.4 v4_global
+
+小规模 smoke：
+
+```bash
+python v4_global/run.py --config config.smoke_small.yaml
+```
+
+conversation 1 全部 QA：
+
+```bash
+python v4_global/run.py --config config.conv1_allqa_hybrid_v4_slot_multihop.yaml
+```
+
+全量 10 conversations / 1382 QA：
+
+```bash
+python v4_global/run.py --config config.allconv_allqa_hybrid_v5_slot_gated_multihop.yaml
+```
+
+只跑 30 QA：
+
+```bash
+python v4_global/run.py --config config.fullconv_30qa_hybrid.yaml
+```
+
+矩阵实验：
+
+```bash
+python v4_global/run.py --matrix --dry-run
 python v4_global/run.py --matrix
 ```
 
-矩阵根目录：各版本 `config.matrix.yaml` 的 `matrix_base_dir: workspaces`（相对该版本目录）。
+配置文件：
 
-密钥：`configs/matrix_secrets.yaml`。
-
----
-
-## 分环节耗时记录（三版本通用）
-
-三版本走同一套 `core/telemetry.py` / `core/matrix/matrix_telemetry.py`，**按环节记墙钟时间**，不区分版本实现细节；差异主要体现在 **add** 阶段（v2 无 LLM 通常最短，v1 调用最多，v3 每 session 一次全局决策）。
-
-### 记在哪里
-
-| 运行方式 | 文件 | 粒度 |
-|----------|------|------|
-| 单次 pipeline | `{version}/workspaces/<workspace_name>/run_timings.json` | `add` / `search` / `answer` / `eval` / `score` 各一条 |
-| 矩阵 `--matrix` | `{version}/workspaces/matrix_timings.json` | 每个 `run_id` × 每个 `phase` 一条 |
-| 终端 + 日志 | `workspaces/logs/run_*.log`（单次）或 `matrix_*_*.log`（矩阵） | 含 `[pipeline] OK phase=… (Xs)`、`[eval] effective concurrency=…` |
-
-单次 `run_timings.json` 示例：
-
-```json
-{
-  "updated_at": "2026-05-26T12:00:00",
-  "phases": {
-    "add":    { "elapsed_s": 3720.5, "status": "ok", "finished_at": "..." },
-    "search": { "elapsed_s": 1623.7, "status": "ok", "finished_at": "..." },
-    "answer": { "elapsed_s": 890.2,  "status": "ok", "finished_at": "..." },
-    "eval":   { "elapsed_s": 7200.0, "status": "ok", "finished_at": "..." },
-    "score":  { "elapsed_s": 1.2,    "status": "ok", "finished_at": "..." }
-  }
-}
+```text
+v4_global/config.yaml
+v4_global/config.smoke_small.yaml
+v4_global/config.fullconv_30qa.yaml
+v4_global/config.fullconv_30qa_hybrid.yaml
+v4_global/config.fullconv_allqa_hybrid.yaml
+v4_global/config.conv1_allqa_hybrid_v2.yaml
+v4_global/config.conv1_allqa_hybrid_v3_slot_multihop.yaml
+v4_global/config.conv1_allqa_hybrid_v4_slot_multihop.yaml
+v4_global/config.allconv_allqa_hybrid_v5_slot_gated_multihop.yaml
+v4_global/config.matrix.yaml
 ```
 
-矩阵跑完后可在日志末尾看到按 run 汇总（`print_timing_summary`），或打开 `matrix_timings.json` 的 `entries[]`（字段含 `run_id`、`phase`、`elapsed_s`、`model_id`、`search_backend`）。
+当前推荐配置：
 
-**当前未写入 JSON 的字段**（需结合 `pipeline_config.json`、当次 config 与日志判断）：`eval_concurrency`、裁判 key 数、是否开启 TPM、是否分片。下文说明如何从日志辨认。
+```bash
+python v4_global/run.py --config config.allconv_allqa_hybrid_v5_slot_gated_multihop.yaml
+```
 
-### 全量 LoCoMo 规模（估算基准）
+特点：
 
-`datasets/locomo_refined.json`：**10 个 conversation，1382 道 QA**（`max_conversations: null` 时）。下列耗时为在本仓库历史 `workspaces/matrix*`、`workspaces/v3` 等跑数上的 **经验区间**，实际随模型、API 限速、网络波动变化。
+- LLM 只负责事实抽取。
+- 代码负责 ADD / UPDATE / NONE、id 分配、slot 聚合。
+- DB 使用增量 UPSERT，不清库重写。
+- 记忆带 `anchor_time`，search / answer 动态展示 `resolved_time`。
+- `hybrid_llm` 使用 BM25 + 向量 RRF 召回，再由 LLM select。
+- 二跳 search 只对桥接、列表、推理、复合题启用。
 
-| 环节 | v1_mem0 | v2_raw | v3_global | 主要并发 / 配置 |
-|------|---------|--------|-----------|-----------------|
-| **add** | 约 **1–2.5 h** | 约 **5–20 min** | 约 **0.5–1.5 h** | v1/v3：`add_llm_concurrency: 4`；v2：仅 embedding |
-| **search (llm)** | 约 **25–80 min** | 同左 | 同左（global 一次列全库记忆） | `search_llm_concurrency: 4` |
-| **search (rag)** | 约 **20–135 min** | 同左 | 同左 | 含 embedding 检索，常比 llm search 慢 |
-| **answer** | 约 **15–45 min** | 同左 | 同左 | 默认 `concurrency: 2` |
-| **eval (llm 裁判)** | 见下表 | 同左 | 同左 | 与 TPM / key 数强相关 |
-| **score** | 不足 5 秒 | 同左 | 同左 | 本地汇总 JSON |
+## 6. 配置文件关键字段
 
-历史单次 run 总耗时（含 search+answer+eval+score，**约 3.5 h/条**）在 `matrix_status.json` 里常见 **~12700 s**，与 eval 占主导一致。
+通用字段：
 
-### eval：限流 × 并发（四种组合）
+```yaml
+dataset_path: datasets/locomo_refined.json
+workspace_base_dir: workspaces
+workspace_name: your_workspace_name
+database_prefix: eval_v4_global
+reset_database_on_add: true
 
-eval 只在使用指标 `llm` 时调用裁判 API；`f1` / `bleu` 为本地计算，可忽略耗时。
+max_conversations: 1                # null 表示全量
+max_questions_per_conversation: 30  # null 表示该 conversation 全部 QA
+max_sessions_per_conversation: null
 
-| 模式 | 环境 / 配置 | 行为 | 全量 1382 题 **粗算耗时** | 日志特征 |
-|------|-------------|------|---------------------------|----------|
-| **A. 限流 + 3 key 分片**（推荐默认） | `EVALUATOR_TPM_LIMIT=40000`（非 0/off）；`EVALUATOR_DASHSCOPE_API_KEYS` 等与 SF key 共 **3 slot**；`eval_concurrency: 6` | `index % 3` 固定分片，**每 key 独立 TPM 窗口**；有效并发通常被压到 **≤6**（常约 **2/分片**） | 约 **2.5–4 h**（~6–10 s/题，含等待窗口） | `keys=3`、`shard mode: 3 workers`、`TPM gate enabled … per key` |
-| **B. 限流 + 单 key** | 仅 1 个 `EVALUATOR_API_KEY`；TPM 开启 | 单 gate + 有效并发 **≤2**（`EVALUATOR_CONCURRENCY_MAX` 默认） | 约 **4–6 h** 或更久 | `keys=1`、`effective concurrency=2`、大量 `TPM budget … wait 50s` |
-| **C. 不限流 + 3 key 分片** | `EVALUATOR_TPM_LIMIT=0` 或 `off` | 分片仍生效，并发可达 **~6**，直至接口 429 | 理想 **~40–90 min**；429 多时退回 ~2 h+ | 无 TPM gate 行；仍有 `shard mode` |
-| **D. 不限流 + 单 key 低并发** | TPM 关；仅 1 key；`eval_concurrency: 2` | 串行化最严重 | 约 **3–5 h**（~8–12 s/题） | `keys=1`，无 shard |
+add_backend: global_v4
+search_backend: hybrid_llm
+search_mode: global
+
+answer_prompt_mode: history
+eval:
+  metrics: [llm, f1, bleu]
+```
+
+LLM 并发：
+
+```yaml
+add_llm_concurrency: 4
+search_llm_concurrency: 4
+answer_concurrency: 2
+eval_concurrency: 4
+```
+
+v4 add：
+
+```yaml
+memory_decision_prompt: prompts/memory_extract_global_v4.txt
+memory_prompt_max_items: 0
+add_history_window: 2
+add_flush_per_session: true
+backfill_embeddings_on_add: true
+```
 
 说明：
 
-- **限流**：`EvaluatorTpmGate` 按 `EVALUATOR_TPM_LIMIT`（默认 40k input tokens/min）× `EVALUATOR_TPM_BUFFER`（0.85）÷ `EVALUATOR_EST_INPUT_TOKENS`（默认 5000，跑前会用样本校准）估算每分钟可发请求数；超预算会 **主动 sleep**（日志 `TPM budget … wait …`），与 429 退避不同。
-- **并发**：`config.yaml` 的 `eval_concurrency` 是上限；实际值见日志 `effective concurrency=`（由 `recommended_eval_concurrency` 与 key 数、TPM 共同决定）。
-- **分片 vs 轮询**：当前实现为 **固定分片**（每题只属于一个 key），429 时 **该 key 退避重试**，不会抢其他 key。
+- `memory_prompt_max_items: 0` 表示不截断 old memory。
+- v4 决策使用完整 `old_memory`，不是只用 prompt 里的 old memory。
+- `backfill_embeddings_on_add: true` 会在 add 后为记忆写 embedding，`hybrid_llm` 需要它。
 
-关闭 TPM 示例：
+v4 search：
 
-```env
-EVALUATOR_TPM_LIMIT=0
+```yaml
+search_hybrid_recall_k: 80
+search_hybrid_rrf_k: 60
+search_top_k: 30
+search_llm_prompt: prompts/search_llm_v4.txt
+search_llm_require_non_empty: true
+
+search_multihop_max_hops: 2
+search_multihop_max_queries: 3
 ```
 
-### 三版本端到端粗算（全量 + eval 模式 A）
+说明：
 
-| 版本 | add | search→score（llm） | + eval (A) | **合计约** |
-|------|-----|---------------------|------------|------------|
-| v1_mem0 | 1–2.5 h | 1–2 h | 2.5–4 h | **5–8.5 h** |
-| v2_raw | 0.1–0.3 h | 1–2 h | 2.5–4 h | **4–6.5 h** |
-| v3_global | 0.5–1.5 h | 1–2 h | 2.5–4 h | **4.5–7.5 h** |
+- `search_backend: hybrid_llm`：BM25 + dense vector RRF → LLM select。
+- `search_multihop_max_hops: 2`：最多二跳。
+- `search_multihop_max_queries: 3`：每题最多生成 3 个 follow-up queries。
+- 当前二跳有 gating，只对桥接 / 列表 / 推理 / 复合题触发。
 
-矩阵（例如 v1：1 模型 × 3 次 add × 2 种 search）在 **模式 A** 下，仅 eval 串行阶段往往还要 **×6 条 search run** 量级，总日历时间需再乘并行度（`parallel_models` / `parallel_search`），详见各版本 `config.matrix.yaml`。
+## 7. API Key 配置
 
-### 如何核对一次 run
+### 7.1 主链路 LLM
 
-1. 打开 `{version}/workspaces/<name>/run_timings.json` 看五步 `elapsed_s`。
-2. 打开同目录 `pipeline_config.json` 看当次 `eval_concurrency`、`search_backend`、`add_backend`。
-3. 打开 `workspaces/logs/run_*.log`，搜索：`effective concurrency`、`keys=`、`shard mode`、`TPM gate`、`TPM budget`。
+用于：
 
-新重组后的路径（`v1_mem0/workspaces/` 等）在**首次全量跑通前**可能没有 `run_timings.json`；旧实验的分环节数据在 `evaluation_pipeline/workspaces/matrix*/matrix_status.json`（多为 **整 run 总耗时**，无分 phase 时以 `matrix_timings.json` 为准，若缺失则只有总 `elapsed_s`）。
+- v1/v3/v4 add
+- LLM search select
+- answer 生成
+
+```env
+OPENAI_API_KEY=...
+OPENAI_API_BASE=https://api.minimaxi.com/v1
+OPENAI_MODEL=MiniMax-M2.7
+```
+
+也可以换成任何 OpenAI-compatible endpoint。
+
+### 7.2 Embedding
+
+用于：
+
+- `search_backend: rag`
+- `search_backend: hybrid_llm`
+- `backfill_embeddings_on_add: true`
+
+```env
+OPENAI_EMBEDDING_API_KEY=...
+OPENAI_EMBEDDING_API_BASE=https://dashscope.aliyuncs.com/compatible-mode/v1
+OPENAI_EMBEDDING_MODEL=text-embedding-v4
+OPENAI_EMBEDDING_DIMENSIONS=1024
+```
+
+如果 embedding 服务限制 batch size，需要在 `core/infra/embedding.py` 里调整 batch。
+
+### 7.3 Evaluator
+
+用于 `eval.metrics` 包含 `llm` 的情况：
+
+```env
+EVALUATOR_API_KEY=...
+EVALUATOR_API_BASE=https://api.siliconflow.cn/v1
+EVALUATOR_MODEL=Qwen/Qwen3-14B
+EVALUATOR_TPM_LIMIT=40000
+```
+
+多个 evaluator key：
+
+```env
+EVALUATOR_API_KEYS=key_a,key_b,key_c
+```
+
+DashScope evaluator 示例：
+
+```env
+EVALUATOR_API_BASE=https://dashscope.aliyuncs.com/compatible-mode/v1
+EVALUATOR_MODEL=qwen3-14b
+```
+
+## 8. Postgres 要求
+
+需要一个可连接的 Postgres。
+
+```env
+EVAL_DATABASE_URL=postgresql://user:password@localhost:5432/postgres
+```
+
+pipeline 会根据 `database_prefix + workspace_name` 创建/使用 workspace 数据库。需要权限：
+
+- 创建 database；
+- 创建 table；
+- 创建/使用 pgvector extension；
+- insert / update / select。
+
+如果没有创建数据库权限，可以先手动建好库，再把 `EVAL_DATABASE_URL` 指向可写库。
+
+## 9. 输出产物在哪里
+
+每次运行输出到：
+
+```text
+<version>/workspaces/<workspace_name>/
+```
+
+常见文件：
+
+| 文件 | 含义 |
+|---|---|
+| `pipeline_config.json` | 本次实际配置快照 |
+| `workspace.json` | workspace DB 信息 |
+| `add_snapshot.json` | add 后的记忆列表快照 |
+| `search_results.json` | search 结果 |
+| `search_results_answerhistory.json` | answer 后结果 |
+| `evaluation_metrics_answerhistory.json` | eval 逐题指标 |
+| `score_summary_answerhistory.json` | 汇总分数 |
+| `run_timings.json` | 每个 phase 耗时 |
+
+日志在：
+
+```text
+<version>/workspaces/logs/run_*.log
+```
+
+最新全量 v4 记忆列表：
+
+```text
+v4_global/workspaces/allconv_v4_allqa_hybrid_v5_slot_gated_multihop/add_snapshot.json
+```
+
+看某个 conversation 最终记忆：
+
+1. 打开 `add_snapshot.json`。
+2. 找到对应 conversation。
+3. 取最后一个 `sessions[-1]`。
+4. 看其中的 `memory` 字段。
+
+## 10. 断点续跑
+
+如果 add 已完成，只想继续 search：
+
+```bash
+python v4_global/run.py --config config.allconv_allqa_hybrid_v5_slot_gated_multihop.yaml --from search
+```
+
+如果 search 已完成，只想重新 answer/eval/score：
+
+```bash
+python v4_global/run.py --config config.allconv_allqa_hybrid_v5_slot_gated_multihop.yaml --from answer
+```
+
+如果只想重新打分：
+
+```bash
+python v4_global/run.py --config config.allconv_allqa_hybrid_v5_slot_gated_multihop.yaml --from eval
+```
+
+注意：
+
+- `add_snapshot.json` 存在时，add 会尝试 resume。
+- `search_results.json` 存在时，search 会跳过已有 retrieval 的 QA。
+- 如果想彻底重跑，换新的 `workspace_name` 最稳。
+
+## 11. 当前 v4 关键设计
+
+### 11.1 提取 + 决策分离
+
+LLM 输出：
+
+```json
+{
+  "facts": [
+    {
+      "fact": "Melanie has a black dog named Oliver.",
+      "type": "attribute"
+    }
+  ]
+}
+```
+
+代码决定：
+
+- `ADD`
+- `UPDATE`
+- `NONE`
+- id
+
+这样避免 LLM 自己乱分 id 或乱 UPDATE。
+
+### 11.2 增量 DB 写入
+
+v4 每个 session 只写变化：
+
+- `ADD`：新 id，新 text。
+- `UPDATE`：复用旧 id，更新 text。
+- 未提及旧记忆：保留。
+
+DB 侧走 UPSERT，不再每轮 clear + full insert。
+
+### 11.3 anchor_time / resolved_time
+
+add 阶段：
+
+- fact 保留相对时间原文；
+- 每条记忆写入固定 `anchor_time`。
+
+search / answer 阶段：
+
+- 根据 `text + anchor_time` 动态解析 `resolved_time`；
+- 例如 `yesterday + 2023-05-08 → 2023-05-07`。
+
+### 11.4 slot 聚合记忆
+
+针对列表题生成额外聚合卡片，例如：
+
+```text
+Melanie's known pets are Luna, Oliver, and Bailey.
+Melanie has bought new shoes and figurines.
+Melanie has seen musical artists or bands including Matt Patterson.
+```
+
+原子记忆仍保留，聚合记忆只作为列表题友好索引。
+
+### 11.5 gated 二跳 search
+
+普通题只单跳。只有这些题型可能二跳：
+
+- bridge：`from Caroline's suggestion`
+- list：`What are...`, `How many...`
+- inference：`Would...`
+- compound：多个实体组合的问题
+
+二跳流程：
+
+```text
+原问题 search → 第一跳 selected memories → 生成 follow-up queries → 第二跳 search → 合并结果 → answer
+```
+
+## 12. 已跑过的代表性结果
+
+全量 v4：
+
+```text
+workspace: v4_global/workspaces/allconv_v4_allqa_hybrid_v5_slot_gated_multihop
+QA: 1382
+llm: 0.6686
+f1: 0.5730
+bleu: 0.5023
+```
+
+全量记忆规模：
+
+```text
+conversation memory counts:
+[415, 250, 583, 468, 510, 422, 526, 504, 365, 491]
+
+total memories: 4534
+avg words per memory: 10.03
+```
+
+全量耗时：
+
+```text
+add:    1670.8s
+search: 28050.9s
+answer: 4376.1s
+eval:   2289.3s
+score:  0.3s
+```
+
+## 13. 常见问题
+
+### 13.1 为什么 search 很慢？
+
+`hybrid_llm` 每题都要：
+
+1. dense embedding query；
+2. BM25 recall；
+3. RRF 合并；
+4. LLM select；
+5. 部分题还会二跳。
+
+全量 1382 QA 时 search 是主要耗时瓶颈。
+
+### 13.2 为什么 v4 memory 数量比 v3 多很多？
+
+v4 记忆更原子，且抽取更多 answer-bearing facts，还增加了 slot 聚合记忆。
+
+历史统计：
+
+| 版本 | 总 memory | 平均每 conv | 平均 words |
+|---|---:|---:|---:|
+| `v2_raw` | 544 | 54.4 | 618.08 |
+| `v3_global` | 607 | 60.7 | 16.02 |
+| `v4_global latest` | 4534 | 453.4 | 10.03 |
+
+### 13.3 如果 API 429 怎么办？
+
+可以降低并发：
+
+```yaml
+add_llm_concurrency: 2
+search_llm_concurrency: 2
+answer_concurrency: 1
+eval_concurrency: 2
+```
+
+也可以打开/降低 evaluator TPM：
+
+```env
+EVALUATOR_TPM_LIMIT=20000
+```
+
+### 13.4 如果只想快速验证改动？
+
+优先跑：
+
+```bash
+python v4_global/run.py --config config.smoke_small.yaml
+```
+
+或者只跑 conversation 1：
+
+```bash
+python v4_global/run.py --config config.conv1_allqa_hybrid_v4_slot_multihop.yaml
+```
 
