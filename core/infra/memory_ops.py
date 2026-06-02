@@ -24,11 +24,13 @@ def apply_global_memory_delta(
         text = str(item.get("text") or "").strip()
         if not memory_id or not text:
             continue
+        anchor_time = str(item.get("anchor_time") or "").strip()
         old_order.append(memory_id)
         by_id[memory_id] = {
             "id": memory_id,
             "text": text,
             "event": str(item.get("event") or "ADD").upper(),
+            "anchor_time": anchor_time,
         }
 
     db_writes: list[dict[str, Any]] = []
@@ -61,25 +63,53 @@ def apply_global_memory_delta(
         if not text:
             continue
 
+        anchor_time = str(raw.get("anchor_time") or "").strip()
         if event == "ADD":
             if memory_id in by_id:
                 event = "UPDATE"
             else:
                 stats["delta_added"] += 1
-                by_id[memory_id] = {"id": memory_id, "text": text, "event": "ADD"}
-                db_writes.append({"id": memory_id, "text": text, "event": "ADD"})
+                by_id[memory_id] = {
+                    "id": memory_id,
+                    "text": text,
+                    "event": "ADD",
+                    "anchor_time": anchor_time,
+                }
+                db_writes.append(
+                    {"id": memory_id, "text": text, "event": "ADD", "anchor_time": anchor_time}
+                )
                 continue
 
         if event == "UPDATE":
             if memory_id not in by_id:
                 stats["delta_added"] += 1
-                by_id[memory_id] = {"id": memory_id, "text": text, "event": "ADD"}
-                db_writes.append({"id": memory_id, "text": text, "event": "ADD"})
+                by_id[memory_id] = {
+                    "id": memory_id,
+                    "text": text,
+                    "event": "ADD",
+                    "anchor_time": anchor_time,
+                }
+                db_writes.append(
+                    {"id": memory_id, "text": text, "event": "ADD", "anchor_time": anchor_time}
+                )
                 continue
             if by_id[memory_id]["text"] != text:
                 stats["delta_updated"] += 1
-                by_id[memory_id] = {"id": memory_id, "text": text, "event": "UPDATE"}
-                db_writes.append({"id": memory_id, "text": text, "event": "UPDATE"})
+                preserved_anchor = str(by_id[memory_id].get("anchor_time") or anchor_time).strip()
+                by_id[memory_id] = {
+                    "id": memory_id,
+                    "text": text,
+                    "event": "UPDATE",
+                    "anchor_time": preserved_anchor,
+                }
+                db_writes.append(
+                    {
+                        "id": memory_id,
+                        "text": text,
+                        "event": "UPDATE",
+                        "anchor_time": preserved_anchor,
+                    }
+                )
 
     for memory_id in old_order:
         if memory_id not in touched:

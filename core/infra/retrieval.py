@@ -122,11 +122,16 @@ def build_retrieval_payload(
     metadata_extra: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """把选中的 memory id 映射为 answer 步骤可消费的 retrieval 块。"""
-    id_set = {str(value) for value in selected_ids}
+    ordered_ids: list[str] = []
+    for value in selected_ids:
+        memory_id = str(value)
+        if memory_id and memory_id not in ordered_ids:
+            ordered_ids.append(memory_id)
+    by_memory_id = {str(item.get("id") or ""): item for item in memories}
     selected: list[dict[str, Any]] = []
-    for item in memories:
-        memory_id = str(item.get("id") or "")
-        if memory_id not in id_set:
+    for memory_id in ordered_ids:
+        item = by_memory_id.get(memory_id)
+        if not item:
             continue
         score = 1.0
         if score_by_id and memory_id in score_by_id:

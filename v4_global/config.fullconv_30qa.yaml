@@ -1,26 +1,28 @@
 dataset_path: datasets/locomo_refined.json
 max_conversations: 1
-max_questions_per_conversation: null
+max_questions_per_conversation: 30
 max_sessions_per_conversation: null
 
 workspace_base_dir: workspaces
-workspace_name: smoke_v4
+workspace_name: fullconv_v4_30qa_noembed
 database_prefix: eval_v4_global
 reset_database_on_add: false
 
 add_backend: global_v4
 search_mode: global
-search_backend: hybrid_llm
+search_backend: llm
+
+# embedding quota不足时：跳过 embedding 回填；因此 search_backend 不能用 rag/hybrid_llm
+backfill_embeddings_on_add: false
 
 # hybrid 召回池（BM25 + pgvector → RRF），再 LLM 重排至 search_top_k
 search_hybrid_recall_k: 80
 search_hybrid_rrf_k: 60
 
-# v4：ADD 不截断 old_memory（0 = unlimited）
+# extraction-only add prompt (facts only; code decides ops)
 memory_decision_prompt: prompts/memory_extract_global_v4.txt
 memory_prompt_max_items: 0
 
-# v4：LLM search 禁止空选 + 词面兜底
 search_llm_prompt: prompts/search_llm_v4.txt
 search_llm_require_non_empty: true
 
@@ -31,7 +33,7 @@ search_llm_concurrency: 4
 answer_prompt_mode: history
 search_top_k: 30
 concurrency: 2
-eval_concurrency: 6
+eval_concurrency: 4
 
 eval:
   metrics: [llm, f1, bleu]

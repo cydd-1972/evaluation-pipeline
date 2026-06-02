@@ -54,7 +54,7 @@ class EmbeddingClient:
         self.dimensions = dimensions or resolved_dims
         self._client = OpenAI(api_key=self.api_key, base_url=self.api_base)
 
-    def embed_texts(self, texts: Sequence[str], *, batch_size: int = 16) -> list[list[float]]:
+    def embed_texts(self, texts: Sequence[str], *, batch_size: int = 10) -> list[list[float]]:
         """批量嵌入；保持与输入相同的顺序。"""
         cleaned = [str(text or "").strip() for text in texts]
         if not cleaned:

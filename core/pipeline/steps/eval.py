@@ -171,9 +171,9 @@ async def evaluate_records(
         """信号量包装的单条评测任务（分片模式由 shard_sem 限流）。"""
         if results[index] is not None or abort_event.is_set():
             return
-        nonlocal completed_since_save
 
         async def _run() -> None:
+            nonlocal completed_since_save
             if abort_event.is_set():
                 return
             async with progress_lock:

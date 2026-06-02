@@ -113,13 +113,15 @@ def _memory_items_from_db(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if not text:
             continue
         meta = row.get("meta") if isinstance(row.get("meta"), dict) else {}
-        items.append(
-            {
-                "id": str(row.get("id") or len(items)),
-                "text": text,
-                "event": str(meta.get("event") or "ADD"),
-            }
-        )
+        anchor_time = str(meta.get("anchor_time") or meta.get("source_session_time") or "").strip()
+        item = {
+            "id": str(row.get("id") or len(items)),
+            "text": text,
+            "event": str(meta.get("event") or "ADD"),
+        }
+        if anchor_time:
+            item["anchor_time"] = anchor_time
+        items.append(item)
     return items
 
 
@@ -201,6 +203,9 @@ def _serialize_memory_snapshot(memory: list[dict[str, Any]]) -> list[dict[str, s
             "text": text,
             "event": str(item.get("event") or "ADD"),
         }
+        anchor_time = str(item.get("anchor_time") or "").strip()
+        if anchor_time:
+            row["anchor_time"] = anchor_time
         rows.append(row)
     return rows
 

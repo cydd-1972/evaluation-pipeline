@@ -18,6 +18,7 @@ from typing import Any
 
 from core.infra.llm_client import PipelineLLM
 from core.infra.progress import ProgressBar
+from core.infra.time_resolver import parse_anchor_date, resolve_relative_time
 
 PIPELINE_DIR = Path(__file__).resolve().parents[3]
 # mode → 模板路径；history=单块 memory_history，22=双 speaker 分块
@@ -44,10 +45,24 @@ def _format_selected_memories(retrieval: dict[str, Any] | None) -> str:
         if not text:
             continue
         created_at = str(item.get("created_at") or "").strip()
+        meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+        anchor_time = str(meta.get("anchor_time") or meta.get("source_session_time") or "").strip()
+        resolved_time = ""
+        if anchor_time:
+            anchor_date = parse_anchor_date(anchor_time)
+            if anchor_date:
+                resolved = resolve_relative_time(text, anchor_date)
+                if resolved:
+                    resolved_time = resolved.value
+        extra = ""
+        if anchor_time and resolved_time:
+            extra = f" (anchor_time={anchor_time}; resolved_time={resolved_time})"
+        elif anchor_time:
+            extra = f" (anchor_time={anchor_time}; resolved_time=UNKNOWN)"
         if created_at:
-            lines.append(f"- [{created_at}] {text}")
+            lines.append(f"- [{created_at}] {text}{extra}")
         else:
-            lines.append(f"- {text}")
+            lines.append(f"- {text}{extra}")
     return "\n".join(lines)
 
 

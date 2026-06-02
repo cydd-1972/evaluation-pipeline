@@ -178,6 +178,7 @@ async def _run_add(
         batch = int(config.get("add_llm_concurrency") or 1)
         history_window = int(config.get("add_history_window") or 2)
         flush_per_session = bool(config.get("add_flush_per_session", True))
+        backfill_embeddings = bool(config.get("backfill_embeddings_on_add", True))
         print(
             f"[pipeline] step=add (global v4 incremental, batch={batch}, "
             f"history_window={history_window})",
@@ -189,6 +190,7 @@ async def _run_add(
             add_flush_per_session=flush_per_session,
             memory_prompt_path=config.get("memory_decision_prompt"),
             memory_prompt_max_items=config.get("memory_prompt_max_items"),
+            backfill_embeddings=backfill_embeddings,
         )
     if backend == "global":
         batch = int(config.get("add_llm_concurrency") or 1)
@@ -258,6 +260,8 @@ async def _run_search(
                 search_llm_require_non_empty=require_non_empty,
                 search_hybrid_recall_k=hybrid_recall_k,
                 search_hybrid_rrf_k=hybrid_rrf_k,
+                search_multihop_max_hops=int(config.get("search_multihop_max_hops") or 1),
+                search_multihop_max_queries=int(config.get("search_multihop_max_queries") or 0),
             )
         if is_global:
             frozen = f" frozen={search_llm.model}" if search_llm else ""

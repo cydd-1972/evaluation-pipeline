@@ -1,0 +1,117 @@
+# v4 (extraction-only): extract facts only; code decides ADD/UPDATE/NONE.
+# Time rule: keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
+
+You are a fact extractor for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Your task is to extract answer-bearing atomic facts from the current session D_n.
+
+Do NOT compare with existing memories. Do NOT decide ADD/UPDATE/NONE. Do NOT assign ids.
+
+# INPUT
+
+## M_(n-1) — existing memory snapshot (for context only, do NOT use for decision)
+{old_memory_json}
+
+## Prior sessions — context window only (for disambiguation)
+{history_sessions_json}
+
+## D_n — current session (primary source)
+{current_session_json}
+
+# YOUR TASK
+
+Extract facts that could directly help answer future short-answer questions about people, events, times, places, plans, relationships, preferences, possessions, identities, counts, causes, outcomes, and stable attributes.
+
+Skip small talk, praise, generic reactions, repeated acknowledgements, and vague feelings unless they are clearly the target of a future answer.
+
+## Atomic fact (what to output)
+
+A single, self-contained piece of information written as one standalone English sentence.
+
+If a sentence contains multiple facts, split them into multiple fact sentences.
+
+- Wrong: "Caroline felt accepted and gained courage."
+- Correct: "Caroline felt accepted at the support group."
+- Correct: "Caroline gained courage to embrace herself."
+
+## Fact types
+
+For each fact, assign a type in:
+"event", "plan", "state", "feeling", "negative", "attribute"
+
+## Time rules (critical)
+
+Keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
+
+- Correct: "Melanie ran a charity race last Saturday."
+- Correct: "Caroline attended a support group yesterday."
+- Wrong: "On 7 May 2023, Caroline attended a support group."
+
+Do NOT append session_time, do NOT add parenthetical anchors, and do NOT invent time words.
+If the dialogue contains no time expression, leave time out.
+
+If the dialogue contains an absolute date/time already, keep it as-is.
+
+## Entity rules
+
+Use explicit names. Never use bare pronouns.
+
+- Wrong: "She went to a group."
+Example: "Caroline attended an LGBTQ support group."
+
+If a third party is unnamed, use a role label tied to a speaker when possible (e.g., "Melanie's coworker").
+
+Extract stable implied attributes when the wording clearly states them.
+
+- Dialogue: "my home country, Sweden"
+- Fact: "Caroline's home country is Sweden."
+- Dialogue: "my son Kyle"
+- Fact: "John's son is named Kyle."
+
+## High-value details never skip
+
+Always extract concrete details that often become short-answer targets:
+
+- Names and titles: book titles, song names, event names, group names, workshop/class names, pet names, place names, organization names.
+- Text visible or quoted in the dialogue or image caption: signs, posters, slogans, labels, written messages.
+- Image-specific details: objects, colors, symbols, animals, people, locations, and whether someone made/bought/owned/saw the item.
+- Counts and quantities: number of pets, children, years, months, classes, trips, artworks, objects, or people.
+- Relationships and durations: spouse/partner/child/friend/mentor roles and how long the relationship has lasted.
+- Recommendation chains: who recommended what to whom, who read/watched/attended it, and what the person took away from it.
+- Ownership and origin: who owns an item, who gave it, where it came from, and what it represents.
+- Explicit opinions from another person: what one speaker thinks about the other's decision, plan, identity, adoption, career, or community work.
+
+When the dialogue gives both a specific item and a broader category, extract both if both could answer different questions.
+
+- Dialogue: "I have two cats, Luna and Oliver, and a dog named Bailey."
+- Facts: "Melanie has two cats and a dog." / "Melanie's cats are named Luna and Oliver." / "Melanie's dog is named Bailey."
+- Dialogue: "Caroline recommended Becoming Nicole to Melanie."
+- Facts: "Caroline recommended 'Becoming Nicole' to Melanie." / "Melanie read 'Becoming Nicole' from Caroline's recommendation."
+
+## Granularity rules (do NOT force “six elements”)
+
+- Do NOT try to make each fact “complete” with time/place/cause/result if they are not explicitly stated.
+- Include time/place/people/details only when they are present in D_n or clearly implied by D_n wording.
+- Prefer multiple small facts over one long packed sentence if it helps keep each fact atomic.
+- Do NOT merge distinct events into one summary sentence.
+- Avoid extracting several separate feelings about the same event unless each feeling is important and distinct.
+- Prefer concrete facts over generic summaries such as "X had a meaningful experience" or "Y felt inspired."
+
+## Deduplication (within this output)
+
+If the same fact is repeated in D_n, output it only once (choose the clearest wording).
+
+## Output format
+
+Return ONLY one JSON object with the required key "facts":
+
+{{"facts": [{{"fact": "<string>", "type": "<string>"}}]}}
+
+Example:
+{{
+  "facts": [
+    {{"fact": "Caroline attended an LGBTQ support group yesterday.", "type": "event"}},
+    {{"fact": "Caroline felt accepted at the support group.", "type": "feeling"}},
+    {{"fact": "Caroline plans to pursue education in counseling or mental health.", "type": "plan"}}
+  ]
+}}

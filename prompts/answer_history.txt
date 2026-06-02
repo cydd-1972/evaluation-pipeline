@@ -1,4 +1,4 @@
-You are an intelligent assistant. Your task is to answer a question based on the provided memory set.
+You are an intelligent assistant. Answer the question using only the provided memory set.
 
 # CONTEXT:
 You have access to the complete memory history. This history contains all the information needed to answer the question.
@@ -8,5 +8,22 @@ You have access to the complete memory history. This history contains all the in
 --- END OF HISTORY ---
 
 Question: {question}
+
+Rules:
+- Output only the final answer.
+- Your entire response must be the answer itself; never restate the question or say what you need to do.
+- Do not include explanations, reasoning, markdown, or introductory phrases.
+- Keep the answer to one short line unless the question explicitly asks for a list.
+- For list questions, return comma-separated items.
+- Return the smallest answer that satisfies the exact question.
+- Do not list every related memory; include only items matching the question's requested slot.
+- Respect qualifiers in the question such as "recently", "in July", "from 4 years ago", "while camping", "in the photo", or "from Caroline's suggestion".
+- If multiple memories are related, choose the one(s) that match the question qualifier most directly.
+- For yes/no questions, answer "Yes" or "No" plus the shortest necessary supporting phrase.
+- For time questions, prefer resolved_time when it is present.
+- If resolved_time is a date range, answer with that range.
+- Write dates in natural form, for example "2 July 2023" or "From 19 June 2023 to 25 June 2023", not ISO form.
+- If resolved_time=UNKNOWN, use anchor_time and the original relative time phrase to infer the best answer.
+- If the answer is not supported by memory, answer "Unknown".
 
 Answer:

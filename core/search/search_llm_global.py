@@ -25,9 +25,24 @@ from core.infra.ids import build_conversation_user_id
 from core.infra.llm_client import PipelineLLM
 from core.infra.progress import ProgressBar
 from core.infra.retrieval import build_retrieval_payload, lexical_fallback_memory_ids
+from core.infra.time_resolver import parse_anchor_date, resolve_relative_time
 
 from core.paths import EVAL_PIPELINE_ROOT as PIPELINE_DIR
 SEARCH_PROMPT_PATH = PIPELINE_DIR / "prompts" / "search_llm.txt"
+
+
+def _format_time_hint(item: dict[str, Any]) -> str:
+    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    anchor_time = str(meta.get("anchor_time") or meta.get("source_session_time") or "").strip()
+    if not anchor_time:
+        return ""
+    resolved_value = "UNKNOWN"
+    anchor_date = parse_anchor_date(anchor_time)
+    if anchor_date:
+        resolved = resolve_relative_time(str(item.get("text") or ""), anchor_date)
+        if resolved:
+            resolved_value = resolved.value
+    return f" anchor_time={anchor_time}; resolved_time={resolved_value}"
 
 
 def _format_memory_list(memories: list[dict[str, Any]]) -> str:
@@ -37,11 +52,12 @@ def _format_memory_list(memories: list[dict[str, Any]]) -> str:
         text = str(item.get("text") or "").strip()
         if not text:
             continue
+        time_hint = _format_time_hint(item)
         created_at = str(item.get("created_at") or "").strip()
         if created_at:
-            lines.append(f"[id={memory_id}] ({created_at}) {text}")
+            lines.append(f"[id={memory_id}] ({created_at}) {text}{time_hint}")
         else:
-            lines.append(f"[id={memory_id}] {text}")
+            lines.append(f"[id={memory_id}] {text}{time_hint}")
     return "\n".join(lines) if lines else "(no memories)"
 
 
@@ -61,7 +77,11 @@ def _select_memories_sync(
         memory_list=_format_memory_list(memories),
         top_k=top_k,
     )
-    payload = llm.chat_json_object(prompt, required_key="ids")
+    try:
+        payload = llm.chat_json_object(prompt, required_key="ids")
+    except ValueError:
+        selected = lexical_fallback_memory_ids(question=question, memories=memories, top_k=top_k)
+        return selected, bool(selected)
     raw_ids = payload.get("ids") or []
     if not isinstance(raw_ids, list):
         raw_ids = []
