@@ -1,0 +1,39 @@
+dataset_path: datasets/locomo_refined.json
+max_conversations: null
+max_questions_per_conversation: null
+max_sessions_per_conversation: null
+
+workspace_base_dir: workspaces
+workspace_name: allconv_v5_{model_id}
+workspace_db_name: allconv_v5_{model_id}
+database_prefix: eval_v5
+reset_database_on_add: true
+
+add_backend: global_v4_plus
+search_mode: global
+search_backend: llm
+backfill_embeddings_on_add: true
+
+memory_decision_prompt: prompts/memory_extract_global_v4.txt
+memory_update_judge_prompt: prompts/memory_update_judge_v4_plus.txt
+memory_prompt_max_items: 0
+update_none_similarity_threshold: 0.92
+update_add_similarity_threshold: 0.55
+update_candidate_top_k: 3
+
+search_llm_prompt: prompts/search_llm.txt
+search_llm_require_non_empty: false
+
+add_history_window: 2
+add_flush_per_session: true
+add_llm_concurrency: 4
+search_llm_concurrency: 4
+answer_prompt_mode: history
+search_top_k: 30
+concurrency: 2
+eval_concurrency: 4
+progress_label: v5/{model_id}
+
+eval:
+  metrics: [llm, f1, bleu]
+  dataset_name: locomo

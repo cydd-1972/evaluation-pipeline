@@ -754,4 +754,59 @@ cd evaluation_pipeline/v3_ablate_v4add
 python run.py --config config.conv1_v3_baseline_minimax.yaml
 ```
 
-建议：等 MiniMax 可用后，先把 `evaluation_pipeline/.env` 切回 MiniMax，再按上面的正式命令完整重跑做最终对比。
+## 15. v5
+
+`v5` 是一个混合版本：
+
+- `add`：使用 `v4_plus`（`memory_extract_global_v4.txt` + staged update judge）
+- `search`：使用 `v3` 风格 global LLM search（`prompts/search_llm.txt`）
+- `answer`：使用 `history` 模式（`prompts/answer_history.txt`）
+- `eval`：保持原有评测逻辑不变
+
+### 15.1 模型规则
+
+`v5` 里只有 `add` 会随命令切换模型：
+
+```bash
+python v5/run.py --model-id minimax
+python v5/run.py --model-id deepseek
+python v5/run.py --model-id gemini
+```
+
+固定不变的部分：
+
+- `search` 固定使用 `MiniMax-M2.7`
+- `answer` 固定使用 `MiniMax-M2.7`
+- `eval.llm` 继续使用 `EVALUATOR_*`，即当前的 `Qwen3-14B` 裁判链路
+
+### 15.2 数据范围
+
+- `v5/config.yaml` 默认是全量数据
+- `max_conversations: null`
+- 即跑 10 个 conversations
+
+### 15.3 常用命令
+
+完整运行：
+
+```bash
+python v5/run.py --model-id minimax
+python v5/run.py --model-id deepseek
+python v5/run.py --model-id gemini
+```
+
+分步运行：
+
+```bash
+python v5/run.py --model-id minimax --only add
+python v5/run.py --model-id minimax --from search
+python v5/run.py --model-id minimax --from answer
+python v5/run.py --model-id minimax --print-config
+```
+
+### 15.4 关键文件
+
+- `evaluation_pipeline/v5/run.py`
+- `evaluation_pipeline/v5/config.yaml`
+- `evaluation_pipeline/v5/README.md`
+

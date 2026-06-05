@@ -121,6 +121,41 @@ def _search_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
     model = str(spec.get("model") or "").strip()
     if not (api_key and api_base and model):
         return None
+    thinking_mode = str(spec.get("llm_thinking_mode") or "").strip().lower()
+    if thinking_mode:
+        os.environ["PIPELINE_LLM_THINKING_MODE"] = thinking_mode
+    return PipelineLLM(api_key=api_key, api_base=api_base, model=model)
+
+
+def _add_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
+    spec = config.get("add_llm_client")
+    if not isinstance(spec, dict):
+        return None
+    api_key = str(spec.get("api_key") or "").strip()
+    api_base = str(spec.get("api_base") or "").strip()
+    model = str(spec.get("model") or "").strip()
+    if not (api_key and api_base and model):
+        return None
+    thinking_mode = str(spec.get("llm_thinking_mode") or "").strip().lower()
+    if thinking_mode:
+        os.environ["PIPELINE_LLM_THINKING_MODE"] = thinking_mode
+    else:
+        os.environ.pop("PIPELINE_LLM_THINKING_MODE", None)
+    return PipelineLLM(api_key=api_key, api_base=api_base, model=model)
+
+
+def _answer_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
+    spec = config.get("answer_llm_client")
+    if not isinstance(spec, dict):
+        return None
+    api_key = str(spec.get("api_key") or "").strip()
+    api_base = str(spec.get("api_base") or "").strip()
+    model = str(spec.get("model") or "").strip()
+    if not (api_key and api_base and model):
+        return None
+    thinking_mode = str(spec.get("llm_thinking_mode") or "").strip().lower()
+    if thinking_mode:
+        os.environ["PIPELINE_LLM_THINKING_MODE"] = thinking_mode
     return PipelineLLM(api_key=api_key, api_base=api_base, model=model)
 
 
@@ -172,7 +207,9 @@ async def _run_add(
         "progress_label": config.get("progress_label"),
     }
     backend = str(config.get("add_backend") or "mem0").strip().lower()
-    add_llm = PipelineLLM() if backend in {"mem0", "global", "global_v4", "global_v4_plus"} else None
+    add_llm = _add_llm_from_config(config)
+    if add_llm is None and backend in {"mem0", "global", "global_v4", "global_v4_plus"}:
+        add_llm = PipelineLLM()
     if backend == "raw":
         print("[pipeline] step=add (raw: session transcript → postgres + embedding, no LLM)")
         return await run_add_raw(**add_kwargs)
@@ -325,12 +362,15 @@ async def _run_answer(config: dict[str, Any], workspace_dir: Path) -> list[dict[
     search_output = _search_output_path(workspace_dir)
     answer_output, _ = _answer_paths(workspace_dir, answer_mode)
     concurrency = int(config.get("concurrency") or config.get("answer_concurrency") or 2)
-    print(f"[pipeline] step=answer (prompt_mode={answer_mode})")
+    answer_llm = _answer_llm_from_config(config)
+    frozen = f" frozen={answer_llm.model}" if answer_llm else ""
+    print(f"[pipeline] step=answer (prompt_mode={answer_mode}{frozen})")
     return await reanswer_dataset(
         input_path=search_output,
         output_path=answer_output,
         concurrency=concurrency,
         answer_prompt_mode=answer_mode,
+        llm=answer_llm,
         progress_label=config.get("progress_label"),
     )
 

@@ -5,17 +5,15 @@ You are a fact extractor for a two-person conversation between {speaker_a} and {
 
 Your task is to extract answer-bearing atomic facts from the current session D_n.
 
-Do NOT compare with existing memories. Do NOT decide ADD/UPDATE/NONE. Do NOT assign ids.
-
 # INPUT
 
-## M_(n-1) — existing memory snapshot (for context only, do NOT use for decision)
+## M_(n-1) — existing memory snapshot 
 {old_memory_json}
 
-## Prior sessions — context window only (for disambiguation)
+## Prior sessions — context window only 
 {history_sessions_json}
 
-## D_n — current session (primary source)
+## D_n — current session 
 {current_session_json}
 
 # YOUR TASK
@@ -68,25 +66,18 @@ Extract stable implied attributes when the wording clearly states them.
 - Dialogue: "my son Kyle"
 - Fact: "John's son is named Kyle."
 
-## High-value details never skip
+## High-value details
 
-Always extract concrete details that often become short-answer targets:
+Extract the following types of concrete information:
 
-- Names and titles: book titles, song names, event names, group names, workshop/class names, pet names, place names, organization names.
-- Text visible or quoted in the dialogue or image caption: signs, posters, slogans, labels, written messages.
-- Image-specific details: objects, colors, symbols, animals, people, locations, and whether someone made/bought/owned/saw the item.
-- Counts and quantities: number of pets, children, years, months, classes, trips, artworks, objects, or people.
-- Relationships and durations: spouse/partner/child/friend/mentor roles and how long the relationship has lasted.
-- Recommendation chains: who recommended what to whom, who read/watched/attended it, and what the person took away from it.
-- Ownership and origin: who owns an item, who gave it, where it came from, and what it represents.
-- Explicit opinions from another person: what one speaker thinks about the other's decision, plan, identity, adoption, career, or community work.
-
-When the dialogue gives both a specific item and a broader category, extract both if both could answer different questions.
-
-- Dialogue: "I have two cats, Luna and Oliver, and a dog named Bailey."
-- Facts: "Melanie has two cats and a dog." / "Melanie's cats are named Luna and Oliver." / "Melanie's dog is named Bailey."
-- Dialogue: "Caroline recommended Becoming Nicole to Melanie."
-- Facts: "Caroline recommended 'Becoming Nicole' to Melanie." / "Melanie read 'Becoming Nicole' from Caroline's recommendation."
+- Names (book titles, song names, event names, group names, pet names, place names, etc.)
+- Quoted text (signs, posters, slogans, etc.)
+- Image-specific details (objects, colors, people, etc.)
+- Counts and quantities
+- Relationships and durations
+- Recommendation chains (who recommended what to whom)
+- Ownership and origin
+- One speaker's explicit opinion about another speaker's decision
 
 ## Granularity rules (do NOT force “six elements”)
 
