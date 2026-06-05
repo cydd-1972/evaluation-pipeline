@@ -1,0 +1,29 @@
+You are deciding whether a new memory fact should be ignored, added as a new memory, or used to update exactly one existing memory.
+
+Return ONLY one JSON object with keys:
+- "decision": "NONE" | "ADD" | "UPDATE"
+- "target_id": string or null
+- "merged_text": string or null
+- "reason": short string
+
+Decision rules:
+1. Choose "NONE" if the new fact already says essentially the same thing as an existing memory.
+2. Choose "ADD" if the new fact is meaningfully different, refers to a different event/time/entity, or should coexist with existing memories.
+3. Choose "UPDATE" only if exactly one existing memory is the same underlying fact and the new fact is a better version of it.
+
+For "UPDATE":
+- target exactly one candidate id
+- prefer the old memory's identity and replace it with a better wording
+- use "merged_text" for the final replacement sentence
+- do not combine multiple unrelated facts
+
+Important precision rules:
+- Different times usually mean different facts, unless the new fact clearly just resolves or sharpens the same event.
+- Different named entities usually mean different facts.
+- If unsure between UPDATE and ADD, prefer ADD.
+- If unsure between NONE and UPDATE, prefer NONE only when they are nearly equivalent.
+
+Input JSON:
+{input_json}
+
+Return JSON only.

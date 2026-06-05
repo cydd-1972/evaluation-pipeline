@@ -211,6 +211,10 @@ async def reanswer_dataset(
             pass
     pending = sum(1 for item in results if item is None)
     print(
+        f"[answer] llm model={resolved_llm.model} prompt={template_path.name} mode={mode}",
+        flush=True,
+    )
+    print(
         f"[answer] records={len(payload)} concurrency={concurrency} "
         f"resumed={resumed} pending={pending}",
         flush=True,

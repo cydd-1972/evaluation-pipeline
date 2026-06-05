@@ -33,6 +33,7 @@ from v1_mem0.add import run_add_mem0
 from v2_raw.add import run_add_raw
 from v3_global.add import run_add_global
 from v4_global.add import run_add_global_v4
+from v4_plus.add import run_add_global_v4_plus
 
 PIPELINE_STEPS = ("add", "search", "answer", "eval", "score")
 
@@ -108,7 +109,7 @@ def _read_database_url(workspace_dir: Path) -> str:
 def _is_global_search(config: dict[str, Any]) -> bool:
     search_mode = str(config.get("search_mode") or "").strip().lower()
     add_backend = str(config.get("add_backend") or "mem0").strip().lower()
-    return search_mode == "global" or add_backend in {"global", "global_v4"}
+    return search_mode == "global" or add_backend in {"global", "global_v4", "global_v4_plus"}
 
 
 def _search_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
@@ -171,6 +172,7 @@ async def _run_add(
         "progress_label": config.get("progress_label"),
     }
     backend = str(config.get("add_backend") or "mem0").strip().lower()
+    add_llm = PipelineLLM() if backend in {"mem0", "global", "global_v4", "global_v4_plus"} else None
     if backend == "raw":
         print("[pipeline] step=add (raw: session transcript → postgres + embedding, no LLM)")
         return await run_add_raw(**add_kwargs)
@@ -181,10 +183,11 @@ async def _run_add(
         backfill_embeddings = bool(config.get("backfill_embeddings_on_add", True))
         print(
             f"[pipeline] step=add (global v4 incremental, batch={batch}, "
-            f"history_window={history_window})",
+            f"history_window={history_window}, model={add_llm.model})",
         )
         return await run_add_global_v4(
             **add_kwargs,
+            llm=add_llm,
             add_llm_concurrency=batch,
             add_history_window=history_window,
             add_flush_per_session=flush_per_session,
@@ -193,16 +196,40 @@ async def _run_add(
             backfill_embeddings=backfill_embeddings,
             enable_slot_aggregates=bool(config.get("enable_slot_aggregates", True)),
         )
+    if backend == "global_v4_plus":
+        batch = int(config.get("add_llm_concurrency") or 1)
+        history_window = int(config.get("add_history_window") or 2)
+        flush_per_session = bool(config.get("add_flush_per_session", True))
+        backfill_embeddings = bool(config.get("backfill_embeddings_on_add", True))
+        print(
+            f"[pipeline] step=add (global v4 plus incremental, batch={batch}, "
+            f"history_window={history_window}, model={add_llm.model})",
+        )
+        return await run_add_global_v4_plus(
+            **add_kwargs,
+            llm=add_llm,
+            add_llm_concurrency=batch,
+            add_history_window=history_window,
+            add_flush_per_session=flush_per_session,
+            memory_prompt_path=config.get("memory_decision_prompt"),
+            memory_prompt_max_items=config.get("memory_prompt_max_items"),
+            backfill_embeddings=backfill_embeddings,
+            update_judge_prompt_path=config.get("memory_update_judge_prompt"),
+            none_similarity_threshold=float(config.get("update_none_similarity_threshold", 0.92)),
+            add_similarity_threshold=float(config.get("update_add_similarity_threshold", 0.55)),
+            update_candidate_top_k=int(config.get("update_candidate_top_k", 3)),
+        )
     if backend == "global":
         batch = int(config.get("add_llm_concurrency") or 1)
         history_window = int(config.get("add_history_window") or 2)
         flush_per_session = bool(config.get("add_flush_per_session", True))
         print(
             f"[pipeline] step=add (global session state machine, batch={batch}, "
-            f"history_window={history_window})",
+            f"history_window={history_window}, model={add_llm.model})",
         )
         return await run_add_global(
             **add_kwargs,
+            llm=add_llm,
             add_llm_concurrency=batch,
             add_history_window=history_window,
             add_flush_per_session=flush_per_session,
@@ -211,9 +238,10 @@ async def _run_add(
         )
     batch = int(config.get("add_llm_concurrency") or 1)
     prompt_max = config.get("memory_prompt_max_items")
-    print(f"[pipeline] step=add (mem0-style, batch={batch})")
+    print(f"[pipeline] step=add (mem0-style, batch={batch}, model={add_llm.model})")
     return await run_add_mem0(
         **add_kwargs,
+        llm=add_llm,
         add_llm_concurrency=batch,
         memory_prompt_max_items=prompt_max,
     )
@@ -247,7 +275,7 @@ async def _run_search(
     if backend in {"llm", "hybrid_llm"}:
         if backend == "hybrid_llm":
             if not is_global:
-                raise ValueError("search_backend hybrid_llm requires search_mode global or add_backend global_v4")
+                raise ValueError("search_backend hybrid_llm requires search_mode global or add_backend global/global_v4/global_v4_plus")
             frozen = f" frozen={search_llm.model}" if search_llm else ""
             print(
                 f"[pipeline] step=search (global hybrid_llm: BM25+vector RRF→LLM, "

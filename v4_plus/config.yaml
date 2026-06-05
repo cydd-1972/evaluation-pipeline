@@ -4,18 +4,21 @@ max_questions_per_conversation: null
 max_sessions_per_conversation: null
 
 workspace_base_dir: workspaces
-workspace_name: conv1_v4_noslot_allqa
-database_prefix: eval_v4_ablate_nosearchslot
+workspace_name: conv1_v4_plus_allqa
+database_prefix: eval_v4_plus
 reset_database_on_add: true
 
-add_backend: global_v4
+add_backend: global_v4_plus
 search_mode: global
 search_backend: hybrid_llm
 backfill_embeddings_on_add: true
-enable_slot_aggregates: false
 
 memory_decision_prompt: prompts/memory_extract_global_v4.txt
+memory_update_judge_prompt: prompts/memory_update_judge_v4_plus.txt
 memory_prompt_max_items: 0
+update_none_similarity_threshold: 0.92
+update_add_similarity_threshold: 0.55
+update_candidate_top_k: 3
 
 search_hybrid_recall_k: 80
 search_hybrid_rrf_k: 60

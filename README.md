@@ -648,9 +648,8 @@ python v4_global/run.py --config config.conv1_allqa_hybrid_v4_slot_multihop.yaml
 
 ## 14. Ablation Experiments
 
-当前 4 个 conversation 1 消融实验都放在独立目录中，不会改动 `v3_global` 或 `v4_global` 原始实现。
 
-> 说明：目前只使用 DeepSeek 环境做了代码级验证，主要是 `1 QA` + `--end-at-step search`，用于确认接线正确。
+> 说明：目前只使用 DeepSeek 环境做了代码级验证  
 > 等 `MiniMax-M2.7` 恢复可用后，正式对比分数时需要切回 MiniMax 的 `.env` / 配置重新跑。
 
 ### 14.1 Ablation 1: `v3` replaced with `v4 add`

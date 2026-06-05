@@ -25,7 +25,7 @@ search_llm_require_non_empty: true
 add_history_window: 2
 add_flush_per_session: true
 add_llm_concurrency: 4
-search_llm_concurrency: 4
+search_llm_concurrency: 2
 answer_prompt_mode: history
 search_top_k: 30
 concurrency: 2
