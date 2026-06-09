@@ -37,6 +37,7 @@ class ProgressBar:
         total: int | None = None,
         unit: str = "it",
         log_every_pct: float = _FILE_LOG_EVERY_PCT,
+        file_log_every_n: int | None = None,
     ) -> None:
         self._desc = desc
         self._label_prefix = _progress_prefix(label)
@@ -44,8 +45,10 @@ class ProgressBar:
         self._done = 0
         self._unit = unit
         self._log_every_pct = max(1.0, float(log_every_pct))
+        self._file_log_every_n = max(1, int(file_log_every_n)) if file_log_every_n else None
         self._last_logged_pct = -1.0
         self._last_log_mono = time.monotonic()
+        self._last_logged_done = 0
         self._bar: Any = None
         self._file_mode = _file_log_mode()
 
@@ -80,12 +83,25 @@ class ProgressBar:
             print(self._progress_line(f"{self._desc}: {self._done}/{total_s} (100%)"), flush=True)
             self._last_logged_pct = 100.0
             self._last_log_mono = now
+            self._last_logged_done = self._done
             return
         if not self._total or self._total <= 0:
             if self._done == 1 or self._done % 50 == 0:
                 print(self._progress_line(f"{self._desc}: {self._done}"), flush=True)
                 self._last_log_mono = now
+                self._last_logged_done = self._done
             return
+        if self._file_log_every_n is not None:
+            if self._done - self._last_logged_done >= self._file_log_every_n:
+                pct = self._pct()
+                print(
+                    self._progress_line(f"{self._desc}: {self._done}/{self._total} ({pct:.1f}%)"),
+                    flush=True,
+                )
+                self._last_log_mono = now
+                self._last_logged_done = self._done
+                self._last_logged_pct = self._pct()
+                return
         pct = self._pct()
         milestone = int(pct // self._log_every_pct) * self._log_every_pct
         if milestone > self._last_logged_pct:
@@ -95,6 +111,7 @@ class ProgressBar:
             )
             self._last_logged_pct = milestone
             self._last_log_mono = now
+            self._last_logged_done = self._done
             return
         if self._done > 0 and now - self._last_log_mono >= _FILE_LOG_HEARTBEAT_S:
             print(
@@ -102,6 +119,7 @@ class ProgressBar:
                 flush=True,
             )
             self._last_log_mono = now
+            self._last_logged_done = self._done
 
     def update(self, n: int = 1) -> None:
         self._done += n

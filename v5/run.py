@@ -5,6 +5,7 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -16,10 +17,12 @@ if str(PIPELINE_DIR) not in sys.path:
     sys.path.insert(0, str(PIPELINE_DIR))
 
 from core.infra.env import load_runtime_env
+from core.infra.flat_export import flattened_eval_output_path
 from core.pipeline.runner import PIPELINE_STEPS, run_pipeline_from_config
 
 DEFAULT_CONFIG_NAME = "config.yaml"
 SECRETS_PATH = PIPELINE_DIR / "configs" / "matrix_secrets.yaml"
+RESETTABLE_STEPS = tuple(step for step in PIPELINE_STEPS if step != "add")
 DEFAULT_MODELS: dict[str, dict[str, str]] = {
     "gemini": {
         "model": "gemini-3.1-flash-lite-preview",
@@ -111,7 +114,96 @@ def _client_config(model_spec: dict[str, str]) -> dict[str, str]:
 
 
 def _resolve_config_path(raw: Path, *, version_dir: Path) -> Path:
-    return raw if raw.is_absolute() else version_dir / raw
+    if raw.is_absolute():
+        return raw
+    if raw.exists():
+        return raw.resolve()
+    candidate = version_dir / raw
+    if candidate.exists():
+        return candidate
+    pipeline_candidate = version_dir.parent / raw
+    if pipeline_candidate.exists():
+        return pipeline_candidate
+    return candidate
+
+
+def _resolve_workspace_dir(config: dict[str, Any], *, version_dir: Path) -> Path:
+    base_raw = str(config.get("workspace_base_dir") or "workspaces")
+    base_path = Path(base_raw)
+    base_dir = base_path if base_path.is_absolute() else version_dir / base_path
+    return base_dir / str(config.get("workspace_name") or "smoke")
+
+
+def _reset_output_paths(workspace_dir: Path, *, answer_mode: str) -> dict[str, list[Path]]:
+    answer_output = workspace_dir / f"search_results_answer{answer_mode}.json"
+    eval_output = workspace_dir / f"evaluation_metrics_answer{answer_mode}.json"
+    flattened_eval = flattened_eval_output_path(eval_output)
+    score_output = workspace_dir / f"score_summary_answer{answer_mode}.json"
+    return {
+        "search": [
+            workspace_dir / "search_results.json",
+            answer_output,
+            eval_output,
+            flattened_eval,
+            score_output,
+        ],
+        "answer": [
+            answer_output,
+            eval_output,
+            flattened_eval,
+            score_output,
+        ],
+        "eval": [
+            eval_output,
+            flattened_eval,
+            score_output,
+        ],
+        "score": [
+            score_output,
+        ],
+    }
+
+
+def _archive_step_outputs(
+    *,
+    workspace_dir: Path,
+    step: str,
+    answer_mode: str,
+    archive_dir_name: str,
+) -> list[Path]:
+    output_paths = _reset_output_paths(workspace_dir, answer_mode=answer_mode).get(step, [])
+    existing = [path for path in output_paths if path.exists()]
+    if not existing:
+        return []
+    archive_root = workspace_dir / archive_dir_name
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    archive_dir = archive_root / f"{stamp}_{step}"
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    archived_to: list[Path] = []
+    manifest: list[dict[str, str]] = []
+    for source in existing:
+        target = archive_dir / source.name
+        suffix_index = 1
+        while target.exists():
+            target = archive_dir / f"{source.stem}_{suffix_index}{source.suffix}"
+            suffix_index += 1
+        source.rename(target)
+        archived_to.append(target)
+        manifest.append({"source": str(source), "archived_to": str(target)})
+    (archive_dir / "manifest.json").write_text(
+        json.dumps(
+            {
+                "step": step,
+                "answer_mode": answer_mode,
+                "archived_at": datetime.now().isoformat(timespec="seconds"),
+                "files": manifest,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    return archived_to
 
 
 def _materialize_templates(
@@ -148,6 +240,12 @@ def main() -> None:
     parser.add_argument("--secrets", type=Path, default=SECRETS_PATH)
     parser.add_argument("--start-from-step", "--from", dest="start_from_step", default="add", choices=PIPELINE_STEPS)
     parser.add_argument("--end-at-step", "--only", dest="end_at_step", default=None, choices=PIPELINE_STEPS)
+    parser.add_argument(
+        "--reset-outputs-from-step",
+        default=None,
+        choices=RESETTABLE_STEPS,
+        help="archive old outputs for this step and downstream files before rerunning; never deletes directly",
+    )
     parser.add_argument("--no-tee-log", action="store_true")
     parser.add_argument("--print-config", action="store_true", help="print resolved config and exit")
     args = parser.parse_args()
@@ -171,6 +269,8 @@ def main() -> None:
         add_model_spec=add_model_spec,
         downstream_model_spec=downstream_model_spec,
     )
+    workspace_dir = _resolve_workspace_dir(config, version_dir=VERSION_DIR)
+    archive_dir_name = str(config.get("reset_archive_dir") or "archived_outputs").strip() or "archived_outputs"
 
     if args.print_config:
         payload = {
@@ -194,6 +294,21 @@ def main() -> None:
     )
     if add_model_spec.get("llm_thinking_mode"):
         print(f"[v5] add_llm_thinking_mode={add_model_spec['llm_thinking_mode']}", flush=True)
+    if args.reset_outputs_from_step:
+        archived = _archive_step_outputs(
+            workspace_dir=workspace_dir,
+            step=args.reset_outputs_from_step,
+            answer_mode=str(config.get("answer_prompt_mode") or "history"),
+            archive_dir_name=archive_dir_name,
+        )
+        if archived:
+            print(
+                f"[v5] archived {len(archived)} file(s) before rerun: "
+                + ", ".join(str(path) for path in archived),
+                flush=True,
+            )
+        else:
+            print(f"[v5] no existing outputs to archive for step={args.reset_outputs_from_step}", flush=True)
 
     import asyncio
 

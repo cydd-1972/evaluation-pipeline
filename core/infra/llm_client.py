@@ -185,6 +185,10 @@ class PipelineLLM:
     def _is_minimax_model(self) -> bool:
         return "minimax" in self.model.lower()
 
+    def _requires_disable_thinking(self) -> bool:
+        name = self.model.lower()
+        return name.startswith("qwen3") or "qwen3" in name
+
     def _completion_kwargs(
         self,
         *,
@@ -202,6 +206,8 @@ class PipelineLLM:
         extra_body: dict[str, Any] = {}
         if self._is_deepseek_v4_model():
             extra_body["thinking"] = {"type": "disabled"}
+        if self._requires_disable_thinking():
+            extra_body["enable_thinking"] = False
         if self._is_minimax_model():
             mode = _llm_thinking_mode()
             extra_body["reasoning_split"] = True
@@ -213,11 +219,17 @@ class PipelineLLM:
             kwargs["extra_body"] = extra_body
         return kwargs
 
-    def chat_json(self, prompt: str, *, temperature: float = 0.0) -> dict[str, Any]:
-        """要求模型只返回 JSON 对象（fact/memory/search 步骤用）；Gemini 失败时自动重试。"""
+    def _chat_json_internal(
+        self,
+        prompt: str,
+        *,
+        temperature: float = 0.0,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """结构化 JSON 调用内部实现；返回 (payload, meta)。"""
         user_prompt = prompt
         last_error: Exception | None = None
         last_raw = ""
+        last_response_format = "none"
 
         for attempt in range(3):
             messages = [
@@ -227,17 +239,20 @@ class PipelineLLM:
             kwargs = self._completion_kwargs(messages=messages, temperature=temperature, json_task=True)
             try:
                 if self._is_gemini_model():
+                    last_response_format = "json_object"
                     response = self._create_completion(
                         **kwargs,
                         response_format={"type": "json_object"},
                     )
                 else:
                     try:
+                        last_response_format = "json_object"
                         response = self._create_completion(
                             **kwargs,
                             response_format={"type": "json_object"},
                         )
                     except Exception:
+                        last_response_format = "none"
                         response = self._create_completion(**kwargs)
             except Exception as exc:
                 last_error = exc
@@ -256,7 +271,13 @@ class PipelineLLM:
                 )
                 continue
             try:
-                return _extract_json_object(last_raw)
+                payload = _extract_json_object(last_raw)
+                return payload, {
+                    "model": self.model,
+                    "attempt_index": attempt,
+                    "response_format": last_response_format,
+                    "raw_text": last_raw,
+                }
             except (ValueError, json.JSONDecodeError) as exc:
                 last_error = exc
                 user_prompt = (
@@ -272,6 +293,20 @@ class PipelineLLM:
             f"{last_error}{detail}"
         ) from last_error
 
+    def chat_json(self, prompt: str, *, temperature: float = 0.0) -> dict[str, Any]:
+        """要求模型只返回 JSON 对象（fact/memory/search 步骤用）；Gemini 失败时自动重试。"""
+        payload, _meta = self._chat_json_internal(prompt, temperature=temperature)
+        return payload
+
+    def chat_json_with_meta(
+        self,
+        prompt: str,
+        *,
+        temperature: float = 0.0,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """返回 JSON payload 及原始输出等调试元信息。"""
+        return self._chat_json_internal(prompt, temperature=temperature)
+
     def chat_json_object(
         self,
         prompt: str,
@@ -281,20 +316,43 @@ class PipelineLLM:
         max_attempts: int = 4,
     ) -> dict[str, Any]:
         """要求 JSON 根对象包含 required_key（Gemini 常漏字段，自动重试）。"""
+        payload, _meta = self.chat_json_object_with_meta(
+            prompt,
+            required_key=required_key,
+            temperature=temperature,
+            max_attempts=max_attempts,
+        )
+        return payload
+
+    def chat_json_object_with_meta(
+        self,
+        prompt: str,
+        *,
+        required_key: str,
+        temperature: float = 0.0,
+        max_attempts: int = 4,
+    ) -> tuple[dict[str, Any], dict[str, Any]]:
+        """要求 JSON 根对象包含 required_key，并返回原始输出等元信息。"""
         schema_hint = (
             f'\n\nReturn only one JSON object with required key "{required_key}". '
             "The word JSON must appear in your output structure."
         )
         user_prompt = prompt
         last_payload: dict[str, Any] | None = None
+        last_meta: dict[str, Any] | None = None
 
         for attempt in range(max_attempts):
             if attempt > 0 and self._is_gemini_model():
                 time.sleep(1.5)
-            payload = self.chat_json(user_prompt + schema_hint, temperature=temperature)
+            payload, meta = self.chat_json_with_meta(user_prompt + schema_hint, temperature=temperature)
             last_payload = payload
+            last_meta = meta
             if not _is_stub_payload(payload, required_key=required_key):
-                return payload
+                return payload, {
+                    **(meta or {}),
+                    "required_key": required_key,
+                    "required_key_attempt_index": attempt,
+                }
             user_prompt = (
                 f"{prompt}\n\n"
                 f'IMPORTANT: Return only JSON like {{"{required_key}": ...}}. '

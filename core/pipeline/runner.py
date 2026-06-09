@@ -124,6 +124,8 @@ def _search_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
     thinking_mode = str(spec.get("llm_thinking_mode") or "").strip().lower()
     if thinking_mode:
         os.environ["PIPELINE_LLM_THINKING_MODE"] = thinking_mode
+    else:
+        os.environ.pop("PIPELINE_LLM_THINKING_MODE", None)
     return PipelineLLM(api_key=api_key, api_base=api_base, model=model)
 
 
@@ -156,6 +158,8 @@ def _answer_llm_from_config(config: dict[str, Any]) -> PipelineLLM | None:
     thinking_mode = str(spec.get("llm_thinking_mode") or "").strip().lower()
     if thinking_mode:
         os.environ["PIPELINE_LLM_THINKING_MODE"] = thinking_mode
+    else:
+        os.environ.pop("PIPELINE_LLM_THINKING_MODE", None)
     return PipelineLLM(api_key=api_key, api_base=api_base, model=model)
 
 
@@ -304,6 +308,9 @@ async def _run_search(
         "progress_label": config.get("progress_label"),
     }
     batch = int(config.get("search_llm_concurrency") or 1)
+    search_flush_every = int(config.get("search_flush_every") or 5)
+    search_log_every_n = config.get("search_log_every_n")
+    search_log_every_n = None if search_log_every_n in (None, "") else int(search_log_every_n)
     search_llm = _search_llm_from_config(config)
     search_prompt_path = _resolve_search_prompt_path(config, pipeline_dir=pipeline_dir)
     require_non_empty = _search_llm_require_non_empty(config)
@@ -322,6 +329,8 @@ async def _run_search(
                 **search_kwargs,
                 llm=search_llm,
                 search_llm_concurrency=batch,
+                search_flush_every=search_flush_every,
+                search_log_every_n=search_log_every_n,
                 search_prompt_path=search_prompt_path,
                 search_llm_require_non_empty=require_non_empty,
                 search_hybrid_recall_k=hybrid_recall_k,
@@ -336,6 +345,8 @@ async def _run_search(
                 **search_kwargs,
                 llm=search_llm,
                 search_llm_concurrency=batch,
+                search_flush_every=search_flush_every,
+                search_log_every_n=search_log_every_n,
                 search_prompt_path=search_prompt_path,
                 search_llm_require_non_empty=require_non_empty,
             )
@@ -362,6 +373,8 @@ async def _run_answer(config: dict[str, Any], workspace_dir: Path) -> list[dict[
     search_output = _search_output_path(workspace_dir)
     answer_output, _ = _answer_paths(workspace_dir, answer_mode)
     concurrency = int(config.get("concurrency") or config.get("answer_concurrency") or 2)
+    answer_flush_every = int(config.get("answer_flush_every") or 5)
+    answer_continue_on_error = bool(config.get("answer_continue_on_error", False))
     answer_llm = _answer_llm_from_config(config)
     frozen = f" frozen={answer_llm.model}" if answer_llm else ""
     print(f"[pipeline] step=answer (prompt_mode={answer_mode}{frozen})")
@@ -372,6 +385,8 @@ async def _run_answer(config: dict[str, Any], workspace_dir: Path) -> list[dict[
         answer_prompt_mode=answer_mode,
         llm=answer_llm,
         progress_label=config.get("progress_label"),
+        flush_every=answer_flush_every,
+        continue_on_error=answer_continue_on_error,
     )
 
 

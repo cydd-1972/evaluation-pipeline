@@ -4,10 +4,10 @@ max_questions_per_conversation: null
 max_sessions_per_conversation: null
 
 workspace_base_dir: workspaces
-workspace_name: allconv_v5_{model_id}
-workspace_db_name: allconv_v5_{model_id}
+workspace_name: allconv_v5_minimaxadd_qwen3_searchanswer
+workspace_db_name: allconv_v5_minimax
 database_prefix: eval_v5
-reset_database_on_add: true
+reset_database_on_add: false
 
 add_backend: global_v4_plus
 search_mode: global
@@ -31,10 +31,12 @@ search_llm_concurrency: 4
 search_flush_every: 1
 search_log_every_n: 1
 answer_prompt_mode: history
+answer_flush_every: 1
+answer_continue_on_error: true
 search_top_k: 30
 concurrency: 2
 eval_concurrency: 4
-progress_label: v5/{model_id}
+progress_label: v5/minimaxadd-qwen3-searchanswer
 reset_archive_dir: archived_outputs
 
 eval:

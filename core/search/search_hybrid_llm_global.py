@@ -426,6 +426,8 @@ async def run_search_hybrid_llm_global(
     embedder: EmbeddingClient | None = None,
     progress_label: str | None = None,
     search_llm_concurrency: int = 1,
+    search_flush_every: int = 5,
+    search_log_every_n: int | None = None,
     search_prompt_path: Path | str | None = None,
     search_llm_require_non_empty: bool = False,
     search_hybrid_recall_k: int = DEFAULT_HYBRID_RECALL_K,
@@ -454,6 +456,7 @@ async def run_search_hybrid_llm_global(
     )
     template = prompt_path.read_text(encoding="utf-8")
     llm_batch = max(1, int(search_llm_concurrency or 1))
+    flush_every = max(1, int(search_flush_every or 1))
     conversations = load_locomo_dataset(dataset_path, max_conversations=max_conversations)
     qa_plans: list[tuple[Any, int, Any]] = []
     for conversation in conversations:
@@ -468,7 +471,7 @@ async def run_search_hybrid_llm_global(
     pending_count = len(qa_plans) - resumed
     print(
         f"[search-global-hybrid-llm] conversations={len(conversations)} questions={len(qa_plans)} "
-        f"resumed={resumed} pending={pending_count} llm_batch={llm_batch}",
+        f"resumed={resumed} pending={pending_count} llm_batch={llm_batch} flush_every={flush_every}",
         flush=True,
     )
 
@@ -478,6 +481,7 @@ async def run_search_hybrid_llm_global(
         total=len(qa_plans) or None,
         unit="qa",
         label=progress_label,
+        file_log_every_n=search_log_every_n,
     )
     if resumed:
         progress.update(resumed)
@@ -549,7 +553,7 @@ async def run_search_hybrid_llm_global(
                 progress.set_description(f"search-global-hybrid conv{conversation.idx} qa{qa_index}")
                 progress.update(1)
                 completed_since_flush += 1
-                if completed_since_flush >= 5:
+                if completed_since_flush >= flush_every:
                     completed_since_flush = 0
                     write_json_list(
                         output_path,

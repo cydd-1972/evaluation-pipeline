@@ -181,6 +181,8 @@ async def reanswer_dataset(
     answer_prompt_mode: str = "history",
     llm: PipelineLLM | None = None,
     progress_label: str | None = None,
+    flush_every: int = 5,
+    continue_on_error: bool = False,
 ) -> list[dict[str, Any]]:
     """并发对 search 结果逐条生成答案并写入 output_path。"""
     mode = str(answer_prompt_mode or "history").strip()
@@ -197,6 +199,13 @@ async def reanswer_dataset(
     output_file = Path(output_path)
     output_file.parent.mkdir(parents=True, exist_ok=True)
     results: list[dict[str, Any] | None] = [None] * len(payload)
+    flush_every = max(1, int(flush_every or 1))
+
+    def _has_answer_result(item: dict[str, Any]) -> bool:
+        if str(item.get("predicted_answer") or item.get("response") or "").strip():
+            return True
+        return str(item.get("answer_error") or "").strip() != ""
+
     resumed = 0
     if output_file.exists():
         try:
@@ -204,7 +213,7 @@ async def reanswer_dataset(
             if isinstance(existing, list):
                 for index, item in enumerate(existing):
                     if index < len(results) and isinstance(item, dict):
-                        if str(item.get("predicted_answer") or item.get("response") or "").strip():
+                        if _has_answer_result(item):
                             results[index] = item
                             resumed += 1
         except (json.JSONDecodeError, OSError):
@@ -248,22 +257,37 @@ async def reanswer_dataset(
                 progress.set_description(f"answer conv{conv_idx} qa{qa_index}")
             has_memories = _record_has_memories(record)
             predicted = ""
-            if has_memories:
-                prompt = _build_answer_prompt(
-                    template_path=template_path,
-                    mode=mode,
-                    record=record,
-                )
-                raw = await asyncio.to_thread(resolved_llm.chat, prompt)
-                predicted = _postprocess_answer_minimal(raw)
             updated = dict(record)
-            updated["predicted_answer"] = predicted
-            updated["response"] = predicted
+            updated.pop("answer_error", None)
+            try:
+                if has_memories:
+                    prompt = _build_answer_prompt(
+                        template_path=template_path,
+                        mode=mode,
+                        record=record,
+                    )
+                    raw = await asyncio.to_thread(resolved_llm.chat, prompt)
+                    predicted = _postprocess_answer_minimal(raw)
+                updated["predicted_answer"] = predicted
+                updated["response"] = predicted
+            except Exception as exc:
+                if not continue_on_error:
+                    raise
+                updated["predicted_answer"] = ""
+                updated["response"] = ""
+                updated["answer_error"] = str(exc)
+                existing_errors = updated.get("errors")
+                if isinstance(existing_errors, list):
+                    error_list = [str(item) for item in existing_errors]
+                else:
+                    error_list = []
+                error_list.append(f"answer_error: {exc}")
+                updated["errors"] = error_list
             results[index] = updated
             async with progress_lock:
                 progress.update(1)
             completed_since_save += 1
-            if completed_since_save >= 5:
+            if completed_since_save >= flush_every:
                 completed_since_save = 0
                 await _flush_partial()
 

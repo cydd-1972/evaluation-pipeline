@@ -49,6 +49,12 @@ from v4_global.add import (
 DEFAULT_UPDATE_JUDGE_PROMPT_PATH = EVAL_PIPELINE_ROOT / "prompts" / "memory_update_judge_v4_plus.txt"
 
 
+def _append_jsonl(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
 def resolve_update_judge_prompt_path(raw: str | Path | None) -> Path:
     if raw is None or not str(raw).strip():
         return DEFAULT_UPDATE_JUDGE_PROMPT_PATH
@@ -133,7 +139,7 @@ def _judge_midrange_fact(
         ],
     }
     prompt = update_judge_template.format(input_json=json.dumps(payload, ensure_ascii=False, indent=2))
-    judged = llm.chat_json_object(prompt, required_key="decision", max_attempts=4)
+    judged, call_meta = llm.chat_json_object_with_meta(prompt, required_key="decision", max_attempts=4)
     decision = str(judged.get("decision") or "").strip().upper()
     target_id = str(judged.get("target_id") or "").strip() or None
     merged_text = str(judged.get("merged_text") or "").strip() or None
@@ -144,6 +150,8 @@ def _judge_midrange_fact(
         "target_id": target_id,
         "merged_text": merged_text,
         "reason": str(judged.get("reason") or "").strip(),
+        "raw_output": str(call_meta.get("raw_text") or ""),
+        "response_format": str(call_meta.get("response_format") or ""),
     }
 
 
@@ -157,7 +165,7 @@ def _decide_ops_from_facts_v4_plus(
     none_similarity_threshold: float,
     add_similarity_threshold: float,
     update_candidate_top_k: int,
-) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
     used_ids = {str(item.get("id") or "").strip() for item in old_memory if str(item.get("id") or "").strip()}
     known_texts = {str(item.get("text") or "").strip().lower() for item in old_memory if str(item.get("text") or "").strip()}
     old_by_id = {
@@ -165,6 +173,7 @@ def _decide_ops_from_facts_v4_plus(
         for item in old_memory
         if str(item.get("id") or "").strip() and str(item.get("text") or "").strip()
     }
+    decision_traces: list[dict[str, Any]] = []
     meta: dict[str, Any] = {
         "facts_total": len(new_facts),
         "ops_add": 0,
@@ -211,10 +220,30 @@ def _decide_ops_from_facts_v4_plus(
 
         if fact_text.lower() in known_texts:
             meta["ops_none"] += 1
+            decision_traces.append(
+                {
+                    "fact_text": fact_text,
+                    "fact_type": fact_type,
+                    "top_score": top_score,
+                    "decision": "NONE",
+                    "decision_source": "known_text_duplicate",
+                    "candidates": candidates,
+                }
+            )
             continue
 
         if top_score >= none_similarity_threshold:
             meta["ops_none"] += 1
+            decision_traces.append(
+                {
+                    "fact_text": fact_text,
+                    "fact_type": fact_type,
+                    "top_score": top_score,
+                    "decision": "NONE",
+                    "decision_source": "similarity_threshold_none",
+                    "candidates": candidates,
+                }
+            )
             continue
 
         if not candidates or top_score <= add_similarity_threshold:
@@ -223,6 +252,17 @@ def _decide_ops_from_facts_v4_plus(
             ops.append({"id": new_id, "text": fact_text, "event": "ADD", "anchor_time": session_anchor_time})
             known_texts.add(fact_text.lower())
             meta["ops_add"] += 1
+            decision_traces.append(
+                {
+                    "fact_text": fact_text,
+                    "fact_type": fact_type,
+                    "top_score": top_score,
+                    "decision": "ADD",
+                    "decision_source": "similarity_threshold_add",
+                    "target_id": new_id,
+                    "candidates": candidates,
+                }
+            )
             continue
 
         chosen = None
@@ -249,6 +289,8 @@ def _decide_ops_from_facts_v4_plus(
                 "target_id": target_id,
                 "merged_text": merged_text,
                 "reason": "heuristic_fallback",
+                "raw_output": "",
+                "response_format": "",
             }
 
         decision = str(chosen.get("decision") or "").upper()
@@ -258,6 +300,21 @@ def _decide_ops_from_facts_v4_plus(
         if decision == "NONE":
             meta["ops_none"] += 1
             meta["midrange_llm_none"] += 1
+            decision_traces.append(
+                {
+                    "fact_text": fact_text,
+                    "fact_type": fact_type,
+                    "top_score": top_score,
+                    "decision": "NONE",
+                    "decision_source": "midrange_llm",
+                    "target_id": target_id,
+                    "merged_text": merged_text,
+                    "reason": str(chosen.get("reason") or ""),
+                    "raw_output": str(chosen.get("raw_output") or ""),
+                    "response_format": str(chosen.get("response_format") or ""),
+                    "candidates": candidates,
+                }
+            )
             continue
 
         if decision == "UPDATE":
@@ -286,6 +343,21 @@ def _decide_ops_from_facts_v4_plus(
                 known_texts.add(update_text.lower())
                 meta["ops_update"] += 1
                 meta["midrange_llm_update"] += 1
+                decision_traces.append(
+                    {
+                        "fact_text": fact_text,
+                        "fact_type": fact_type,
+                        "top_score": top_score,
+                        "decision": "UPDATE",
+                        "decision_source": "midrange_llm",
+                        "target_id": target_id,
+                        "merged_text": update_text,
+                        "reason": str(chosen.get("reason") or ""),
+                        "raw_output": str(chosen.get("raw_output") or ""),
+                        "response_format": str(chosen.get("response_format") or ""),
+                        "candidates": candidates,
+                    }
+                )
                 continue
 
         new_id = _next_numeric_id(used_ids)
@@ -294,8 +366,23 @@ def _decide_ops_from_facts_v4_plus(
         known_texts.add(fact_text.lower())
         meta["ops_add"] += 1
         meta["midrange_llm_add"] += 1
+        decision_traces.append(
+            {
+                "fact_text": fact_text,
+                "fact_type": fact_type,
+                "top_score": top_score,
+                "decision": "ADD",
+                "decision_source": "midrange_llm" if str(chosen.get("reason") or "") != "heuristic_fallback" else "heuristic_fallback",
+                "target_id": new_id,
+                "merged_text": fact_text,
+                "reason": str(chosen.get("reason") or ""),
+                "raw_output": str(chosen.get("raw_output") or ""),
+                "response_format": str(chosen.get("response_format") or ""),
+                "candidates": candidates,
+            }
+        )
 
-    return ops, meta
+    return ops, meta, decision_traces
 
 
 def _next_numeric_id(used: set[str]) -> str:
@@ -321,8 +408,13 @@ def _decide_global_memory_v4_plus_sync(
     none_similarity_threshold: float = 0.92,
     add_similarity_threshold: float = 0.55,
     update_candidate_top_k: int = 3,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
     meta: dict[str, Any] = {"add_write_mode": "incremental", "slot_aggregates_disabled": True}
+    trace: dict[str, Any] = {
+        "llm_model": llm.model,
+        "memory_before_count": len(old_memory),
+        "memory_before": _serialize_memory_snapshot(old_memory),
+    }
     old_trim = _truncate_memory_for_prompt(old_memory, limit=memory_prompt_max_items)
     history_json = format_sessions_structured_json(history_sessions)
     current_json = format_session_structured_json(current_session)
@@ -339,11 +431,18 @@ def _decide_global_memory_v4_plus_sync(
         if used_llm_time:
             meta["anchor_time_llm_fallback"] = True
 
-        payload = llm.chat_json_object(prompt, required_key="facts", max_attempts=6)
+        payload, extract_meta = llm.chat_json_object_with_meta(prompt, required_key="facts", max_attempts=6)
         facts = _coerce_fact_items(payload)
         meta["memory_prompt"] = "extract"
         meta["facts_extracted"] = len(facts)
-        ops, op_stats = _decide_ops_from_facts_v4_plus(
+        trace["extract"] = {
+            "raw_output": str(extract_meta.get("raw_text") or ""),
+            "response_format": str(extract_meta.get("response_format") or ""),
+            "parsed_payload": payload,
+            "facts": facts,
+            "session_anchor_time": session_anchor_time,
+        }
+        ops, op_stats, decision_traces = _decide_ops_from_facts_v4_plus(
             llm,
             old_memory=old_memory,
             new_facts=facts,
@@ -356,7 +455,12 @@ def _decide_global_memory_v4_plus_sync(
         meta.update(op_stats)
         merged, db_writes, delta_stats = apply_global_memory_delta(old_memory, ops)
         meta.update(delta_stats)
-        return merged, db_writes, meta
+        trace["decision_traces"] = decision_traces
+        trace["operations"] = ops
+        trace["db_writes"] = db_writes
+        trace["memory_after_count"] = len(merged)
+        trace["memory_after"] = _serialize_memory_snapshot(merged)
+        return merged, db_writes, meta, trace
     except ValueError:
         pass
 
@@ -380,7 +484,20 @@ def _decide_global_memory_v4_plus_sync(
     ]
     merged, db_writes, delta_stats = apply_global_memory_delta(old_memory, delta_items)
     meta.update(delta_stats)
-    return merged, db_writes, meta
+    trace["extract"] = {
+        "raw_output": "",
+        "response_format": "",
+        "parsed_payload": {"facts": []},
+        "facts": [],
+        "session_anchor_time": session_anchor_time,
+        "fallback": True,
+    }
+    trace["decision_traces"] = []
+    trace["operations"] = delta_items
+    trace["db_writes"] = db_writes
+    trace["memory_after_count"] = len(merged)
+    trace["memory_after"] = _serialize_memory_snapshot(merged)
+    return merged, db_writes, meta, trace
 
 
 async def run_add_global_v4_plus(
@@ -423,6 +540,7 @@ async def run_add_global_v4_plus(
     history_window = max(0, int(add_history_window or 0))
 
     add_snapshot_path = workspace_dir / "add_snapshot.json"
+    add_trace_path = workspace_dir / "add_trace.jsonl"
     snapshot_for_reset = load_json_list(add_snapshot_path) if add_snapshot_path.exists() else []
     effective_reset = bool(reset_database) and not snapshot_for_reset
     if reset_database and snapshot_for_reset:
@@ -535,11 +653,11 @@ async def run_add_global_v4_plus(
 
             async def _memory_job(
                 item: tuple[_GlobalConvState, Any],
-            ) -> tuple[_GlobalConvState, Any, list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+            ) -> tuple[_GlobalConvState, Any, list[dict[str, Any]], list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
                 cs, session = item
                 hist_start = max(0, session_index - history_window)
                 history_sessions = cs.sessions[hist_start:session_index]
-                updated, db_writes, meta = await asyncio.to_thread(
+                updated, db_writes, meta, trace = await asyncio.to_thread(
                     _decide_global_memory_v4_plus_sync,
                     resolved_llm,
                     speaker_a=cs.conversation.speaker_a,
@@ -554,11 +672,11 @@ async def run_add_global_v4_plus(
                     add_similarity_threshold=add_similarity_threshold,
                     update_candidate_top_k=update_candidate_top_k,
                 )
-                return cs, session, updated, db_writes, meta
+                return cs, session, updated, db_writes, meta, trace
 
             memory_rows = await _run_batched(session_work, batch_size=llm_batch, worker=_memory_job)
 
-            for cs, session, updated, db_writes, meta in memory_rows:
+            for cs, session, updated, db_writes, meta, trace in memory_rows:
                 cs.memory = updated
                 user_id = str(build_conversation_user_id(cs.conversation.idx))
                 written = 0
@@ -578,8 +696,24 @@ async def run_add_global_v4_plus(
                     "delta_writes": len(db_writes),
                     "db_added": write_stats["added"],
                     "db_updated": write_stats["updated"],
+                    "operations": db_writes,
+                    "model_operations": trace.get("operations") or [],
                     "memory": _serialize_memory_snapshot(updated),
                     **meta,
+                }
+                trace_record = {
+                    "conversation_idx": int(cs.conversation.idx),
+                    "session_index": int(session.index),
+                    "session_time": session.date_time,
+                    "speaker_a": cs.conversation.speaker_a,
+                    "speaker_b": cs.conversation.speaker_b,
+                    "user_id": user_id,
+                    "written": written,
+                    "delta_writes": len(db_writes),
+                    "db_added": write_stats["added"],
+                    "db_updated": write_stats["updated"],
+                    "meta": meta,
+                    **trace,
                 }
                 cs.conv_entry.setdefault("conversation_idx", cs.conversation.idx)
                 cs.conv_entry.setdefault("speaker_a", cs.conversation.speaker_a)
@@ -592,6 +726,7 @@ async def run_add_global_v4_plus(
                 cs.conv_entry["memory_count"] = len(updated)
                 _upsert_snapshot(snapshot, cs.conv_entry)
                 write_json_list(add_snapshot_path, snapshot)
+                _append_jsonl(add_trace_path, trace_record)
                 progress.update(1)
                 print(
                     f"[add-global-v4-plus] conv{cs.conversation.idx} session{session.index} "
