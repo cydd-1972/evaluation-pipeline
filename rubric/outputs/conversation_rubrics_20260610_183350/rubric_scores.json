@@ -1,0 +1,179 @@
+{
+  "run_name": "conversation_rubrics_20260610_183350",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "snapshot_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax\\add_snapshot.json",
+      "conversation_count": 2,
+      "model_score": 1.0,
+      "conversations": [
+        {
+          "conversation_idx": 0,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "no_fabrication",
+              "name": "No Fabrication",
+              "question": "Does the final memory avoid including any clearly unsupported factual claim that cannot be grounded in the conversation?",
+              "score": 1,
+              "reason": "All facts in the memory are directly supported by the conversation."
+            },
+            {
+              "id": "correct_attribution",
+              "name": "Correct Attribution",
+              "question": "Does the final memory avoid assigning a fact to the wrong speaker, person, or entity mentioned in the conversation?",
+              "score": 1,
+              "reason": "All facts are correctly attributed to either Caroline or Melanie as per the conversation."
+            },
+            {
+              "id": "correct_temporal_framing",
+              "name": "Correct Temporal Framing",
+              "question": "Does the final memory preserve whether information is a past event, a current state, or a future plan without obvious temporal mistakes?",
+              "score": 1,
+              "reason": "Temporal framing is accurate, with past, present, and future events properly noted."
+            },
+            {
+              "id": "no_internal_contradiction",
+              "name": "No Internal Contradiction",
+              "question": "Does the final memory avoid containing mutually inconsistent claims or claims that clearly contradict the conversation?",
+              "score": 1,
+              "reason": "No contradictions are present in the memory set."
+            },
+            {
+              "id": "covers_identity_background",
+              "name": "Covers Core Identity and Background",
+              "question": "Does the final memory include the major identity and background facts of the main people when those facts are important in the conversation?",
+              "score": 1,
+              "reason": "Core identity and background facts of both Caroline and Melanie are included."
+            },
+            {
+              "id": "covers_preferences_traits",
+              "name": "Covers Ongoing Preferences and Traits",
+              "question": "Does the final memory include the important long-term preferences, stable traits, or recurring interests that matter in the conversation?",
+              "score": 1,
+              "reason": "Preferences and traits like Caroline's love for blue, painting, and advocacy are included."
+            },
+            {
+              "id": "covers_plans_goals",
+              "name": "Covers Important Plans and Goals",
+              "question": "Does the final memory include the important plans, goals, or future intentions that are central in the conversation?",
+              "score": 1,
+              "reason": "Important plans and goals, such as Caroline's adoption journey and advocacy, are included."
+            },
+            {
+              "id": "covers_major_events_relationships",
+              "name": "Covers Major Events and Relationship Facts",
+              "question": "Does the final memory include the major events and the important relationship facts that are central in the conversation?",
+              "score": 1,
+              "reason": "Major events and relationships, like Melanie's camping trips and Caroline's mentorship, are included."
+            },
+            {
+              "id": "low_redundancy",
+              "name": "Low Redundancy",
+              "question": "Does the final memory avoid obvious large-scale repetition, so that semantically duplicate or near-duplicate memories are not repeatedly stored?",
+              "score": 1,
+              "reason": "No large-scale repetition or near-duplicate memories are present."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set is comprehensive, accurate, and free of redundancy, effectively capturing the key facts, events, and traits from the conversation.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"conversation_idx\": 0,\n  \"add_model\": \"minimax\",\n  \"rubrics\": [\n    {\n      \"id\": \"no_fabrication\",\n      \"score\": 1,\n      \"reason\": \"All facts in the memory are directly supported by the conversation.\"\n    },\n    {\n      \"id\": \"correct_attribution\",\n      \"score\": 1,\n      \"reason\": \"All facts are correctly attributed to either Caroline or Melanie as per the conversation.\"\n    },\n    {\n      \"id\": \"correct_temporal_framing\",\n      \"score\": 1,\n      \"reason\": \"Temporal framing is accurate, with past, present, and future events properly noted.\"\n    },\n    {\n      \"id\": \"no_internal_contradiction\",\n      \"score\": 1,\n      \"reason\": \"No contradictions are present in the memory set.\"\n    },\n    {\n      \"id\": \"covers_identity_background\",\n      \"score\": 1,\n      \"reason\": \"Core identity and background facts of both Caroline and Melanie are included.\"\n    },\n    {\n      \"id\": \"covers_preferences_traits\",\n      \"score\": 1,\n      \"reason\": \"Preferences and traits like Caroline's love for blue, painting, and advocacy are included.\"\n    },\n    {\n      \"id\": \"covers_plans_goals\",\n      \"score\": 1,\n      \"reason\": \"Important plans and goals, such as Caroline's adoption journey and advocacy, are included.\"\n    },\n    {\n      \"id\": \"covers_major_events_relationships\",\n      \"score\": 1,\n      \"reason\": \"Major events and relationships, like Melanie's camping trips and Caroline's mentorship, are included.\"\n    },\n    {\n      \"id\": \"low_redundancy\",\n      \"score\": 1,\n      \"reason\": \"No large-scale repetition or near-duplicate memories are present.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set is comprehensive, accurate, and free of redundancy, effectively capturing the key facts, events, and traits from the conversation.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 324
+        },
+        {
+          "conversation_idx": 1,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "no_fabrication",
+              "name": "No Fabrication",
+              "question": "Does the final memory avoid including any clearly unsupported factual claim that cannot be grounded in the conversation?",
+              "score": 1,
+              "reason": "No unsupported factual claims are present in the memory."
+            },
+            {
+              "id": "correct_attribution",
+              "name": "Correct Attribution",
+              "question": "Does the final memory avoid assigning a fact to the wrong speaker, person, or entity mentioned in the conversation?",
+              "score": 1,
+              "reason": "All facts are correctly attributed to either Jon or Gina."
+            },
+            {
+              "id": "correct_temporal_framing",
+              "name": "Correct Temporal Framing",
+              "question": "Does the final memory preserve whether information is a past event, a current state, or a future plan without obvious temporal mistakes?",
+              "score": 1,
+              "reason": "Temporal framing is accurate, with events properly placed in the past, present, or future."
+            },
+            {
+              "id": "no_internal_contradiction",
+              "name": "No Internal Contradiction",
+              "question": "Does the final memory avoid containing mutually inconsistent claims or claims that clearly contradict the conversation?",
+              "score": 1,
+              "reason": "No internal contradictions are found in the memory."
+            },
+            {
+              "id": "covers_identity_background",
+              "name": "Covers Core Identity and Background",
+              "question": "Does the final memory include the major identity and background facts of the main people when those facts are important in the conversation?",
+              "score": 1,
+              "reason": "The memory includes both Gina's and Jon's core identities and backgrounds, such as their passion for dance, their job losses, and their motivations."
+            },
+            {
+              "id": "covers_preferences_traits",
+              "name": "Covers Ongoing Preferences and Traits",
+              "question": "Does the final memory include the important long-term preferences, stable traits, or recurring interests that matter in the conversation?",
+              "score": 1,
+              "reason": "Preferences and traits like Gina's love for fashion and dance, and Jon's passion for contemporary dance and his determination are well covered."
+            },
+            {
+              "id": "covers_plans_goals",
+              "name": "Covers Important Plans and Goals",
+              "question": "Does the final memory include the important plans, goals, or future intentions that are central in the conversation?",
+              "score": 1,
+              "reason": "Important plans and goals, such as Gina's clothing store and Jon's dance studio, are included in the memory."
+            },
+            {
+              "id": "covers_major_events_relationships",
+              "name": "Covers Major Events and Relationship Facts",
+              "question": "Does the final memory include the major events and the important relationship facts that are central in the conversation?",
+              "score": 1,
+              "reason": "Major events like Gina's dance competition and Jon's fair attendance are included, along with their supportive relationship."
+            },
+            {
+              "id": "low_redundancy",
+              "name": "Low Redundancy",
+              "question": "Does the final memory avoid obvious large-scale repetition, so that semantically duplicate or near-duplicate memories are not repeatedly stored?",
+              "score": 1,
+              "reason": "The memory avoids large-scale repetition, with each entry containing unique and relevant information."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory accurately captures all key facts, attributes them correctly, avoids contradictions, and includes all major events and goals without redundancy.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"conversation_idx\": 1,\n  \"add_model\": \"minimax\",\n  \"rubrics\": [\n    {\n      \"id\": \"no_fabrication\",\n      \"score\": 1,\n      \"reason\": \"No unsupported factual claims are present in the memory.\"\n    },\n    {\n      \"id\": \"correct_attribution\",\n      \"score\": 1,\n      \"reason\": \"All facts are correctly attributed to either Jon or Gina.\"\n    },\n    {\n      \"id\": \"correct_temporal_framing\",\n      \"score\": 1,\n      \"reason\": \"Temporal framing is accurate, with events properly placed in the past, present, or future.\"\n    },\n    {\n      \"id\": \"no_internal_contradiction\",\n      \"score\": 1,\n      \"reason\": \"No internal contradictions are found in the memory.\"\n    },\n    {\n      \"id\": \"covers_identity_background\",\n      \"score\": 1,\n      \"reason\": \"The memory includes both Gina's and Jon's core identities and backgrounds, such as their passion for dance, their job losses, and their motivations.\"\n    },\n    {\n      \"id\": \"covers_preferences_traits\",\n      \"score\": 1,\n      \"reason\": \"Preferences and traits like Gina's love for fashion and dance, and Jon's passion for contemporary dance and his determination are well covered.\"\n    },\n    {\n      \"id\": \"covers_plans_goals\",\n      \"score\": 1,\n      \"reason\": \"Important plans and goals, such as Gina's clothing store and Jon's dance studio, are included in the memory.\"\n    },\n    {\n      \"id\": \"covers_major_events_relationships\",\n      \"score\": 1,\n      \"reason\": \"Major events like Gina's dance competition and Jon's fair attendance are included, along with their supportive relationship.\"\n    },\n    {\n      \"id\": \"low_redundancy\",\n      \"score\": 1,\n      \"reason\": \"The memory avoids large-scale repetition, with each entry containing unique and relevant information.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory accurately captures all key facts, attributes them correctly, avoids contradictions, and includes all major events and goals without redundancy.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 212
+        }
+      ]
+    }
+  ],
+  "missing": [],
+  "final_score": 1.0
+}

@@ -1,0 +1,10 @@
+[2026-06-10 18:33:50] run_name=conversation_rubrics_20260610_183350
+[2026-06-10 18:33:50] evaluator_model=Qwen/Qwen3-14B
+[2026-06-10 18:33:50] targets=['minimax']
+[2026-06-10 18:33:50] start model=minimax workspace=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax
+[2026-06-10 18:33:50] score model=minimax conv=0 memory_items=324
+[2026-06-10 18:34:06] done model=minimax conv=0 score=1.0000
+[2026-06-10 18:34:06] score model=minimax conv=1 memory_items=212
+[2026-06-10 18:34:19] done model=minimax conv=1 score=1.0000
+[2026-06-10 18:34:19] final_score=1.0000
+[2026-06-10 18:34:19] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_rubrics_20260610_183350

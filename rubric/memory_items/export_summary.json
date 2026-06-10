@@ -1,0 +1,29 @@
+[
+  {
+    "add_model": "minimax",
+    "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+    "workspace_export_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax\\memory_items",
+    "rubric_export_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\memory_items\\allconv_v5_minimax",
+    "conversation_count": 10,
+    "incremental_session_count": 272,
+    "status": "ok"
+  },
+  {
+    "add_model": "deepseek",
+    "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek",
+    "workspace_export_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek\\memory_items",
+    "rubric_export_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\memory_items\\allconv_v5_deepseek",
+    "conversation_count": 10,
+    "incremental_session_count": 272,
+    "status": "ok"
+  },
+  {
+    "add_model": "gemini",
+    "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_gemini",
+    "workspace_export_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_gemini\\memory_items",
+    "rubric_export_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\memory_items\\allconv_v5_gemini",
+    "conversation_count": 10,
+    "incremental_session_count": 272,
+    "status": "ok"
+  }
+]

@@ -1,0 +1,29 @@
+[2026-06-10 17:58:31] run_name=conversation_rubrics_20260610_175831
+[2026-06-10 17:58:31] evaluator_model=Qwen/Qwen3-14B
+[2026-06-10 17:58:31] targets=['minimax', 'deepseek', 'gemini']
+[2026-06-10 17:58:31] missing=[{"add_model": "qwen3-14b", "status": "missing", "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_qwen3_14b", "snapshot_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_qwen3_14b\\add_snapshot.json"}, {"add_model": "qwen3-4b", "status": "missing", "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_qwen3_4b", "snapshot_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_qwen3_4b\\add_snapshot.json"}]
+[2026-06-10 17:58:31] start model=minimax workspace=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax
+[2026-06-10 17:58:31] score model=minimax conv=0 memory_items=324
+[2026-06-10 17:58:48] done model=minimax conv=0 score=1.0000
+[2026-06-10 17:58:48] score model=minimax conv=1 memory_items=212
+[2026-06-10 17:58:58] done model=minimax conv=1 score=1.0000
+[2026-06-10 17:58:58] score model=minimax conv=2 memory_items=422
+[2026-06-10 17:59:13] done model=minimax conv=2 score=1.0000
+[2026-06-10 17:59:13] score model=minimax conv=3 memory_items=395
+[2026-06-10 17:59:32] done model=minimax conv=3 score=1.0000
+[2026-06-10 17:59:32] score model=minimax conv=4 memory_items=405
+[2026-06-10 17:59:48] done model=minimax conv=4 score=1.0000
+[2026-06-10 17:59:48] score model=minimax conv=5 memory_items=374
+[2026-06-10 18:00:02] done model=minimax conv=5 score=1.0000
+[2026-06-10 18:00:02] score model=minimax conv=6 memory_items=448
+[2026-06-10 18:00:21] done model=minimax conv=6 score=1.0000
+[2026-06-10 18:00:21] score model=minimax conv=7 memory_items=454
+[2026-06-10 18:00:35] done model=minimax conv=7 score=1.0000
+[2026-06-10 18:00:35] score model=minimax conv=8 memory_items=316
+[2026-06-10 18:00:49] done model=minimax conv=8 score=1.0000
+[2026-06-10 18:00:49] score model=minimax conv=9 memory_items=414
+[2026-06-10 18:01:11] done model=minimax conv=9 score=1.0000
+[2026-06-10 18:01:11] start model=deepseek workspace=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_deepseek
+[2026-06-10 18:01:11] score model=deepseek conv=0 memory_items=228
+[2026-06-10 18:01:28] done model=deepseek conv=0 score=1.0000
+[2026-06-10 18:01:28] score model=deepseek conv=1 memory_items=173
