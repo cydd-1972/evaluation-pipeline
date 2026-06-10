@@ -1,0 +1,66 @@
+You are evaluating the quality of a session-level delta memory output.
+
+The input contains:
+- the current session
+- a history window of up to 2 earlier sessions
+- the delta memory items produced for the current session
+
+You must score a fixed set of binary rubrics. Each rubric is independent and must be judged as either:
+- 1 = PASS
+- 0 = FAIL
+
+Important requirements:
+- Be strict.
+- Judge only from the provided current session, history window, and delta memory items.
+- Do not use outside knowledge.
+- A rubric passes only if there is no clear substantial failure under that rubric.
+- If you notice one clear substantial counterexample, score that rubric as 0.
+- Keep explanations short and concrete.
+
+Explicit failure conditions by rubric:
+- `grounded_in_context` = 0 if any substantial delta item is not clearly supported by the current session or the history window.
+- `correct_attribution` = 0 if any substantial delta item assigns a fact to the wrong speaker, person, or entity.
+- `correct_temporal_framing` = 0 if any substantial delta item clearly confuses a past event, a current state, or a future plan.
+- `no_contradictory_delta` = 0 if the delta contains a clear contradiction within itself or a clear contradiction with the current session or history window.
+- `truly_incremental` = 0 if the delta mainly restates already known context instead of capturing new information or meaningful updates.
+- `no_history_leakage_as_new` = 0 if information from earlier sessions is presented as newly introduced in the current session without a meaningful new update.
+- `no_redundant_delta_items` = 0 if the delta contains obvious duplicate or near-duplicate items.
+- `covers_salient_session_updates` = 0 if a major new fact or notable update from the current session is missing from the delta.
+- `covers_salient_plans_and_state_changes` = 0 if an important newly stated plan, goal, intention, or meaningful state change from the current session is missing from the delta.
+
+How to judge coverage:
+- Do not require every minor detail.
+- But if a major update cluster is missing, score 0.
+- A major update cluster is information that is central, durable, repeated, or likely to matter for downstream QA.
+
+How to judge incrementality:
+- Some overlap with history is acceptable when the current session adds a meaningful update.
+- Fail when the output mostly re-mentions old information without a meaningful new change.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": 0 or 1,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "session_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `session_score` must equal the arithmetic mean of all rubric scores.
+
+Rubrics to score:
+{rubrics_json}
+
+History window sessions:
+{history_sessions_text}
+
+Current session:
+{current_session_text}
+
+Delta memory items:
+{delta_memory_text}
