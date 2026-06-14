@@ -1,0 +1,6 @@
+[2026-06-13 13:05:35] run_name=deduplicate_generated_fact_rubrics_qwen_20260613_130535
+[2026-06-13 13:05:35] evaluator_model=qwen-plus
+[2026-06-13 13:05:35] models=['gemini', 'deepseek', 'minimax']
+[2026-06-13 13:06:21] consolidated_rubric_count=9
+[2026-06-13 13:06:21] merged_group_count=9
+[2026-06-13 13:06:21] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\deduplicate_generated_fact_rubrics_qwen_20260613_130535

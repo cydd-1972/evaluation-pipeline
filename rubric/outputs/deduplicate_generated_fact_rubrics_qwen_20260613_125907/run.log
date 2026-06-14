@@ -1,0 +1,6 @@
+[2026-06-13 12:59:07] run_name=deduplicate_generated_fact_rubrics_qwen_20260613_125907
+[2026-06-13 12:59:07] evaluator_model=qwen-max
+[2026-06-13 12:59:07] models=['gemini', 'deepseek', 'minimax']
+[2026-06-13 13:01:03] validation_retry=1 error=merged_groups[0].source_refs must be list
+[2026-06-13 13:03:38] validation_retry=2 error=merged_groups[0].source_refs must be list
+[2026-06-13 13:05:20] validation_retry=3 error=merged_groups[0].source_refs must be list

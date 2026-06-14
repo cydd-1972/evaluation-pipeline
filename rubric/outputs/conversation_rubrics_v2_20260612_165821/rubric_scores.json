@@ -1,0 +1,90 @@
+{
+  "run_name": "conversation_rubrics_v2_20260612_165821",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_count": 1,
+      "model_score": 1.0,
+      "conversations": [
+        {
+          "conversation_idx": 0,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly traceable to explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present; all information aligns with what was stated in the conversation."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "All memory items correctly reflect the past, current, and future status as mentioned in the conversation."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is a single, distinct fact without bundling multiple facts together."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "No obvious redundancy or near-duplicate information is present in the memory set."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The memory set captures all significant and memory-worthy content from the conversation without clear omissions."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory set is concise and avoids unnecessary or verbose information."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "All memory items follow a consistent structure with clear identifiers, events, anchor times, and text."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set fully satisfies all rubrics with no issues detected.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly traceable to explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present; all information aligns with what was stated in the conversation.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items correctly reflect the past, current, and future status as mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is a single, distinct fact without bundling multiple facts together.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"No obvious redundancy or near-duplicate information is present in the memory set.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set captures all significant and memory-worthy content from the conversation without clear omissions.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set is concise and avoids unnecessary or verbose information.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items follow a consistent structure with clear identifiers, events, anchor times, and text.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set fully satisfies all rubrics with no issues detected.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 324
+        }
+      ]
+    }
+  ],
+  "missing": [],
+  "final_score": 1.0
+}

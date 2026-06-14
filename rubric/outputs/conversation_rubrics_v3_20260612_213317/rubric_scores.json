@@ -1,0 +1,106 @@
+{
+  "run_name": "conversation_rubrics_v3_20260612_213317",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_count": 1,
+      "model_score": 1.0,
+      "conversations": [
+        {
+          "conversation_idx": 0,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "every_item_sourceable",
+              "name": "Every Item Sourceable",
+              "question": "Does every final memory item have a recoverable source in the original conversation, with no clearly unsupported item?",
+              "score": 1.0,
+              "reason": "All items in the final memory are directly supported by statements in the conversation."
+            },
+            {
+              "id": "every_item_factually_valid",
+              "name": "Every Item Factually Valid",
+              "question": "Does every final memory item avoid factual error relative to the original conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present in the final memory relative to the conversation."
+            },
+            {
+              "id": "every_item_temporally_valid",
+              "name": "Every Item Temporally Valid",
+              "question": "Does every final memory item preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "All items in the final memory correctly reflect the past, current, or future status as described in the conversation."
+            },
+            {
+              "id": "item_atomicity",
+              "name": "Item Atomicity",
+              "question": "Are final memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each item in the final memory is atomic and represents a single, distinct fact."
+            },
+            {
+              "id": "set_nonredundancy",
+              "name": "Set Nonredundancy",
+              "question": "Does the final memory set avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "The final memory set does not contain obvious redundancy or near-duplicate information."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "Does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The final memory set captures all memory-worthy information from the conversation without clear omissions."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "Is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The final memory set is concise and avoids bloated or overly verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "Does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "The final memory set follows a consistent structure across all items."
+            }
+          ],
+          "conversation_score": 1.0,
+          "arithmetic_mean_score": 1.0,
+          "summary": "The final memory set fully satisfies all rubrics with no issues detected.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"every_item_sourceable\",\n      \"score\": 1.0,\n      \"reason\": \"All items in the final memory are directly supported by statements in the conversation.\"\n    },\n    {\n      \"id\": \"every_item_factually_valid\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present in the final memory relative to the conversation.\"\n    },\n    {\n      \"id\": \"every_item_temporally_valid\",\n      \"score\": 1.0,\n      \"reason\": \"All items in the final memory correctly reflect the past, current, or future status as described in the conversation.\"\n    },\n    {\n      \"id\": \"item_atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each item in the final memory is atomic and represents a single, distinct fact.\"\n    },\n    {\n      \"id\": \"set_nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"The final memory set does not contain obvious redundancy or near-duplicate information.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The final memory set captures all memory-worthy information from the conversation without clear omissions.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The final memory set is concise and avoids bloated or overly verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"The final memory set follows a consistent structure across all items.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set fully satisfies all rubrics with no issues detected.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 324
+        }
+      ]
+    }
+  ],
+  "missing": [],
+  "final_score": 1.0,
+  "weights": {
+    "every_item_sourceable": 3.0,
+    "every_item_factually_valid": 3.0,
+    "every_item_temporally_valid": 2.0,
+    "item_atomicity": 1.0,
+    "set_nonredundancy": 1.0,
+    "coverage_of_memory_worthy_content": 2.0,
+    "conciseness": 1.0,
+    "structural_consistency": 1.0
+  },
+  "hard_cap_rubrics": [
+    "every_item_sourceable",
+    "every_item_factually_valid"
+  ],
+  "hard_cap_value": 0.4
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "id": "grounded_in_context",
+    "name": "Grounded In Context",
+    "question": "Does every substantial delta memory item have clear support in the current session or in the provided history window?"
+  },
+  {
+    "id": "correct_attribution",
+    "name": "Correct Attribution",
+    "question": "Do the delta memory items avoid assigning facts to the wrong speaker, person, or entity?"
+  },
+  {
+    "id": "correct_temporal_framing",
+    "name": "Correct Temporal Framing",
+    "question": "Do the delta memory items preserve whether information is a past event, a current state, or a future plan without obvious temporal mistakes?"
+  },
+  {
+    "id": "no_contradictory_delta",
+    "name": "No Contradictory Delta",
+    "question": "Do the delta memory items avoid clear contradictions within the delta set or clear contradictions with the current session and history window?"
+  },
+  {
+    "id": "truly_incremental",
+    "name": "Truly Incremental",
+    "question": "Do the delta memory items mainly capture new information or meaningful updates rather than merely restating already known context?"
+  },
+  {
+    "id": "no_history_leakage_as_new",
+    "name": "No History Leakage As New",
+    "question": "Do the delta memory items avoid presenting information from earlier sessions as if it were newly introduced in the current session?"
+  },
+  {
+    "id": "no_redundant_delta_items",
+    "name": "No Redundant Delta Items",
+    "question": "Do the delta memory items avoid obvious semantic duplication or near-duplicate restatements within this session's delta output?"
+  },
+  {
+    "id": "covers_identity_background_from_text",
+    "name": "Covers Identity And Background From Text",
+    "question": "Does the delta memory cover the identity or background facts explicitly stated in the current session text when those facts are appropriate to store as memory?"
+  },
+  {
+    "id": "covers_preferences_traits_from_text",
+    "name": "Covers Preferences And Traits From Text",
+    "question": "Does the delta memory cover the preferences, habits, or stable traits explicitly stated in the current session text when those facts are appropriate to store as memory?"
+  },
+  {
+    "id": "covers_relationship_facts_from_text",
+    "name": "Covers Relationship Facts From Text",
+    "question": "Does the delta memory cover the relationship facts or relationship changes explicitly stated in the current session text?"
+  },
+  {
+    "id": "covers_event_facts_from_text",
+    "name": "Covers Event Facts From Text",
+    "question": "Does the delta memory cover the important event facts explicitly stated in the current session text?"
+  },
+  {
+    "id": "covers_plans_commitments_from_text",
+    "name": "Covers Plans And Commitments From Text",
+    "question": "Does the delta memory cover the plans, goals, commitments, intentions, or decisions explicitly stated in the current session text?"
+  },
+  {
+    "id": "covers_schedule_time_facts_from_text",
+    "name": "Covers Schedule And Time Facts From Text",
+    "question": "Does the delta memory cover the explicit schedule, timing, date, or future arrangement information stated in the current session text?"
+  },
+  {
+    "id": "covers_state_changes_from_text",
+    "name": "Covers State Changes From Text",
+    "question": "Does the delta memory cover the meaningful state changes explicitly stated in the current session text?"
+  },
+  {
+    "id": "covers_problem_need_updates_from_text",
+    "name": "Covers Problems And Needs From Text",
+    "question": "Does the delta memory cover the new problems, needs, worries, or unresolved issues explicitly stated in the current session text when those facts are appropriate to store as memory?"
+  }
+]

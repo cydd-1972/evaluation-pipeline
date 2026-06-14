@@ -1,0 +1,118 @@
+{
+  "run_name": "conversation_bucket_summary_continuous_20260613_011444",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "conversation_idx": 0,
+      "rubrics": [
+        {
+          "id": "summary_sourceability",
+          "name": "Summary Sourceability",
+          "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+          "score": 0.9,
+          "reason": "Most summary items are supported by the conversation or fact memories, though a few may be slightly overgeneralized."
+        },
+        {
+          "id": "summary_factual_correctness",
+          "name": "Summary Factual Correctness",
+          "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+          "score": 0.9,
+          "reason": "Summary items are mostly factually correct, though some details may be slightly ambiguous."
+        },
+        {
+          "id": "summary_temporal_consistency",
+          "name": "Summary Temporal Consistency",
+          "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+          "score": 0.9,
+          "reason": "Temporal references are generally consistent, though a few could be more precise."
+        },
+        {
+          "id": "bucket_schema_fit",
+          "name": "Bucket Schema Fit",
+          "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+          "score": 0.9,
+          "reason": "Summary items mostly fit their bucket types, though some character summaries could be more detailed."
+        },
+        {
+          "id": "summary_abstraction_quality",
+          "name": "Summary Abstraction Quality",
+          "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+          "score": 0.8,
+          "reason": "Some summary items are good abstractions, but a few are too close to the original facts."
+        },
+        {
+          "id": "cross_fact_integration",
+          "name": "Cross-Fact Integration",
+          "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+          "score": 0.8,
+          "reason": "Some summary items integrate multiple facts well, but others could be more integrated."
+        },
+        {
+          "id": "nonredundancy_across_summaries",
+          "name": "Nonredundancy Across Summaries",
+          "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+          "score": 0.8,
+          "reason": "There is some redundancy, but it is not overwhelming."
+        },
+        {
+          "id": "conciseness_and_density",
+          "name": "Conciseness And Density",
+          "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+          "score": 0.8,
+          "reason": "Summary items are concise but could be more dense in some cases."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+          "score": 0.8,
+          "reason": "Structure is mostly consistent, but some summaries vary in format."
+        },
+        {
+          "id": "coverage_of_summary_targets",
+          "name": "Coverage Of Summary Targets",
+          "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+          "score": 0.9,
+          "reason": "Summary items cover the main people, events, and locations appropriately."
+        }
+      ],
+      "conversation_score": 0.8632,
+      "arithmetic_mean_score": 0.85,
+      "summary": "The summary memory items are mostly well-supported, factually correct, and cover the key aspects of the conversation. They provide useful abstraction and integration of facts, though some could be more concise or integrated.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the conversation or fact memories, though a few may be slightly overgeneralized.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items are mostly factually correct, though some details may be slightly ambiguous.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are generally consistent, though a few could be more precise.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items mostly fit their bucket types, though some character summaries could be more detailed.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.8,\n      \"reason\": \"Some summary items are good abstractions, but a few are too close to the original facts.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.8,\n      \"reason\": \"Some summary items integrate multiple facts well, but others could be more integrated.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"There is some redundancy, but it is not overwhelming.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.8,\n      \"reason\": \"Summary items are concise but could be more dense in some cases.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Structure is mostly consistent, but some summaries vary in format.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items cover the main people, events, and locations appropriately.\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The summary memory items are mostly well-supported, factually correct, and cover the key aspects of the conversation. They provide useful abstraction and integration of facts, though some could be more concise or integrated.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      },
+      "fact_count": 228,
+      "summary_count": 105
+    }
+  ],
+  "summary": {
+    "evaluator_model": "Qwen/Qwen3-14B",
+    "final_score": 0.8632,
+    "conversation_count": 1,
+    "missing_conversation_indices": [],
+    "weights": {
+      "summary_sourceability": 3.0,
+      "summary_factual_correctness": 3.0,
+      "summary_temporal_consistency": 2.0,
+      "bucket_schema_fit": 2.0,
+      "summary_abstraction_quality": 2.0,
+      "cross_fact_integration": 2.0,
+      "nonredundancy_across_summaries": 1.0,
+      "conciseness_and_density": 1.0,
+      "structural_consistency": 1.0,
+      "coverage_of_summary_targets": 2.0
+    },
+    "hard_cap_rubrics": [
+      "summary_sourceability",
+      "summary_factual_correctness"
+    ],
+    "hard_cap_threshold": 0.3,
+    "hard_cap_value": 0.4
+  }
+}

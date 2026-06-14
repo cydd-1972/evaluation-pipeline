@@ -1,0 +1,381 @@
+[
+  {
+    "id": "explicit_textual_support",
+    "name": "Explicit Textual Support",
+    "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+    "why_it_matters": "This is the core anti-fabrication check. A fact memory item should be traceable to what was actually said, not invented by the model.",
+    "failure_examples": [
+      "Memory says someone has a PhD, but the conversation never mentions education.",
+      "Memory adds a specific date even though the conversation only says 'next week'."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Keeps grounding/sourceability as a standalone rubric. Does not merge with inference-boundary."
+  },
+  {
+    "id": "inference_boundary_compliance",
+    "name": "Inference Boundary Compliance",
+    "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+    "why_it_matters": "A memory item can be textually related to the conversation yet still overreach by adding causal or psychological interpretation that was never stated.",
+    "failure_examples": [
+      "Memory says 'Alice was frustrated because her manager was demanding' when the conversation only shows a request from the manager.",
+      "Memory says 'Bob quit due to burnout' when the conversation only says he has been tired lately."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Kept separate from explicit textual support because unsupported inference is a narrower and stricter failure mode."
+  },
+  {
+    "id": "entity_attribution_accuracy",
+    "name": "Entity Attribution Accuracy",
+    "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+    "why_it_matters": "Misattributing a fact to the wrong entity corrupts the memory even if the underlying fact appeared somewhere in the conversation.",
+    "failure_examples": [
+      "Memory says Bob is moving to New York when the conversation says Alice is moving.",
+      "Memory assigns the user's preference to another participant."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek"
+    ],
+    "notes": "Kept separate from attribute/relationship/event accuracy because the main check here is who the fact belongs to."
+  },
+  {
+    "id": "entity_name_and_referent_consistency",
+    "name": "Entity Name and Referent Consistency",
+    "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+    "why_it_matters": "Even if attribution is correct locally, inconsistent referents across items make the memory store hard to interpret and retrieve from reliably.",
+    "failure_examples": [
+      "One item uses 'Robert' and another uses 'Bob' for the same person without clear unification.",
+      "One item says 'the company' and another says 'Acme Corp' without making clear they are the same entity."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Kept separate from pronoun clarity because this is mainly a cross-item consistency check."
+  },
+  {
+    "id": "pronoun_and_reference_clarity",
+    "name": "Pronoun and Reference Clarity",
+    "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+    "why_it_matters": "A memory item can be grounded and correctly attributed in context but still be unusable later if it contains unresolved pronouns or vague references.",
+    "failure_examples": [
+      "Memory item says 'He is a doctor' without specifying who 'he' is.",
+      "Memory item says 'She likes cats' without a clear antecedent."
+    ],
+    "source_models": [
+      "deepseek"
+    ],
+    "notes": "Kept separate from entity-name consistency because this is an item-local interpretability check."
+  },
+  {
+    "id": "entity_attribute_accuracy",
+    "name": "Entity Attribute Accuracy",
+    "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+    "why_it_matters": "These are core fact-level details that often drive downstream personalization or QA.",
+    "failure_examples": [
+      "Memory says Bob is a software engineer when the conversation describes him as a product manager.",
+      "Memory says Alice has brown hair when the conversation says she dyed it red."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Kept separate from attribution and relationship checks."
+  },
+  {
+    "id": "relationship_accuracy",
+    "name": "Relationship Accuracy",
+    "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+    "why_it_matters": "Relationship facts have a distinct failure mode and are important for relational recall.",
+    "failure_examples": [
+      "Memory says Carol is David's wife when the conversation establishes she is his sister.",
+      "Memory says Alice works for Bob when the conversation shows they are peers."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Kept separate because relationship facts are not just generic attributes."
+  },
+  {
+    "id": "event_detail_accuracy",
+    "name": "Event Detail Accuracy",
+    "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+    "why_it_matters": "Event detail corruption can break downstream recall even if entity facts are otherwise correct.",
+    "failure_examples": [
+      "Memory says Alice presented the report when the conversation shows Bob presented it.",
+      "Memory says the meeting was in Conference Room B when the conversation specifies Room A."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Kept separate because event-fact errors often behave differently from attribute errors."
+  },
+  {
+    "id": "temporal_status_accuracy",
+    "name": "Temporal Status Accuracy",
+    "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+    "why_it_matters": "Treating a plan as completed, or an old state as current, is a high-impact memory error.",
+    "failure_examples": [
+      "Memory states a planned trip as a completed event.",
+      "Memory says someone currently lives in Seattle when the conversation says they moved away."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Kept separate from temporal-value accuracy because the failure type is different."
+  },
+  {
+    "id": "temporal_value_accuracy",
+    "name": "Temporal Value Accuracy",
+    "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+    "why_it_matters": "A memory item may correctly identify that something is past or future while still getting the actual time value or sequence wrong.",
+    "failure_examples": [
+      "Memory says an event happened in June when the conversation says January.",
+      "Memory reverses the order of two events."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Explicitly separated from temporal-status accuracy."
+  },
+  {
+    "id": "fact_atomicity",
+    "name": "Fact Atomicity",
+    "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+    "why_it_matters": "Atomic memory is easier to update, retrieve, and judge. Bundled items create ambiguity about which sub-fact is supported or stale.",
+    "failure_examples": [
+      "One item combines a person's job, city, and food preference.",
+      "One item combines facts about two different people."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Merges atomicity and no-bundling because they target the same core property."
+  },
+  {
+    "id": "exact_duplicate_absence",
+    "name": "Exact Duplicate Absence",
+    "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+    "why_it_matters": "Exact duplicates waste space and indicate failed deduplication during memory writing.",
+    "failure_examples": [
+      "Two items both say 'Alice is the project lead'.",
+      "Two identical phone-number facts appear separately."
+    ],
+    "source_models": [
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Kept separate from near-duplicate absence because exact duplicates are a narrower failure mode."
+  },
+  {
+    "id": "near_duplicate_absence",
+    "name": "Near-Duplicate Absence",
+    "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+    "why_it_matters": "Near-duplicates increase ambiguity about the canonical fact and waste memory budget even if wording differs.",
+    "failure_examples": [
+      "One item says Quinn is vegetarian and another says Quinn does not eat meat.",
+      "Two differently phrased items encode the same residence fact."
+    ],
+    "source_models": [
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Kept separate from exact duplicates to preserve finer-grained diagnosis."
+  },
+  {
+    "id": "entity_coverage",
+    "name": "Entity Coverage",
+    "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+    "why_it_matters": "If important people, places, organizations, or objects are missing entirely, the memory cannot support later recall.",
+    "failure_examples": [
+      "A major recurring person is never represented in memory.",
+      "A named project central to the conversation never appears in memory."
+    ],
+    "source_models": [
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Split coverage by content type instead of one merged catch-all."
+  },
+  {
+    "id": "attribute_coverage",
+    "name": "Attribute Coverage",
+    "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+    "why_it_matters": "Entity presence alone is not enough if the properties that matter for future use are missing.",
+    "failure_examples": [
+      "Memory mentions Bob but omits that he is the team lead.",
+      "Memory mentions Alice but omits her strong remote-work preference."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Separated from entity coverage because existence and attribute completeness are different checks."
+  },
+  {
+    "id": "event_coverage",
+    "name": "Event Coverage",
+    "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+    "why_it_matters": "Important event omissions are a major source of weak downstream recall.",
+    "failure_examples": [
+      "A launch-delay decision is discussed but never written into memory.",
+      "A major move or job change is omitted."
+    ],
+    "source_models": [
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Kept separate because event recall is different from entity/attribute recall."
+  },
+  {
+    "id": "relationship_coverage",
+    "name": "Relationship Coverage",
+    "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+    "why_it_matters": "Relational omissions make the memory structurally incomplete for social and organizational reasoning.",
+    "failure_examples": [
+      "A manager-report relationship is discussed but not captured.",
+      "A close family or collaboration relationship is omitted."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Kept separate from generic coverage because relational structure matters independently."
+  },
+  {
+    "id": "plan_and_future_commitment_coverage",
+    "name": "Plan and Future Commitment Coverage",
+    "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+    "why_it_matters": "Future-oriented content is often highly memory-worthy and easy to miss if coverage only focuses on completed facts.",
+    "failure_examples": [
+      "A promised Monday follow-up is discussed but omitted.",
+      "A scheduled upgrade or trip is never written to memory."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Separated from event coverage because plans are not the same as completed events."
+  },
+  {
+    "id": "conciseness",
+    "name": "Conciseness",
+    "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+    "why_it_matters": "Concise memory improves efficiency and retrieval quality.",
+    "failure_examples": [
+      "Item starts with 'The user mentioned that...'.",
+      "Item includes long narrative context when a short fact statement would suffice."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek",
+      "minimax"
+    ],
+    "notes": "Combines verbosity/noise concerns into one concise operational rubric."
+  },
+  {
+    "id": "relevance_filtering",
+    "name": "Relevance Filtering",
+    "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+    "why_it_matters": "A memory item can be accurate and concise but still be low-value clutter.",
+    "failure_examples": [
+      "A one-time greeting is stored as durable memory.",
+      "A temporary mood with no future relevance is stored."
+    ],
+    "source_models": [
+      "gemini"
+    ],
+    "notes": "Kept separate from conciseness because usefulness is a different criterion from brevity."
+  },
+  {
+    "id": "structural_consistency",
+    "name": "Structural Consistency",
+    "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+    "why_it_matters": "Structural regularity improves interpretability and makes downstream programmatic use easier.",
+    "failure_examples": [
+      "Some items are clauses while others are loosely formatted notes without a stable pattern.",
+      "Equivalent facts are written with inconsistent syntactic frames."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek"
+    ],
+    "notes": "A high-level structural rubric retained separately from more specific formatting sub-rubrics below."
+  },
+  {
+    "id": "field_and_schema_completeness",
+    "name": "Field and Schema Completeness",
+    "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+    "why_it_matters": "Missing semantic slots are a different failure mode from merely inconsistent style.",
+    "failure_examples": [
+      "An item states 'Xavier likes' with the object missing.",
+      "An item names an entity but does not state the relation or fact."
+    ],
+    "source_models": [
+      "deepseek"
+    ],
+    "notes": "Separated from structural consistency because missing content fields are a schema-completeness issue."
+  },
+  {
+    "id": "field_naming_and_temporal_format_consistency",
+    "name": "Field Naming and Temporal Format Consistency",
+    "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+    "why_it_matters": "Representational inconsistency hurts downstream parsing and cross-item comparison.",
+    "failure_examples": [
+      "One item uses 'subject' and another uses 'person' for the same slot.",
+      "Different date formats are mixed inconsistently across items."
+    ],
+    "source_models": [
+      "minimax"
+    ],
+    "notes": "Groups the formatting-style consistency rubrics, but keeps them distinct from general structure and from pronoun clarity."
+  },
+  {
+    "id": "contradiction_avoidance",
+    "name": "Contradiction Avoidance",
+    "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+    "why_it_matters": "Contradictions make the memory store unreliable for future reasoning and QA.",
+    "failure_examples": [
+      "One item says the user is vegan and another says they love steak.",
+      "Two items give conflicting ages or locations for the same person."
+    ],
+    "source_models": [
+      "gemini",
+      "deepseek"
+    ],
+    "notes": "Retained as a set-level consistency check."
+  },
+  {
+    "id": "negation_accuracy",
+    "name": "Negation Accuracy",
+    "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+    "why_it_matters": "Negation errors can invert meaning and are especially costly in personalization settings.",
+    "failure_examples": [
+      "A dislike is stored as a like.",
+      "A 'does not want' statement is stored as a desire."
+    ],
+    "source_models": [
+      "gemini"
+    ],
+    "notes": "Split apart from quantifier accuracy for finer diagnosis."
+  },
+  {
+    "id": "quantifier_accuracy",
+    "name": "Quantifier Accuracy",
+    "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+    "why_it_matters": "Errors in quantifiers can distort habits, constraints, and factual magnitude.",
+    "failure_examples": [
+      "Changing 'sometimes' to 'always'.",
+      "Rounding or simplifying a number in a way that changes meaning."
+    ],
+    "source_models": [
+      "gemini"
+    ],
+    "notes": "Separated from negation because the linguistic failure mode is different."
+  }
+]

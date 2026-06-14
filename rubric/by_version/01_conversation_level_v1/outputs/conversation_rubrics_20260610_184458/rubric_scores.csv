@@ -1,0 +1,3 @@
+add_model,workspace_dir,conversation_idx,memory_count,conversation_score,rubric_no_fabrication,rubric_correct_attribution,rubric_correct_temporal_framing,rubric_no_internal_contradiction,rubric_covers_identity_background,rubric_covers_preferences_traits,rubric_covers_plans_goals,rubric_covers_major_events_relationships,rubric_low_redundancy
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,0,324,1.0,1,1,1,1,1,1,1,1,1
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,1,212,1.0,1,1,1,1,1,1,1,1,1

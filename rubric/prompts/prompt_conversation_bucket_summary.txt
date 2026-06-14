@@ -1,0 +1,60 @@
+You are evaluating bucket-summary memory items from the final session of one conversation.
+
+The input contains:
+- the full original conversation
+- the fact-level memory items from the final session
+- the summary memory items from the final session
+
+The summary memory items are the non-fact bucket items, such as character, event, and location summaries.
+
+You must score a fixed set of rubrics using a 3-level scale:
+- 1.0 = fully satisfies the rubric
+- 0.5 = partially satisfies the rubric
+- 0.0 = clearly fails the rubric
+
+Important requirements:
+- Be strict.
+- Judge only from the provided conversation, fact memories, and summary memories.
+- Do not use outside knowledge.
+- Work directly from the provided text.
+- Keep reasons short and concrete.
+
+How to use the scale:
+- Use 1.0 only when there is no clear substantial problem under that rubric.
+- Use 0.5 when the output is mixed: broadly acceptable but with meaningful issues.
+- Use 0.0 when there is a clear substantial failure.
+
+Special guidance:
+- For `summary_sourceability`, ask whether the summary item can be justified from the original conversation or the fact memories, rather than being invented.
+- For `bucket_schema_fit`, ask whether each summary item really behaves like its bucket type.
+- For `coverage_of_summary_targets`, judge coverage only at the level of summary-worthy people, events, and locations, not every atomic fact.
+- For `conciseness_and_density`, judge from the text itself; do not compute token counts.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": 0.0 or 0.5 or 1.0,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "conversation_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `conversation_score` should be the judge's unweighted arithmetic mean across rubric scores.
+- The caller may apply weighting or caps afterward.
+
+Rubrics to score:
+{rubrics_json}
+
+Full conversation:
+{conversation_text}
+
+Fact-level memory items from the final session:
+{fact_memory_text}
+
+Summary memory items from the final session:
+{summary_memory_text}

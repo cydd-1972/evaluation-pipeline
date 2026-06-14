@@ -1,0 +1,141 @@
+{
+  "generator_model_id": "gemini",
+  "generator_model_name": "gemini-3.1-flash-lite-preview",
+  "api_base": "https://api.gptplus5.com/v1",
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_generate_finer_fact_rubrics.txt",
+  "baseline_rubric_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\rubrics\\conversation_fact_rubrics_continuous.json",
+  "result": {
+    "task_summary": "Evaluating the quality of accumulated fact-based memory items extracted from multi-session conversations to ensure they are accurate, atomic, and usable for future retrieval.",
+    "design_rationale": "The rubric set was refined to move from abstract quality labels to operational, diagnostic checks. By decomposing broad concepts like 'correctness' into specific failure modes (e.g., temporal confusion, entity attribution errors, and bundling), the evaluation becomes more actionable for model improvement.",
+    "rubrics": [
+      {
+        "id": "grounding_verifiability",
+        "name": "Grounding Verifiability",
+        "question": "Can every claim in the memory item be directly mapped to a specific utterance or segment in the conversation history?",
+        "why_it_matters": "Prevents hallucination and ensures the memory is based on actual user input.",
+        "failure_examples": [
+          "Memory item contains details not mentioned in the text",
+          "Memory item infers a preference the user never explicitly stated"
+        ]
+      },
+      {
+        "id": "entity_attribution_accuracy",
+        "name": "Entity Attribution Accuracy",
+        "question": "Are attributes, preferences, and actions correctly assigned to the specific speaker or entity they belong to?",
+        "why_it_matters": "Prevents cross-talk errors where the model confuses the user's traits with the assistant's or another participant's.",
+        "failure_examples": [
+          "Assigning the user's dietary restriction to the assistant",
+          "Confusing two different people mentioned in the conversation"
+        ]
+      },
+      {
+        "id": "temporal_state_precision",
+        "name": "Temporal State Precision",
+        "question": "Does the memory item correctly distinguish between past events, current states, and future intentions?",
+        "why_it_matters": "Ensures the model does not treat a past preference as a current one or a future plan as a completed action.",
+        "failure_examples": [
+          "Stating a planned trip as a completed event",
+          "Retaining an outdated address after the user provided a new one"
+        ]
+      },
+      {
+        "id": "fact_atomicity",
+        "name": "Fact Atomicity",
+        "question": "Does each memory item contain exactly one distinct, independent fact?",
+        "why_it_matters": "Atomic facts are easier to update, delete, or retrieve without side effects.",
+        "failure_examples": [
+          "Combining a user's job title and their favorite color in one item",
+          "Bundling a list of three unrelated hobbies into a single entry"
+        ]
+      },
+      {
+        "id": "redundancy_check",
+        "name": "Redundancy Check",
+        "question": "Is the information in this item unique, or is it already covered by another existing memory item?",
+        "why_it_matters": "Redundancy bloats the memory store and increases the risk of conflicting information.",
+        "failure_examples": [
+          "Two items stating the same fact with slightly different wording",
+          "A general item that is entirely contained within a more specific item"
+        ]
+      },
+      {
+        "id": "information_completeness",
+        "name": "Information Completeness",
+        "question": "Does the memory item capture the full context necessary to understand the fact without needing the original conversation?",
+        "why_it_matters": "Ensures the memory is self-contained and useful for future sessions.",
+        "failure_examples": [
+          "Storing 'He likes it' without specifying who 'he' is or what 'it' refers to",
+          "Storing a date without the associated event"
+        ]
+      },
+      {
+        "id": "conciseness_and_noise",
+        "name": "Conciseness and Noise",
+        "question": "Is the memory item free of conversational filler, meta-commentary, or low-value adjectives?",
+        "why_it_matters": "Reduces token usage and improves the signal-to-noise ratio for retrieval.",
+        "failure_examples": [
+          "Including 'The user mentioned that...' in the memory item",
+          "Using flowery language to describe a simple fact"
+        ]
+      },
+      {
+        "id": "structural_uniformity",
+        "name": "Structural Uniformity",
+        "question": "Does the memory item follow a consistent format (e.g., subject-predicate-object or key-value) across the entire set?",
+        "why_it_matters": "Consistent structure allows for programmatic filtering and better retrieval performance.",
+        "failure_examples": [
+          "Mixing full sentences with bulleted lists",
+          "Inconsistent casing or naming conventions for categories"
+        ]
+      },
+      {
+        "id": "negation_handling",
+        "name": "Negation Handling",
+        "question": "Are negative facts (what the user does NOT like or want) explicitly and correctly captured?",
+        "why_it_matters": "Negative constraints are often as important as positive ones for personalization.",
+        "failure_examples": [
+          "Omitting a 'not' that changes the meaning of a preference",
+          "Stating a negative preference as a positive one"
+        ]
+      },
+      {
+        "id": "quantifier_accuracy",
+        "name": "Quantifier Accuracy",
+        "question": "Are quantities, frequencies, and durations accurately represented?",
+        "why_it_matters": "Prevents misinterpretation of the intensity or frequency of user preferences.",
+        "failure_examples": [
+          "Changing 'sometimes' to 'always'",
+          "Rounding a specific number in a way that loses critical meaning"
+        ]
+      },
+      {
+        "id": "contradiction_avoidance",
+        "name": "Contradiction Avoidance",
+        "question": "Does the memory set contain any mutually exclusive facts?",
+        "why_it_matters": "Contradictions render the memory store unreliable for decision-making.",
+        "failure_examples": [
+          "One item saying the user is vegan, another saying they love steak",
+          "Conflicting location data for the same entity"
+        ]
+      },
+      {
+        "id": "relevance_filtering",
+        "name": "Relevance Filtering",
+        "question": "Does the memory item contain information that is actually useful for future interactions?",
+        "why_it_matters": "Prevents the memory store from being cluttered with trivial, transient information.",
+        "failure_examples": [
+          "Storing a one-time greeting as a permanent fact",
+          "Storing a temporary mood that is no longer relevant"
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "model": "gemini-3.1-flash-lite-preview",
+    "attempt_index": 0,
+    "response_format": "json_object",
+    "raw_text": "{\n  \"task_summary\": \"Evaluating the quality of accumulated fact-based memory items extracted from multi-session conversations to ensure they are accurate, atomic, and usable for future retrieval.\",\n  \"design_rationale\": \"The rubric set was refined to move from abstract quality labels to operational, diagnostic checks. By decomposing broad concepts like 'correctness' into specific failure modes (e.g., temporal confusion, entity attribution errors, and bundling), the evaluation becomes more actionable for model improvement.\",\n  \"rubrics\": [\n    {\n      \"id\": \"grounding_verifiability\",\n      \"name\": \"Grounding Verifiability\",\n      \"question\": \"Can every claim in the memory item be directly mapped to a specific utterance or segment in the conversation history?\",\n      \"why_it_matters\": \"Prevents hallucination and ensures the memory is based on actual user input.\",\n      \"failure_examples\": [\"Memory item contains details not mentioned in the text\", \"Memory item infers a preference the user never explicitly stated\"]\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"name\": \"Entity Attribution Accuracy\",\n      \"question\": \"Are attributes, preferences, and actions correctly assigned to the specific speaker or entity they belong to?\",\n      \"why_it_matters\": \"Prevents cross-talk errors where the model confuses the user's traits with the assistant's or another participant's.\",\n      \"failure_examples\": [\"Assigning the user's dietary restriction to the assistant\", \"Confusing two different people mentioned in the conversation\"]\n    },\n    {\n      \"id\": \"temporal_state_precision\",\n      \"name\": \"Temporal State Precision\",\n      \"question\": \"Does the memory item correctly distinguish between past events, current states, and future intentions?\",\n      \"why_it_matters\": \"Ensures the model does not treat a past preference as a current one or a future plan as a completed action.\",\n      \"failure_examples\": [\"Stating a planned trip as a completed event\", \"Retaining an outdated address after the user provided a new one\"]\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"name\": \"Fact Atomicity\",\n      \"question\": \"Does each memory item contain exactly one distinct, independent fact?\",\n      \"why_it_matters\": \"Atomic facts are easier to update, delete, or retrieve without side effects.\",\n      \"failure_examples\": [\"Combining a user's job title and their favorite color in one item\", \"Bundling a list of three unrelated hobbies into a single entry\"]\n    },\n    {\n      \"id\": \"redundancy_check\",\n      \"name\": \"Redundancy Check\",\n      \"question\": \"Is the information in this item unique, or is it already covered by another existing memory item?\",\n      \"why_it_matters\": \"Redundancy bloats the memory store and increases the risk of conflicting information.\",\n      \"failure_examples\": [\"Two items stating the same fact with slightly different wording\", \"A general item that is entirely contained within a more specific item\"]\n    },\n    {\n      \"id\": \"information_completeness\",\n      \"name\": \"Information Completeness\",\n      \"question\": \"Does the memory item capture the full context necessary to understand the fact without needing the original conversation?\",\n      \"why_it_matters\": \"Ensures the memory is self-contained and useful for future sessions.\",\n      \"failure_examples\": [\"Storing 'He likes it' without specifying who 'he' is or what 'it' refers to\", \"Storing a date without the associated event\"]\n    },\n    {\n      \"id\": \"conciseness_and_noise\",\n      \"name\": \"Conciseness and Noise\",\n      \"question\": \"Is the memory item free of conversational filler, meta-commentary, or low-value adjectives?\",\n      \"why_it_matters\": \"Reduces token usage and improves the signal-to-noise ratio for retrieval.\",\n      \"failure_examples\": [\"Including 'The user mentioned that...' in the memory item\", \"Using flowery language to describe a simple fact\"]\n    },\n    {\n      \"id\": \"structural_uniformity\",\n      \"name\": \"Structural Uniformity\",\n      \"question\": \"Does the memory item follow a consistent format (e.g., subject-predicate-object or key-value) across the entire set?\",\n      \"why_it_matters\": \"Consistent structure allows for programmatic filtering and better retrieval performance.\",\n      \"failure_examples\": [\"Mixing full sentences with bulleted lists\", \"Inconsistent casing or naming conventions for categories\"]\n    },\n    {\n      \"id\": \"negation_handling\",\n      \"name\": \"Negation Handling\",\n      \"question\": \"Are negative facts (what the user does NOT like or want) explicitly and correctly captured?\",\n      \"why_it_matters\": \"Negative constraints are often as important as positive ones for personalization.\",\n      \"failure_examples\": [\"Omitting a 'not' that changes the meaning of a preference\", \"Stating a negative preference as a positive one\"]\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"name\": \"Quantifier Accuracy\",\n      \"question\": \"Are quantities, frequencies, and durations accurately represented?\",\n      \"why_it_matters\": \"Prevents misinterpretation of the intensity or frequency of user preferences.\",\n      \"failure_examples\": [\"Changing 'sometimes' to 'always'\", \"Rounding a specific number in a way that loses critical meaning\"]\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"name\": \"Contradiction Avoidance\",\n      \"question\": \"Does the memory set contain any mutually exclusive facts?\",\n      \"why_it_matters\": \"Contradictions render the memory store unreliable for decision-making.\",\n      \"failure_examples\": [\"One item saying the user is vegan, another saying they love steak\", \"Conflicting location data for the same entity\"]\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"name\": \"Relevance Filtering\",\n      \"question\": \"Does the memory item contain information that is actually useful for future interactions?\",\n      \"why_it_matters\": \"Prevents the memory store from being cluttered with trivial, transient information.\",\n      \"failure_examples\": [\"Storing a one-time greeting as a permanent fact\", \"Storing a temporary mood that is no longer relevant\"]\n    }\n  ]\n}",
+    "required_key": "rubrics",
+    "required_key_attempt_index": 0
+  }
+}

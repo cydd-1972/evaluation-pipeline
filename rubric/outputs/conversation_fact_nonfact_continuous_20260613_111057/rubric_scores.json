@@ -1,0 +1,1718 @@
+{
+  "run_name": "conversation_fact_nonfact_continuous_20260613_111057",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "conversation_idx": 0,
+      "fact_count": 228,
+      "nonfact_count": 105,
+      "fact_score": 0.8929,
+      "nonfact_score": 0.8737,
+      "combined_score": 0.8868,
+      "fact_arithmetic_mean_score": 0.875,
+      "nonfact_arithmetic_mean_score": 0.86,
+      "fact_result": {
+        "conversation_idx": 0,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are explicitly supported by the conversation, though a few minor details (e.g., 'Caroline's favorite color is blue') are not directly mentioned."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.95,
+            "reason": "Facts are mostly accurate, with no clear errors. Minor issues like 'Melanie has a dog named Oliver' are repeated with no contradiction."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.9,
+            "reason": "Temporal references are mostly correct, though some entries (e.g., 'Melanie went camping with her kids a few weeks ago') lack precise time anchors."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.85,
+            "reason": "Some facts bundle multiple distinct points (e.g., 'Caroline's relationships feel more genuine now' and 'Some of Caroline's close friends kept supporting her during her transition' could be combined)."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.8,
+            "reason": "There are some redundant facts (e.g., multiple mentions of Caroline's support network and her love for art)."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "Most key facts from the conversation are covered, though some details (e.g., specific events or conversations) are omitted."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.85,
+            "reason": "Some facts are verbose or include unnecessary details (e.g., 'Caroline's drawing is a reminder to stay true to herself and embrace her womanhood' could be more concise)."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.85,
+            "reason": "The structure is mostly consistent, but some entries vary in phrasing and detail level (e.g., some facts are phrased as statements, others as descriptions)."
+          }
+        ],
+        "conversation_score": 0.8929,
+        "arithmetic_mean_score": 0.875,
+        "summary": "The fact memory items are mostly accurate and traceable to the conversation, but some redundancy and minor issues with atomicity and conciseness are present.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are explicitly supported by the conversation, though a few minor details (e.g., 'Caroline's favorite color is blue') are not directly mentioned.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.95,\n      \"reason\": \"Facts are mostly accurate, with no clear errors. Minor issues like 'Melanie has a dog named Oliver' are repeated with no contradiction.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly correct, though some entries (e.g., 'Melanie went camping with her kids a few weeks ago') lack precise time anchors.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.85,\n      \"reason\": \"Some facts bundle multiple distinct points (e.g., 'Caroline's relationships feel more genuine now' and 'Some of Caroline's close friends kept supporting her during her transition' could be combined).\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"There are some redundant facts (e.g., multiple mentions of Caroline's support network and her love for art).\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key facts from the conversation are covered, though some details (e.g., specific events or conversations) are omitted.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.85,\n      \"reason\": \"Some facts are verbose or include unnecessary details (e.g., 'Caroline's drawing is a reminder to stay true to herself and embrace her womanhood' could be more concise).\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.85,\n      \"reason\": \"The structure is mostly consistent, but some entries vary in phrasing and detail level (e.g., some facts are phrased as statements, others as descriptions).\"\n    }\n  ],\n  \"conversation_score\": 0.86,\n  \"summary\": \"The fact memory items are mostly accurate and traceable to the conversation, but some redundancy and minor issues with atomicity and conciseness are present.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 0,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the conversation or fact memories, though a few may be slightly overgeneralized."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summary items are mostly factually correct, though some details may be slightly ambiguous."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.9,
+            "reason": "Temporal references are mostly consistent, though a few could be more precise."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Summary items generally fit their bucket types, though some character summaries could be more detailed."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.9,
+            "reason": "Summaries provide good abstraction over facts, though some could be more concise."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.8,
+            "reason": "Some summary items integrate multiple facts well, but others could benefit from more integration."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.8,
+            "reason": "There is some redundancy in summaries, particularly around art and support themes."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.8,
+            "reason": "Summaries are generally concise and dense, though some could be more succinct."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "Structure is mostly consistent, though some summaries vary in format."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover the key people, events, and locations relevant to the conversation."
+          }
+        ],
+        "conversation_score": 0.8737,
+        "arithmetic_mean_score": 0.86,
+        "summary": "The summary memory items are mostly well-supported, factually correct, and consistent with the conversation. They provide good abstraction and cover the key themes of the conversation, though some could be more concise and avoid redundancy.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the conversation or fact memories, though a few may be slightly overgeneralized.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items are mostly factually correct, though some details may be slightly ambiguous.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly consistent, though a few could be more precise.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items generally fit their bucket types, though some character summaries could be more detailed.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries provide good abstraction over facts, though some could be more concise.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.8,\n      \"reason\": \"Some summary items integrate multiple facts well, but others could benefit from more integration.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"There is some redundancy in summaries, particularly around art and support themes.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.8,\n      \"reason\": \"Summaries are generally concise and dense, though some could be more succinct.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Structure is mostly consistent, though some summaries vary in format.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover the key people, events, and locations relevant to the conversation.\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The summary memory items are mostly well-supported, factually correct, and consistent with the conversation. They provide good abstraction and cover the key themes of the conversation, though some could be more concise and avoid redundancy.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 1,
+      "fact_count": 173,
+      "nonfact_count": 66,
+      "fact_score": 0.8786,
+      "nonfact_score": 1.0,
+      "combined_score": 0.9121,
+      "fact_arithmetic_mean_score": 0.8562,
+      "nonfact_arithmetic_mean_score": 1.0,
+      "fact_result": {
+        "conversation_idx": 1,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to the conversation, but some lack explicit references (e.g., 'Jon used to work as a banker' is mentioned but not explicitly stated)."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.95,
+            "reason": "Factual correctness is high, with no clear errors in names, events, or relationships."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.85,
+            "reason": "Some temporal references are slightly off (e.g., 'Jon visited Paris yesterday' is from Session 2, but the anchor time is 2023-01-29, which is not accurate)."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.8,
+            "reason": "Some facts bundle multiple ideas (e.g., 'Jon is rehearsing hard for an upcoming show' could be split into separate facts about the show and his rehearsal efforts)."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.8,
+            "reason": "Some facts are redundant (e.g., multiple entries about Jon's passion for dance and his determination)."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "Most memory-worthy facts are covered, but some details from the conversation are missing (e.g., specific names of dance styles or events)."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.85,
+            "reason": "Some facts are verbose or could be more concise (e.g., 'Jon used to be scared to death of what people would think, but I learnt that my own happiness is the most important thing')."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "Structure is mostly consistent, but some entries have varying formats (e.g., some include 'anchor_time' while others do not)."
+          }
+        ],
+        "conversation_score": 0.8786,
+        "arithmetic_mean_score": 0.8562,
+        "summary": "The fact memory items are mostly accurate and traceable, but some suffer from minor temporal inaccuracies, redundancy, and lack of conciseness.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but some lack explicit references (e.g., 'Jon used to work as a banker' is mentioned but not explicitly stated).\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.95,\n      \"reason\": \"Factual correctness is high, with no clear errors in names, events, or relationships.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.85,\n      \"reason\": \"Some temporal references are slightly off (e.g., 'Jon visited Paris yesterday' is from Session 2, but the anchor time is 2023-01-29, which is not accurate).\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts bundle multiple ideas (e.g., 'Jon is rehearsing hard for an upcoming show' could be split into separate facts about the show and his rehearsal efforts).\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are redundant (e.g., multiple entries about Jon's passion for dance and his determination).\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most memory-worthy facts are covered, but some details from the conversation are missing (e.g., specific names of dance styles or events).\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.85,\n      \"reason\": \"Some facts are verbose or could be more concise (e.g., 'Jon used to be scared to death of what people would think, but I learnt that my own happiness is the most important thing').\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Structure is mostly consistent, but some entries have varying formats (e.g., some include 'anchor_time' while others do not).\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly accurate and traceable, but some suffer from minor temporal inaccuracies, redundancy, and lack of conciseness.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 1,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 1.0,
+            "reason": "All summary items are directly supported by the original conversation or fact-level memories."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 1.0,
+            "reason": "No factual errors are present in the summary items."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 1.0,
+            "reason": "Temporal references in the summary items are consistent with the original conversation."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 1.0,
+            "reason": "Each summary item fits its bucket type correctly, with character, event, and location summaries behaving as expected."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 1.0,
+            "reason": "Summary items provide useful abstraction over underlying facts without copying or overgeneralizing."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 1.0,
+            "reason": "Summary items effectively integrate multiple related fact-level memories where appropriate."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 1.0,
+            "reason": "Summary items do not contain obvious redundancy or near-duplicate content."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 1.0,
+            "reason": "Summary items are concise and carry high information density."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 1.0,
+            "reason": "Summary items within the same bucket follow a consistent and reusable structure."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 1.0,
+            "reason": "Summary items cover all appropriate people, events, and locations relevant to the conversation."
+          }
+        ],
+        "conversation_score": 1.0,
+        "arithmetic_mean_score": 1.0,
+        "summary": "The summary memory items are fully sourceable, factually correct, temporally consistent, and fit their bucket types well. They provide high-quality abstraction, integrate facts effectively, avoid redundancy, are concise, and maintain structural consistency. They also cover all relevant summary targets.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All summary items are directly supported by the original conversation or fact-level memories.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present in the summary items.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"Temporal references in the summary items are consistent with the original conversation.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 1.0,\n      \"reason\": \"Each summary item fits its bucket type correctly, with character, event, and location summaries behaving as expected.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items provide useful abstraction over underlying facts without copying or overgeneralizing.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items effectively integrate multiple related fact-level memories where appropriate.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items do not contain obvious redundancy or near-duplicate content.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items are concise and carry high information density.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items within the same bucket follow a consistent and reusable structure.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items cover all appropriate people, events, and locations relevant to the conversation.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The summary memory items are fully sourceable, factually correct, temporally consistent, and fit their bucket types well. They provide high-quality abstraction, integrate facts effectively, avoid redundancy, are concise, and maintain structural consistency. They also cover all relevant summary targets.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 2,
+      "fact_count": 336,
+      "nonfact_count": 152,
+      "fact_score": 0.8071,
+      "nonfact_score": 0.8947,
+      "combined_score": 0.8344,
+      "fact_arithmetic_mean_score": 0.7875,
+      "nonfact_arithmetic_mean_score": 0.89,
+      "fact_result": {
+        "conversation_idx": 2,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to explicit mentions in the conversation, though a few lack direct references."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.8,
+            "reason": "Some facts are slightly ambiguous or lack specific details, but overall no major factual errors."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.8,
+            "reason": "Temporal references are mostly accurate, but a few events are misaligned with their anchor times."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.7,
+            "reason": "Some facts bundle multiple distinct pieces of information, making them less atomic."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.7,
+            "reason": "There are some instances of near-duplicate facts, though not excessive."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.8,
+            "reason": "Most memory-worthy facts are covered, though some details are omitted."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Facts are generally concise, though a few could be more succinct."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "Facts follow a consistent structure, though some variations exist."
+          }
+        ],
+        "conversation_score": 0.8071,
+        "arithmetic_mean_score": 0.7875,
+        "summary": "The fact memory items are mostly traceable and accurate, with some issues in atomicity and redundancy.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to explicit mentions in the conversation, though a few lack direct references.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are slightly ambiguous or lack specific details, but overall no major factual errors.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal references are mostly accurate, but a few events are misaligned with their anchor times.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some facts bundle multiple distinct pieces of information, making them less atomic.\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.7,\n      \"reason\": \"There are some instances of near-duplicate facts, though not excessive.\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Most memory-worthy facts are covered, though some details are omitted.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Facts are generally concise, though a few could be more succinct.\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Facts follow a consistent structure, though some variations exist.\"\n    }\n  ],\n  \"conversation_score\": 0.8,\n  \"summary\": \"The fact memory items are mostly traceable and accurate, with some issues in atomicity and redundancy.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 2,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the conversation or fact memories, though a few could be more explicitly tied to specific statements."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summaries are factually correct, though some could be more precise in details like the exact nature of the community meeting space."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.9,
+            "reason": "Temporal references are mostly consistent, though some could clarify the exact timing of events like the flood and the community meeting."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Character, event, and location summaries mostly fit their types, though some character summaries could better highlight personal motivations."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.9,
+            "reason": "Summaries provide good abstraction, though some could avoid being too close to the original conversation phrasing."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.9,
+            "reason": "Summaries integrate multiple facts well, though some could better connect related events like the flood and infrastructure improvements."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.8,
+            "reason": "Some summaries are slightly redundant, such as multiple mentions of the importance of community and family."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.9,
+            "reason": "Summaries are concise and dense, though a few could be slightly more focused."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.9,
+            "reason": "Summaries follow a reasonably consistent structure, though some could better align with the standard format."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover key people, events, and locations, though some minor characters or locations could be included."
+          }
+        ],
+        "conversation_score": 0.8947,
+        "arithmetic_mean_score": 0.89,
+        "summary": "The summary memory items are mostly well-supported, factually accurate, and well-structured, with good abstraction and integration of facts. They cover the main people, events, and locations from the conversation, though there are minor issues with redundancy and some could be more precise or focused.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the conversation or fact memories, though a few could be more explicitly tied to specific statements.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are factually correct, though some could be more precise in details like the exact nature of the community meeting space.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly consistent, though some could clarify the exact timing of events like the flood and the community meeting.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Character, event, and location summaries mostly fit their types, though some character summaries could better highlight personal motivations.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries provide good abstraction, though some could avoid being too close to the original conversation phrasing.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries integrate multiple facts well, though some could better connect related events like the flood and infrastructure improvements.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"Some summaries are slightly redundant, such as multiple mentions of the importance of community and family.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are concise and dense, though a few could be slightly more focused.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries follow a reasonably consistent structure, though some could better align with the standard format.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover key people, events, and locations, though some minor characters or locations could be included.\"\n    }\n  ],\n  \"conversation_score\": 0.88,\n  \"summary\": \"The summary memory items are mostly well-supported, factually accurate, and well-structured, with good abstraction and integration of facts. They cover the main people, events, and locations from the conversation, though there are minor issues with redundancy and some could be more precise or focused.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 3,
+      "fact_count": 321,
+      "nonfact_count": 119,
+      "fact_score": 0.8714,
+      "nonfact_score": 0.8895,
+      "combined_score": 0.8763,
+      "fact_arithmetic_mean_score": 0.85,
+      "nonfact_arithmetic_mean_score": 0.88,
+      "fact_result": {
+        "conversation_idx": 3,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to the conversation, but a few like 'Joanna is allergic to turtles' are not explicitly mentioned."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Factual correctness is mostly maintained, but there is a minor error regarding Joanna being allergic to turtles."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.9,
+            "reason": "Temporal correctness is mostly maintained, but some facts lack precise time references."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.8,
+            "reason": "Some facts are not atomic, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss' which combines multiple details."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.8,
+            "reason": "There is some redundancy, such as multiple mentions of Joanna's allergies and Nate's turtle-related activities."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "Most memory-worthy facts are covered, but some details like the specific name of the movie Joanna watched in Session 23 are missing."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Some facts are verbose, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss' which could be more concise."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is mostly consistent, but some facts are phrased differently, which could be standardized."
+          }
+        ],
+        "conversation_score": 0.8714,
+        "arithmetic_mean_score": 0.85,
+        "summary": "The fact memory items are mostly accurate and traceable to the conversation, but there are some issues with factual correctness, redundancy, and conciseness.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but a few like 'Joanna is allergic to turtles' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Factual correctness is mostly maintained, but there is a minor error regarding Joanna being allergic to turtles.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal correctness is mostly maintained, but some facts lack precise time references.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are not atomic, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss' which combines multiple details.\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"There is some redundancy, such as multiple mentions of Joanna's allergies and Nate's turtle-related activities.\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most memory-worthy facts are covered, but some details like the specific name of the movie Joanna watched in Session 23 are missing.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are verbose, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss' which could be more concise.\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some facts are phrased differently, which could be standardized.\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly accurate and traceable to the conversation, but there are some issues with factual correctness, redundancy, and conciseness.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 3,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the conversation or fact memories, though some details like the specific name of the book series Nate recommended are not explicitly mentioned in the conversation."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summaries are mostly factually correct, but there is a minor inconsistency regarding Joanna's allergy to turtles, which was not mentioned in the conversation."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.9,
+            "reason": "Temporal references are mostly consistent, though some summaries could be more precise about the timing of events."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Character and event summaries fit their types well, but some location summaries could be more descriptive and less event-focused."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.9,
+            "reason": "Summaries provide good abstraction over facts, though some could be more concise and avoid minor repetition."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.9,
+            "reason": "Summaries integrate multiple facts well, though some could better connect related events or characters."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.8,
+            "reason": "Some summaries are slightly redundant, such as multiple mentions of Nate's turtle care and Joanna's screenplay progress."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.8,
+            "reason": "Summaries are generally concise but could be more dense in some cases, such as combining details about Nate's gaming tournaments."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.9,
+            "reason": "Summaries within the same bucket follow a reasonably consistent structure, though some event summaries vary in detail."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover the main people, events, and locations relevant to the conversation, though some minor details could be included."
+          }
+        ],
+        "conversation_score": 0.8895,
+        "arithmetic_mean_score": 0.88,
+        "summary": "The summary memory items are mostly well-supported, factually correct, and consistent with the conversation. They provide good abstraction and integration of facts, though some redundancy and minor structural inconsistencies exist.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the conversation or fact memories, though some details like the specific name of the book series Nate recommended are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are mostly factually correct, but there is a minor inconsistency regarding Joanna's allergy to turtles, which was not mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly consistent, though some summaries could be more precise about the timing of events.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Character and event summaries fit their types well, but some location summaries could be more descriptive and less event-focused.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries provide good abstraction over facts, though some could be more concise and avoid minor repetition.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries integrate multiple facts well, though some could better connect related events or characters.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"Some summaries are slightly redundant, such as multiple mentions of Nate's turtle care and Joanna's screenplay progress.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.8,\n      \"reason\": \"Summaries are generally concise but could be more dense in some cases, such as combining details about Nate's gaming tournaments.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries within the same bucket follow a reasonably consistent structure, though some event summaries vary in detail.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover the main people, events, and locations relevant to the conversation, though some minor details could be included.\"\n    }\n  ],\n  \"conversation_score\": 0.87,\n  \"summary\": \"The summary memory items are mostly well-supported, factually correct, and consistent with the conversation. They provide good abstraction and integration of facts, though some redundancy and minor structural inconsistencies exist.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 4,
+      "fact_count": 364,
+      "nonfact_count": 161,
+      "fact_score": 0.8714,
+      "nonfact_score": 0.8947,
+      "combined_score": 0.8785,
+      "fact_arithmetic_mean_score": 0.85,
+      "nonfact_arithmetic_mean_score": 0.89,
+      "fact_result": {
+        "conversation_idx": 4,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to the conversation, but a few lack explicit references (e.g., 'John has a painting of Aragorn in his room')."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Facts are mostly correct, but there are minor inconsistencies (e.g., 'John has a painting of Aragorn in his room' is not explicitly mentioned)."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.9,
+            "reason": "Temporal references are mostly accurate, but some events are misaligned with their anchor times (e.g., 'John's team won a trophy' is not explicitly tied to a specific time)."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.8,
+            "reason": "Some facts bundle multiple distinct pieces of information (e.g., 'John's team gave their all during a scrimmage last week' could be split into separate facts)."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.8,
+            "reason": "There are some near-duplicates (e.g., 'John's team gave their all during a scrimmage last week' and 'John's team dug deep and overturned the deficit to win the game')."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "Most memory-worthy facts are covered, but some key details from the conversation are missing (e.g., 'John's team had a real battle against another team last week' lacks context)."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Some facts are overly verbose (e.g., 'John's team gave their all during a scrimmage last week' could be more concise)."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is mostly consistent, but some facts are phrased differently (e.g., 'John's team gave their all during a scrimmage last week' vs. 'John's team had a real battle against another team last week')."
+          }
+        ],
+        "conversation_score": 0.8714,
+        "arithmetic_mean_score": 0.85,
+        "summary": "The fact memory items are mostly accurate and traceable to the conversation, but some lack explicit references, have minor inconsistencies, and could be more concise or atomic.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but a few lack explicit references (e.g., 'John has a painting of Aragorn in his room').\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly correct, but there are minor inconsistencies (e.g., 'John has a painting of Aragorn in his room' is not explicitly mentioned).\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly accurate, but some events are misaligned with their anchor times (e.g., 'John's team won a trophy' is not explicitly tied to a specific time).\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts bundle multiple distinct pieces of information (e.g., 'John's team gave their all during a scrimmage last week' could be split into separate facts).\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"There are some near-duplicates (e.g., 'John's team gave their all during a scrimmage last week' and 'John's team dug deep and overturned the deficit to win the game').\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most memory-worthy facts are covered, but some key details from the conversation are missing (e.g., 'John's team had a real battle against another team last week' lacks context).\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are overly verbose (e.g., 'John's team gave their all during a scrimmage last week' could be more concise).\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some facts are phrased differently (e.g., 'John's team gave their all during a scrimmage last week' vs. 'John's team had a real battle against another team last week').\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly accurate and traceable to the conversation, but some lack explicit references, have minor inconsistencies, and could be more concise or atomic.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 4,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the original conversation or fact memories, though some minor details may be slightly ambiguous."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summary items are mostly factually correct, though a few could be more precise, such as the exact nature of Tim's study abroad program."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.9,
+            "reason": "Temporal consistency is mostly maintained, though some summaries could clarify the exact time frames for events."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Summary items fit their bucket types well, though some character summaries could be more detailed."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.9,
+            "reason": "Summaries provide good abstraction over underlying facts, though some could be more concise."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.9,
+            "reason": "Summaries integrate multiple related facts effectively, though some could be more comprehensive."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.9,
+            "reason": "Summaries are mostly non-redundant, though a few similar events could be combined."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.8,
+            "reason": "Some summaries could be more concise while maintaining the same level of information density."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.9,
+            "reason": "Summaries within the same bucket follow a reasonably consistent structure, though some could be more uniform."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover the appropriate people, events, and locations, though some minor details could be included."
+          }
+        ],
+        "conversation_score": 0.8947,
+        "arithmetic_mean_score": 0.89,
+        "summary": "The summary memory items from the final session of the conversation are mostly well-structured and factually accurate, with good abstraction and integration of related facts. They cover the key people, events, and locations from the conversation, though some could be more concise and have minor issues with temporal clarity and redundancy.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the original conversation or fact memories, though some minor details may be slightly ambiguous.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items are mostly factually correct, though a few could be more precise, such as the exact nature of Tim's study abroad program.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal consistency is mostly maintained, though some summaries could clarify the exact time frames for events.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items fit their bucket types well, though some character summaries could be more detailed.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries provide good abstraction over underlying facts, though some could be more concise.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries integrate multiple related facts effectively, though some could be more comprehensive.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are mostly non-redundant, though a few similar events could be combined.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.8,\n      \"reason\": \"Some summaries could be more concise while maintaining the same level of information density.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries within the same bucket follow a reasonably consistent structure, though some could be more uniform.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover the appropriate people, events, and locations, though some minor details could be included.\"\n    }\n  ],\n  \"conversation_score\": 0.88,\n  \"summary\": \"The summary memory items from the final session of the conversation are mostly well-structured and factually accurate, with good abstraction and integration of related facts. They cover the key people, events, and locations from the conversation, though some could be more concise and have minor issues with temporal clarity and redundancy.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 5,
+      "fact_count": 282,
+      "nonfact_count": 151,
+      "fact_score": 0.8571,
+      "nonfact_score": 1.0,
+      "combined_score": 0.9069,
+      "fact_arithmetic_mean_score": 0.8375,
+      "nonfact_arithmetic_mean_score": 1.0,
+      "fact_result": {
+        "conversation_idx": 5,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are well-supported by the conversation, though a few minor details (e.g., 'Audrey has a cast on her arm') are not explicitly mentioned in the conversation."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Factual correctness is high, but there is a minor inconsistency regarding the number of dogs Audrey has (some entries say 3, others say 4)."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.8,
+            "reason": "Some temporal references are slightly off, such as the mention of 'Audrey's dogs are all 3 years old' when the conversation indicates some are older."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.8,
+            "reason": "Most facts are atomic, but some entries bundle multiple facts (e.g., 'Audrey's dogs love the bigger backyard and she set up a play area')."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.8,
+            "reason": "There is some redundancy, such as multiple mentions of Audrey's dogs enjoying the park and playing fetch."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "The coverage is good, but some key details from the conversation (e.g., specific names of places Audrey visited) are missing."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Some facts are verbose, such as 'Audrey's dogs love socializing with other pups at the dog park' which could be more concise."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is mostly consistent, but some entries have slightly different formats (e.g., some include 'anchor_time' while others do not)."
+          }
+        ],
+        "conversation_score": 0.8571,
+        "arithmetic_mean_score": 0.8375,
+        "summary": "The fact memory items are mostly accurate and well-supported by the conversation, with some minor issues in temporal correctness, redundancy, and conciseness.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are well-supported by the conversation, though a few minor details (e.g., 'Audrey has a cast on her arm') are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Factual correctness is high, but there is a minor inconsistency regarding the number of dogs Audrey has (some entries say 3, others say 4).\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some temporal references are slightly off, such as the mention of 'Audrey's dogs are all 3 years old' when the conversation indicates some are older.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Most facts are atomic, but some entries bundle multiple facts (e.g., 'Audrey's dogs love the bigger backyard and she set up a play area').\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"There is some redundancy, such as multiple mentions of Audrey's dogs enjoying the park and playing fetch.\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"The coverage is good, but some key details from the conversation (e.g., specific names of places Audrey visited) are missing.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are verbose, such as 'Audrey's dogs love socializing with other pups at the dog park' which could be more concise.\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some entries have slightly different formats (e.g., some include 'anchor_time' while others do not).\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly accurate and well-supported by the conversation, with some minor issues in temporal correctness, redundancy, and conciseness.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 5,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 1.0,
+            "reason": "All summary items are directly supported by the conversation or fact memories."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 1.0,
+            "reason": "No factual errors in the summary items about people, events, places, relationships, or attributes."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 1.0,
+            "reason": "Temporal references are consistent with the timeline of the conversation."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 1.0,
+            "reason": "Each summary item fits its bucket type (character, event, location) correctly."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 1.0,
+            "reason": "Summary items provide useful abstraction over underlying facts without copying or overgeneralizing."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 1.0,
+            "reason": "Summary items effectively integrate multiple related fact-level memories."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 1.0,
+            "reason": "No obvious redundancy or near-duplicate content across summary items."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 1.0,
+            "reason": "Summary items are concise and carry high information density."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 1.0,
+            "reason": "Summary items within the same bucket follow a consistent and reusable structure."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 1.0,
+            "reason": "Summary items cover all appropriate people, events, and locations for the conversation."
+          }
+        ],
+        "conversation_score": 1.0,
+        "arithmetic_mean_score": 1.0,
+        "summary": "The summary memory items from the final session are fully sourceable, factually correct, temporally consistent, and fit their bucket types well. They provide useful abstraction, integrate facts effectively, avoid redundancy, are concise, and follow a consistent structure. They also cover all appropriate summary targets.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All summary items are directly supported by the conversation or fact memories.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors in the summary items about people, events, places, relationships, or attributes.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"Temporal references are consistent with the timeline of the conversation.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 1.0,\n      \"reason\": \"Each summary item fits its bucket type (character, event, location) correctly.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items provide useful abstraction over underlying facts without copying or overgeneralizing.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items effectively integrate multiple related fact-level memories.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 1.0,\n      \"reason\": \"No obvious redundancy or near-duplicate content across summary items.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items are concise and carry high information density.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items within the same bucket follow a consistent and reusable structure.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items cover all appropriate people, events, and locations for the conversation.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The summary memory items from the final session are fully sourceable, factually correct, temporally consistent, and fit their bucket types well. They provide useful abstraction, integrate facts effectively, avoid redundancy, are concise, and follow a consistent structure. They also cover all appropriate summary targets.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 6,
+      "fact_count": 390,
+      "nonfact_count": 154,
+      "fact_score": 0.8571,
+      "nonfact_score": 0.8947,
+      "combined_score": 0.8677,
+      "fact_arithmetic_mean_score": 0.8375,
+      "nonfact_arithmetic_mean_score": 0.89,
+      "fact_result": {
+        "conversation_idx": 6,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to the conversation, but a few are not explicitly mentioned, such as 'James has two people who always help him out when he's struggling.'"
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Factual correctness is mostly maintained, but there are minor inconsistencies, such as 'James's mother's army friend is still serving in the army' and 'James's mother's army friend retired a long time ago.'"
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.8,
+            "reason": "Temporal correctness is generally good, but some facts are not clearly anchored in time, such as 'James's mother came to see him with her army friend two days ago.'"
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.8,
+            "reason": "Some facts are reasonably atomic, but others bundle multiple distinct facts, such as 'James and his gaming group had a get-together recently, and the gaming marathon strengthened the bond between James and his friends.'"
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.8,
+            "reason": "There is some redundancy, such as multiple mentions of James's dogs and his love for gaming, but it is not excessive."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "The fact memory items cover most memory-worthy content from the conversation, but some details are omitted, such as the specific names of the dogs and the names of the books John enjoys."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Some facts are concise, but others are overly verbose, such as 'James and his gaming group had a get-together recently, and the gaming marathon strengthened the bond between James and his friends.'"
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is reasonably consistent, but there are some variations in how facts are presented, such as some facts being more detailed than others."
+          }
+        ],
+        "conversation_score": 0.8571,
+        "arithmetic_mean_score": 0.8375,
+        "summary": "The fact memory items are mostly accurate and traceable to the conversation, with some minor issues in temporal correctness, atomicity, and structural consistency.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but a few are not explicitly mentioned, such as 'James has two people who always help him out when he's struggling.'\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Factual correctness is mostly maintained, but there are minor inconsistencies, such as 'James's mother's army friend is still serving in the army' and 'James's mother's army friend retired a long time ago.'\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal correctness is generally good, but some facts are not clearly anchored in time, such as 'James's mother came to see him with her army friend two days ago.'\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are reasonably atomic, but others bundle multiple distinct facts, such as 'James and his gaming group had a get-together recently, and the gaming marathon strengthened the bond between James and his friends.'\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"There is some redundancy, such as multiple mentions of James's dogs and his love for gaming, but it is not excessive.\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"The fact memory items cover most memory-worthy content from the conversation, but some details are omitted, such as the specific names of the dogs and the names of the books John enjoys.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are concise, but others are overly verbose, such as 'James and his gaming group had a get-together recently, and the gaming marathon strengthened the bond between James and his friends.'\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is reasonably consistent, but there are some variations in how facts are presented, such as some facts being more detailed than others.\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly accurate and traceable to the conversation, with some minor issues in temporal correctness, atomicity, and structural consistency.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 6,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the original conversation or fact memories, though some minor details may be slightly ambiguous."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summary items are mostly factually correct, though there are a few minor inconsistencies or ambiguities."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.9,
+            "reason": "Temporal consistency is mostly maintained, though a few summaries could be more precise with time references."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Summary items generally fit their bucket types, though some could be more clearly structured as character, event, or location summaries."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.9,
+            "reason": "Summaries provide good abstraction over underlying facts, though some could be more concise or avoid near-duplicates."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.9,
+            "reason": "Summaries integrate multiple related facts effectively, though some could be more comprehensive."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.8,
+            "reason": "Some summaries are slightly redundant or near-duplicates, but overall, redundancy is minimal."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.9,
+            "reason": "Summaries are reasonably concise and carry high information density, though a few could be more succinct."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.9,
+            "reason": "Summaries within the same bucket follow a reasonably consistent structure, though some could be more uniform."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover the appropriate people, events, and locations, though some could be more comprehensive."
+          }
+        ],
+        "conversation_score": 0.8947,
+        "arithmetic_mean_score": 0.89,
+        "summary": "The summary memory items from the final session of the conversation are mostly well-structured, factually accurate, and sourceable from the original conversation and fact memories. They provide good abstraction and integration of facts, though some minor issues with redundancy and structural consistency exist.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the original conversation or fact memories, though some minor details may be slightly ambiguous.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items are mostly factually correct, though there are a few minor inconsistencies or ambiguities.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal consistency is mostly maintained, though a few summaries could be more precise with time references.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Summary items generally fit their bucket types, though some could be more clearly structured as character, event, or location summaries.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries provide good abstraction over underlying facts, though some could be more concise or avoid near-duplicates.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries integrate multiple related facts effectively, though some could be more comprehensive.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"Some summaries are slightly redundant or near-duplicates, but overall, redundancy is minimal.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are reasonably concise and carry high information density, though a few could be more succinct.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries within the same bucket follow a reasonably consistent structure, though some could be more uniform.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover the appropriate people, events, and locations, though some could be more comprehensive.\"\n    }\n  ],\n  \"conversation_score\": 0.89,\n  \"summary\": \"The summary memory items from the final session of the conversation are mostly well-structured, factually accurate, and sourceable from the original conversation and fact memories. They provide good abstraction and integration of facts, though some minor issues with redundancy and structural consistency exist.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 7,
+      "fact_count": 326,
+      "nonfact_count": 160,
+      "fact_score": 0.85,
+      "nonfact_score": 0.8895,
+      "combined_score": 0.863,
+      "fact_arithmetic_mean_score": 0.825,
+      "nonfact_arithmetic_mean_score": 0.88,
+      "fact_result": {
+        "conversation_idx": 7,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to the conversation, but a few lack explicit references (e.g., 'Deborah has a cozy nook')."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Facts are mostly accurate, but some details are slightly inconsistent (e.g., 'Deborah's mother passed away a few years ago' vs. 'Deborah's mother passed away last year')."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.8,
+            "reason": "Some facts have incorrect or ambiguous temporal references (e.g., 'Deborah's mother passed away a few years ago' vs. 'Deborah's mother passed away last year')."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.8,
+            "reason": "Some facts bundle multiple distinct pieces of information (e.g., 'Deborah's mother's hobbies included reading and travel')."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.7,
+            "reason": "There are several redundant facts (e.g., multiple mentions of 'Jolene's mother passed away last year' and 'Deborah's mother passed away a few years ago')."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.9,
+            "reason": "The facts cover most memory-worthy content from the conversation, but some details are omitted (e.g., specific names of yoga poses)."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Some facts are overly verbose (e.g., 'Deborah's mother's hobbies included reading and travel')."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is mostly consistent, but some facts are phrased differently (e.g., 'Deborah's mother passed away a few years ago' vs. 'Deborah's mother passed away last year')."
+          }
+        ],
+        "conversation_score": 0.85,
+        "arithmetic_mean_score": 0.825,
+        "summary": "The fact memory items are mostly accurate and traceable to the conversation, but there are some inconsistencies in temporal references and redundancy in certain facts.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but a few lack explicit references (e.g., 'Deborah has a cozy nook').\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly accurate, but some details are slightly inconsistent (e.g., 'Deborah's mother passed away a few years ago' vs. 'Deborah's mother passed away last year').\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts have incorrect or ambiguous temporal references (e.g., 'Deborah's mother passed away a few years ago' vs. 'Deborah's mother passed away last year').\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts bundle multiple distinct pieces of information (e.g., 'Deborah's mother's hobbies included reading and travel').\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.7,\n      \"reason\": \"There are several redundant facts (e.g., multiple mentions of 'Jolene's mother passed away last year' and 'Deborah's mother passed away a few years ago').\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"The facts cover most memory-worthy content from the conversation, but some details are omitted (e.g., specific names of yoga poses).\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are overly verbose (e.g., 'Deborah's mother's hobbies included reading and travel').\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some facts are phrased differently (e.g., 'Deborah's mother passed away a few years ago' vs. 'Deborah's mother passed away last year').\"\n    }\n  ],\n  \"conversation_score\": 0.8375,\n  \"summary\": \"The fact memory items are mostly accurate and traceable to the conversation, but there are some inconsistencies in temporal references and redundancy in certain facts.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 7,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the conversation or fact memories, though some details like the 'hidden gem' location are slightly vague."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summaries are factually correct, but some items like 'Deborah's favorite yoga track' are not explicitly mentioned in the conversation."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.9,
+            "reason": "Temporal references are mostly consistent, though some summaries could be more precise about the timing of events."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Character and event summaries fit their types well, but some location summaries could be more descriptive."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.9,
+            "reason": "Summaries provide good abstraction, though some could be more concise and avoid minor repetition."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.9,
+            "reason": "Summaries integrate related facts well, though some could be more comprehensive."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.8,
+            "reason": "Some summaries are slightly redundant, such as multiple mentions of yoga and meditation."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.8,
+            "reason": "Summaries are generally concise but could be more dense in some cases."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.9,
+            "reason": "Summaries have a reasonably consistent structure, though some could be more uniform."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover the main people, events, and locations, though some minor details are missing."
+          }
+        ],
+        "conversation_score": 0.8895,
+        "arithmetic_mean_score": 0.88,
+        "summary": "The summary memory items are mostly well-supported, factually accurate, and consistent with the conversation. They provide good abstraction and integration of facts, though some could be more concise and avoid redundancy.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the conversation or fact memories, though some details like the 'hidden gem' location are slightly vague.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are factually correct, but some items like 'Deborah's favorite yoga track' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly consistent, though some summaries could be more precise about the timing of events.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Character and event summaries fit their types well, but some location summaries could be more descriptive.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries provide good abstraction, though some could be more concise and avoid minor repetition.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries integrate related facts well, though some could be more comprehensive.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"Some summaries are slightly redundant, such as multiple mentions of yoga and meditation.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.8,\n      \"reason\": \"Summaries are generally concise but could be more dense in some cases.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries have a reasonably consistent structure, though some could be more uniform.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover the main people, events, and locations, though some minor details are missing.\"\n    }\n  ],\n  \"conversation_score\": 0.87,\n  \"summary\": \"The summary memory items are mostly well-supported, factually accurate, and consistent with the conversation. They provide good abstraction and integration of facts, though some could be more concise and avoid redundancy.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 8,
+      "fact_count": 233,
+      "nonfact_count": 104,
+      "fact_score": 0.8286,
+      "nonfact_score": 0.8579,
+      "combined_score": 0.8376,
+      "fact_arithmetic_mean_score": 0.8062,
+      "nonfact_arithmetic_mean_score": 0.85,
+      "fact_result": {
+        "conversation_idx": 8,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.85,
+            "reason": "Most facts are traceable, but some like 'Evan owns a bonsai tree' and 'Evan's happy place is the small island where he grew up' are not explicitly mentioned in the conversation."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Factual errors are minimal, but there are a few like 'Evan's family motto is from a trip to Banff' which is not explicitly stated in the conversation."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.8,
+            "reason": "Some facts have incorrect temporal references, such as 'Evan's painting was inspired by a vacation a few years back' which is not clearly supported in the conversation."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.75,
+            "reason": "Some facts are not atomic, for example, 'Evan's painting captures a moment of introspection' and 'Evan painted a painting with a sense of joy and freedom' are similar and could be combined."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.7,
+            "reason": "There are some redundant facts, such as 'Evan finds that painting or going for a drive helps when he is stressed' and 'Evan finds that painting or going for a drive helps when he is stressed' are repeated."
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.85,
+            "reason": "Most memory-worthy facts are covered, but some like 'Evan's partner is pregnant' and 'Evan got married last week' are not explicitly mentioned in the conversation."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.8,
+            "reason": "Some facts are verbose, such as 'Evan's painting emphasizes emotional state through expressive brushwork and vibrant color choices' which could be more concise."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is mostly consistent, but some facts are phrased differently, such as 'Evan's painting captures a moment of introspection' and 'Evan painted a painting with a sense of joy and freedom' which could be standardized."
+          }
+        ],
+        "conversation_score": 0.8286,
+        "arithmetic_mean_score": 0.8062,
+        "summary": "The fact memory items are mostly traceable and factually correct, but there are some issues with temporal accuracy, redundancy, and conciseness. The overall quality is good but not perfect.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.85,\n      \"reason\": \"Most facts are traceable, but some like 'Evan owns a bonsai tree' and 'Evan's happy place is the small island where he grew up' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Factual errors are minimal, but there are a few like 'Evan's family motto is from a trip to Banff' which is not explicitly stated in the conversation.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts have incorrect temporal references, such as 'Evan's painting was inspired by a vacation a few years back' which is not clearly supported in the conversation.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.75,\n      \"reason\": \"Some facts are not atomic, for example, 'Evan's painting captures a moment of introspection' and 'Evan painted a painting with a sense of joy and freedom' are similar and could be combined.\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.7,\n      \"reason\": \"There are some redundant facts, such as 'Evan finds that painting or going for a drive helps when he is stressed' and 'Evan finds that painting or going for a drive helps when he is stressed' are repeated.\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.85,\n      \"reason\": \"Most memory-worthy facts are covered, but some like 'Evan's partner is pregnant' and 'Evan got married last week' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are verbose, such as 'Evan's painting emphasizes emotional state through expressive brushwork and vibrant color choices' which could be more concise.\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some facts are phrased differently, such as 'Evan's painting captures a moment of introspection' and 'Evan painted a painting with a sense of joy and freedom' which could be standardized.\"\n    }\n  ],\n  \"conversation_score\": 0.8125,\n  \"summary\": \"The fact memory items are mostly traceable and factually correct, but there are some issues with temporal accuracy, redundancy, and conciseness. The overall quality is good but not perfect.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 8,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 0.9,
+            "reason": "Most summary items are supported by the conversation or fact memories, though some details like 'Evan's happy place is the small island where he grew up' are slightly vague."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.9,
+            "reason": "Summaries are mostly factually correct, but there is a minor inconsistency in the timeline of Evan's marriage and the incident with the roses."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 0.8,
+            "reason": "Temporal references are mostly consistent, but some summaries mix past and present events without clear distinction."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 0.9,
+            "reason": "Character and event summaries fit their types well, but location summaries could be more descriptive and structured."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 0.8,
+            "reason": "Summaries provide good abstraction, but some are too close to the original conversation, lacking higher-level synthesis."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 0.8,
+            "reason": "Some summaries integrate multiple facts well, but others could better combine related information for a more cohesive narrative."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 0.8,
+            "reason": "There is some redundancy in summaries about health challenges and painting, but it's not overwhelming."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 0.9,
+            "reason": "Summaries are concise and carry high information density, though a few could be slightly more focused."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "Summaries have a consistent structure, but some lack uniformity in how details are presented."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 0.9,
+            "reason": "Summaries cover key people, events, and locations, though some minor events could be included for completeness."
+          }
+        ],
+        "conversation_score": 0.8579,
+        "arithmetic_mean_score": 0.85,
+        "summary": "The summary memory items are mostly well-supported, factually accurate, and abstracted appropriately, with some minor issues in temporal consistency and redundancy.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most summary items are supported by the conversation or fact memories, though some details like 'Evan's happy place is the small island where he grew up' are slightly vague.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are mostly factually correct, but there is a minor inconsistency in the timeline of Evan's marriage and the incident with the roses.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal references are mostly consistent, but some summaries mix past and present events without clear distinction.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 0.9,\n      \"reason\": \"Character and event summaries fit their types well, but location summaries could be more descriptive and structured.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 0.8,\n      \"reason\": \"Summaries provide good abstraction, but some are too close to the original conversation, lacking higher-level synthesis.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 0.8,\n      \"reason\": \"Some summaries integrate multiple facts well, but others could better combine related information for a more cohesive narrative.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 0.8,\n      \"reason\": \"There is some redundancy in summaries about health challenges and painting, but it's not overwhelming.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries are concise and carry high information density, though a few could be slightly more focused.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Summaries have a consistent structure, but some lack uniformity in how details are presented.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 0.9,\n      \"reason\": \"Summaries cover key people, events, and locations, though some minor events could be included for completeness.\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The summary memory items are mostly well-supported, factually accurate, and abstracted appropriately, with some minor issues in temporal consistency and redundancy.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    },
+    {
+      "conversation_idx": 9,
+      "fact_count": 309,
+      "nonfact_count": 145,
+      "fact_score": 0.7929,
+      "nonfact_score": 1.0,
+      "combined_score": 0.859,
+      "fact_arithmetic_mean_score": 0.7625,
+      "nonfact_arithmetic_mean_score": 1.0,
+      "fact_result": {
+        "conversation_idx": 9,
+        "rubrics": [
+          {
+            "id": "fact_sourceability",
+            "name": "Fact Sourceability",
+            "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+            "score": 0.9,
+            "reason": "Most facts are traceable to the conversation, but some details like 'Calvin's red sports car is a sign of his hard work and dedication' are not explicitly mentioned."
+          },
+          {
+            "id": "fact_factual_correctness",
+            "name": "Fact Factual Correctness",
+            "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 0.8,
+            "reason": "Some facts are slightly incorrect, such as 'Dave sold the restored car to a collector' which is not explicitly confirmed in the conversation."
+          },
+          {
+            "id": "fact_temporal_correctness",
+            "name": "Fact Temporal Correctness",
+            "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+            "score": 0.8,
+            "reason": "Some facts have minor temporal inconsistencies, like 'Dave's goal since he was a kid is to work on classic cars' which is not clearly stated in the conversation."
+          },
+          {
+            "id": "fact_atomicity",
+            "name": "Fact Atomicity",
+            "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+            "score": 0.7,
+            "reason": "Some facts bundle multiple distinct pieces of information, such as 'Calvin's studio setup includes a monitor, keyboard, and monitor' which is redundant and not clearly atomic."
+          },
+          {
+            "id": "fact_nonredundancy",
+            "name": "Fact Nonredundancy",
+            "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+            "score": 0.6,
+            "reason": "There are several instances of redundant facts, such as multiple mentions of 'Calvin is excited about his upcoming trip to Boston' and 'Calvin is looking forward to exploring Boston.'"
+          },
+          {
+            "id": "fact_coverage",
+            "name": "Fact Coverage",
+            "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+            "score": 0.8,
+            "reason": "Most memory-worthy facts are covered, but some details like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned in the conversation."
+          },
+          {
+            "id": "fact_conciseness",
+            "name": "Fact Conciseness",
+            "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+            "score": 0.7,
+            "reason": "Some facts are overly verbose, such as 'Calvin's custom guitar has an octopus design and a shiny purple finish' which could be more concise."
+          },
+          {
+            "id": "fact_structural_consistency",
+            "name": "Fact Structural Consistency",
+            "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+            "score": 0.8,
+            "reason": "The structure is mostly consistent, but some facts are phrased differently, such as 'Calvin's car is fixed and going strong' versus 'Calvin's car is a Ferrari.'"
+          }
+        ],
+        "conversation_score": 0.7929,
+        "arithmetic_mean_score": 0.7625,
+        "summary": "The fact memory items are mostly traceable and cover the main points of the conversation, but there are some minor issues with factual correctness, temporal accuracy, atomicity, redundancy, and structural consistency.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but some details like 'Calvin's red sports car is a sign of his hard work and dedication' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are slightly incorrect, such as 'Dave sold the restored car to a collector' which is not explicitly confirmed in the conversation.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts have minor temporal inconsistencies, like 'Dave's goal since he was a kid is to work on classic cars' which is not clearly stated in the conversation.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some facts bundle multiple distinct pieces of information, such as 'Calvin's studio setup includes a monitor, keyboard, and monitor' which is redundant and not clearly atomic.\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.6,\n      \"reason\": \"There are several instances of redundant facts, such as multiple mentions of 'Calvin is excited about his upcoming trip to Boston' and 'Calvin is looking forward to exploring Boston.'\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Most memory-worthy facts are covered, but some details like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.7,\n      \"reason\": \"Some facts are overly verbose, such as 'Calvin's custom guitar has an octopus design and a shiny purple finish' which could be more concise.\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some facts are phrased differently, such as 'Calvin's car is fixed and going strong' versus 'Calvin's car is a Ferrari.'\"\n    }\n  ],\n  \"conversation_score\": 0.775,\n  \"summary\": \"The fact memory items are mostly traceable and cover the main points of the conversation, but there are some minor issues with factual correctness, temporal accuracy, atomicity, redundancy, and structural consistency.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      },
+      "nonfact_result": {
+        "conversation_idx": 9,
+        "rubrics": [
+          {
+            "id": "summary_sourceability",
+            "name": "Summary Sourceability",
+            "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?",
+            "score": 1.0,
+            "reason": "All summary items are directly supported by the original conversation or fact memories."
+          },
+          {
+            "id": "summary_factual_correctness",
+            "name": "Summary Factual Correctness",
+            "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?",
+            "score": 1.0,
+            "reason": "No factual errors are present in the summary items; all details align with the provided conversation and fact memories."
+          },
+          {
+            "id": "summary_temporal_consistency",
+            "name": "Summary Temporal Consistency",
+            "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?",
+            "score": 1.0,
+            "reason": "Temporal references in the summary items are consistent with the original conversation and fact memories."
+          },
+          {
+            "id": "bucket_schema_fit",
+            "name": "Bucket Schema Fit",
+            "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?",
+            "score": 1.0,
+            "reason": "Each summary item fits its bucket type correctly, with character summaries focusing on traits and relationships, event summaries capturing key moments, and location summaries describing places."
+          },
+          {
+            "id": "summary_abstraction_quality",
+            "name": "Summary Abstraction Quality",
+            "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?",
+            "score": 1.0,
+            "reason": "Summary items effectively abstract underlying facts without copying them or overgeneralizing."
+          },
+          {
+            "id": "cross_fact_integration",
+            "name": "Cross-Fact Integration",
+            "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?",
+            "score": 1.0,
+            "reason": "Summary items integrate multiple related fact-level memories effectively, providing a cohesive narrative."
+          },
+          {
+            "id": "nonredundancy_across_summaries",
+            "name": "Nonredundancy Across Summaries",
+            "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?",
+            "score": 1.0,
+            "reason": "Summary items are concise and do not contain obvious redundancy or near-duplicate content."
+          },
+          {
+            "id": "conciseness_and_density",
+            "name": "Conciseness And Density",
+            "question": "Are the summary memory items reasonably concise while still carrying high information density?",
+            "score": 1.0,
+            "reason": "Summary items are reasonably concise while carrying high information density."
+          },
+          {
+            "id": "structural_consistency",
+            "name": "Structural Consistency",
+            "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?",
+            "score": 1.0,
+            "reason": "Summary items within the same bucket follow a consistent and reusable structure."
+          },
+          {
+            "id": "coverage_of_summary_targets",
+            "name": "Coverage Of Summary Targets",
+            "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?",
+            "score": 1.0,
+            "reason": "Summary items cover the appropriate people, events, and locations for the conversation."
+          }
+        ],
+        "conversation_score": 1.0,
+        "arithmetic_mean_score": 1.0,
+        "summary": "The summary memory items are fully sourceable, factually correct, temporally consistent, and fit their bucket types well. They provide useful abstraction, integrate facts effectively, avoid redundancy, are concise, follow a consistent structure, and cover the appropriate summary targets.",
+        "evaluator_meta": {
+          "model": "Qwen/Qwen3-14B",
+          "attempt_index": 0,
+          "response_format": "json_object",
+          "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"summary_sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All summary items are directly supported by the original conversation or fact memories.\"\n    },\n    {\n      \"id\": \"summary_factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present in the summary items; all details align with the provided conversation and fact memories.\"\n    },\n    {\n      \"id\": \"summary_temporal_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"Temporal references in the summary items are consistent with the original conversation and fact memories.\"\n    },\n    {\n      \"id\": \"bucket_schema_fit\",\n      \"score\": 1.0,\n      \"reason\": \"Each summary item fits its bucket type correctly, with character summaries focusing on traits and relationships, event summaries capturing key moments, and location summaries describing places.\"\n    },\n    {\n      \"id\": \"summary_abstraction_quality\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items effectively abstract underlying facts without copying them or overgeneralizing.\"\n    },\n    {\n      \"id\": \"cross_fact_integration\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items integrate multiple related fact-level memories effectively, providing a cohesive narrative.\"\n    },\n    {\n      \"id\": \"nonredundancy_across_summaries\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items are concise and do not contain obvious redundancy or near-duplicate content.\"\n    },\n    {\n      \"id\": \"conciseness_and_density\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items are reasonably concise while carrying high information density.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items within the same bucket follow a consistent and reusable structure.\"\n    },\n    {\n      \"id\": \"coverage_of_summary_targets\",\n      \"score\": 1.0,\n      \"reason\": \"Summary items cover the appropriate people, events, and locations for the conversation.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The summary memory items are fully sourceable, factually correct, temporally consistent, and fit their bucket types well. They provide useful abstraction, integrate facts effectively, avoid redundancy, are concise, follow a consistent structure, and cover the appropriate summary targets.\"\n}",
+          "required_key": "rubrics",
+          "required_key_attempt_index": 0
+        }
+      }
+    }
+  ],
+  "summary": {
+    "evaluator_model": "Qwen/Qwen3-14B",
+    "conversation_count": 10,
+    "missing_conversation_indices": [],
+    "fact_score": 0.8507,
+    "nonfact_score": 0.9195,
+    "combined_score": 0.8722,
+    "fact_weights": {
+      "fact_sourceability": 3.0,
+      "fact_factual_correctness": 3.0,
+      "fact_temporal_correctness": 2.0,
+      "fact_atomicity": 1.0,
+      "fact_nonredundancy": 1.0,
+      "fact_coverage": 2.0,
+      "fact_conciseness": 1.0,
+      "fact_structural_consistency": 1.0
+    },
+    "nonfact_weights": {
+      "summary_sourceability": 3.0,
+      "summary_factual_correctness": 3.0,
+      "summary_temporal_consistency": 2.0,
+      "bucket_schema_fit": 2.0,
+      "summary_abstraction_quality": 2.0,
+      "cross_fact_integration": 2.0,
+      "nonredundancy_across_summaries": 1.0,
+      "conciseness_and_density": 1.0,
+      "structural_consistency": 1.0,
+      "coverage_of_summary_targets": 2.0
+    },
+    "hard_cap_threshold": 0.3,
+    "hard_cap_value": 0.4
+  }
+}

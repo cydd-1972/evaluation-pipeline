@@ -1,0 +1,27 @@
+[
+  {
+    "id": "supported_by_context",
+    "name": "Supported By Context",
+    "question": "Is this delta item clearly supported by the current session or the provided history window?"
+  },
+  {
+    "id": "correct_attribution",
+    "name": "Correct Attribution",
+    "question": "Does this delta item assign the fact to the correct speaker, person, or entity?"
+  },
+  {
+    "id": "correct_temporal_framing",
+    "name": "Correct Temporal Framing",
+    "question": "Does this delta item preserve whether the fact is a past event, current state, or future plan?"
+  },
+  {
+    "id": "actually_incremental",
+    "name": "Actually Incremental",
+    "question": "Does this delta item represent new information or a meaningful update rather than merely repeating old context?"
+  },
+  {
+    "id": "nonredundant_item",
+    "name": "Nonredundant Item",
+    "question": "Is this delta item not an obvious duplicate or near-duplicate of another delta item in the same session output?"
+  }
+]

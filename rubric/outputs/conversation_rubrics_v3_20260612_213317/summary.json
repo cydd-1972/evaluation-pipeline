@@ -1,0 +1,28 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "final_score": 1.0,
+  "models": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_count": 1,
+      "model_score": 1.0
+    }
+  ],
+  "missing": [],
+  "weights": {
+    "every_item_sourceable": 3.0,
+    "every_item_factually_valid": 3.0,
+    "every_item_temporally_valid": 2.0,
+    "item_atomicity": 1.0,
+    "set_nonredundancy": 1.0,
+    "coverage_of_memory_worthy_content": 2.0,
+    "conciseness": 1.0,
+    "structural_consistency": 1.0
+  },
+  "hard_cap_rubrics": [
+    "every_item_sourceable",
+    "every_item_factually_valid"
+  ],
+  "hard_cap_value": 0.4
+}

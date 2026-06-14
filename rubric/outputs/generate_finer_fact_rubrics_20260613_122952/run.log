@@ -1,0 +1,5 @@
+[2026-06-13 12:29:52] run_name=generate_finer_fact_rubrics_20260613_122952
+[2026-06-13 12:29:52] models=['minimax']
+[2026-06-13 12:29:52] generate model=minimax api_base=https://api.minimaxi.com/v1 llm_model=MiniMax-M2.7
+[2026-06-13 12:31:41] done model=minimax rubric_count=20
+[2026-06-13 12:31:41] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\generate_finer_fact_rubrics_20260613_122952

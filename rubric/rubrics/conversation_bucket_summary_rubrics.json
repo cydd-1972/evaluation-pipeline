@@ -1,0 +1,52 @@
+[
+  {
+    "id": "summary_sourceability",
+    "name": "Summary Sourceability",
+    "question": "Can each summary memory item in the final session be supported by the original conversation or by the fact-level memories from the same conversation?"
+  },
+  {
+    "id": "summary_factual_correctness",
+    "name": "Summary Factual Correctness",
+    "question": "Do the summary memory items avoid factual errors about people, events, places, relationships, and attributes?"
+  },
+  {
+    "id": "summary_temporal_consistency",
+    "name": "Summary Temporal Consistency",
+    "question": "Do the summary memory items preserve the temporal status of past, current, and future information correctly?"
+  },
+  {
+    "id": "bucket_schema_fit",
+    "name": "Bucket Schema Fit",
+    "question": "Do the summary memory items fit their bucket type correctly, such that character items behave like character summaries, event items like event summaries, and location items like location summaries?"
+  },
+  {
+    "id": "summary_abstraction_quality",
+    "name": "Summary Abstraction Quality",
+    "question": "Do the summary memory items provide useful abstraction over underlying facts without merely copying them or overgeneralizing them?"
+  },
+  {
+    "id": "cross_fact_integration",
+    "name": "Cross-Fact Integration",
+    "question": "Do the summary memory items appropriately integrate multiple related fact-level memories when such integration is useful?"
+  },
+  {
+    "id": "nonredundancy_across_summaries",
+    "name": "Nonredundancy Across Summaries",
+    "question": "Do the summary memory items avoid obvious redundancy or repeated near-duplicate content across summary items?"
+  },
+  {
+    "id": "conciseness_and_density",
+    "name": "Conciseness And Density",
+    "question": "Are the summary memory items reasonably concise while still carrying high information density?"
+  },
+  {
+    "id": "structural_consistency",
+    "name": "Structural Consistency",
+    "question": "Do summary memory items within the same bucket follow a reasonably consistent and reusable structure?"
+  },
+  {
+    "id": "coverage_of_summary_targets",
+    "name": "Coverage Of Summary Targets",
+    "question": "Do the summary memory items cover the people, events, and locations that are appropriate to summarize at the conversation level?"
+  }
+]

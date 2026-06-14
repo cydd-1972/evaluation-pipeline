@@ -1,0 +1,72 @@
+You are evaluating the quality of a session-level delta memory output.
+
+The input contains:
+- the current session
+- a history window of up to 2 earlier sessions
+- the delta memory items produced for the current session
+
+You must score a fixed set of binary rubrics. Each rubric is independent and must be judged as either:
+- 1 = PASS
+- 0 = FAIL
+
+Important requirements:
+- Be strict.
+- Judge only from the provided current session, history window, and delta memory items.
+- Do not use outside knowledge.
+- A rubric passes only if there is no clear substantial failure under that rubric.
+- If you notice one clear substantial counterexample, score that rubric as 0.
+- Keep explanations short and concrete.
+
+Explicit failure conditions by rubric:
+- `grounded_in_context` = 0 if any substantial delta item is not clearly supported by the current session or the history window.
+- `correct_attribution` = 0 if any substantial delta item assigns a fact to the wrong speaker, person, or entity.
+- `correct_temporal_framing` = 0 if any substantial delta item clearly confuses a past event, a current state, or a future plan.
+- `no_contradictory_delta` = 0 if the delta contains a clear contradiction within itself or a clear contradiction with the current session or history window.
+- `truly_incremental` = 0 if the delta mainly restates already known context instead of capturing new information or meaningful updates.
+- `no_history_leakage_as_new` = 0 if information from earlier sessions is presented as newly introduced in the current session without a meaningful new update.
+- `no_redundant_delta_items` = 0 if the delta contains obvious duplicate or near-duplicate items.
+- `covers_identity_background_from_text` = 0 if identity or background facts explicitly stated in the current session text and appropriate for memory are missing from the delta.
+- `covers_preferences_traits_from_text` = 0 if preferences, habits, or stable traits explicitly stated in the current session text and appropriate for memory are missing from the delta.
+- `covers_relationship_facts_from_text` = 0 if relationship facts or relationship changes explicitly stated in the current session text are missing from the delta.
+- `covers_event_facts_from_text` = 0 if important event facts explicitly stated in the current session text are missing from the delta.
+- `covers_plans_commitments_from_text` = 0 if plans, goals, commitments, intentions, or decisions explicitly stated in the current session text are missing from the delta.
+- `covers_schedule_time_facts_from_text` = 0 if explicit schedule, timing, date, or future arrangement information stated in the current session text is missing from the delta.
+- `covers_state_changes_from_text` = 0 if meaningful state changes explicitly stated in the current session text are missing from the delta.
+- `covers_problem_need_updates_from_text` = 0 if new problems, needs, worries, or unresolved issues explicitly stated in the current session text and appropriate for memory are missing from the delta.
+
+How to judge text-based coverage:
+- Judge directly against the original current session text, not against an abstract summary.
+- Do not require trivial wording details or fleeting filler.
+- But if a clearly stated fact of the relevant type is suitable for memory and is absent from the delta, score 0.
+
+How to judge incrementality:
+- Some overlap with history is acceptable when the current session adds a meaningful update.
+- Fail when the output mostly re-mentions old information without a meaningful new change.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": 0 or 1,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "session_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `session_score` must equal the arithmetic mean of all rubric scores.
+
+Rubrics to score:
+{rubrics_json}
+
+History window sessions:
+{history_sessions_text}
+
+Current session:
+{current_session_text}
+
+Delta memory items:
+{delta_memory_text}

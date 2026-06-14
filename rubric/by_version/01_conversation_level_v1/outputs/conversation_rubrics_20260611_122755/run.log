@@ -1,0 +1,68 @@
+[2026-06-11 12:27:55] run_name=conversation_rubrics_20260611_122755
+[2026-06-11 12:27:55] evaluator_model=Qwen/Qwen3-14B
+[2026-06-11 12:27:55] targets=['minimax', 'deepseek', 'gemini']
+[2026-06-11 12:27:55] start model=minimax workspace=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax
+[2026-06-11 12:27:55] score model=minimax conv=0 memory_items=324
+[2026-06-11 12:28:11] done model=minimax conv=0 score=1.0000
+[2026-06-11 12:28:11] score model=minimax conv=1 memory_items=212
+[2026-06-11 12:28:27] done model=minimax conv=1 score=1.0000
+[2026-06-11 12:28:27] score model=minimax conv=2 memory_items=422
+[2026-06-11 12:28:49] done model=minimax conv=2 score=1.0000
+[2026-06-11 12:28:49] score model=minimax conv=3 memory_items=395
+[2026-06-11 12:29:10] done model=minimax conv=3 score=1.0000
+[2026-06-11 12:29:10] score model=minimax conv=4 memory_items=405
+[2026-06-11 12:29:33] done model=minimax conv=4 score=1.0000
+[2026-06-11 12:29:33] score model=minimax conv=5 memory_items=374
+[2026-06-11 12:29:56] done model=minimax conv=5 score=1.0000
+[2026-06-11 12:29:56] score model=minimax conv=6 memory_items=448
+[2026-06-11 12:30:18] done model=minimax conv=6 score=1.0000
+[2026-06-11 12:30:18] score model=minimax conv=7 memory_items=454
+[2026-06-11 12:30:39] done model=minimax conv=7 score=1.0000
+[2026-06-11 12:30:39] score model=minimax conv=8 memory_items=316
+[2026-06-11 12:31:04] done model=minimax conv=8 score=1.0000
+[2026-06-11 12:31:04] score model=minimax conv=9 memory_items=414
+[2026-06-11 12:31:25] done model=minimax conv=9 score=1.0000
+[2026-06-11 12:31:25] start model=deepseek workspace=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_deepseek
+[2026-06-11 12:31:25] score model=deepseek conv=0 memory_items=228
+[2026-06-11 12:31:44] done model=deepseek conv=0 score=1.0000
+[2026-06-11 12:31:44] score model=deepseek conv=1 memory_items=173
+[2026-06-11 12:32:02] done model=deepseek conv=1 score=1.0000
+[2026-06-11 12:32:02] score model=deepseek conv=2 memory_items=336
+[2026-06-11 12:32:26] done model=deepseek conv=2 score=1.0000
+[2026-06-11 12:32:26] score model=deepseek conv=3 memory_items=321
+[2026-06-11 12:32:46] done model=deepseek conv=3 score=1.0000
+[2026-06-11 12:32:46] score model=deepseek conv=4 memory_items=364
+[2026-06-11 12:33:15] done model=deepseek conv=4 score=1.0000
+[2026-06-11 12:33:15] score model=deepseek conv=5 memory_items=282
+[2026-06-11 12:34:05] done model=deepseek conv=5 score=1.0000
+[2026-06-11 12:34:05] score model=deepseek conv=6 memory_items=390
+[2026-06-11 12:34:32] done model=deepseek conv=6 score=1.0000
+[2026-06-11 12:34:32] score model=deepseek conv=7 memory_items=326
+[2026-06-11 12:35:18] done model=deepseek conv=7 score=1.0000
+[2026-06-11 12:35:18] score model=deepseek conv=8 memory_items=233
+[2026-06-11 12:35:48] done model=deepseek conv=8 score=1.0000
+[2026-06-11 12:35:48] score model=deepseek conv=9 memory_items=309
+[2026-06-11 12:36:21] done model=deepseek conv=9 score=1.0000
+[2026-06-11 12:36:21] start model=gemini workspace=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_gemini
+[2026-06-11 12:36:21] score model=gemini conv=0 memory_items=149
+[2026-06-11 12:37:03] done model=gemini conv=0 score=1.0000
+[2026-06-11 12:37:03] score model=gemini conv=1 memory_items=103
+[2026-06-11 12:37:22] done model=gemini conv=1 score=1.0000
+[2026-06-11 12:37:22] score model=gemini conv=2 memory_items=302
+[2026-06-11 12:37:41] done model=gemini conv=2 score=1.0000
+[2026-06-11 12:37:41] score model=gemini conv=3 memory_items=201
+[2026-06-11 12:38:25] done model=gemini conv=3 score=1.0000
+[2026-06-11 12:38:25] score model=gemini conv=4 memory_items=219
+[2026-06-11 12:38:51] done model=gemini conv=4 score=1.0000
+[2026-06-11 12:38:51] score model=gemini conv=5 memory_items=186
+[2026-06-11 12:39:35] done model=gemini conv=5 score=1.0000
+[2026-06-11 12:39:35] score model=gemini conv=6 memory_items=261
+[2026-06-11 12:39:58] done model=gemini conv=6 score=1.0000
+[2026-06-11 12:39:58] score model=gemini conv=7 memory_items=207
+[2026-06-11 12:40:43] done model=gemini conv=7 score=1.0000
+[2026-06-11 12:40:43] score model=gemini conv=8 memory_items=185
+[2026-06-11 12:41:17] done model=gemini conv=8 score=1.0000
+[2026-06-11 12:41:17] score model=gemini conv=9 memory_items=171
+[2026-06-11 12:41:44] done model=gemini conv=9 score=1.0000
+[2026-06-11 12:41:44] final_score=1.0000
+[2026-06-11 12:41:44] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_rubrics_20260611_122755

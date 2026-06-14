@@ -1,0 +1,49 @@
+You are evaluating the quality of a final memory set built from one full multi-session conversation.
+
+You must score a fixed set of conversation-level rubrics using a 3-level scale:
+- 1.0 = fully satisfies the rubric
+- 0.5 = partially satisfies the rubric, with meaningful but non-fatal issues
+- 0.0 = clearly fails the rubric
+
+Important requirements:
+- Be strict.
+- Judge only from the provided conversation and final memory.
+- Do not use outside knowledge.
+- Do not rely on any extracted fact list, external metric, or external tool.
+- Work directly from the original conversation text and the final memory text.
+- Keep reasons short and concrete.
+
+How to use the 3-level scale:
+- Use 1.0 only when there is no clear substantial problem under that rubric.
+- Use 0.5 when the memory is mixed: broadly acceptable but with noticeable issues or omissions.
+- Use 0.0 when there is a clear and substantial failure.
+
+Special guidance:
+- For `sourceability`, ask whether the memory items are recoverable from the conversation rather than fabricated or unsupported.
+- For `coverage_of_memory_worthy_content`, do not require every trivial detail, but do penalize clearly important omissions that should have been stored as memory.
+- For `conciseness`, judge relative bloating or low-value storage qualitatively from the memory itself; do not compute token counts.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": 0.0 or 0.5 or 1.0,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "conversation_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `conversation_score` must equal the arithmetic mean of all rubric scores.
+
+Rubrics to score:
+{rubrics_json}
+
+Full conversation:
+{conversation_text}
+
+Final memory:
+{final_memory_text}

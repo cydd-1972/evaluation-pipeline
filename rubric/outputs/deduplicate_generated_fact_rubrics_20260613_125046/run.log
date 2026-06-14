@@ -1,0 +1,3 @@
+[2026-06-13 12:50:46] run_name=deduplicate_generated_fact_rubrics_20260613_125046
+[2026-06-13 12:50:46] evaluator_model=qwen-max
+[2026-06-13 12:50:46] models=['gemini', 'deepseek', 'minimax']

@@ -1,0 +1,25 @@
+[2026-06-13 11:10:57] run_name=conversation_fact_nonfact_continuous_20260613_111057
+[2026-06-13 11:10:57] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 11:10:58] conversation_indices=all
+[2026-06-13 11:10:58] score conv=0 fact_items=228 nonfact_items=105
+[2026-06-13 11:11:17] done conv=0 fact=0.8929 nonfact=0.8737 combined=0.8868
+[2026-06-13 11:11:17] score conv=1 fact_items=173 nonfact_items=66
+[2026-06-13 11:11:41] done conv=1 fact=0.8786 nonfact=1.0000 combined=0.9121
+[2026-06-13 11:11:41] score conv=2 fact_items=336 nonfact_items=152
+[2026-06-13 11:12:13] done conv=2 fact=0.8071 nonfact=0.8947 combined=0.8344
+[2026-06-13 11:12:13] score conv=3 fact_items=321 nonfact_items=119
+[2026-06-13 11:12:41] done conv=3 fact=0.8714 nonfact=0.8895 combined=0.8763
+[2026-06-13 11:12:41] score conv=4 fact_items=364 nonfact_items=161
+[2026-06-13 11:13:52] done conv=4 fact=0.8714 nonfact=0.8947 combined=0.8785
+[2026-06-13 11:13:52] score conv=5 fact_items=282 nonfact_items=151
+[2026-06-13 11:15:29] done conv=5 fact=0.8571 nonfact=1.0000 combined=0.9069
+[2026-06-13 11:15:29] score conv=6 fact_items=390 nonfact_items=154
+[2026-06-13 11:17:09] done conv=6 fact=0.8571 nonfact=0.8947 combined=0.8677
+[2026-06-13 11:17:09] score conv=7 fact_items=326 nonfact_items=160
+[2026-06-13 11:18:54] done conv=7 fact=0.8500 nonfact=0.8895 combined=0.8630
+[2026-06-13 11:18:54] score conv=8 fact_items=233 nonfact_items=104
+[2026-06-13 11:20:30] done conv=8 fact=0.8286 nonfact=0.8579 combined=0.8376
+[2026-06-13 11:20:30] score conv=9 fact_items=309 nonfact_items=145
+[2026-06-13 11:21:39] done conv=9 fact=0.7929 nonfact=1.0000 combined=0.8590
+[2026-06-13 11:21:39] final fact=0.8507 nonfact=0.9195 combined=0.8722
+[2026-06-13 11:21:39] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_fact_nonfact_continuous_20260613_111057

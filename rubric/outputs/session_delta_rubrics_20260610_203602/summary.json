@@ -1,0 +1,13 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "final_score": 0.9967,
+  "models": [
+    {
+      "add_model": "deepseek",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek",
+      "session_count": 272,
+      "model_score": 0.9967
+    }
+  ],
+  "missing": []
+}

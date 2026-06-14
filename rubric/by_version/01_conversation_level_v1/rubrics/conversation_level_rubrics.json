@@ -1,0 +1,47 @@
+[
+  {
+    "id": "no_fabrication",
+    "name": "No Fabrication",
+    "question": "Does the final memory avoid including any clearly unsupported factual claim that cannot be grounded in the conversation?"
+  },
+  {
+    "id": "correct_attribution",
+    "name": "Correct Attribution",
+    "question": "Does the final memory avoid assigning a fact to the wrong speaker, person, or entity mentioned in the conversation?"
+  },
+  {
+    "id": "correct_temporal_framing",
+    "name": "Correct Temporal Framing",
+    "question": "Does the final memory preserve whether information is a past event, a current state, or a future plan without obvious temporal mistakes?"
+  },
+  {
+    "id": "no_internal_contradiction",
+    "name": "No Internal Contradiction",
+    "question": "Does the final memory avoid containing mutually inconsistent claims or claims that clearly contradict the conversation?"
+  },
+  {
+    "id": "covers_identity_background",
+    "name": "Covers Core Identity and Background",
+    "question": "Does the final memory include the major identity and background facts of the main people when those facts are important in the conversation?"
+  },
+  {
+    "id": "covers_preferences_traits",
+    "name": "Covers Ongoing Preferences and Traits",
+    "question": "Does the final memory include the important long-term preferences, stable traits, or recurring interests that matter in the conversation?"
+  },
+  {
+    "id": "covers_plans_goals",
+    "name": "Covers Important Plans and Goals",
+    "question": "Does the final memory include the important plans, goals, or future intentions that are central in the conversation?"
+  },
+  {
+    "id": "covers_major_events_relationships",
+    "name": "Covers Major Events and Relationship Facts",
+    "question": "Does the final memory include the major events and the important relationship facts that are central in the conversation?"
+  },
+  {
+    "id": "low_redundancy",
+    "name": "Low Redundancy",
+    "question": "Does the final memory avoid obvious large-scale repetition, so that semantically duplicate or near-duplicate memories are not repeatedly stored?"
+  }
+]

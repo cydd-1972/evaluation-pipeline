@@ -1,0 +1,49 @@
+You are evaluating the quality of a final memory set built from one full multi-session conversation.
+
+You must score a fixed set of conversation-level rubrics using a 3-level scale:
+- 1.0 = fully satisfies the rubric
+- 0.5 = partially satisfies the rubric, with meaningful but non-fatal issues
+- 0.0 = clearly fails the rubric
+
+Important requirements:
+- Be strict.
+- Judge only from the provided conversation and final memory.
+- Do not use outside knowledge.
+- Work directly from the original conversation text and the final memory text.
+- Keep reasons short and concrete.
+
+How to use the scale:
+- Use 1.0 only when there is no clear substantial problem.
+- Use 0.5 when the memory is mixed: broadly acceptable but with noticeable issues or omissions.
+- Use 0.0 when there is a clear and substantial failure.
+
+Critical hard-constraint interpretation:
+- For `every_item_sourceable`, judge whether any final memory item is clearly unsupported by the conversation. If one or more substantial items are unsupported, this rubric should be 0.0.
+- For `every_item_factually_valid`, judge whether any final memory item contains a clear factual error. If one or more substantial items are factually wrong, this rubric should be 0.0.
+- For `every_item_temporally_valid`, judge whether any final memory item clearly gets past/current/future status wrong. If so, this rubric should be 0.0.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": 0.0 or 0.5 or 1.0,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "conversation_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `conversation_score` should be the judge's unweighted arithmetic mean across rubric scores.
+- The caller may apply stricter weighting or caps afterward.
+
+Rubrics to score:
+{rubrics_json}
+
+Full conversation:
+{conversation_text}
+
+Final memory:
+{final_memory_text}

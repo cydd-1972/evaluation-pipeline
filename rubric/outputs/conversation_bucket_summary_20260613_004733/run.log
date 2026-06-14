@@ -1,0 +1,25 @@
+[2026-06-13 00:47:33] run_name=conversation_bucket_summary_20260613_004733
+[2026-06-13 00:47:33] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 00:47:33] conversation_indices=all
+[2026-06-13 00:47:33] score conv=0 fact_items=228 summary_items=105
+[2026-06-13 00:47:48] done conv=0 score=1.0000 mean=1.0000
+[2026-06-13 00:47:48] score conv=1 fact_items=173 summary_items=66
+[2026-06-13 00:48:00] done conv=1 score=1.0000 mean=1.0000
+[2026-06-13 00:48:00] score conv=2 fact_items=336 summary_items=152
+[2026-06-13 00:48:18] done conv=2 score=1.0000 mean=1.0000
+[2026-06-13 00:48:18] score conv=3 fact_items=321 summary_items=119
+[2026-06-13 00:48:36] done conv=3 score=1.0000 mean=1.0000
+[2026-06-13 00:48:36] score conv=4 fact_items=364 summary_items=161
+[2026-06-13 00:48:56] done conv=4 score=1.0000 mean=1.0000
+[2026-06-13 00:48:56] score conv=5 fact_items=282 summary_items=151
+[2026-06-13 00:49:18] done conv=5 score=1.0000 mean=1.0000
+[2026-06-13 00:49:18] score conv=6 fact_items=390 summary_items=154
+[2026-06-13 00:49:40] done conv=6 score=1.0000 mean=1.0000
+[2026-06-13 00:49:40] score conv=7 fact_items=326 summary_items=160
+[2026-06-13 00:50:00] done conv=7 score=1.0000 mean=1.0000
+[2026-06-13 00:50:00] score conv=8 fact_items=233 summary_items=104
+[2026-06-13 00:51:12] done conv=8 score=1.0000 mean=1.0000
+[2026-06-13 00:51:12] score conv=9 fact_items=309 summary_items=145
+[2026-06-13 00:51:34] done conv=9 score=1.0000 mean=1.0000
+[2026-06-13 00:51:34] final_score=1.0000
+[2026-06-13 00:51:34] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_bucket_summary_20260613_004733

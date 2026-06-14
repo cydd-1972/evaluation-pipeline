@@ -1,0 +1,45 @@
+You are evaluating the quality of a final memory set built from one full multi-session conversation.
+
+You must score a fixed set of binary rubrics. Each rubric is independent and must be judged as either:
+- 1 = PASS
+- 0 = FAIL
+
+Important requirements:
+- Be strict.
+- Judge only from the provided conversation and final memory.
+- Do not use outside knowledge.
+- A rubric passes only if the memory clearly satisfies it overall.
+- If there is a meaningful violation, score 0.
+- Keep explanations short and concrete.
+- Do not give full credit just because the memory is generally good.
+- A rubric should pass only when there is no clear failure under that rubric.
+- If you notice one clear counterexample that is substantial, score that rubric as 0.
+
+How to write reasons:
+- Name the specific failure or state that no clear failure was found.
+- Avoid vague praise like “good overall” or “comprehensive”.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": 0 or 1,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "conversation_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `conversation_score` must equal the arithmetic mean of all rubric scores.
+
+Rubrics to score:
+{rubrics_json}
+
+Full conversation:
+{conversation_text}
+
+Final memory:
+{final_memory_text}

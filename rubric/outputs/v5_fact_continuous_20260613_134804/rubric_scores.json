@@ -1,0 +1,2042 @@
+{
+  "run_name": "v5_fact_continuous_20260613_134804",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 0,
+      "memory_count": 324,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.9,
+          "reason": "Most facts are directly supported by the conversation, but a few items (e.g., 'Caroline felt liberated and empowered doing it') are slightly vague about the context of 'it' without clear textual support."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.8,
+          "reason": "Some items infer motivations or emotional states (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow') that are not explicitly stated in the conversation."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are mostly correctly attributed to the right entities, but a few items (e.g., 'Melanie's kids are her biggest motivation and support') may misattribute the source of motivation without explicit confirmation."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.9,
+          "reason": "Entity names are mostly consistent, but there are minor inconsistencies (e.g., 'Oscar' is mentioned as a guinea pig, but 'Oscar' is not consistently used in all references)."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.8,
+          "reason": "Some items use unresolved pronouns (e.g., 'They've been there through everything') without clear antecedents, which could cause ambiguity."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.9,
+          "reason": "Attributes are mostly accurate, but a few items (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow') may not fully align with the conversation's explicit statements."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.9,
+          "reason": "Relationships are mostly accurate, but a few items (e.g., 'Caroline's support network has been instrumental in her transition') may not fully capture the specific relationships mentioned in the conversation."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.9,
+          "reason": "Event details are mostly accurate, but a few items (e.g., 'Caroline felt accepted and happy at the pride parade') may not fully capture the specific events and their details as described in the conversation."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.8,
+          "reason": "Some items treat future plans as completed events (e.g., 'Caroline is ready to be a mom') without clear indication of future intent."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, but a few items (e.g., 'Melanie's family went camping in the mountains last week') may not match the exact timeline mentioned in the conversation."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.8,
+          "reason": "Some items bundle multiple facts (e.g., 'Caroline's support network has been instrumental in her transition' combines multiple aspects of support)."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "There are no exact duplicates, but some items are very similar (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow' and 'Caroline wants to help people go through the same things as me')."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "There are some near-duplicates (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow' and 'Caroline wants to help people go through the same things as me')."
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Most key entities are covered, but a few (e.g., 'the local church' where Caroline made a stained glass window) are not explicitly mentioned in the memory."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.9,
+          "reason": "Most attributes are covered, but some (e.g., 'Caroline's library includes kids' books') are not fully detailed in the memory."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.9,
+          "reason": "Most important events are covered, but a few (e.g., 'Caroline's negative experience on a hike with religious conservatives') are not fully detailed in the memory."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.9,
+          "reason": "Most relationships are covered, but some (e.g., 'Caroline's mentorship program for LGBTQ youth') are not fully detailed in the memory."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Most future plans are covered, but a few (e.g., 'Caroline's plan to attend an LGBTQ conference this month') are not fully detailed in the memory."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.9,
+          "reason": "Most items are concise, but a few are slightly verbose (e.g., 'Caroline's support network has been instrumental in her transition')."
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Most items are relevant, but a few (e.g., 'Melanie's kids are her biggest motivation and support') may be considered low-value clutter."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.9,
+          "reason": "The structure is mostly consistent, but there are minor variations in phrasing and format."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.9,
+          "reason": "Most fields are complete, but a few items lack specific semantic slots (e.g., 'Caroline felt accepted at the support group' lacks a clear event or action)."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field naming and temporal formats are mostly consistent, but there are minor inconsistencies (e.g., 'last week' vs. 'last Friday')."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "No clear contradictions are present, but a few items may be ambiguous (e.g., 'Caroline is ready to be a mom' vs. 'Caroline is excited and nervous about becoming a mom')."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.9,
+          "reason": "Negations are mostly preserved, but a few items may not fully capture the negative aspects (e.g., 'Caroline had a negative experience on a hike')."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.9,
+          "reason": "Quantifiers are mostly accurate, but a few items may not fully capture the exact frequency or magnitude (e.g., 'Melanie has been running longer since their last chat')."
+        }
+      ],
+      "conversation_score": 0.8808,
+      "arithmetic_mean_score": 0.8808,
+      "summary": "The final fact memory is mostly accurate and well-supported, but has some minor issues with inference boundary compliance, temporal status accuracy, and fact atomicity.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are directly supported by the conversation, but a few items (e.g., 'Caroline felt liberated and empowered doing it') are slightly vague about the context of 'it' without clear textual support.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.8,\n      \"reason\": \"Some items infer motivations or emotional states (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow') that are not explicitly stated in the conversation.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly correctly attributed to the right entities, but a few items (e.g., 'Melanie's kids are her biggest motivation and support') may misattribute the source of motivation without explicit confirmation.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Entity names are mostly consistent, but there are minor inconsistencies (e.g., 'Oscar' is mentioned as a guinea pig, but 'Oscar' is not consistently used in all references).\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.8,\n      \"reason\": \"Some items use unresolved pronouns (e.g., 'They've been there through everything') without clear antecedents, which could cause ambiguity.\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are mostly accurate, but a few items (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow') may not fully align with the conversation's explicit statements.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships are mostly accurate, but a few items (e.g., 'Caroline's support network has been instrumental in her transition') may not fully capture the specific relationships mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Event details are mostly accurate, but a few items (e.g., 'Caroline felt accepted and happy at the pride parade') may not fully capture the specific events and their details as described in the conversation.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Some items treat future plans as completed events (e.g., 'Caroline is ready to be a mom') without clear indication of future intent.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, but a few items (e.g., 'Melanie's family went camping in the mountains last week') may not match the exact timeline mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some items bundle multiple facts (e.g., 'Caroline's support network has been instrumental in her transition' combines multiple aspects of support).\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"There are no exact duplicates, but some items are very similar (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow' and 'Caroline wants to help people go through the same things as me').\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"There are some near-duplicates (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow' and 'Caroline wants to help people go through the same things as me').\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key entities are covered, but a few (e.g., 'the local church' where Caroline made a stained glass window) are not explicitly mentioned in the memory.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most attributes are covered, but some (e.g., 'Caroline's library includes kids' books') are not fully detailed in the memory.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most important events are covered, but a few (e.g., 'Caroline's negative experience on a hike with religious conservatives') are not fully detailed in the memory.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most relationships are covered, but some (e.g., 'Caroline's mentorship program for LGBTQ youth') are not fully detailed in the memory.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most future plans are covered, but a few (e.g., 'Caroline's plan to attend an LGBTQ conference this month') are not fully detailed in the memory.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.9,\n      \"reason\": \"Most items are concise, but a few are slightly verbose (e.g., 'Caroline's support network has been instrumental in her transition').\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Most items are relevant, but a few (e.g., 'Melanie's kids are her biggest motivation and support') may be considered low-value clutter.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"The structure is mostly consistent, but there are minor variations in phrasing and format.\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.9,\n      \"reason\": \"Most fields are complete, but a few items lack specific semantic slots (e.g., 'Caroline felt accepted at the support group' lacks a clear event or action).\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field naming and temporal formats are mostly consistent, but there are minor inconsistencies (e.g., 'last week' vs. 'last Friday').\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"No clear contradictions are present, but a few items may be ambiguous (e.g., 'Caroline is ready to be a mom' vs. 'Caroline is excited and nervous about becoming a mom').\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Negations are mostly preserved, but a few items may not fully capture the negative aspects (e.g., 'Caroline had a negative experience on a hike').\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Quantifiers are mostly accurate, but a few items may not fully capture the exact frequency or magnitude (e.g., 'Melanie has been running longer since their last chat').\"\n    }\n  ],\n  \"conversation_score\": 0.87,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, but has some minor issues with inference boundary compliance, temporal status accuracy, and fact atomicity.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 1,
+      "memory_count": 212,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.9,
+          "reason": "Most facts are well-supported by the conversation, but a few items like 'Jon has an ideal dance studio with a view of the ocean' are not explicitly mentioned."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.9,
+          "reason": "There are minimal unsupported inferences, but some items like 'Jon is living his true self through dance' are slightly interpretive."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Most facts are correctly attributed, but there are a few instances where the attribution could be more precise."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.9,
+          "reason": "Entity names are mostly consistent, but there are a few minor inconsistencies in references."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.8,
+          "reason": "Some pronouns and references are not fully resolved, making a few items slightly ambiguous."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.9,
+          "reason": "Attributes are mostly accurate, but a few could be more specific."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.9,
+          "reason": "Relationships are mostly accurate, but a few could be more clearly defined."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.9,
+          "reason": "Event details are mostly accurate, but a few are slightly vague."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.9,
+          "reason": "Temporal status is mostly accurate, but a few items could be more precise."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, but a few could be more specific."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.8,
+          "reason": "Some items bundle multiple facts, which could be split for better clarity."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "There are no exact duplicates, but a few items are very similar."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "There are a few near-duplicates, which could be consolidated."
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Key entities are covered, but a few minor ones are missing."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.9,
+          "reason": "Attributes are mostly covered, but a few key ones are missing."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.9,
+          "reason": "Important events are covered, but a few could be more detailed."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.9,
+          "reason": "Relationships are mostly covered, but a few could be more detailed."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Plans and future commitments are mostly covered, but a few could be more detailed."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.8,
+          "reason": "Some items are slightly verbose, but overall they are concise."
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Most information is relevant, but a few items could be more focused."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.9,
+          "reason": "Structure is mostly consistent, but a few items have slightly different formats."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.9,
+          "reason": "Field and schema completeness is mostly there, but a few items are missing some details."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field naming and temporal format are mostly consistent, but a few items have minor inconsistencies."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 1.0,
+          "reason": "No contradictions found in the memory items."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 1.0,
+          "reason": "No negation errors found in the memory items."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 1.0,
+          "reason": "Quantifiers are accurately represented in the memory items."
+        }
+      ],
+      "conversation_score": 0.8962,
+      "arithmetic_mean_score": 0.8962,
+      "summary": "The final fact memory is mostly accurate and well-supported, with some minor issues in atomicity, inference boundary compliance, and near-duplicate absence.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are well-supported by the conversation, but a few items like 'Jon has an ideal dance studio with a view of the ocean' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.9,\n      \"reason\": \"There are minimal unsupported inferences, but some items like 'Jon is living his true self through dance' are slightly interpretive.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are correctly attributed, but there are a few instances where the attribution could be more precise.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Entity names are mostly consistent, but there are a few minor inconsistencies in references.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.8,\n      \"reason\": \"Some pronouns and references are not fully resolved, making a few items slightly ambiguous.\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are mostly accurate, but a few could be more specific.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships are mostly accurate, but a few could be more clearly defined.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Event details are mostly accurate, but a few are slightly vague.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal status is mostly accurate, but a few items could be more precise.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, but a few could be more specific.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some items bundle multiple facts, which could be split for better clarity.\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"There are no exact duplicates, but a few items are very similar.\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"There are a few near-duplicates, which could be consolidated.\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Key entities are covered, but a few minor ones are missing.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are mostly covered, but a few key ones are missing.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Important events are covered, but a few could be more detailed.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships are mostly covered, but a few could be more detailed.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Plans and future commitments are mostly covered, but a few could be more detailed.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some items are slightly verbose, but overall they are concise.\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Most information is relevant, but a few items could be more focused.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Structure is mostly consistent, but a few items have slightly different formats.\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.9,\n      \"reason\": \"Field and schema completeness is mostly there, but a few items are missing some details.\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field naming and temporal format are mostly consistent, but a few items have minor inconsistencies.\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 1.0,\n      \"reason\": \"No contradictions found in the memory items.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 1.0,\n      \"reason\": \"No negation errors found in the memory items.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 1.0,\n      \"reason\": \"Quantifiers are accurately represented in the memory items.\"\n    }\n  ],\n  \"conversation_score\": 0.88,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, with some minor issues in atomicity, inference boundary compliance, and near-duplicate absence.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 2,
+      "memory_count": 422,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.8,
+          "reason": "Most items have explicit textual support, but some are vague or lack direct references (e.g., 'John is feeling optimistic' without specifying the context of the political involvement)."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.7,
+          "reason": "Some items infer motivations or emotions not explicitly stated (e.g., 'John is feeling optimistic about his political involvement' implies a positive outcome without explicit confirmation)."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are mostly correctly attributed to the right entities, though a few items could be more precise (e.g., 'John's family is his rock' could clarify which family member)."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.8,
+          "reason": "Entity names are mostly consistent, but there are minor inconsistencies (e.g., 'Max' and 'Max's photo' could be unified more clearly)."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.7,
+          "reason": "Some pronouns are not clearly resolved (e.g., 'They' in 'They brainstormed together' could refer to multiple groups, leading to ambiguity)."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.9,
+          "reason": "Attributes are generally accurate, but a few could be more specific (e.g., 'John is considering adopting a rescue dog' could mention the reason for adoption)."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.8,
+          "reason": "Relationships are mostly accurate, but some are unclear (e.g., 'John's team' could be more explicitly defined as the fire brigade)."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.9,
+          "reason": "Event details are mostly accurate, though a few are missing specific details (e.g., 'John had a power cut' lacks the exact date or location)."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.8,
+          "reason": "Temporal status is mostly correct, but some items treat future plans as completed (e.g., 'John is planning a trip to the East Coast' is treated as a completed event)."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, though a few are imprecise (e.g., 'John saw a power cut last week' is correct, but could be more specific)."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.7,
+          "reason": "Some items bundle multiple facts (e.g., 'John is considering adopting a rescue dog to teach his kids responsibility and compassion' combines two distinct facts)."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "No exact duplicates found, but some items are very similar (e.g., 'John is feeling optimistic' and 'John feels a sense of purpose and passion' could be merged)."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.7,
+          "reason": "There are near-duplicates (e.g., 'John is feeling optimistic' and 'John feels a sense of purpose and passion' express similar sentiments)."
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Key entities are covered, though some minor ones are missing (e.g., 'Sara' is mentioned but not consistently tracked)."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Most attributes are covered, but some are missing (e.g., 'John's new job in tech' lacks details on the role or company)."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.8,
+          "reason": "Important events are covered, but some are omitted (e.g., the flood in John's area is mentioned but lacks details on the response)."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.8,
+          "reason": "Key relationships are covered, but some are missing (e.g., the relationship between John and his colleague Rob is not fully detailed)."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.8,
+          "reason": "Future plans are covered, but some are vague (e.g., 'John is considering joining local organizations' lacks specifics)."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.8,
+          "reason": "Most items are concise, but some are unnecessarily wordy (e.g., 'John is considering adopting a rescue dog to teach his kids responsibility and compassion' could be shorter)."
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Relevance is mostly maintained, though a few items could be more focused (e.g., 'John's workspace includes a desk with a computer, keyboard, and notebook' is low-value)."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.8,
+          "reason": "Structure is mostly consistent, but some items vary in format (e.g., some are full sentences, others are phrases)."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.8,
+          "reason": "Fields are mostly complete, but some lack necessary details (e.g., 'John's family is his rock' lacks the specific family member)."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field naming and temporal formats are mostly consistent, though some could be more uniform (e.g., 'anchor_time' is used but not always precise)."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "No clear contradictions found, but some items could be more aligned (e.g., 'John is feeling optimistic' and 'John is feeling stuck' could be better contextualized)."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 1.0,
+          "reason": "No clear negation errors found; all negative facts are accurately represented."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 1.0,
+          "reason": "Quantifiers are accurately represented; no distortion of frequency or magnitude found."
+        }
+      ],
+      "conversation_score": 0.8346,
+      "arithmetic_mean_score": 0.8346,
+      "summary": "The final fact memory is mostly accurate and well-supported, but has some issues with inference overreach, bundled facts, and minor inconsistencies in entity references and temporal status.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.8,\n      \"reason\": \"Most items have explicit textual support, but some are vague or lack direct references (e.g., 'John is feeling optimistic' without specifying the context of the political involvement).\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.7,\n      \"reason\": \"Some items infer motivations or emotions not explicitly stated (e.g., 'John is feeling optimistic about his political involvement' implies a positive outcome without explicit confirmation).\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly correctly attributed to the right entities, though a few items could be more precise (e.g., 'John's family is his rock' could clarify which family member).\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Entity names are mostly consistent, but there are minor inconsistencies (e.g., 'Max' and 'Max's photo' could be unified more clearly).\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.7,\n      \"reason\": \"Some pronouns are not clearly resolved (e.g., 'They' in 'They brainstormed together' could refer to multiple groups, leading to ambiguity).\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are generally accurate, but a few could be more specific (e.g., 'John is considering adopting a rescue dog' could mention the reason for adoption).\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Relationships are mostly accurate, but some are unclear (e.g., 'John's team' could be more explicitly defined as the fire brigade).\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Event details are mostly accurate, though a few are missing specific details (e.g., 'John had a power cut' lacks the exact date or location).\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal status is mostly correct, but some items treat future plans as completed (e.g., 'John is planning a trip to the East Coast' is treated as a completed event).\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, though a few are imprecise (e.g., 'John saw a power cut last week' is correct, but could be more specific).\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items bundle multiple facts (e.g., 'John is considering adopting a rescue dog to teach his kids responsibility and compassion' combines two distinct facts).\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"No exact duplicates found, but some items are very similar (e.g., 'John is feeling optimistic' and 'John feels a sense of purpose and passion' could be merged).\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.7,\n      \"reason\": \"There are near-duplicates (e.g., 'John is feeling optimistic' and 'John feels a sense of purpose and passion' express similar sentiments).\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Key entities are covered, though some minor ones are missing (e.g., 'Sara' is mentioned but not consistently tracked).\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Most attributes are covered, but some are missing (e.g., 'John's new job in tech' lacks details on the role or company).\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Important events are covered, but some are omitted (e.g., the flood in John's area is mentioned but lacks details on the response).\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Key relationships are covered, but some are missing (e.g., the relationship between John and his colleague Rob is not fully detailed).\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Future plans are covered, but some are vague (e.g., 'John is considering joining local organizations' lacks specifics).\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Most items are concise, but some are unnecessarily wordy (e.g., 'John is considering adopting a rescue dog to teach his kids responsibility and compassion' could be shorter).\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Relevance is mostly maintained, though a few items could be more focused (e.g., 'John's workspace includes a desk with a computer, keyboard, and notebook' is low-value).\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Structure is mostly consistent, but some items vary in format (e.g., some are full sentences, others are phrases).\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.8,\n      \"reason\": \"Fields are mostly complete, but some lack necessary details (e.g., 'John's family is his rock' lacks the specific family member).\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field naming and temporal formats are mostly consistent, though some could be more uniform (e.g., 'anchor_time' is used but not always precise).\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"No clear contradictions found, but some items could be more aligned (e.g., 'John is feeling optimistic' and 'John is feeling stuck' could be better contextualized).\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 1.0,\n      \"reason\": \"No clear negation errors found; all negative facts are accurately represented.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 1.0,\n      \"reason\": \"Quantifiers are accurately represented; no distortion of frequency or magnitude found.\"\n    }\n  ],\n  \"conversation_score\": 0.82,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, but has some issues with inference overreach, bundled facts, and minor inconsistencies in entity references and temporal status.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 3,
+      "memory_count": 395,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.9,
+          "reason": "Most memory items are well-supported by the conversation, but a few have minor issues, such as 'Joanna has an external drive for backups' which is not explicitly mentioned."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.8,
+          "reason": "Some items infer emotions or motivations not explicitly stated, such as 'Nate chose purple because it is bright and bold like him' which is an interpretation rather than an explicit statement."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are mostly correctly attributed to the right entities, but there are a few instances where the attribution is unclear, such as 'The name Tilly helps Joanna remember when she could hold animals without allergic reactions' which could be misattributed."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.8,
+          "reason": "There are inconsistencies in entity names, such as 'turtles' and 'critters' being used interchangeably without clear unification."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.7,
+          "reason": "Some items use unresolved pronouns, such as 'He is a doctor' without specifying who 'he' is, though this is not present in the given memory items. However, there are instances where references are ambiguous, like 'they' in 'They look tired from all the walking.'"
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.9,
+          "reason": "Attributes are mostly accurate, but there are minor inaccuracies, such as 'Nate has a gaming room with a computer and a gaming chair' which is not explicitly mentioned."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.8,
+          "reason": "Relationships are mostly accurate, but there are some minor issues, such as 'Nate and the couple agreed to do doggy playdates' which is not explicitly stated."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.9,
+          "reason": "Event details are mostly accurate, but there are a few minor inaccuracies, such as 'Nate made homemade coconut ice cream with sprinkles' which is not explicitly mentioned."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.8,
+          "reason": "Temporal status is mostly accurate, but there are a few instances where past events are treated as current, such as 'Nate is currently participating in the video game tournament again' which is not explicitly stated."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, but there are a few minor issues, such as 'Nate's fourth tournament was online' which is not explicitly mentioned."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.7,
+          "reason": "Some items bundle multiple facts, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss and it was inspired by personal experiences and her own journey of self-discovery.'"
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.8,
+          "reason": "There are no exact duplicates, but there are near-duplicates, such as 'Joanna's screenplay bits appeared on the big screen on 4 June 2022' and 'Another movie script that Joanna contributed to was shown on the big screen last Sunday.'"
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.7,
+          "reason": "There are several near-duplicates, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss' and 'Joanna's new screenplay is about loss, identity, and connection.'"
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Key entities are covered, but there are minor omissions, such as 'Joanna's writers group' which is not explicitly mentioned."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Attributes are mostly covered, but there are some missing key attributes, such as 'Joanna's specific hobbies' which are not fully detailed."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.9,
+          "reason": "Important events are covered, but there are minor omissions, such as 'Joanna's first play' which is not explicitly mentioned."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.8,
+          "reason": "Relationships are mostly covered, but there are some omissions, such as 'Joanna's relationship with her writers group' which is not fully detailed."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Plans and future commitments are mostly covered, but there are minor omissions, such as 'Joanna's plans for her book' which are not fully detailed."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.8,
+          "reason": "Items are mostly concise, but some are unnecessarily verbose, such as 'Nate is creating gaming content for YouTube. It's a cool way to entertain folks and satisfy his video game cravings at the same time when there aren't any tourneys going on.'"
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Relevance is mostly maintained, but there are a few instances of low-value information, such as 'Nate's controller has a purple and blue design with a star field.'"
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.8,
+          "reason": "Structure is mostly consistent, but there are some variations in formatting, such as 'Nate's hobbies are playing video games and watching movies at home' which is not in a consistent format with other items."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.9,
+          "reason": "Field and schema completeness is mostly maintained, but there are a few missing fields, such as 'Nate's gaming room' which is not fully detailed."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.8,
+          "reason": "Field naming and temporal formats are mostly consistent, but there are some inconsistencies, such as 'anchor_time' being used in different formats."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "Contradictions are avoided, but there are a few potential contradictions, such as 'Nate is proud of himself for making coconut milk ice cream' and 'Nate discovered he can make coconut milk ice cream.'"
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.9,
+          "reason": "Negation is mostly accurate, but there are a few instances where it might be missing, such as 'Joanna is allergic to most reptiles and animals with fur' which is not explicitly stated."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.9,
+          "reason": "Quantifiers are mostly accurate, but there are a few minor issues, such as 'Nate has been practicing for his next video game tournament' which is not explicitly quantified."
+        }
+      ],
+      "conversation_score": 0.8385,
+      "arithmetic_mean_score": 0.8385,
+      "summary": "The final fact memory is mostly accurate and well-supported, but has some issues with inference boundary compliance, fact atomicity, and near-duplicates.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.9,\n      \"reason\": \"Most memory items are well-supported by the conversation, but a few have minor issues, such as 'Joanna has an external drive for backups' which is not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.8,\n      \"reason\": \"Some items infer emotions or motivations not explicitly stated, such as 'Nate chose purple because it is bright and bold like him' which is an interpretation rather than an explicit statement.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly correctly attributed to the right entities, but there are a few instances where the attribution is unclear, such as 'The name Tilly helps Joanna remember when she could hold animals without allergic reactions' which could be misattributed.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"There are inconsistencies in entity names, such as 'turtles' and 'critters' being used interchangeably without clear unification.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items use unresolved pronouns, such as 'He is a doctor' without specifying who 'he' is, though this is not present in the given memory items. However, there are instances where references are ambiguous, like 'they' in 'They look tired from all the walking.'\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are mostly accurate, but there are minor inaccuracies, such as 'Nate has a gaming room with a computer and a gaming chair' which is not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Relationships are mostly accurate, but there are some minor issues, such as 'Nate and the couple agreed to do doggy playdates' which is not explicitly stated.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Event details are mostly accurate, but there are a few minor inaccuracies, such as 'Nate made homemade coconut ice cream with sprinkles' which is not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal status is mostly accurate, but there are a few instances where past events are treated as current, such as 'Nate is currently participating in the video game tournament again' which is not explicitly stated.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, but there are a few minor issues, such as 'Nate's fourth tournament was online' which is not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items bundle multiple facts, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss and it was inspired by personal experiences and her own journey of self-discovery.'\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"There are no exact duplicates, but there are near-duplicates, such as 'Joanna's screenplay bits appeared on the big screen on 4 June 2022' and 'Another movie script that Joanna contributed to was shown on the big screen last Sunday.'\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.7,\n      \"reason\": \"There are several near-duplicates, such as 'Joanna's new screenplay is about a thirty year old woman on a journey of self-discovery after a loss' and 'Joanna's new screenplay is about loss, identity, and connection.'\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Key entities are covered, but there are minor omissions, such as 'Joanna's writers group' which is not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Attributes are mostly covered, but there are some missing key attributes, such as 'Joanna's specific hobbies' which are not fully detailed.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Important events are covered, but there are minor omissions, such as 'Joanna's first play' which is not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Relationships are mostly covered, but there are some omissions, such as 'Joanna's relationship with her writers group' which is not fully detailed.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Plans and future commitments are mostly covered, but there are minor omissions, such as 'Joanna's plans for her book' which are not fully detailed.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Items are mostly concise, but some are unnecessarily verbose, such as 'Nate is creating gaming content for YouTube. It's a cool way to entertain folks and satisfy his video game cravings at the same time when there aren't any tourneys going on.'\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Relevance is mostly maintained, but there are a few instances of low-value information, such as 'Nate's controller has a purple and blue design with a star field.'\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Structure is mostly consistent, but there are some variations in formatting, such as 'Nate's hobbies are playing video games and watching movies at home' which is not in a consistent format with other items.\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.9,\n      \"reason\": \"Field and schema completeness is mostly maintained, but there are a few missing fields, such as 'Nate's gaming room' which is not fully detailed.\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Field naming and temporal formats are mostly consistent, but there are some inconsistencies, such as 'anchor_time' being used in different formats.\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"Contradictions are avoided, but there are a few potential contradictions, such as 'Nate is proud of himself for making coconut milk ice cream' and 'Nate discovered he can make coconut milk ice cream.'\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Negation is mostly accurate, but there are a few instances where it might be missing, such as 'Joanna is allergic to most reptiles and animals with fur' which is not explicitly stated.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Quantifiers are mostly accurate, but there are a few minor issues, such as 'Nate has been practicing for his next video game tournament' which is not explicitly quantified.\"\n    }\n  ],\n  \"conversation_score\": 0.83,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, but has some issues with inference boundary compliance, fact atomicity, and near-duplicates.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 4,
+      "memory_count": 405,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.9,
+          "reason": "Most items have clear textual support, though a few minor details (e.g., 'John's team bond makes the hard work worth it') are slightly generalized but still traceable."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.8,
+          "reason": "Some items infer motivations or traits (e.g., 'John is learning Spanish because it's useful') that are not explicitly stated, though these are loosely supported."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are mostly correctly attributed to the right entities, though a few items (e.g., 'John's team bond makes the hard work worth it') could be more specific."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.9,
+          "reason": "Entity names are mostly consistent, though 'The Wolves' and 'Minnesota Wolves' are used interchangeably without clear unification."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.8,
+          "reason": "Some pronouns are not fully resolved (e.g., 'They signed it for a special reason' without specifying 'they')."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.9,
+          "reason": "Attributes are mostly accurate, though a few (e.g., 'John's team bond makes the hard work worth it') are slightly generalized."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.9,
+          "reason": "Relationships are mostly accurate, though some could be more explicitly defined (e.g., 'John's teammates support him')."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.9,
+          "reason": "Event details are mostly accurate, though a few minor discrepancies exist (e.g., 'John's team bond makes the hard work worth it' is a generalization)."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.9,
+          "reason": "Temporal status is mostly accurate, though a few items (e.g., 'John's team bond makes the hard work worth it') could be more precise."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, though a few items (e.g., 'John's team bond makes the hard work worth it') could be more precise."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.8,
+          "reason": "Some items bundle multiple facts (e.g., 'John's team bond makes the hard work worth it' combines team bond and hard work)."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "No exact duplicates found, though some items are very similar (e.g., 'John's team bond makes the hard work worth it' and 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "Some near-duplicates exist (e.g., 'John's team bond makes the hard work worth it' and 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Most key entities are covered, though a few (e.g., 'Anthony') are not included."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.9,
+          "reason": "Most key attributes are covered, though a few (e.g., 'John's favorite character from Lord of the Rings') are not included."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.9,
+          "reason": "Most important events are covered, though a few (e.g., 'John's team had a scrimmage last week') are not included."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.9,
+          "reason": "Most important relationships are covered, though a few (e.g., 'John's teammates support him') are not included."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Most plans and future commitments are covered, though a few (e.g., 'John's team is planning a trip to Edinburgh') are not included."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.9,
+          "reason": "Items are mostly concise, though a few could be more succinct (e.g., 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Most items are relevant, though a few could be more focused (e.g., 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.9,
+          "reason": "Structure is mostly consistent, though a few items vary in format (e.g., 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.9,
+          "reason": "Most fields are complete, though a few could be more detailed (e.g., 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field naming and temporal formats are mostly consistent, though a few could be more uniform (e.g., 'John's team bond makes the hard work worth it')."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 1.0,
+          "reason": "No contradictions found in the memory set."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 1.0,
+          "reason": "No negation errors found in the memory set."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 1.0,
+          "reason": "Quantifiers are accurately represented in the memory set."
+        }
+      ],
+      "conversation_score": 0.8962,
+      "arithmetic_mean_score": 0.8962,
+      "summary": "The final fact memory is mostly accurate and well-supported, with minor issues in inference boundary compliance, fact atomicity, and near-duplicate absence.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.9,\n      \"reason\": \"Most items have clear textual support, though a few minor details (e.g., 'John's team bond makes the hard work worth it') are slightly generalized but still traceable.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.8,\n      \"reason\": \"Some items infer motivations or traits (e.g., 'John is learning Spanish because it's useful') that are not explicitly stated, though these are loosely supported.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly correctly attributed to the right entities, though a few items (e.g., 'John's team bond makes the hard work worth it') could be more specific.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Entity names are mostly consistent, though 'The Wolves' and 'Minnesota Wolves' are used interchangeably without clear unification.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.8,\n      \"reason\": \"Some pronouns are not fully resolved (e.g., 'They signed it for a special reason' without specifying 'they').\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are mostly accurate, though a few (e.g., 'John's team bond makes the hard work worth it') are slightly generalized.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships are mostly accurate, though some could be more explicitly defined (e.g., 'John's teammates support him').\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Event details are mostly accurate, though a few minor discrepancies exist (e.g., 'John's team bond makes the hard work worth it' is a generalization).\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal status is mostly accurate, though a few items (e.g., 'John's team bond makes the hard work worth it') could be more precise.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, though a few items (e.g., 'John's team bond makes the hard work worth it') could be more precise.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some items bundle multiple facts (e.g., 'John's team bond makes the hard work worth it' combines team bond and hard work).\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"No exact duplicates found, though some items are very similar (e.g., 'John's team bond makes the hard work worth it' and 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"Some near-duplicates exist (e.g., 'John's team bond makes the hard work worth it' and 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key entities are covered, though a few (e.g., 'Anthony') are not included.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key attributes are covered, though a few (e.g., 'John's favorite character from Lord of the Rings') are not included.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most important events are covered, though a few (e.g., 'John's team had a scrimmage last week') are not included.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most important relationships are covered, though a few (e.g., 'John's teammates support him') are not included.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most plans and future commitments are covered, though a few (e.g., 'John's team is planning a trip to Edinburgh') are not included.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.9,\n      \"reason\": \"Items are mostly concise, though a few could be more succinct (e.g., 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Most items are relevant, though a few could be more focused (e.g., 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Structure is mostly consistent, though a few items vary in format (e.g., 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.9,\n      \"reason\": \"Most fields are complete, though a few could be more detailed (e.g., 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field naming and temporal formats are mostly consistent, though a few could be more uniform (e.g., 'John's team bond makes the hard work worth it').\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 1.0,\n      \"reason\": \"No contradictions found in the memory set.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 1.0,\n      \"reason\": \"No negation errors found in the memory set.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 1.0,\n      \"reason\": \"Quantifiers are accurately represented in the memory set.\"\n    }\n  ],\n  \"conversation_score\": 0.88,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, with minor issues in inference boundary compliance, fact atomicity, and near-duplicate absence.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 5,
+      "memory_count": 374,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.8,
+          "reason": "Most facts are supported by the conversation, but some items like 'Andrew currently has two dogs' are unsupported as the conversation shows he has more than two."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.9,
+          "reason": "The memory items mostly stick to what was explicitly stated, with minimal unsupported inferences."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.7,
+          "reason": "Some facts are misattributed, such as 'Andrew currently has two dogs' when the conversation indicates he has more."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.9,
+          "reason": "Entity names are mostly consistent, though some references to 'Andrew's dogs' could be more specific."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.8,
+          "reason": "Most pronouns are resolved, but some items like 'They look so cute!' could be clearer about who 'they' refers to."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.8,
+          "reason": "Attributes are mostly accurate, but some details like 'Andrew currently has two dogs' are incorrect."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.9,
+          "reason": "Relationships are accurately represented, though some could be more detailed."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.8,
+          "reason": "Event details are mostly accurate, but some items like 'Andrew currently has two dogs' are incorrect."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.9,
+          "reason": "Temporal status is mostly accurate, though some items may not clearly distinguish past and future events."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, though some items may have minor inaccuracies."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.7,
+          "reason": "Some items bundle multiple facts, such as 'Andrew and his girlfriend tried a new cafe last weekend' and 'Andrew and his girlfriend discovered a park outside of town' which could be split."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "No exact duplicates found in the memory items."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "Some items express similar facts with minor wording differences, such as 'Andrew and his girlfriend tried a new cafe last weekend' and 'Andrew and his girlfriend discovered a park outside of town'."
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Key entities like Audrey, Andrew, their dogs, and locations are well covered."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Most attributes are covered, but some like the specific breeds of Andrew's dogs are missing."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.8,
+          "reason": "Important events are covered, but some like the specific details of the dog training course are missing."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.9,
+          "reason": "Relationships between Audrey and her dogs, and Andrew and his dogs, are well covered."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.8,
+          "reason": "Future plans are covered, but some like the specific details of the planned hike are missing."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.8,
+          "reason": "Items are mostly concise, but some could be more succinct."
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Trivial information is mostly filtered out, though some items could be more relevant."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.8,
+          "reason": "Structure is mostly consistent, but some items have different formats."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.8,
+          "reason": "Most fields are complete, but some could have more detailed information."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field names and temporal formats are mostly consistent."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "No direct contradictions found in the memory items."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.9,
+          "reason": "Negations are accurately represented, though some could be more explicit."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.9,
+          "reason": "Quantifiers are accurately represented, though some could be more precise."
+        }
+      ],
+      "conversation_score": 0.8423,
+      "arithmetic_mean_score": 0.8423,
+      "summary": "The final fact memory is mostly accurate and well-structured, but has some issues with entity attribution and fact bundling.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.8,\n      \"reason\": \"Most facts are supported by the conversation, but some items like 'Andrew currently has two dogs' are unsupported as the conversation shows he has more than two.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.9,\n      \"reason\": \"The memory items mostly stick to what was explicitly stated, with minimal unsupported inferences.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.7,\n      \"reason\": \"Some facts are misattributed, such as 'Andrew currently has two dogs' when the conversation indicates he has more.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Entity names are mostly consistent, though some references to 'Andrew's dogs' could be more specific.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.8,\n      \"reason\": \"Most pronouns are resolved, but some items like 'They look so cute!' could be clearer about who 'they' refers to.\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Attributes are mostly accurate, but some details like 'Andrew currently has two dogs' are incorrect.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships are accurately represented, though some could be more detailed.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Event details are mostly accurate, but some items like 'Andrew currently has two dogs' are incorrect.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal status is mostly accurate, though some items may not clearly distinguish past and future events.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, though some items may have minor inaccuracies.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items bundle multiple facts, such as 'Andrew and his girlfriend tried a new cafe last weekend' and 'Andrew and his girlfriend discovered a park outside of town' which could be split.\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"No exact duplicates found in the memory items.\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"Some items express similar facts with minor wording differences, such as 'Andrew and his girlfriend tried a new cafe last weekend' and 'Andrew and his girlfriend discovered a park outside of town'.\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Key entities like Audrey, Andrew, their dogs, and locations are well covered.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Most attributes are covered, but some like the specific breeds of Andrew's dogs are missing.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Important events are covered, but some like the specific details of the dog training course are missing.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships between Audrey and her dogs, and Andrew and his dogs, are well covered.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Future plans are covered, but some like the specific details of the planned hike are missing.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Items are mostly concise, but some could be more succinct.\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Trivial information is mostly filtered out, though some items could be more relevant.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Structure is mostly consistent, but some items have different formats.\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.8,\n      \"reason\": \"Most fields are complete, but some could have more detailed information.\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field names and temporal formats are mostly consistent.\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"No direct contradictions found in the memory items.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Negations are accurately represented, though some could be more explicit.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Quantifiers are accurately represented, though some could be more precise.\"\n    }\n  ],\n  \"conversation_score\": 0.82,\n  \"summary\": \"The final fact memory is mostly accurate and well-structured, but has some issues with entity attribution and fact bundling.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 6,
+      "memory_count": 448,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.8,
+          "reason": "Most items have explicit textual support, but some like 'James's dog is named Ned' and 'John's dog is named Jill' are not fully supported by the conversation."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.9,
+          "reason": "The memory items mostly avoid unsupported inferences, though some like 'James is happier with his new dog in the family' might imply emotional states not explicitly stated."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.7,
+          "reason": "There are a few misattributions, such as 'John's dog is named Jill' which is not explicitly stated in the conversation."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.6,
+          "reason": "There are inconsistencies in entity names, such as 'Jill' being used for John's dog without clear support, and 'James's dog is named Ned' being an update without prior mention of Ned."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.8,
+          "reason": "Most pronouns are resolved, but some items like 'He is a doctor' are not present, and others like 'She' in 'She left me her phone number' could be ambiguous."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.9,
+          "reason": "Attributes are mostly accurate, but there are minor issues like 'John's dog is named Jill' which is not explicitly stated."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.8,
+          "reason": "Relationships are mostly accurate, but some like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.9,
+          "reason": "Event details are mostly accurate, but some like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.8,
+          "reason": "Temporal status is mostly accurate, but some items like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.9,
+          "reason": "Temporal values are mostly accurate, but some like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.7,
+          "reason": "Some items bundle multiple facts, such as 'James and John made a bet about which team will finish higher in the final standings' which combines the bet and the teams."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "There are no exact duplicates, but some items like 'James and John made a bet about which team will finish higher in the final standings' and 'James bet Liverpool will finish higher than Manchester City' are similar."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "There are some near-duplicates, such as 'James and John made a bet about which team will finish higher in the final standings' and 'James bet Liverpool will finish higher than Manchester City'."
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Most key entities are covered, but 'Jill' as John's dog is not explicitly mentioned in the conversation."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Some attributes are missing, such as 'John's dog is named Jill' which is not explicitly stated."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.9,
+          "reason": "Important events are mostly covered, but some like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.8,
+          "reason": "Some relationships are missing, such as 'John's dog is named Jill' which is not explicitly stated."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Future plans are mostly covered, but some like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.9,
+          "reason": "Most items are concise, but some could be more succinct, such as 'James and John made a bet about which team will finish higher in the final standings'."
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.9,
+          "reason": "Most items are relevant, but some like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.8,
+          "reason": "The structure is mostly consistent, but some items have different formats, such as 'James and John made a bet about which team will finish higher in the final standings'."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.9,
+          "reason": "Most fields are complete, but some like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field naming and temporal formats are mostly consistent, but some like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "There are no clear contradictions, but some items like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.9,
+          "reason": "Negations are mostly accurate, but some like 'John's dog is named Jill' are not supported."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.9,
+          "reason": "Quantifiers are mostly accurate, but some like 'John's dog is named Jill' are not supported."
+        }
+      ],
+      "conversation_score": 0.8423,
+      "arithmetic_mean_score": 0.8423,
+      "summary": "The final fact memory is mostly accurate and well-supported, but there are some minor issues with entity names, attribute coverage, and fact atomicity.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.8,\n      \"reason\": \"Most items have explicit textual support, but some like 'James's dog is named Ned' and 'John's dog is named Jill' are not fully supported by the conversation.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.9,\n      \"reason\": \"The memory items mostly avoid unsupported inferences, though some like 'James is happier with his new dog in the family' might imply emotional states not explicitly stated.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.7,\n      \"reason\": \"There are a few misattributions, such as 'John's dog is named Jill' which is not explicitly stated in the conversation.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.6,\n      \"reason\": \"There are inconsistencies in entity names, such as 'Jill' being used for John's dog without clear support, and 'James's dog is named Ned' being an update without prior mention of Ned.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.8,\n      \"reason\": \"Most pronouns are resolved, but some items like 'He is a doctor' are not present, and others like 'She' in 'She left me her phone number' could be ambiguous.\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Attributes are mostly accurate, but there are minor issues like 'John's dog is named Jill' which is not explicitly stated.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Relationships are mostly accurate, but some like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Event details are mostly accurate, but some like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal status is mostly accurate, but some items like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal values are mostly accurate, but some like 'John's dog is named Jill' are not supported, and 'John's parents are learning coding from him' is not explicitly stated.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items bundle multiple facts, such as 'James and John made a bet about which team will finish higher in the final standings' which combines the bet and the teams.\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"There are no exact duplicates, but some items like 'James and John made a bet about which team will finish higher in the final standings' and 'James bet Liverpool will finish higher than Manchester City' are similar.\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"There are some near-duplicates, such as 'James and John made a bet about which team will finish higher in the final standings' and 'James bet Liverpool will finish higher than Manchester City'.\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key entities are covered, but 'Jill' as John's dog is not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Some attributes are missing, such as 'John's dog is named Jill' which is not explicitly stated.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Important events are mostly covered, but some like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Some relationships are missing, such as 'John's dog is named Jill' which is not explicitly stated.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Future plans are mostly covered, but some like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.9,\n      \"reason\": \"Most items are concise, but some could be more succinct, such as 'James and John made a bet about which team will finish higher in the final standings'.\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.9,\n      \"reason\": \"Most items are relevant, but some like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some items have different formats, such as 'James and John made a bet about which team will finish higher in the final standings'.\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.9,\n      \"reason\": \"Most fields are complete, but some like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field naming and temporal formats are mostly consistent, but some like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"There are no clear contradictions, but some items like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Negations are mostly accurate, but some like 'John's dog is named Jill' are not supported.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Quantifiers are mostly accurate, but some like 'John's dog is named Jill' are not supported.\"\n    }\n  ],\n  \"conversation_score\": 0.82,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, but there are some minor issues with entity names, attribute coverage, and fact atomicity.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 7,
+      "memory_count": 454,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.8,
+          "reason": "Most memory items are supported by the conversation, but some have unsupported details, such as 'Deborah has a pendant that reminds her of her mother' (not explicitly stated) and 'Jolene's mom taught her to never give up' (not explicitly stated)."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.7,
+          "reason": "Some items infer emotions or motivations not explicitly stated, such as 'Deborah feels her mother's presence when she sits by the window' and 'Deborah feels peace and gratitude when she goes back to the bench.'"
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are mostly correctly attributed to the right entities, but there are a few misattributions, such as 'Deborah's mom believed art could give out strong emotions' when the conversation attributes this to Deborah's mom."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.8,
+          "reason": "There are inconsistencies in entity names, such as 'Anna' and 'Anna got Deborah a vegan stir-fry' being mentioned in different ways, and 'Susie' and 'Seraphim' being used interchangeably for Jolene's snakes."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.7,
+          "reason": "Some items use ambiguous pronouns, such as 'He is a doctor' without specifying who 'he' is, and 'She likes cats' without a clear antecedent."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.8,
+          "reason": "Some attributes are inaccurately stated, such as 'Deborah is a software engineer' when the conversation describes her as a product manager, and 'Jolene is a software engineer' when she is described as an electrical engineering student."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.8,
+          "reason": "Some relationships are inaccurately represented, such as 'Deborah and her husband being there for each other' when the conversation describes them as being there for each other, but not explicitly stating the relationship."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.8,
+          "reason": "Some event details are inaccurately represented, such as 'Jolene's mom gave her the pendant in 2010 in Paris' when the conversation says 'Jolene's mother gave it to me in 2010 in Paris.'"
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.7,
+          "reason": "Some items treat future plans as completed events, such as 'Jolene plans to play 'Walking Dead' next Saturday' being treated as a completed event."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.8,
+          "reason": "Some temporal values are inaccurately represented, such as 'Deborah's mom passed away a few years ago' when the conversation says 'a few years ago.'"
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.6,
+          "reason": "Some items bundle multiple distinct facts together, such as 'Deborah's mom had a special bench near the window and loved to sit there every morning.'"
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.6,
+          "reason": "There are exact duplicates, such as 'Deborah's mom passed away a few years ago' and 'Deborah's mom passed away last year.'"
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.7,
+          "reason": "There are near-duplicates, such as 'Deborah's mom loved to read and would sit by the window every night with a book and a smile' and 'Deborah's mom had a big passion for cooking.'"
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Most key entities are covered, but some are missing, such as 'Deborah's husband' and 'Deborah's neighbor Anna.'"
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Some key attributes are missing, such as 'Deborah's mom's profession' and 'Jolene's partner's profession.'"
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.8,
+          "reason": "Some important events are missing, such as 'Deborah's mom's wedding' and 'Jolene's mom's death.'"
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.8,
+          "reason": "Some important relationships are missing, such as 'Deborah's relationship with her husband' and 'Jolene's relationship with her partner.'"
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.7,
+          "reason": "Some important plans and future commitments are missing, such as 'Deborah's yoga retreat' and 'Jolene's meditation course.'"
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.7,
+          "reason": "Some items are not concise, such as 'Deborah's mom believed art could give out strong emotions and uniquely connect us.'"
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.8,
+          "reason": "Some items are not relevant, such as 'Deborah's mom used to sing lullabies to her.'"
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.7,
+          "reason": "Some items have inconsistent structure, such as 'Deborah's mom had a big passion for cooking' and 'Deborah's mom loved flowers.'"
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.7,
+          "reason": "Some items are missing fields or semantic slots, such as 'Deborah's mom had a big passion for cooking' without specifying the relationship."
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.7,
+          "reason": "There are inconsistencies in field naming and temporal formats, such as 'Deborah's mom passed away a few years ago' and 'Deborah's mom passed away last year.'"
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.8,
+          "reason": "There are no clear contradictions in the memory set."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.8,
+          "reason": "Negation is accurately represented, such as 'Jolene's mom passed away last year.'"
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.8,
+          "reason": "Quantifiers are accurately represented, such as 'Jolene has been doing yoga and meditation sporadically for about 3 years now.'"
+        }
+      ],
+      "conversation_score": 0.7577,
+      "arithmetic_mean_score": 0.7577,
+      "summary": "The final fact memory has a good level of explicit textual support and covers most key entities, attributes, events, and relationships. However, there are some issues with inference boundary compliance, entity name and referent consistency, fact atomicity, and exact duplicate absence.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.8,\n      \"reason\": \"Most memory items are supported by the conversation, but some have unsupported details, such as 'Deborah has a pendant that reminds her of her mother' (not explicitly stated) and 'Jolene's mom taught her to never give up' (not explicitly stated).\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.7,\n      \"reason\": \"Some items infer emotions or motivations not explicitly stated, such as 'Deborah feels her mother's presence when she sits by the window' and 'Deborah feels peace and gratitude when she goes back to the bench.'\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are mostly correctly attributed to the right entities, but there are a few misattributions, such as 'Deborah's mom believed art could give out strong emotions' when the conversation attributes this to Deborah's mom.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"There are inconsistencies in entity names, such as 'Anna' and 'Anna got Deborah a vegan stir-fry' being mentioned in different ways, and 'Susie' and 'Seraphim' being used interchangeably for Jolene's snakes.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items use ambiguous pronouns, such as 'He is a doctor' without specifying who 'he' is, and 'She likes cats' without a clear antecedent.\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Some attributes are inaccurately stated, such as 'Deborah is a software engineer' when the conversation describes her as a product manager, and 'Jolene is a software engineer' when she is described as an electrical engineering student.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Some relationships are inaccurately represented, such as 'Deborah and her husband being there for each other' when the conversation describes them as being there for each other, but not explicitly stating the relationship.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Some event details are inaccurately represented, such as 'Jolene's mom gave her the pendant in 2010 in Paris' when the conversation says 'Jolene's mother gave it to me in 2010 in Paris.'\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.7,\n      \"reason\": \"Some items treat future plans as completed events, such as 'Jolene plans to play 'Walking Dead' next Saturday' being treated as a completed event.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Some temporal values are inaccurately represented, such as 'Deborah's mom passed away a few years ago' when the conversation says 'a few years ago.'\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.6,\n      \"reason\": \"Some items bundle multiple distinct facts together, such as 'Deborah's mom had a special bench near the window and loved to sit there every morning.'\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.6,\n      \"reason\": \"There are exact duplicates, such as 'Deborah's mom passed away a few years ago' and 'Deborah's mom passed away last year.'\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.7,\n      \"reason\": \"There are near-duplicates, such as 'Deborah's mom loved to read and would sit by the window every night with a book and a smile' and 'Deborah's mom had a big passion for cooking.'\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key entities are covered, but some are missing, such as 'Deborah's husband' and 'Deborah's neighbor Anna.'\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Some key attributes are missing, such as 'Deborah's mom's profession' and 'Jolene's partner's profession.'\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Some important events are missing, such as 'Deborah's mom's wedding' and 'Jolene's mom's death.'\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Some important relationships are missing, such as 'Deborah's relationship with her husband' and 'Jolene's relationship with her partner.'\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.7,\n      \"reason\": \"Some important plans and future commitments are missing, such as 'Deborah's yoga retreat' and 'Jolene's meditation course.'\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.7,\n      \"reason\": \"Some items are not concise, such as 'Deborah's mom believed art could give out strong emotions and uniquely connect us.'\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.8,\n      \"reason\": \"Some items are not relevant, such as 'Deborah's mom used to sing lullabies to her.'\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.7,\n      \"reason\": \"Some items have inconsistent structure, such as 'Deborah's mom had a big passion for cooking' and 'Deborah's mom loved flowers.'\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.7,\n      \"reason\": \"Some items are missing fields or semantic slots, such as 'Deborah's mom had a big passion for cooking' without specifying the relationship.\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.7,\n      \"reason\": \"There are inconsistencies in field naming and temporal formats, such as 'Deborah's mom passed away a few years ago' and 'Deborah's mom passed away last year.'\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.8,\n      \"reason\": \"There are no clear contradictions in the memory set.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Negation is accurately represented, such as 'Jolene's mom passed away last year.'\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Quantifiers are accurately represented, such as 'Jolene has been doing yoga and meditation sporadically for about 3 years now.'\"\n    }\n  ],\n  \"conversation_score\": 0.76,\n  \"summary\": \"The final fact memory has a good level of explicit textual support and covers most key entities, attributes, events, and relationships. However, there are some issues with inference boundary compliance, entity name and referent consistency, fact atomicity, and exact duplicate absence.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 8,
+      "memory_count": 316,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.8,
+          "reason": "Most facts are supported by the conversation, but some items like 'Evan has a bonsai tree that symbolizes strength and resilience' are not explicitly mentioned."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.7,
+          "reason": "Some items infer motives or emotions not explicitly stated, such as 'Evan is finding it tough to stay consistent with his usual fitness routine due to the knee injury' which assumes difficulty without explicit confirmation."
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are generally attributed correctly to the right entities, though a few items like 'Evan has a fitness watch that tracks his progress' are not clearly supported."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.8,
+          "reason": "There are minor inconsistencies, such as 'Evan's partner' and 'Evan's wife' being used interchangeably without clear unification."
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.7,
+          "reason": "Some items use ambiguous pronouns, like 'He is a doctor' without specifying who 'he' is, though this is less common."
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.8,
+          "reason": "Attributes are mostly accurate, but some like 'Evan has a fitness watch' are not supported by the conversation."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.8,
+          "reason": "Relationships are mostly accurate, but 'Evan's partner' is not consistently attributed to the same person across all items."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.8,
+          "reason": "Event details are mostly accurate, but some like 'Evan had a health scare last week and had to go to the hospital' are not explicitly mentioned in the conversation."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.7,
+          "reason": "Some items treat future plans as completed, like 'Evan and his family are planning a big family reunion next summer' being treated as if it has already happened."
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.8,
+          "reason": "Temporal values are mostly accurate, but some like 'Evan had a health scare last week' are not explicitly mentioned in the conversation."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.7,
+          "reason": "Some items bundle multiple facts, like 'Evan's painting instructor stresses observing nature and painting what is seen' combining two distinct facts."
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "There are no exact duplicates in the memory items."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "Some items express the same fact with minor wording differences, like 'Evan is doing PT for his knee' and 'Evan is doing physical therapy for his knee.'"
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "Key entities like Evan, Sam, and their respective partners are well-covered in the memory items."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Some key attributes are missing, like 'Evan's old Prius broke down' is mentioned, but the current status of the car is not fully captured."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.8,
+          "reason": "Important events are covered, but some like 'Evan's health scare last week' are not explicitly mentioned in the conversation."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.8,
+          "reason": "Relationships are covered, but some like 'Evan's partner' are not consistently attributed."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.8,
+          "reason": "Future plans are covered, but some like 'Evan and his family are planning a big family reunion next summer' are not explicitly mentioned in the conversation."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.8,
+          "reason": "Most items are concise, but some are unnecessarily wordy, like 'Evan's painting instructor stresses observing nature and painting what is seen.'"
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.8,
+          "reason": "Most items are relevant, but some like 'Evan lost his keys again' are trivial and not useful for future interaction."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.8,
+          "reason": "Items follow a consistent structure, but some are more narrative than factual, like 'Evan's painting instructor stresses observing nature and painting what is seen.'"
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.8,
+          "reason": "Most items have complete fields, but some lack specific details, like 'Evan's painting instructor stresses observing nature and painting what is seen.'"
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.9,
+          "reason": "Field names and temporal formats are mostly consistent, though some items use different phrasing for the same event."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "No clear contradictions are found in the memory items."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.9,
+          "reason": "Negations are accurately represented, though some items like 'Evan's old Prius broke down' are not explicitly mentioned in the conversation."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.9,
+          "reason": "Quantifiers are accurately represented, though some items like 'Evan is limiting himself to two ginger snaps a day' are not explicitly mentioned in the conversation."
+        }
+      ],
+      "conversation_score": 0.8115,
+      "arithmetic_mean_score": 0.8115,
+      "summary": "The final fact memory is mostly accurate and well-supported, but has some issues with inference boundary compliance, temporal status accuracy, and fact atomicity.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.8,\n      \"reason\": \"Most facts are supported by the conversation, but some items like 'Evan has a bonsai tree that symbolizes strength and resilience' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.7,\n      \"reason\": \"Some items infer motives or emotions not explicitly stated, such as 'Evan is finding it tough to stay consistent with his usual fitness routine due to the knee injury' which assumes difficulty without explicit confirmation.\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are generally attributed correctly to the right entities, though a few items like 'Evan has a fitness watch that tracks his progress' are not clearly supported.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"There are minor inconsistencies, such as 'Evan's partner' and 'Evan's wife' being used interchangeably without clear unification.\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items use ambiguous pronouns, like 'He is a doctor' without specifying who 'he' is, though this is less common.\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Attributes are mostly accurate, but some like 'Evan has a fitness watch' are not supported by the conversation.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Relationships are mostly accurate, but 'Evan's partner' is not consistently attributed to the same person across all items.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Event details are mostly accurate, but some like 'Evan had a health scare last week and had to go to the hospital' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.7,\n      \"reason\": \"Some items treat future plans as completed, like 'Evan and his family are planning a big family reunion next summer' being treated as if it has already happened.\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal values are mostly accurate, but some like 'Evan had a health scare last week' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items bundle multiple facts, like 'Evan's painting instructor stresses observing nature and painting what is seen' combining two distinct facts.\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"There are no exact duplicates in the memory items.\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"Some items express the same fact with minor wording differences, like 'Evan is doing PT for his knee' and 'Evan is doing physical therapy for his knee.'\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Key entities like Evan, Sam, and their respective partners are well-covered in the memory items.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Some key attributes are missing, like 'Evan's old Prius broke down' is mentioned, but the current status of the car is not fully captured.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Important events are covered, but some like 'Evan's health scare last week' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Relationships are covered, but some like 'Evan's partner' are not consistently attributed.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Future plans are covered, but some like 'Evan and his family are planning a big family reunion next summer' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Most items are concise, but some are unnecessarily wordy, like 'Evan's painting instructor stresses observing nature and painting what is seen.'\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.8,\n      \"reason\": \"Most items are relevant, but some like 'Evan lost his keys again' are trivial and not useful for future interaction.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Items follow a consistent structure, but some are more narrative than factual, like 'Evan's painting instructor stresses observing nature and painting what is seen.'\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.8,\n      \"reason\": \"Most items have complete fields, but some lack specific details, like 'Evan's painting instructor stresses observing nature and painting what is seen.'\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Field names and temporal formats are mostly consistent, though some items use different phrasing for the same event.\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"No clear contradictions are found in the memory items.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Negations are accurately represented, though some items like 'Evan's old Prius broke down' are not explicitly mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Quantifiers are accurately represented, though some items like 'Evan is limiting himself to two ginger snaps a day' are not explicitly mentioned in the conversation.\"\n    }\n  ],\n  \"conversation_score\": 0.81,\n  \"summary\": \"The final fact memory is mostly accurate and well-supported, but has some issues with inference boundary compliance, temporal status accuracy, and fact atomicity.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 9,
+      "memory_count": 414,
+      "rubrics": [
+        {
+          "id": "explicit_textual_support",
+          "name": "Explicit Textual Support",
+          "question": "Does each memory item have explicit textual support in the conversation for the factual content it states?",
+          "score": 0.8,
+          "reason": "Most facts are supported by the conversation, but some items like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned."
+        },
+        {
+          "id": "inference_boundary_compliance",
+          "name": "Inference Boundary Compliance",
+          "question": "Does the memory item avoid unsupported inference beyond the conversation, especially inferred emotions, motivations, causation, or personality traits?",
+          "score": 0.7,
+          "reason": "Some items infer emotions or motivations not explicitly stated, such as 'Calvin finds switching between music genres intimidating but exciting.'"
+        },
+        {
+          "id": "entity_attribution_accuracy",
+          "name": "Entity Attribution Accuracy",
+          "question": "Are facts correctly attributed to the right person, organization, place, or object mentioned in the conversation?",
+          "score": 0.9,
+          "reason": "Facts are generally attributed correctly to Calvin or Dave, with few misattributions."
+        },
+        {
+          "id": "entity_name_and_referent_consistency",
+          "name": "Entity Name and Referent Consistency",
+          "question": "Are the same entities referred to consistently across memory items, with names, aliases, nicknames, and references unified without ambiguity?",
+          "score": 0.8,
+          "reason": "Entity names are mostly consistent, but there are a few instances where 'Ferrari' is used without clear unification with 'car' or 'luxury car.'"
+        },
+        {
+          "id": "pronoun_and_reference_clarity",
+          "name": "Pronoun and Reference Clarity",
+          "question": "Are pronouns and abbreviated references in memory items resolved clearly enough that the item can be understood without ambiguity?",
+          "score": 0.7,
+          "reason": "Some items use unresolved pronouns, such as 'He was jamming out to one of their hits.'"
+        },
+        {
+          "id": "entity_attribute_accuracy",
+          "name": "Entity Attribute Accuracy",
+          "question": "Are attributes of entities such as role, profession, location, preference, state, or description stated accurately relative to the conversation?",
+          "score": 0.8,
+          "reason": "Attributes are mostly accurate, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned."
+        },
+        {
+          "id": "relationship_accuracy",
+          "name": "Relationship Accuracy",
+          "question": "Are relationships between entities represented accurately, including family, social, organizational, or reporting relationships?",
+          "score": 0.9,
+          "reason": "Relationships are accurately represented, such as Calvin's collaborations with Frank Ocean and Dave's work with his dad."
+        },
+        {
+          "id": "event_detail_accuracy",
+          "name": "Event Detail Accuracy",
+          "question": "Are event details such as who did what, where it happened, and what the outcome was represented accurately?",
+          "score": 0.8,
+          "reason": "Event details are mostly accurate, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned."
+        },
+        {
+          "id": "temporal_status_accuracy",
+          "name": "Temporal Status Accuracy",
+          "question": "Does the memory correctly distinguish past events, current states, and future plans or intentions?",
+          "score": 0.7,
+          "reason": "Some items treat future plans as completed events, such as 'Calvin's tour ended and was amazing.'"
+        },
+        {
+          "id": "temporal_value_accuracy",
+          "name": "Temporal Value Accuracy",
+          "question": "Are specific temporal values such as dates, times, durations, and event order represented accurately?",
+          "score": 0.8,
+          "reason": "Temporal values are mostly accurate, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Does each memory item contain only one independent fact rather than bundling multiple distinct facts together?",
+          "score": 0.7,
+          "reason": "Some items bundle multiple facts, such as 'Calvin is attached to his Ferrari and it inspires him.'"
+        },
+        {
+          "id": "exact_duplicate_absence",
+          "name": "Exact Duplicate Absence",
+          "question": "Does the memory set avoid storing two items that state the same fact in effectively identical form?",
+          "score": 0.9,
+          "reason": "There are no exact duplicates in the memory items."
+        },
+        {
+          "id": "near_duplicate_absence",
+          "name": "Near-Duplicate Absence",
+          "question": "Does the memory set avoid storing multiple items that express the same fact with only minor wording differences?",
+          "score": 0.8,
+          "reason": "There are a few near-duplicates, such as 'Calvin finds switching between music genres intimidating but exciting' and 'Calvin finds it exciting to see where these new ideas take him.'"
+        },
+        {
+          "id": "entity_coverage",
+          "name": "Entity Coverage",
+          "question": "Does the final memory cover the key entities introduced in the conversation that are worth remembering?",
+          "score": 0.9,
+          "reason": "All key entities like Calvin, Dave, Frank Ocean, and locations like Japan and Boston are covered."
+        },
+        {
+          "id": "attribute_coverage",
+          "name": "Attribute Coverage",
+          "question": "Does the final memory preserve the key attributes of important entities, such as role, preference, location, or status?",
+          "score": 0.8,
+          "reason": "Most attributes are covered, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned."
+        },
+        {
+          "id": "event_coverage",
+          "name": "Event Coverage",
+          "question": "Does the final memory preserve the important events, decisions, and notable actions from the conversation?",
+          "score": 0.9,
+          "reason": "Important events like Calvin's tour with Frank Ocean and Dave's car restoration are covered."
+        },
+        {
+          "id": "relationship_coverage",
+          "name": "Relationship Coverage",
+          "question": "Does the final memory preserve important relationships between entities that are relevant to future understanding?",
+          "score": 0.9,
+          "reason": "Key relationships like Calvin's collaborations and Dave's work with his dad are covered."
+        },
+        {
+          "id": "plan_and_future_commitment_coverage",
+          "name": "Plan and Future Commitment Coverage",
+          "question": "Does the final memory preserve important plans, intentions, scheduled actions, and future commitments mentioned in the conversation?",
+          "score": 0.8,
+          "reason": "Future plans are mostly covered, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned."
+        },
+        {
+          "id": "conciseness",
+          "name": "Conciseness",
+          "question": "Is each memory item concise and stripped of unnecessary filler, elaboration, or meta-commentary?",
+          "score": 0.7,
+          "reason": "Some items are verbose, such as 'Calvin finds switching between music genres intimidating but exciting.'"
+        },
+        {
+          "id": "relevance_filtering",
+          "name": "Relevance Filtering",
+          "question": "Does the final memory avoid storing trivial, transient, or low-value information that is not useful for future interaction?",
+          "score": 0.8,
+          "reason": "Most items are relevant, but some like 'Dave shared a photo of a silver corvette parked in front of a building' are low-value."
+        },
+        {
+          "id": "structural_consistency",
+          "name": "Structural Consistency",
+          "question": "Do memory items follow a consistent overall structural pattern and style across the memory set?",
+          "score": 0.7,
+          "reason": "The structure is somewhat consistent, but there are variations in how facts are presented."
+        },
+        {
+          "id": "field_and_schema_completeness",
+          "name": "Field and Schema Completeness",
+          "question": "Where a structured memory format is expected, are the necessary fields or semantic slots present and non-empty?",
+          "score": 0.8,
+          "reason": "Most items have complete fields, but some lack specific details like 'Calvin's new Ferrari is a black sports car.'"
+        },
+        {
+          "id": "field_naming_and_temporal_format_consistency",
+          "name": "Field Naming and Temporal Format Consistency",
+          "question": "Are field names, date formats, and similar representational conventions used consistently across the memory set?",
+          "score": 0.8,
+          "reason": "Field naming is mostly consistent, but there are minor inconsistencies in temporal formats."
+        },
+        {
+          "id": "contradiction_avoidance",
+          "name": "Contradiction Avoidance",
+          "question": "Does the final memory avoid containing mutually exclusive or directly contradictory facts?",
+          "score": 0.9,
+          "reason": "There are no clear contradictions in the memory items."
+        },
+        {
+          "id": "negation_accuracy",
+          "name": "Negation Accuracy",
+          "question": "Are negative facts and prohibitions represented accurately, without dropping or reversing negation?",
+          "score": 0.9,
+          "reason": "Negations are accurately represented, with no clear errors."
+        },
+        {
+          "id": "quantifier_accuracy",
+          "name": "Quantifier Accuracy",
+          "question": "Are quantities, frequencies, counts, and intensifiers preserved accurately?",
+          "score": 0.9,
+          "reason": "Quantifiers are accurately represented, with no clear errors."
+        }
+      ],
+      "conversation_score": 0.8115,
+      "arithmetic_mean_score": 0.8115,
+      "summary": "The final fact memory is mostly accurate and covers key entities, events, and relationships. However, there are some issues with inference boundary compliance, temporal status accuracy, and fact atomicity.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"score\": 0.8,\n      \"reason\": \"Most facts are supported by the conversation, but some items like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"score\": 0.7,\n      \"reason\": \"Some items infer emotions or motivations not explicitly stated, such as 'Calvin finds switching between music genres intimidating but exciting.'\"\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Facts are generally attributed correctly to Calvin or Dave, with few misattributions.\"\n    },\n    {\n      \"id\": \"entity_name_and_referent_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Entity names are mostly consistent, but there are a few instances where 'Ferrari' is used without clear unification with 'car' or 'luxury car.'\"\n    },\n    {\n      \"id\": \"pronoun_and_reference_clarity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items use unresolved pronouns, such as 'He was jamming out to one of their hits.'\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Attributes are mostly accurate, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Relationships are accurately represented, such as Calvin's collaborations with Frank Ocean and Dave's work with his dad.\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Event details are mostly accurate, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"score\": 0.7,\n      \"reason\": \"Some items treat future plans as completed events, such as 'Calvin's tour ended and was amazing.'\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"score\": 0.8,\n      \"reason\": \"Temporal values are mostly accurate, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.7,\n      \"reason\": \"Some items bundle multiple facts, such as 'Calvin is attached to his Ferrari and it inspires him.'\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"score\": 0.9,\n      \"reason\": \"There are no exact duplicates in the memory items.\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"score\": 0.8,\n      \"reason\": \"There are a few near-duplicates, such as 'Calvin finds switching between music genres intimidating but exciting' and 'Calvin finds it exciting to see where these new ideas take him.'\"\n    },\n    {\n      \"id\": \"entity_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"All key entities like Calvin, Dave, Frank Ocean, and locations like Japan and Boston are covered.\"\n    },\n    {\n      \"id\": \"attribute_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Most attributes are covered, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"event_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Important events like Calvin's tour with Frank Ocean and Dave's car restoration are covered.\"\n    },\n    {\n      \"id\": \"relationship_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Key relationships like Calvin's collaborations and Dave's work with his dad are covered.\"\n    },\n    {\n      \"id\": \"plan_and_future_commitment_coverage\",\n      \"score\": 0.8,\n      \"reason\": \"Future plans are mostly covered, but some like 'Calvin's new Ferrari is a black sports car' are not explicitly mentioned.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 0.7,\n      \"reason\": \"Some items are verbose, such as 'Calvin finds switching between music genres intimidating but exciting.'\"\n    },\n    {\n      \"id\": \"relevance_filtering\",\n      \"score\": 0.8,\n      \"reason\": \"Most items are relevant, but some like 'Dave shared a photo of a silver corvette parked in front of a building' are low-value.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 0.7,\n      \"reason\": \"The structure is somewhat consistent, but there are variations in how facts are presented.\"\n    },\n    {\n      \"id\": \"field_and_schema_completeness\",\n      \"score\": 0.8,\n      \"reason\": \"Most items have complete fields, but some lack specific details like 'Calvin's new Ferrari is a black sports car.'\"\n    },\n    {\n      \"id\": \"field_naming_and_temporal_format_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"Field naming is mostly consistent, but there are minor inconsistencies in temporal formats.\"\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"score\": 0.9,\n      \"reason\": \"There are no clear contradictions in the memory items.\"\n    },\n    {\n      \"id\": \"negation_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Negations are accurately represented, with no clear errors.\"\n    },\n    {\n      \"id\": \"quantifier_accuracy\",\n      \"score\": 0.9,\n      \"reason\": \"Quantifiers are accurately represented, with no clear errors.\"\n    }\n  ],\n  \"conversation_score\": 0.8,\n  \"summary\": \"The final fact memory is mostly accurate and covers key entities, events, and relationships. However, there are some issues with inference boundary compliance, temporal status accuracy, and fact atomicity.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    }
+  ],
+  "summary": {
+    "evaluator_model": "Qwen/Qwen3-14B",
+    "rubric_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\rubrics\\consolidated_fact_rubrics_v1.json",
+    "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_consolidated_fact_rubrics_v1_strict.txt",
+    "models": {
+      "minimax": {
+        "conversation_count": 10,
+        "fact_score": 0.8412,
+        "arithmetic_mean_score": 0.8412,
+        "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax"
+      }
+    },
+    "missing": [],
+    "weights": {
+      "fact_sourceability": 3.0,
+      "fact_factual_correctness": 3.0,
+      "fact_temporal_correctness": 2.0,
+      "fact_atomicity": 1.0,
+      "fact_nonredundancy": 1.0,
+      "fact_coverage": 2.0,
+      "fact_conciseness": 1.0,
+      "fact_structural_consistency": 1.0
+    },
+    "hard_cap_threshold": 0.3,
+    "hard_cap_value": 0.4
+  }
+}

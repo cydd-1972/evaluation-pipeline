@@ -1,0 +1,42 @@
+[
+  {
+    "id": "sourceability",
+    "name": "Sourceability",
+    "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?"
+  },
+  {
+    "id": "factual_correctness",
+    "name": "Factual Correctness",
+    "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?"
+  },
+  {
+    "id": "temporal_correctness",
+    "name": "Temporal Correctness",
+    "question": "To what extent does the final memory preserve past, current, and future status correctly?"
+  },
+  {
+    "id": "atomicity",
+    "name": "Atomicity",
+    "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?"
+  },
+  {
+    "id": "nonredundancy",
+    "name": "Nonredundancy",
+    "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?"
+  },
+  {
+    "id": "coverage_of_memory_worthy_content",
+    "name": "Coverage Of Memory-Worthy Content",
+    "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?"
+  },
+  {
+    "id": "conciseness",
+    "name": "Conciseness",
+    "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?"
+  },
+  {
+    "id": "structural_consistency",
+    "name": "Structural Consistency",
+    "question": "To what extent does the final memory follow a consistent, reusable structure across items?"
+  }
+]

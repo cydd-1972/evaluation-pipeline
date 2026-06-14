@@ -1,0 +1,7 @@
+[
+  {
+    "id": "fact_covered",
+    "name": "Fact Covered",
+    "question": "Is this salient atomic fact covered by at least one delta item?"
+  }
+]

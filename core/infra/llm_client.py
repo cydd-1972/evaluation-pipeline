@@ -21,6 +21,7 @@ from core.infra.api_failure_budget import is_countable_api_error
 _API_RETRY_ATTEMPTS = 10
 _API_RETRY_BASE_SEC = 3.0
 _API_RETRY_MAX_SEC = 90.0
+_API_TIMEOUT_SEC = 120.0
 
 _JSON_SYSTEM_PROMPT = (
     "You are a strict JSON API. Respond with exactly one valid JSON object. "
@@ -65,6 +66,20 @@ def _strip_thinking_tags(text: str) -> str:
 
 def _llm_thinking_mode() -> str:
     return os.getenv("PIPELINE_LLM_THINKING_MODE", "").strip().lower()
+
+
+def _env_int(name: str, default: int) -> int:
+    try:
+        return max(1, int(os.getenv(name, "").strip() or default))
+    except ValueError:
+        return default
+
+
+def _env_float(name: str, default: float) -> float:
+    try:
+        return max(1.0, float(os.getenv(name, "").strip() or default))
+    except ValueError:
+        return default
 
 
 def _message_text(message: Any) -> str:
@@ -130,8 +145,9 @@ class PipelineLLM:
             else:
                 resolved_key, resolved_base, resolved_model = require_openai_env()
         self.model = resolved_model
-        self._client = OpenAI(api_key=resolved_key, base_url=resolved_base)
-        self.max_tokens = max_tokens
+        timeout_sec = _env_float("PIPELINE_LLM_TIMEOUT_SEC", _API_TIMEOUT_SEC)
+        self._client = OpenAI(api_key=resolved_key, base_url=resolved_base, timeout=timeout_sec)
+        self.max_tokens = _env_int("PIPELINE_LLM_MAX_TOKENS", max_tokens)
 
     def _should_retry_api_error(self, exc: Exception) -> bool:
         """是否对网关瞬时错误退避重试（403 余额不足等会计入次数上限）。"""
@@ -140,16 +156,17 @@ class PipelineLLM:
     def _create_completion(self, **kwargs: Any) -> Any:
         """带退避的 chat.completions.create。"""
         last_error: Exception | None = None
-        for attempt in range(_API_RETRY_ATTEMPTS):
+        max_attempts = _env_int("PIPELINE_LLM_API_RETRY_ATTEMPTS", _API_RETRY_ATTEMPTS)
+        for attempt in range(max_attempts):
             try:
                 return self._client.chat.completions.create(**kwargs)
             except Exception as exc:
                 last_error = exc
-                if not self._should_retry_api_error(exc) or attempt >= _API_RETRY_ATTEMPTS - 1:
+                if not self._should_retry_api_error(exc) or attempt >= max_attempts - 1:
                     raise
                 delay = min(_API_RETRY_BASE_SEC * (2**attempt), _API_RETRY_MAX_SEC)
                 print(
-                    f"[llm] API error ({exc!r}), retry {attempt + 2}/{_API_RETRY_ATTEMPTS} "
+                    f"[llm] API error ({exc!r}), retry {attempt + 2}/{max_attempts} "
                     f"in {delay:.0f}s ...",
                     flush=True,
                 )

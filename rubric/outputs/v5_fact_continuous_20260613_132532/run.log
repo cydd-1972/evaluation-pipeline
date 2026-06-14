@@ -1,0 +1,28 @@
+[2026-06-13 13:25:32] run_name=v5_fact_continuous_20260613_132532
+[2026-06-13 13:25:32] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 13:25:32] models=['minimax']
+[2026-06-13 13:25:32] conversation_indices=all
+[2026-06-13 13:25:32] rubric_path=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\rubrics\consolidated_fact_rubrics_v1.json
+[2026-06-13 13:25:32] prompt_path=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\prompts\prompt_conversation_fact_continuous.txt
+[2026-06-13 13:25:32] score model=minimax conv=0 memory_items=324
+[2026-06-13 13:26:03] done model=minimax conv=0 score=0.9250 mean=0.9250
+[2026-06-13 13:26:03] score model=minimax conv=1 memory_items=212
+[2026-06-13 13:26:31] done model=minimax conv=1 score=0.9923 mean=0.9923
+[2026-06-13 13:26:31] score model=minimax conv=2 memory_items=422
+[2026-06-13 13:27:15] done model=minimax conv=2 score=1.0000 mean=1.0000
+[2026-06-13 13:27:15] score model=minimax conv=3 memory_items=395
+[2026-06-13 13:27:45] done model=minimax conv=3 score=1.0000 mean=1.0000
+[2026-06-13 13:27:45] score model=minimax conv=4 memory_items=405
+[2026-06-13 13:28:16] done model=minimax conv=4 score=1.0000 mean=1.0000
+[2026-06-13 13:28:16] score model=minimax conv=5 memory_items=374
+[2026-06-13 13:29:00] done model=minimax conv=5 score=1.0000 mean=1.0000
+[2026-06-13 13:29:00] score model=minimax conv=6 memory_items=448
+[2026-06-13 13:29:30] done model=minimax conv=6 score=0.9942 mean=0.9942
+[2026-06-13 13:29:30] score model=minimax conv=7 memory_items=454
+[2026-06-13 13:30:13] done model=minimax conv=7 score=0.8923 mean=0.8923
+[2026-06-13 13:30:13] score model=minimax conv=8 memory_items=316
+[2026-06-13 13:30:48] done model=minimax conv=8 score=0.8615 mean=0.8615
+[2026-06-13 13:30:48] score model=minimax conv=9 memory_items=414
+[2026-06-13 13:31:22] done model=minimax conv=9 score=0.9365 mean=0.9365
+[2026-06-13 13:31:22] final model=minimax fact_score=0.9602 mean=0.9602
+[2026-06-13 13:31:22] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\v5_fact_continuous_20260613_132532

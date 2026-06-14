@@ -1,0 +1,267 @@
+{
+  "run_name": "v5_fact_continuous_20260613_113021",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "add_model": "deepseek",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek",
+      "conversation_idx": 0,
+      "memory_count": 228,
+      "rubrics": [
+        {
+          "id": "fact_sourceability",
+          "name": "Fact Sourceability",
+          "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+          "score": 0.9,
+          "reason": "Most facts are traceable to the conversation, but a few lack explicit references (e.g., 'Caroline's home country is Sweden' is not explicitly mentioned)."
+        },
+        {
+          "id": "fact_factual_correctness",
+          "name": "Fact Factual Correctness",
+          "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+          "score": 0.95,
+          "reason": "Facts are mostly accurate, but there is a minor inconsistency regarding Caroline's home country (Sweden is mentioned, but not explicitly confirmed)."
+        },
+        {
+          "id": "fact_temporal_correctness",
+          "name": "Fact Temporal Correctness",
+          "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+          "score": 0.9,
+          "reason": "Temporal references are mostly correct, but some events are misaligned with their anchor times (e.g., 'Melanie's family saw the Perseid meteor shower on a camping trip last year' is mentioned in Session 10, but the event is not explicitly confirmed in the conversation)."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+          "score": 0.85,
+          "reason": "Some facts are bundled (e.g., 'Caroline's friends, family, and mentors helped her through her transition' combines multiple entities)."
+        },
+        {
+          "id": "fact_nonredundancy",
+          "name": "Fact Nonredundancy",
+          "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+          "score": 0.8,
+          "reason": "There are some near-duplicates (e.g., 'Caroline is thankful for her friends, family and mentors' and 'Caroline's friends and family have been supporting her transition with love, guidance, and acceptance')."
+        },
+        {
+          "id": "fact_coverage",
+          "name": "Fact Coverage",
+          "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+          "score": 0.9,
+          "reason": "Most key facts from the conversation are covered, but some details (e.g., specific events or conversations) are missing."
+        },
+        {
+          "id": "fact_conciseness",
+          "name": "Fact Conciseness",
+          "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+          "score": 0.85,
+          "reason": "Some facts are verbose (e.g., 'Caroline's journey and support motivated her to pursue counseling' could be more concise)."
+        },
+        {
+          "id": "fact_structural_consistency",
+          "name": "Fact Structural Consistency",
+          "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+          "score": 0.9,
+          "reason": "Structure is mostly consistent, but some entries have varying formats (e.g., some include names, others do not)."
+        }
+      ],
+      "conversation_score": 0.8964,
+      "arithmetic_mean_score": 0.8813,
+      "summary": "The fact memory items are mostly accurate and traceable to the conversation, with some minor issues in sourceability, atomicity, and nonredundancy.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are traceable to the conversation, but a few lack explicit references (e.g., 'Caroline's home country is Sweden' is not explicitly mentioned).\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.95,\n      \"reason\": \"Facts are mostly accurate, but there is a minor inconsistency regarding Caroline's home country (Sweden is mentioned, but not explicitly confirmed).\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly correct, but some events are misaligned with their anchor times (e.g., 'Melanie's family saw the Perseid meteor shower on a camping trip last year' is mentioned in Session 10, but the event is not explicitly confirmed in the conversation).\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.85,\n      \"reason\": \"Some facts are bundled (e.g., 'Caroline's friends, family, and mentors helped her through her transition' combines multiple entities).\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"There are some near-duplicates (e.g., 'Caroline is thankful for her friends, family and mentors' and 'Caroline's friends and family have been supporting her transition with love, guidance, and acceptance').\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most key facts from the conversation are covered, but some details (e.g., specific events or conversations) are missing.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.85,\n      \"reason\": \"Some facts are verbose (e.g., 'Caroline's journey and support motivated her to pursue counseling' could be more concise).\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.9,\n      \"reason\": \"Structure is mostly consistent, but some entries have varying formats (e.g., some include names, others do not).\"\n    }\n  ],\n  \"conversation_score\": 0.86875,\n  \"summary\": \"The fact memory items are mostly accurate and traceable to the conversation, with some minor issues in sourceability, atomicity, and nonredundancy.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "gemini",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_gemini",
+      "conversation_idx": 0,
+      "memory_count": 149,
+      "rubrics": [
+        {
+          "id": "fact_sourceability",
+          "name": "Fact Sourceability",
+          "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+          "score": 0.85,
+          "reason": "Most facts are traceable, but some details like 'Caroline owns a clock with a green and yellow design' are not mentioned in the conversation."
+        },
+        {
+          "id": "fact_factual_correctness",
+          "name": "Fact Factual Correctness",
+          "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+          "score": 0.95,
+          "reason": "Facts are mostly accurate, but there is a minor inconsistency with the names of Melanie's pets (Oliver is mentioned as both a dog and a cat)."
+        },
+        {
+          "id": "fact_temporal_correctness",
+          "name": "Fact Temporal Correctness",
+          "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+          "score": 0.9,
+          "reason": "Temporal references are mostly correct, but some events are misdated, such as 'Melanie painted a sunset last week' when the conversation mentions it was inspired by a beach visit."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+          "score": 0.8,
+          "reason": "Some facts bundle multiple distinct pieces of information, such as 'Caroline's relationships changed after she transitioned' which combines several points."
+        },
+        {
+          "id": "fact_nonredundancy",
+          "name": "Fact Nonredundancy",
+          "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+          "score": 0.85,
+          "reason": "There are some repeated facts, such as multiple mentions of Caroline's support system and her interest in art."
+        },
+        {
+          "id": "fact_coverage",
+          "name": "Fact Coverage",
+          "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+          "score": 0.9,
+          "reason": "Most memory-worthy facts are covered, but some details like the specific name of the adoption agency are missing."
+        },
+        {
+          "id": "fact_conciseness",
+          "name": "Fact Conciseness",
+          "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+          "score": 0.8,
+          "reason": "Some facts are verbose, such as 'Caroline's self-portrait features a woman with a blue face' which could be more concise."
+        },
+        {
+          "id": "fact_structural_consistency",
+          "name": "Fact Structural Consistency",
+          "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+          "score": 0.85,
+          "reason": "The structure is mostly consistent, but some entries have varying formats, such as 'Melanie's wooden doll figurines represent family love' which is less structured than others."
+        }
+      ],
+      "conversation_score": 0.8786,
+      "arithmetic_mean_score": 0.8625,
+      "summary": "The fact memory items are mostly accurate and traceable, but some minor issues with redundancy, atomicity, and temporal correctness exist.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.85,\n      \"reason\": \"Most facts are traceable, but some details like 'Caroline owns a clock with a green and yellow design' are not mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.95,\n      \"reason\": \"Facts are mostly accurate, but there is a minor inconsistency with the names of Melanie's pets (Oliver is mentioned as both a dog and a cat).\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"Temporal references are mostly correct, but some events are misdated, such as 'Melanie painted a sunset last week' when the conversation mentions it was inspired by a beach visit.\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts bundle multiple distinct pieces of information, such as 'Caroline's relationships changed after she transitioned' which combines several points.\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.85,\n      \"reason\": \"There are some repeated facts, such as multiple mentions of Caroline's support system and her interest in art.\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most memory-worthy facts are covered, but some details like the specific name of the adoption agency are missing.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are verbose, such as 'Caroline's self-portrait features a woman with a blue face' which could be more concise.\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.85,\n      \"reason\": \"The structure is mostly consistent, but some entries have varying formats, such as 'Melanie's wooden doll figurines represent family love' which is less structured than others.\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly accurate and traceable, but some minor issues with redundancy, atomicity, and temporal correctness exist.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    },
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_idx": 0,
+      "memory_count": 324,
+      "rubrics": [
+        {
+          "id": "fact_sourceability",
+          "name": "Fact Sourceability",
+          "question": "Can the fact memory items be traced back to explicit support in the original conversation?",
+          "score": 0.9,
+          "reason": "Most facts are explicitly supported by the conversation, though a few minor details (e.g., 'Melanie's friend who adopted') are not directly mentioned in the final session."
+        },
+        {
+          "id": "fact_factual_correctness",
+          "name": "Fact Factual Correctness",
+          "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?",
+          "score": 0.9,
+          "reason": "No clear factual errors detected, though some details (e.g., 'Melanie's friend who adopted') are not directly confirmed in the final session."
+        },
+        {
+          "id": "fact_temporal_correctness",
+          "name": "Fact Temporal Correctness",
+          "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?",
+          "score": 0.8,
+          "reason": "Some facts preserve temporal status, but a few lack clear temporal context (e.g., 'Melanie's friend who adopted' is not explicitly tied to a specific time in the conversation)."
+        },
+        {
+          "id": "fact_atomicity",
+          "name": "Fact Atomicity",
+          "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?",
+          "score": 0.8,
+          "reason": "Most facts are atomic, but some are bundled (e.g., 'Caroline's support network has been instrumental in her transition' could be split into separate facts about support and transition)."
+        },
+        {
+          "id": "fact_nonredundancy",
+          "name": "Fact Nonredundancy",
+          "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?",
+          "score": 0.8,
+          "reason": "Some facts are slightly redundant (e.g., multiple mentions of Caroline's support network and her passion for helping others)."
+        },
+        {
+          "id": "fact_coverage",
+          "name": "Fact Coverage",
+          "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?",
+          "score": 0.9,
+          "reason": "Most memory-worthy facts are covered, though some details (e.g., specific events like the poetry reading) are not included in the final session."
+        },
+        {
+          "id": "fact_conciseness",
+          "name": "Fact Conciseness",
+          "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?",
+          "score": 0.8,
+          "reason": "Some facts are verbose (e.g., 'Caroline's support network has been instrumental in her transition' could be more concise)."
+        },
+        {
+          "id": "fact_structural_consistency",
+          "name": "Fact Structural Consistency",
+          "question": "Do the fact memory items follow a reasonably consistent and reusable structure?",
+          "score": 0.8,
+          "reason": "The structure is mostly consistent, but some facts are phrased differently (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow' vs. 'Caroline is passionate about creating a safe and inviting place for people to grow')."
+        }
+      ],
+      "conversation_score": 0.8571,
+      "arithmetic_mean_score": 0.8375,
+      "summary": "The fact memory items are mostly well-supported, factually correct, and consistent, though some could be more concise and atomic, and a few lack explicit temporal context or are slightly redundant.",
+      "evaluator_meta": {
+        "model": "Qwen/Qwen3-14B",
+        "attempt_index": 0,
+        "response_format": "json_object",
+        "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"fact_sourceability\",\n      \"score\": 0.9,\n      \"reason\": \"Most facts are explicitly supported by the conversation, though a few minor details (e.g., 'Melanie's friend who adopted') are not directly mentioned in the final session.\"\n    },\n    {\n      \"id\": \"fact_factual_correctness\",\n      \"score\": 0.9,\n      \"reason\": \"No clear factual errors detected, though some details (e.g., 'Melanie's friend who adopted') are not directly confirmed in the final session.\"\n    },\n    {\n      \"id\": \"fact_temporal_correctness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts preserve temporal status, but a few lack clear temporal context (e.g., 'Melanie's friend who adopted' is not explicitly tied to a specific time in the conversation).\"\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"score\": 0.8,\n      \"reason\": \"Most facts are atomic, but some are bundled (e.g., 'Caroline's support network has been instrumental in her transition' could be split into separate facts about support and transition).\"\n    },\n    {\n      \"id\": \"fact_nonredundancy\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are slightly redundant (e.g., multiple mentions of Caroline's support network and her passion for helping others).\"\n    },\n    {\n      \"id\": \"fact_coverage\",\n      \"score\": 0.9,\n      \"reason\": \"Most memory-worthy facts are covered, though some details (e.g., specific events like the poetry reading) are not included in the final session.\"\n    },\n    {\n      \"id\": \"fact_conciseness\",\n      \"score\": 0.8,\n      \"reason\": \"Some facts are verbose (e.g., 'Caroline's support network has been instrumental in her transition' could be more concise).\"\n    },\n    {\n      \"id\": \"fact_structural_consistency\",\n      \"score\": 0.8,\n      \"reason\": \"The structure is mostly consistent, but some facts are phrased differently (e.g., 'Caroline is passionate about creating a safe, inviting place for people to grow' vs. 'Caroline is passionate about creating a safe and inviting place for people to grow').\"\n    }\n  ],\n  \"conversation_score\": 0.85,\n  \"summary\": \"The fact memory items are mostly well-supported, factually correct, and consistent, though some could be more concise and atomic, and a few lack explicit temporal context or are slightly redundant.\"\n}",
+        "required_key": "rubrics",
+        "required_key_attempt_index": 0
+      }
+    }
+  ],
+  "summary": {
+    "evaluator_model": "Qwen/Qwen3-14B",
+    "models": {
+      "deepseek": {
+        "conversation_count": 1,
+        "fact_score": 0.8964,
+        "arithmetic_mean_score": 0.8813,
+        "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek"
+      },
+      "gemini": {
+        "conversation_count": 1,
+        "fact_score": 0.8786,
+        "arithmetic_mean_score": 0.8625,
+        "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_gemini"
+      },
+      "minimax": {
+        "conversation_count": 1,
+        "fact_score": 0.8571,
+        "arithmetic_mean_score": 0.8375,
+        "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax"
+      }
+    },
+    "missing": [],
+    "weights": {
+      "fact_sourceability": 3.0,
+      "fact_factual_correctness": 3.0,
+      "fact_temporal_correctness": 2.0,
+      "fact_atomicity": 1.0,
+      "fact_nonredundancy": 1.0,
+      "fact_coverage": 2.0,
+      "fact_conciseness": 1.0,
+      "fact_structural_consistency": 1.0
+    },
+    "hard_cap_threshold": 0.3,
+    "hard_cap_value": 0.4
+  }
+}

@@ -1,0 +1,119 @@
+[2026-06-11 01:51:55] run_name=hybrid_delta_rubrics_20260611_015155
+[2026-06-11 01:51:55] evaluator_model=Qwen/Qwen3-14B
+[2026-06-11 01:51:55] targets=['minimax', 'deepseek', 'gemini']
+[2026-06-11 01:51:55] score model=minimax conv=0 session=1 delta_items=11
+[2026-06-11 01:51:55] score model=minimax conv=0 session=2 delta_items=14
+[2026-06-11 01:51:55] score model=minimax conv=0 session=3 delta_items=9
+[2026-06-11 01:53:13] done model=minimax conv=0 session=1 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:53:13] score model=minimax conv=0 session=4 delta_items=17
+[2026-06-11 01:53:20] done model=minimax conv=0 session=3 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:53:20] score model=minimax conv=0 session=5 delta_items=13
+[2026-06-11 01:53:52] done model=minimax conv=0 session=2 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:53:52] score model=minimax conv=0 session=6 delta_items=16
+[2026-06-11 01:55:03] done model=minimax conv=0 session=5 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:55:03] score model=minimax conv=0 session=7 delta_items=32
+[2026-06-11 01:55:24] done model=minimax conv=0 session=4 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:55:24] score model=minimax conv=0 session=8 delta_items=36
+[2026-06-11 01:55:56] done model=minimax conv=0 session=6 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:55:56] score model=minimax conv=0 session=9 delta_items=8
+[2026-06-11 01:57:06] done model=minimax conv=0 session=9 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:57:06] score model=minimax conv=0 session=10 delta_items=22
+[2026-06-11 01:58:22] done model=minimax conv=0 session=7 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:58:22] score model=minimax conv=0 session=11 delta_items=9
+[2026-06-11 01:58:57] done model=minimax conv=0 session=8 score=0.9907 precision=0.9722 recall=1.0000 aux=1.0000
+[2026-06-11 01:58:57] score model=minimax conv=0 session=12 delta_items=13
+[2026-06-11 01:59:15] done model=minimax conv=0 session=10 score=0.9939 precision=0.9818 recall=1.0000 aux=1.0000
+[2026-06-11 01:59:15] score model=minimax conv=0 session=13 delta_items=16
+[2026-06-11 01:59:20] done model=minimax conv=0 session=11 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 01:59:20] score model=minimax conv=0 session=14 delta_items=15
+[2026-06-11 02:00:33] done model=minimax conv=0 session=12 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:00:33] score model=minimax conv=0 session=15 delta_items=17
+[2026-06-11 02:01:03] done model=minimax conv=0 session=13 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:01:03] score model=minimax conv=0 session=16 delta_items=27
+[2026-06-11 02:01:33] done model=minimax conv=0 session=14 score=0.9911 precision=0.9733 recall=1.0000 aux=1.0000
+[2026-06-11 02:01:33] score model=minimax conv=0 session=17 delta_items=25
+[2026-06-11 02:02:41] done model=minimax conv=0 session=15 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:02:41] score model=minimax conv=0 session=18 delta_items=18
+[2026-06-11 02:03:51] done model=minimax conv=0 session=16 score=0.9951 precision=0.9852 recall=1.0000 aux=1.0000
+[2026-06-11 02:03:51] score model=minimax conv=0 session=19 delta_items=14
+[2026-06-11 02:04:22] done model=minimax conv=0 session=17 score=0.9573 precision=0.8720 recall=1.0000 aux=1.0000
+[2026-06-11 02:04:22] score model=deepseek conv=0 session=1 delta_items=8
+[2026-06-11 02:04:43] done model=minimax conv=0 session=18 score=0.9926 precision=0.9778 recall=1.0000 aux=1.0000
+[2026-06-11 02:04:43] score model=deepseek conv=0 session=2 delta_items=10
+[2026-06-11 02:05:21] done model=minimax conv=0 session=19 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:05:21] score model=deepseek conv=0 session=3 delta_items=9
+[2026-06-11 02:05:42] done model=deepseek conv=0 session=1 score=0.9167 precision=1.0000 recall=0.7500 aux=1.0000
+[2026-06-11 02:05:42] score model=deepseek conv=0 session=4 delta_items=10
+[2026-06-11 02:06:03] done model=deepseek conv=0 session=2 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:06:03] score model=deepseek conv=0 session=5 delta_items=7
+[2026-06-11 02:06:38] done model=deepseek conv=0 session=3 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:06:38] score model=deepseek conv=0 session=6 delta_items=9
+[2026-06-11 02:07:15] done model=deepseek conv=0 session=4 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:07:15] score model=deepseek conv=0 session=7 delta_items=15
+[2026-06-11 02:07:18] done model=deepseek conv=0 session=5 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:07:18] score model=deepseek conv=0 session=8 delta_items=21
+[2026-06-11 02:08:06] done model=deepseek conv=0 session=6 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:08:06] score model=deepseek conv=0 session=9 delta_items=10
+[2026-06-11 02:08:53] done model=deepseek conv=0 session=7 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:08:53] score model=deepseek conv=0 session=10 delta_items=8
+[2026-06-11 02:09:29] done model=deepseek conv=0 session=9 score=0.9583 precision=1.0000 recall=0.8750 aux=1.0000
+[2026-06-11 02:09:29] score model=deepseek conv=0 session=11 delta_items=15
+[2026-06-11 02:09:29] done model=deepseek conv=0 session=8 score=0.9329 precision=0.9238 recall=0.8750 aux=1.0000
+[2026-06-11 02:09:29] score model=deepseek conv=0 session=12 delta_items=10
+[2026-06-11 02:10:16] done model=deepseek conv=0 session=10 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:10:16] score model=deepseek conv=0 session=13 delta_items=14
+[2026-06-11 02:10:37] done model=deepseek conv=0 session=12 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:10:37] score model=deepseek conv=0 session=14 delta_items=18
+[2026-06-11 02:11:11] done model=deepseek conv=0 session=11 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:11:11] score model=deepseek conv=0 session=15 delta_items=14
+[2026-06-11 02:12:14] done model=deepseek conv=0 session=13 score=0.9298 precision=0.9143 recall=0.8750 aux=1.0000
+[2026-06-11 02:12:14] score model=deepseek conv=0 session=16 delta_items=20
+[2026-06-11 02:12:51] done model=deepseek conv=0 session=15 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:12:51] score model=deepseek conv=0 session=17 delta_items=26
+[2026-06-11 02:13:08] done model=deepseek conv=0 session=14 score=0.9630 precision=0.8889 recall=1.0000 aux=1.0000
+[2026-06-11 02:13:08] score model=deepseek conv=0 session=18 delta_items=7
+[2026-06-11 02:14:11] done model=deepseek conv=0 session=18 score=0.8690 precision=0.8571 recall=0.7500 aux=1.0000
+[2026-06-11 02:14:11] score model=deepseek conv=0 session=19 delta_items=12
+[2026-06-11 02:14:25] done model=deepseek conv=0 session=16 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:14:25] score model=gemini conv=0 session=1 delta_items=8
+[2026-06-11 02:15:25] done model=deepseek conv=0 session=17 score=0.9846 precision=0.9538 recall=1.0000 aux=1.0000
+[2026-06-11 02:15:25] score model=gemini conv=0 session=2 delta_items=8
+[2026-06-11 02:15:33] done model=deepseek conv=0 session=19 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:15:33] score model=gemini conv=0 session=3 delta_items=8
+[2026-06-11 02:15:42] done model=gemini conv=0 session=1 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:15:42] score model=gemini conv=0 session=4 delta_items=8
+[2026-06-11 02:16:23] done model=gemini conv=0 session=2 score=0.9833 precision=0.9500 recall=1.0000 aux=1.0000
+[2026-06-11 02:16:23] score model=gemini conv=0 session=5 delta_items=5
+[2026-06-11 02:16:23] done model=gemini conv=0 session=3 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:16:23] score model=gemini conv=0 session=6 delta_items=8
+[2026-06-11 02:16:42] done model=gemini conv=0 session=4 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:16:42] score model=gemini conv=0 session=7 delta_items=7
+[2026-06-11 02:17:17] done model=gemini conv=0 session=5 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:17:17] score model=gemini conv=0 session=8 delta_items=8
+[2026-06-11 02:17:33] done model=gemini conv=0 session=6 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:17:33] score model=gemini conv=0 session=9 delta_items=7
+[2026-06-11 02:17:40] done model=gemini conv=0 session=7 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:17:40] score model=gemini conv=0 session=10 delta_items=9
+[2026-06-11 02:18:01] done model=gemini conv=0 session=8 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:18:01] score model=gemini conv=0 session=11 delta_items=7
+[2026-06-11 02:18:36] done model=gemini conv=0 session=9 score=0.9393 precision=0.9429 recall=0.8750 aux=1.0000
+[2026-06-11 02:18:36] score model=gemini conv=0 session=12 delta_items=7
+[2026-06-11 02:19:00] done model=gemini conv=0 session=10 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:19:00] score model=gemini conv=0 session=13 delta_items=9
+[2026-06-11 02:19:15] done model=gemini conv=0 session=11 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:19:15] score model=gemini conv=0 session=14 delta_items=10
+[2026-06-11 02:19:29] done model=gemini conv=0 session=12 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:19:29] score model=gemini conv=0 session=15 delta_items=12
+[2026-06-11 02:20:07] done model=gemini conv=0 session=13 score=0.9852 precision=0.9556 recall=1.0000 aux=1.0000
+[2026-06-11 02:20:07] score model=gemini conv=0 session=16 delta_items=8
+[2026-06-11 02:20:38] done model=gemini conv=0 session=14 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:20:38] score model=gemini conv=0 session=17 delta_items=11
+[2026-06-11 02:21:05] done model=gemini conv=0 session=15 score=0.9889 precision=0.9667 recall=1.0000 aux=1.0000
+[2026-06-11 02:21:05] score model=gemini conv=0 session=18 delta_items=4
+[2026-06-11 02:21:23] done model=gemini conv=0 session=16 score=1.0000 precision=1.0000 recall=1.0000 aux=1.0000
+[2026-06-11 02:21:23] score model=gemini conv=0 session=19 delta_items=8
+[2026-06-11 02:21:58] done model=gemini conv=0 session=17 score=0.9939 precision=0.9818 recall=1.0000 aux=1.0000
+[2026-06-11 02:22:04] done model=gemini conv=0 session=18 score=0.9167 precision=0.7500 recall=1.0000 aux=1.0000
+[2026-06-11 02:22:40] done model=gemini conv=0 session=19 score=0.9667 precision=0.9000 recall=1.0000 aux=1.0000
+[2026-06-11 02:22:40] final_score=0.9868
+[2026-06-11 02:22:40] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\hybrid_delta_rubrics_20260611_015155

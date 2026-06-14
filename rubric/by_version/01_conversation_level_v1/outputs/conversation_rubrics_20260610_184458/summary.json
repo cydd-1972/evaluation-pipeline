@@ -1,0 +1,13 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "final_score": 1.0,
+  "models": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_count": 2,
+      "model_score": 1.0
+    }
+  ],
+  "missing": []
+}
