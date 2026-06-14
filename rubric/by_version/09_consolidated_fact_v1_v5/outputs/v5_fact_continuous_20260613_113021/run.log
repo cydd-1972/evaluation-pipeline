@@ -1,0 +1,14 @@
+[2026-06-13 11:30:21] run_name=v5_fact_continuous_20260613_113021
+[2026-06-13 11:30:21] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 11:30:21] models=['minimax', 'deepseek', 'gemini']
+[2026-06-13 11:30:21] conversation_indices=[0]
+[2026-06-13 11:30:22] score model=minimax conv=0 memory_items=324
+[2026-06-13 11:30:37] done model=minimax conv=0 score=0.8571 mean=0.8375
+[2026-06-13 11:30:37] score model=deepseek conv=0 memory_items=228
+[2026-06-13 11:30:50] done model=deepseek conv=0 score=0.8964 mean=0.8813
+[2026-06-13 11:30:50] score model=gemini conv=0 memory_items=149
+[2026-06-13 11:31:02] done model=gemini conv=0 score=0.8786 mean=0.8625
+[2026-06-13 11:31:02] final model=deepseek fact_score=0.8964 mean=0.8813
+[2026-06-13 11:31:02] final model=gemini fact_score=0.8786 mean=0.8625
+[2026-06-13 11:31:02] final model=minimax fact_score=0.8571 mean=0.8375
+[2026-06-13 11:31:02] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\v5_fact_continuous_20260613_113021

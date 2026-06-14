@@ -1,0 +1,36 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "models": {
+    "deepseek": {
+      "conversation_count": 10,
+      "fact_score": 0.8632,
+      "arithmetic_mean_score": 0.8419,
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek"
+    },
+    "gemini": {
+      "conversation_count": 10,
+      "fact_score": 0.8732,
+      "arithmetic_mean_score": 0.8569,
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_gemini"
+    },
+    "minimax": {
+      "conversation_count": 10,
+      "fact_score": 0.86,
+      "arithmetic_mean_score": 0.8394,
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax"
+    }
+  },
+  "missing": [],
+  "weights": {
+    "fact_sourceability": 3.0,
+    "fact_factual_correctness": 3.0,
+    "fact_temporal_correctness": 2.0,
+    "fact_atomicity": 1.0,
+    "fact_nonredundancy": 1.0,
+    "fact_coverage": 2.0,
+    "fact_conciseness": 1.0,
+    "fact_structural_consistency": 1.0
+  },
+  "hard_cap_threshold": 0.3,
+  "hard_cap_value": 0.4
+}

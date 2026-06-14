@@ -1,0 +1,25 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "final_score": 0.9868,
+  "models": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "session_count": 19,
+      "model_score": 0.9958
+    },
+    {
+      "add_model": "deepseek",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_deepseek",
+      "session_count": 19,
+      "model_score": 0.9765
+    },
+    {
+      "add_model": "gemini",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_gemini",
+      "session_count": 19,
+      "model_score": 0.9881
+    }
+  ],
+  "missing": []
+}

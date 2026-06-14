@@ -1,0 +1,11 @@
+conversation_idx,fact_count,summary_count,conversation_score,arithmetic_mean_score,rubric_summary_sourceability,rubric_summary_factual_correctness,rubric_summary_temporal_consistency,rubric_bucket_schema_fit,rubric_summary_abstraction_quality,rubric_cross_fact_integration,rubric_nonredundancy_across_summaries,rubric_conciseness_and_density,rubric_structural_consistency,rubric_coverage_of_summary_targets
+0,228,105,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+1,173,66,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+2,336,152,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+3,321,119,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+4,364,161,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+5,282,151,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+6,390,154,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+7,326,160,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+8,233,104,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+9,309,145,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0

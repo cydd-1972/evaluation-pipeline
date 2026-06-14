@@ -1,0 +1,42 @@
+[
+  {
+    "id": "every_item_sourceable",
+    "name": "Every Item Sourceable",
+    "question": "Does every final memory item have a recoverable source in the original conversation, with no clearly unsupported item?"
+  },
+  {
+    "id": "every_item_factually_valid",
+    "name": "Every Item Factually Valid",
+    "question": "Does every final memory item avoid factual error relative to the original conversation?"
+  },
+  {
+    "id": "every_item_temporally_valid",
+    "name": "Every Item Temporally Valid",
+    "question": "Does every final memory item preserve past, current, and future status correctly?"
+  },
+  {
+    "id": "item_atomicity",
+    "name": "Item Atomicity",
+    "question": "Are final memory items reasonably atomic rather than bundling many distinct facts together?"
+  },
+  {
+    "id": "set_nonredundancy",
+    "name": "Set Nonredundancy",
+    "question": "Does the final memory set avoid obvious redundancy or repeated near-duplicate information?"
+  },
+  {
+    "id": "coverage_of_memory_worthy_content",
+    "name": "Coverage Of Memory-Worthy Content",
+    "question": "Does the final memory preserve the memory-worthy information from the conversation without clear important omissions?"
+  },
+  {
+    "id": "conciseness",
+    "name": "Conciseness",
+    "question": "Is the final memory reasonably concise rather than bloated with low-value or overly verbose content?"
+  },
+  {
+    "id": "structural_consistency",
+    "name": "Structural Consistency",
+    "question": "Does the final memory follow a consistent, reusable structure across items?"
+  }
+]

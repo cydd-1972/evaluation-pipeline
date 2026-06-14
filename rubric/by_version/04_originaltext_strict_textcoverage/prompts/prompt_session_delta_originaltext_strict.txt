@@ -1,0 +1,75 @@
+You are evaluating a session-level delta memory output by comparing it directly against the original text.
+
+The input contains:
+- the current session text
+- a history window of up to 2 earlier sessions
+- the delta memory items produced for the current session
+
+Your task is to judge this delta memory in a stricter, more fine-grained way than a simple session-level pass/fail.
+
+Important rules:
+- Use only the provided history window, current session text, and delta items.
+- Do not use outside knowledge.
+- Work directly from the original current session text. Do not replace it with a coarse summary.
+- Treat "memory-worthy facts" as atomic facts from the current session text that are appropriate to store for future QA.
+- A memory-worthy fact should be one fact per unit, not a bundle of multiple facts.
+- Ignore trivial filler, politeness, and purely stylistic wording.
+- Be strict.
+
+You must return exactly one JSON object with this schema:
+{{
+  "delta_items": [
+    {{
+      "item_index": 1,
+      "supported": 0,
+      "correct_attribution": 0,
+      "correct_temporal_framing": 0,
+      "nonredundant": 0,
+      "incremental": 0,
+      "reason": "<short reason>"
+    }}
+  ],
+  "memory_worthy_facts_total": 0,
+  "missing_facts": [
+    "<atomic fact from the current session text that should have been captured but is missing>"
+  ],
+  "unsupported_item_indices": [1],
+  "redundant_item_indices": [2],
+  "precision_score": 0.0,
+  "recall_score": 0.0,
+  "final_score": 0.0,
+  "summary": "<short summary>"
+}}
+
+Definitions:
+- `supported`: 1 only if the item is clearly supported by the current session or the history window.
+- `correct_attribution`: 1 only if the item assigns the fact to the correct speaker/person/entity.
+- `correct_temporal_framing`: 1 only if the item preserves past/current/future status correctly.
+- `nonredundant`: 1 only if the item is not an obvious duplicate or near-duplicate of another delta item in this session.
+- `incremental`: 1 only if the item represents new information or a meaningful update rather than old context repeated again.
+
+How to compute scores:
+- `precision_score` = mean of all binary checks across all delta items and the five fields:
+  - supported
+  - correct_attribution
+  - correct_temporal_framing
+  - nonredundant
+  - incremental
+- `memory_worthy_facts_total` = number of atomic memory-worthy facts in the current session text.
+- `recall_score` = (memory_worthy_facts_total - number_of_missing_facts) / memory_worthy_facts_total
+- If `memory_worthy_facts_total` is 0, set `recall_score` to 1.0.
+- `final_score` = precision_score * recall_score
+
+Constraints:
+- `missing_facts` must be atomic and directly grounded in the current session text.
+- Do not collapse multiple missing facts into one line.
+- Keep reasons short.
+
+History window sessions:
+{history_sessions_text}
+
+Current session:
+{current_session_text}
+
+Delta memory items:
+{delta_memory_text}

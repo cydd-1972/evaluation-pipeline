@@ -1,0 +1,47 @@
+[
+  {
+    "id": "grounded_in_context",
+    "name": "Grounded In Context",
+    "question": "Does every substantial delta memory item have clear support in the current session or in the provided history window?"
+  },
+  {
+    "id": "correct_attribution",
+    "name": "Correct Attribution",
+    "question": "Do the delta memory items avoid assigning facts to the wrong speaker, person, or entity?"
+  },
+  {
+    "id": "correct_temporal_framing",
+    "name": "Correct Temporal Framing",
+    "question": "Do the delta memory items preserve whether information is a past event, a current state, or a future plan without obvious temporal mistakes?"
+  },
+  {
+    "id": "no_contradictory_delta",
+    "name": "No Contradictory Delta",
+    "question": "Do the delta memory items avoid clear contradictions within the delta set or clear contradictions with the current session and history window?"
+  },
+  {
+    "id": "truly_incremental",
+    "name": "Truly Incremental",
+    "question": "Do the delta memory items mainly capture new information or meaningful updates rather than merely restating already known context?"
+  },
+  {
+    "id": "no_history_leakage_as_new",
+    "name": "No History Leakage As New",
+    "question": "Do the delta memory items avoid presenting information from earlier sessions as if it were newly introduced in the current session?"
+  },
+  {
+    "id": "no_redundant_delta_items",
+    "name": "No Redundant Delta Items",
+    "question": "Do the delta memory items avoid obvious semantic duplication or near-duplicate restatements within this session's delta output?"
+  },
+  {
+    "id": "covers_salient_session_updates",
+    "name": "Covers Salient Session Updates",
+    "question": "Do the delta memory items capture the major new facts or notable updates introduced in the current session?"
+  },
+  {
+    "id": "covers_salient_plans_and_state_changes",
+    "name": "Covers Salient Plans And State Changes",
+    "question": "Do the delta memory items capture the important newly stated plans, goals, intentions, or meaningful state changes from the current session?"
+  }
+]

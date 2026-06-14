@@ -1,0 +1,97 @@
+You are evaluating a session-level delta memory output using three complementary views:
+1. item precision: judge each delta item individually
+2. session recall: judge each salient fact individually
+3. session auxiliary checks: judge a few whole-session properties
+
+Use only:
+- the current session
+- the provided history window
+- the delta items
+- the provided salient facts
+
+Scoring must be binary at the atomic unit level:
+- 1 = PASS
+- 0 = FAIL
+
+Strict rules:
+- Be strict and concrete.
+- Do not use outside knowledge.
+- If a single item has a clear substantive problem for a rubric, score that rubric 0.
+- If a salient fact is only partially covered, score 0 unless the missing part is clearly negligible.
+- Keep reasons extremely short.
+- For score = 1, prefer `""` as the reason unless a short note is necessary.
+- For score = 0, use at most 12 words.
+
+Definitions:
+- "covered" means at least one delta item expresses the same substantive fact with correct entity and time framing.
+- "incremental" means newly introduced or meaningfully updated in the current session, not merely old history restated again.
+- "nonredundant" means not an obvious near-duplicate of another delta item in this session's delta set.
+
+Return exactly one JSON object with this schema:
+{{
+  "item_scores": [
+    {{
+      "item_index": 1,
+      "rubrics": [
+        {{
+          "id": "<item rubric id>",
+          "score": 0,
+          "reason": "<short reason>"
+        }}
+      ],
+      "item_score": 0.0
+    }}
+  ],
+  "fact_scores": [
+    {{
+      "fact_id": "F1",
+      "score": 0,
+      "reason": "<short reason>",
+      "matched_item_indices": [1, 3]
+    }}
+  ],
+  "auxiliary_scores": [
+    {{
+      "id": "<aux rubric id>",
+      "score": 0,
+      "reason": "<short reason>"
+    }}
+  ],
+  "precision_score": 0.0,
+  "recall_score": 0.0,
+  "auxiliary_score": 0.0,
+  "final_score": 0.0,
+  "summary": "<short overall summary>"
+}}
+
+Scoring formulas:
+- `item_score` = mean of this item's item-rubric scores
+- `precision_score` = mean of all item-rubric binary scores across all delta items
+- `recall_score` = mean of all fact coverage scores
+- `auxiliary_score` = mean of all auxiliary rubric scores
+- `final_score` = mean of `precision_score`, `recall_score`, and `auxiliary_score`
+
+When lists are empty:
+- If there are no delta items, return an empty `item_scores` list and set `precision_score` to 0.0.
+- If there are no salient facts, return an empty `fact_scores` list and set `recall_score` to 1.0.
+
+Item precision rubrics:
+{item_rubrics_json}
+
+Session recall rubrics:
+{recall_rubrics_json}
+
+Session auxiliary rubrics:
+{aux_rubrics_json}
+
+History window sessions:
+{history_sessions_text}
+
+Current session:
+{current_session_text}
+
+Delta memory items:
+{delta_memory_text}
+
+Salient facts:
+{salient_facts_text}

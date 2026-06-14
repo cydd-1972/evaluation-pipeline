@@ -1,0 +1,7 @@
+[2026-06-12 16:58:21] run_name=conversation_rubrics_v2_20260612_165821
+[2026-06-12 16:58:21] evaluator_model=Qwen/Qwen3-14B
+[2026-06-12 16:58:21] targets=['minimax']
+[2026-06-12 16:58:22] score model=minimax conv=0 memory_items=324
+[2026-06-12 16:58:37] done model=minimax conv=0 score=1.0000
+[2026-06-12 16:58:37] final_score=1.0000
+[2026-06-12 16:58:37] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_rubrics_v2_20260612_165821

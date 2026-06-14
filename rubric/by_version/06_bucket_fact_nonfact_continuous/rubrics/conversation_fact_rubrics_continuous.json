@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fact_sourceability",
+    "name": "Fact Sourceability",
+    "question": "Can the fact memory items be traced back to explicit support in the original conversation?"
+  },
+  {
+    "id": "fact_factual_correctness",
+    "name": "Fact Factual Correctness",
+    "question": "Do the fact memory items avoid factual errors about people, events, places, relationships, and attributes?"
+  },
+  {
+    "id": "fact_temporal_correctness",
+    "name": "Fact Temporal Correctness",
+    "question": "Do the fact memory items preserve temporal status correctly, including past, current, and future information?"
+  },
+  {
+    "id": "fact_atomicity",
+    "name": "Fact Atomicity",
+    "question": "Are the fact memory items reasonably atomic rather than bundling many distinct facts together?"
+  },
+  {
+    "id": "fact_nonredundancy",
+    "name": "Fact Nonredundancy",
+    "question": "Do the fact memory items avoid obvious redundancy or repeated near-duplicate content?"
+  },
+  {
+    "id": "fact_coverage",
+    "name": "Fact Coverage",
+    "question": "Do the fact memory items preserve the memory-worthy fact-level content from the conversation without clear omissions?"
+  },
+  {
+    "id": "fact_conciseness",
+    "name": "Fact Conciseness",
+    "question": "Are the fact memory items reasonably concise rather than bloated with low-value or overly verbose content?"
+  },
+  {
+    "id": "fact_structural_consistency",
+    "name": "Fact Structural Consistency",
+    "question": "Do the fact memory items follow a reasonably consistent and reusable structure?"
+  }
+]

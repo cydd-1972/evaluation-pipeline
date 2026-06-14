@@ -1,0 +1,68 @@
+[2026-06-13 11:31:11] run_name=v5_fact_continuous_20260613_113111
+[2026-06-13 11:31:11] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 11:31:11] models=['minimax', 'deepseek', 'gemini']
+[2026-06-13 11:31:11] conversation_indices=all
+[2026-06-13 11:31:11] score model=minimax conv=0 memory_items=324
+[2026-06-13 11:31:23] done model=minimax conv=0 score=0.8821 mean=0.8625
+[2026-06-13 11:31:23] score model=minimax conv=1 memory_items=212
+[2026-06-13 11:31:38] done model=minimax conv=1 score=0.8607 mean=0.8437
+[2026-06-13 11:31:38] score model=minimax conv=2 memory_items=422
+[2026-06-13 11:31:53] done model=minimax conv=2 score=0.8571 mean=0.8375
+[2026-06-13 11:31:53] score model=minimax conv=3 memory_items=395
+[2026-06-13 11:32:09] done model=minimax conv=3 score=0.8786 mean=0.8625
+[2026-06-13 11:32:09] score model=minimax conv=4 memory_items=405
+[2026-06-13 11:32:24] done model=minimax conv=4 score=0.8714 mean=0.8500
+[2026-06-13 11:32:24] score model=minimax conv=5 memory_items=374
+[2026-06-13 11:32:40] done model=minimax conv=5 score=0.8286 mean=0.8000
+[2026-06-13 11:32:40] score model=minimax conv=6 memory_items=448
+[2026-06-13 11:32:58] done model=minimax conv=6 score=0.8714 mean=0.8500
+[2026-06-13 11:32:58] score model=minimax conv=7 memory_items=454
+[2026-06-13 11:33:14] done model=minimax conv=7 score=0.8571 mean=0.8375
+[2026-06-13 11:33:14] score model=minimax conv=8 memory_items=316
+[2026-06-13 11:33:31] done model=minimax conv=8 score=0.8571 mean=0.8375
+[2026-06-13 11:33:31] score model=minimax conv=9 memory_items=414
+[2026-06-13 11:34:14] done model=minimax conv=9 score=0.8357 mean=0.8125
+[2026-06-13 11:34:14] score model=deepseek conv=0 memory_items=228
+[2026-06-13 11:34:55] done model=deepseek conv=0 score=0.8964 mean=0.8813
+[2026-06-13 11:34:55] score model=deepseek conv=1 memory_items=173
+[2026-06-13 11:35:14] done model=deepseek conv=1 score=0.8786 mean=0.8500
+[2026-06-13 11:35:14] score model=deepseek conv=2 memory_items=336
+[2026-06-13 11:35:46] done model=deepseek conv=2 score=0.7929 mean=0.7625
+[2026-06-13 11:35:47] score model=deepseek conv=3 memory_items=321
+[2026-06-13 11:36:39] done model=deepseek conv=3 score=0.8714 mean=0.8500
+[2026-06-13 11:36:39] score model=deepseek conv=4 memory_items=364
+[2026-06-13 11:37:03] done model=deepseek conv=4 score=0.8714 mean=0.8500
+[2026-06-13 11:37:03] score model=deepseek conv=5 memory_items=282
+[2026-06-13 11:37:46] done model=deepseek conv=5 score=0.8571 mean=0.8375
+[2026-06-13 11:37:46] score model=deepseek conv=6 memory_items=390
+[2026-06-13 11:38:28] done model=deepseek conv=6 score=0.9071 mean=0.8875
+[2026-06-13 11:38:28] score model=deepseek conv=7 memory_items=326
+[2026-06-13 11:39:07] done model=deepseek conv=7 score=0.8571 mean=0.8375
+[2026-06-13 11:39:07] score model=deepseek conv=8 memory_items=233
+[2026-06-13 11:39:48] done model=deepseek conv=8 score=0.8643 mean=0.8500
+[2026-06-13 11:39:48] score model=deepseek conv=9 memory_items=309
+[2026-06-13 11:40:09] done model=deepseek conv=9 score=0.8357 mean=0.8125
+[2026-06-13 11:40:09] score model=gemini conv=0 memory_items=149
+[2026-06-13 11:40:47] done model=gemini conv=0 score=0.8786 mean=0.8625
+[2026-06-13 11:40:47] score model=gemini conv=1 memory_items=103
+[2026-06-13 11:41:13] done model=gemini conv=1 score=0.8714 mean=0.8625
+[2026-06-13 11:41:13] score model=gemini conv=2 memory_items=302
+[2026-06-13 11:41:30] done model=gemini conv=2 score=0.8714 mean=0.8500
+[2026-06-13 11:41:30] score model=gemini conv=3 memory_items=201
+[2026-06-13 11:42:13] done model=gemini conv=3 score=0.8607 mean=0.8437
+[2026-06-13 11:42:13] score model=gemini conv=4 memory_items=219
+[2026-06-13 11:42:41] done model=gemini conv=4 score=0.8929 mean=0.8750
+[2026-06-13 11:42:41] score model=gemini conv=5 memory_items=186
+[2026-06-13 11:43:21] done model=gemini conv=5 score=0.8786 mean=0.8625
+[2026-06-13 11:43:21] score model=gemini conv=6 memory_items=261
+[2026-06-13 11:44:03] done model=gemini conv=6 score=0.8357 mean=0.8125
+[2026-06-13 11:44:03] score model=gemini conv=7 memory_items=207
+[2026-06-13 11:48:15] done model=gemini conv=7 score=0.8857 mean=0.8750
+[2026-06-13 11:48:15] score model=gemini conv=8 memory_items=185
+[2026-06-13 11:48:31] done model=gemini conv=8 score=0.8786 mean=0.8625
+[2026-06-13 11:48:31] score model=gemini conv=9 memory_items=171
+[2026-06-13 11:48:44] done model=gemini conv=9 score=0.8786 mean=0.8625
+[2026-06-13 11:48:44] final model=deepseek fact_score=0.8632 mean=0.8419
+[2026-06-13 11:48:44] final model=gemini fact_score=0.8732 mean=0.8569
+[2026-06-13 11:48:44] final model=minimax fact_score=0.8600 mean=0.8394
+[2026-06-13 11:48:44] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\v5_fact_continuous_20260613_113111

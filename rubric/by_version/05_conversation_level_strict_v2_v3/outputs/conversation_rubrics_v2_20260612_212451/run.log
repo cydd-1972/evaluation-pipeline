@@ -1,0 +1,17 @@
+[2026-06-12 21:24:51] run_name=conversation_rubrics_v2_20260612_212451
+[2026-06-12 21:24:51] evaluator_model=Qwen/Qwen3-14B
+[2026-06-12 21:24:51] targets=['minimax']
+[2026-06-12 21:24:51] score model=minimax conv=4 memory_items=405
+[2026-06-12 21:25:04] done model=minimax conv=4 score=1.0000
+[2026-06-12 21:25:04] score model=minimax conv=5 memory_items=374
+[2026-06-12 21:25:16] done model=minimax conv=5 score=1.0000
+[2026-06-12 21:25:16] score model=minimax conv=6 memory_items=448
+[2026-06-12 21:25:31] done model=minimax conv=6 score=1.0000
+[2026-06-12 21:25:31] score model=minimax conv=7 memory_items=454
+[2026-06-12 21:25:43] done model=minimax conv=7 score=1.0000
+[2026-06-12 21:25:43] score model=minimax conv=8 memory_items=316
+[2026-06-12 21:25:54] done model=minimax conv=8 score=1.0000
+[2026-06-12 21:25:54] score model=minimax conv=9 memory_items=414
+[2026-06-12 21:26:05] done model=minimax conv=9 score=1.0000
+[2026-06-12 21:26:05] final_score=1.0000
+[2026-06-12 21:26:05] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_rubrics_v2_20260612_212451

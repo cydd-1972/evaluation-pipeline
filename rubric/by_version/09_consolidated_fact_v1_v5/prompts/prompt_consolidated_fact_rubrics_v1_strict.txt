@@ -1,0 +1,118 @@
+You are evaluating final fact memory for a multi-session conversation-level memory writing task.
+
+Task setting:
+- A memory-writing system reads a long conversation that unfolds across many sessions.
+- During the conversation, the system incrementally writes fact memory items.
+- At evaluation time, you are given:
+  1. the full original conversation
+  2. the final accumulated fact memory items
+- Your job is to judge the quality of the final fact memory against a fixed rubric set.
+
+What the memory is supposed to be:
+- It is not just a generic summary.
+- It is a reusable fact memory store meant for future retrieval, downstream reasoning, and later conversation support.
+- It should preserve important factual content from the conversation while avoiding unsupported, incorrect, redundant, low-value, or structurally messy items.
+
+Scoring format:
+- Score each rubric with a continuous score in [0, 1].
+
+Scoring interpretation:
+- 1.0 = essentially flawless on this rubric; no clear issue
+- 0.9 = very strong, only tiny weaknesses
+- 0.8 = strong, but with noticeable minor issues
+- 0.6-0.7 = mixed quality, real issues present
+- 0.3-0.5 = major problems
+- 0.0-0.2 = severe failure
+
+Strict scoring policy:
+- Be strict.
+- Do not give high scores lightly.
+- A score of 1.0 should be rare.
+- If there is any clear substantial problem for a rubric, the score must be below 1.0.
+- If there are repeated problems for a rubric, the score should fall well below 0.8.
+- If a rubric is violated in a systematic way, the score should be closer to failure than to pass.
+- When uncertain, prefer the lower score.
+
+Important judging rules:
+- Judge only from the provided conversation and final fact memory.
+- Do not use outside knowledge.
+- Do not reward the memory for sounding polished if it is not well-supported.
+- Do not infer hidden intent for the writer; judge what is actually written.
+- Evaluate the memory as a reusable factual store, not as a prose summary.
+
+Rubric-specific judging guidance:
+- For source / grounding rubrics:
+  - Ask whether the factual content can be supported from the conversation itself.
+  - Unsupported additions, fabricated specifics, or overclaims should strongly lower the score.
+
+- For inference-boundary rubrics:
+  - Distinguish explicit fact from interpretation.
+  - Inferring emotions, causes, motives, or traits without explicit support should be penalized even if loosely plausible.
+
+- For attribution and entity rubrics:
+  - Check carefully whether the fact belongs to the right person/entity.
+  - Check whether names, aliases, and references remain coherent across items.
+  - Ambiguous or unresolved pronouns should reduce score.
+
+- For temporal rubrics:
+  - Separate status mistakes from value mistakes.
+  - Plans should not be treated as completed events.
+  - Old states should not be treated as current.
+  - Dates, sequences, and durations should match the conversation.
+
+- For atomicity rubrics:
+  - Penalize bundled items that mix multiple independent facts.
+  - A single item should not combine unrelated facts just because they appeared near each other.
+
+- For duplicate rubrics:
+  - Distinguish exact duplicates from near-duplicates.
+  - If the same fact is repeated with slightly different phrasing, that is still a real issue.
+
+- For coverage rubrics:
+  - Judge whether important memory-worthy content is missing.
+  - Do not require every tiny fact to be present.
+  - But if major entities, key attributes, important events, important relationships, or important future commitments are omitted, reduce the score clearly.
+
+- For conciseness and relevance rubrics:
+  - Penalize filler, meta-commentary, trivial details, and transient low-value information.
+  - A fact can be accurate but still low-value memory clutter.
+
+- For structure rubrics:
+  - Judge consistency of representation, not writing beauty.
+  - Missing semantic slots, inconsistent field naming, and unstable formatting should reduce score.
+
+- For contradiction rubrics:
+  - Look for mutually incompatible facts within the final memory.
+  - Even a small number of direct contradictions is serious.
+
+- For negation / quantifier rubrics:
+  - Dropping negation is a major error.
+  - Distorting frequency, count, or magnitude is also a real error.
+
+Output requirements:
+- Return exactly one JSON object.
+- The object must follow this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": <float between 0 and 1>,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "conversation_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `conversation_score` should be your own unweighted arithmetic mean across rubric scores.
+- The caller may apply extra weighting or hard caps afterward.
+
+Rubrics to score:
+{rubrics_json}
+
+Full conversation:
+{conversation_text}
+
+Final fact memory items:
+{fact_memory_text}

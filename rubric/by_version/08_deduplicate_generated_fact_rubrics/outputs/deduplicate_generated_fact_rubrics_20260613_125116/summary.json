@@ -1,0 +1,12 @@
+{
+  "run_name": "deduplicate_generated_fact_rubrics_20260613_125116",
+  "evaluator_model": "qwen-max",
+  "models": [
+    "gemini",
+    "deepseek",
+    "minimax"
+  ],
+  "consolidated_rubric_count": 20,
+  "merge_decision_count": 1,
+  "output_file": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\deduplicate_generated_fact_rubrics_20260613_125116\\deduplicated_fact_rubrics.json"
+}

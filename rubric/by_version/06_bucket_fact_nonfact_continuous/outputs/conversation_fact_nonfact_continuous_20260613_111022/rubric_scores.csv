@@ -1,0 +1,2 @@
+conversation_idx,fact_count,nonfact_count,fact_score,nonfact_score,combined_score,fact_arithmetic_mean_score,nonfact_arithmetic_mean_score
+0,228,105,0.8786,0.8737,0.8771,0.8562,0.86

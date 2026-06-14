@@ -1,0 +1,2 @@
+add_model,workspace_dir,conversation_idx,memory_count,conversation_score,arithmetic_mean_score,rubric_every_item_sourceable,rubric_every_item_factually_valid,rubric_every_item_temporally_valid,rubric_item_atomicity,rubric_set_nonredundancy,rubric_coverage_of_memory_worthy_content,rubric_conciseness,rubric_structural_consistency
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,0,324,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0

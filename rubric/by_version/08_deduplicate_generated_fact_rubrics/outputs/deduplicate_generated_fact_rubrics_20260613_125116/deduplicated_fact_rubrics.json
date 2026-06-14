@@ -1,0 +1,169 @@
+{
+  "run_name": "deduplicate_generated_fact_rubrics_20260613_125116",
+  "evaluator_model": "qwen-max",
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_deduplicate_generated_fact_rubrics_conservative.txt",
+  "input_files": {
+    "gemini": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122735\\gemini_finer_fact_rubrics.json",
+    "deepseek": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122735\\deepseek_finer_fact_rubrics.json",
+    "minimax": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122952\\minimax_finer_fact_rubrics.json"
+  },
+  "result": {
+    "dedup_principle_summary": "Merge rubrics only if they have the same evaluation intent, unit of judgment, kind of evidence needed, kind of failure being detected, and practical checking action by the evaluator. Keep separate if any of these differ.",
+    "merge_decisions": [
+      {
+        "decision": "merged",
+        "source_items": "reason"
+      }
+    ],
+    "consolidated_rubrics": [
+      {
+        "id": "explicit_textual_grounding",
+        "name": "Explicit Textual Grounding",
+        "question": "Does every memory item have direct textual support in the conversation? For each fact in a memory item, is there an explicit statement or direct quotation in the conversation that supports it?",
+        "why_it_matters": "Memory items must be traceable to the source conversation. If items contain inferred or hallucinated content, downstream use will be unreliable.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "inference_boundary_compliance",
+        "name": "Inference Boundary Compliance",
+        "question": "Does the memory item avoid making inferences that go beyond what is stated? Specifically, does it avoid inferring internal states, causation, or character traits that were not explicitly stated?",
+        "why_it_matters": "While some inference is necessary, crossing into unsupported psychological attribution or causal reasoning distorts the source and misleads future users.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "entity_name_consistency",
+        "name": "Entity Name Consistency",
+        "question": "Are entity names used consistently throughout the memory items? When the conversation refers to the same person or place using different forms (full name, first name, nickname, pronoun), are these correctly unified to a single consistent referent?",
+        "why_it_matters": "Inconsistent naming creates ambiguity about which entity is being referred to and can cause confusion in downstream retrieval.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "entity_attribute_accuracy",
+        "name": "Entity Attribute Accuracy",
+        "question": "Are the attributes assigned to entities (person, place, object) accurate according to the conversation? Does the memory item avoid assigning wrong characteristics like incorrect names, wrong physical descriptions, or incorrect roles?",
+        "why_it_matters": "Wrong attributes about entities are factual errors that corrupt the memory and will cause incorrect answers in downstream tasks.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "relationship_accuracy",
+        "name": "Relationship Accuracy",
+        "question": "Are the relationships between entities accurate according to the conversation? Does the memory avoid misrepresenting familial, professional, or social relationships?",
+        "why_it_matters": "Relationship errors can fundamentally misrepresent the social structure and context of the conversation.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "event_detail_accuracy",
+        "name": "Event Detail Accuracy",
+        "question": "Are the details of events (what happened, where, when, who did what) accurate according to the conversation? Does the memory item avoid changing locations, outcomes, or participant roles?",
+        "why_it_matters": "Event detail errors corrupt the factual record and will lead to incorrect responses in downstream recall tasks.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "temporal_status_accuracy",
+        "name": "Temporal Status Accuracy",
+        "question": "Does the memory item correctly represent the temporal status of information? Specifically, are future plans distinguished from past completed events, and current states correctly labeled as current?",
+        "why_it_matters": "Representing future intentions as past facts or vice versa fundamentally misrepresents reality and will cause downstream reasoning errors.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "temporal_value_accuracy",
+        "name": "Temporal Value Accuracy",
+        "question": "Are the specific temporal values (dates, times, durations, sequences) accurate according to the conversation? Does the memory item avoid assigning wrong time periods or incorrect sequences?",
+        "why_it_matters": "Wrong temporal values make the memory temporally unreliable and can cause failures in time-based reasoning.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "bundling_unity",
+        "name": "Bundling Unity",
+        "question": "Does each memory item contain a single coherent fact rather than bundling multiple unrelated facts together? Specifically, are facts about different entities, different attributes of the same entity, or different time periods kept separate?",
+        "why_it_matters": "Bundled facts are harder to retrieve precisely, create update anomalies, and make it unclear whether each sub-fact is independently supported.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "exact_duplicate_absence",
+        "name": "Exact Duplicate Absence",
+        "question": "Does the memory set avoid containing two or more items that state the exact same fact? Are there no repeated memory items with identical content?",
+        "why_it_matters": "Exact duplicates waste storage, cause confusion in retrieval, and indicate a failure in the writing process.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "near_duplicate_absence",
+        "name": "Near-Duplicate Absence",
+        "question": "Does the memory set avoid containing items that are slight variations of the same fact? Are there no items that restate the same information using different words or slightly different framing?",
+        "why_it_matters": "Near-duplicates indicate inefficiency and create ambiguity about which item represents the canonical fact.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "entity_presence",
+        "name": "Entity Presence",
+        "question": "Does the memory set include information about all entities that appear in the conversation? Are persons, places, organizations, and objects with names or distinct identities represented in the memory?",
+        "why_it_matters": "Missing entities creates gaps in the memory that will cause failures when questions require that entity's information.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "attribute_presence",
+        "name": "Attribute Presence",
+        "question": "Does the memory set include the key attributes of entities that are mentioned in the conversation? For each major entity, are notable attributes (role, location, preferences, state) captured?",
+        "why_it_matters": "Missing attributes for entities makes the memory incomplete and insufficient for detailed downstream queries.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "event_presence",
+        "name": "Event Presence",
+        "question": "Does the memory set include the key events and actions that occurred in the conversation? Are notable actions, decisions, and occurrences recorded?",
+        "why_it_matters": "Missing events means the memory does not capture the important happenings from the conversation.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "relationship_presence",
+        "name": "Relationship Presence",
+        "question": "Does the memory set include the key relationships between entities that are mentioned in the conversation? Are notable connections, affiliations, and interpersonal relationships captured?",
+        "why_it_matters": "Missing relationships leaves the memory structurally incomplete and unable to support relational queries.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "plan_status_presence",
+        "name": "Plan and Status Presence",
+        "question": "Does the memory set capture plans, intentions, and scheduled items mentioned in the conversation? Are future-oriented statements and their temporal markers preserved?",
+        "why_it_matters": "Plans and intentions are memory-worthy content. Missing them loses future-oriented information critical for proactive assistance.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "field_naming_consistency",
+        "name": "Field Naming Consistency",
+        "question": "Do memory items use consistent field names or structural patterns for equivalent types of information? For example, are entity identifiers consistently named across items?",
+        "why_it_matters": "Inconsistent field names make the memory schema unpredictable and harder to query reliably.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "referent_form_consistency",
+        "name": "Referent Form Consistency",
+        "question": "Does each memory item use a consistent form of referring to entities throughout the item? Are there no mixed references like 'Alice' then 'she' then 'Dr. Smith' within the same item?",
+        "why_it_matters": "Mixed referent forms within an item create ambiguity about which entity is being discussed.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "temporal_format_consistency",
+        "name": "Temporal Format Consistency",
+        "question": "Does the memory set use consistent formats for representing temporal information? For example, are dates formatted consistently and are relative times converted consistently?",
+        "why_it_matters": "Inconsistent temporal formats make it hard to compare time across items and can cause parsing errors in automated processing.",
+        "failure_examples": "source_trace"
+      },
+      {
+        "id": "concision_per_item",
+        "name": "Concision Per Item",
+        "question": "Is each memory item concise and free of unnecessary elaboration? Does the item contain only the fact itself without verbose context or filler that does not add factual value?",
+        "why_it_matters": "Verbose items waste storage and make retrieval noisy. Concise items are faster to process and less likely to contain distracting information.",
+        "failure_examples": "source_trace"
+      }
+    ]
+  },
+  "meta": {
+    "model": "qwen-max",
+    "attempt_index": 0,
+    "response_format": "json_object",
+    "raw_text": "{\n  \"dedup_principle_summary\": \"Merge rubrics only if they have the same evaluation intent, unit of judgment, kind of evidence needed, kind of failure being detected, and practical checking action by the evaluator. Keep separate if any of these differ.\",\n  \"merge_decisions\": [\n    {\n      \"decision\": \"merged\",\n      \"source_items\": \n      \"reason\"\n    }\n  ],\n  \"consolidated_rubrics\": [\n    {\n      \"id\": \"explicit_textual_grounding\",\n      \"name\": \"Explicit Textual Grounding\",\n      \"question\": \"Does every memory item have direct textual support in the conversation? For each fact in a memory item, is there an explicit statement or direct quotation in the conversation that supports it?\",\n      \"why_it_matters\": \"Memory items must be traceable to the source conversation. If items contain inferred or hallucinated content, downstream use will be unreliable.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"name\": \"Inference Boundary Compliance\",\n      \"question\": \"Does the memory item avoid making inferences that go beyond what is stated? Specifically, does it avoid inferring internal states, causation, or character traits that were not explicitly stated?\",\n      \"why_it_matters\": \"While some inference is necessary, crossing into unsupported psychological attribution or causal reasoning distorts the source and misleads future users.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"entity_name_consistency\",\n      \"name\": \"Entity Name Consistency\",\n      \"question\": \"Are entity names used consistently throughout the memory items? When the conversation refers to the same person or place using different forms (full name, first name, nickname, pronoun), are these correctly unified to a single consistent referent?\",\n      \"why_it_matters\": \"Inconsistent naming creates ambiguity about which entity is being referred to and can cause confusion in downstream retrieval.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"entity_attribute_accuracy\",\n      \"name\": \"Entity Attribute Accuracy\",\n      \"question\": \"Are the attributes assigned to entities (person, place, object) accurate according to the conversation? Does the memory item avoid assigning wrong characteristics like incorrect names, wrong physical descriptions, or incorrect roles?\",\n      \"why_it_matters\": \"Wrong attributes about entities are factual errors that corrupt the memory and will cause incorrect answers in downstream tasks.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"name\": \"Relationship Accuracy\",\n      \"question\": \"Are the relationships between entities accurate according to the conversation? Does the memory avoid misrepresenting familial, professional, or social relationships?\",\n      \"why_it_matters\": \"Relationship errors can fundamentally misrepresent the social structure and context of the conversation.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"event_detail_accuracy\",\n      \"name\": \"Event Detail Accuracy\",\n      \"question\": \"Are the details of events (what happened, where, when, who did what) accurate according to the conversation? Does the memory item avoid changing locations, outcomes, or participant roles?\",\n      \"why_it_matters\": \"Event detail errors corrupt the factual record and will lead to incorrect responses in downstream recall tasks.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"temporal_status_accuracy\",\n      \"name\": \"Temporal Status Accuracy\",\n      \"question\": \"Does the memory item correctly represent the temporal status of information? Specifically, are future plans distinguished from past completed events, and current states correctly labeled as current?\",\n      \"why_it_matters\": \"Representing future intentions as past facts or vice versa fundamentally misrepresents reality and will cause downstream reasoning errors.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"temporal_value_accuracy\",\n      \"name\": \"Temporal Value Accuracy\",\n      \"question\": \"Are the specific temporal values (dates, times, durations, sequences) accurate according to the conversation? Does the memory item avoid assigning wrong time periods or incorrect sequences?\",\n      \"why_it_matters\": \"Wrong temporal values make the memory temporally unreliable and can cause failures in time-based reasoning.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"bundling_unity\",\n      \"name\": \"Bundling Unity\",\n      \"question\": \"Does each memory item contain a single coherent fact rather than bundling multiple unrelated facts together? Specifically, are facts about different entities, different attributes of the same entity, or different time periods kept separate?\",\n      \"why_it_matters\": \"Bundled facts are harder to retrieve precisely, create update anomalies, and make it unclear whether each sub-fact is independently supported.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"exact_duplicate_absence\",\n      \"name\": \"Exact Duplicate Absence\",\n      \"question\": \"Does the memory set avoid containing two or more items that state the exact same fact? Are there no repeated memory items with identical content?\",\n      \"why_it_matters\": \"Exact duplicates waste storage, cause confusion in retrieval, and indicate a failure in the writing process.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"near_duplicate_absence\",\n      \"name\": \"Near-Duplicate Absence\",\n      \"question\": \"Does the memory set avoid containing items that are slight variations of the same fact? Are there no items that restate the same information using different words or slightly different framing?\",\n      \"why_it_matters\": \"Near-duplicates indicate inefficiency and create ambiguity about which item represents the canonical fact.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"entity_presence\",\n      \"name\": \"Entity Presence\",\n      \"question\": \"Does the memory set include information about all entities that appear in the conversation? Are persons, places, organizations, and objects with names or distinct identities represented in the memory?\",\n      \"why_it_matters\": \"Missing entities creates gaps in the memory that will cause failures when questions require that entity's information.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"attribute_presence\",\n      \"name\": \"Attribute Presence\",\n      \"question\": \"Does the memory set include the key attributes of entities that are mentioned in the conversation? For each major entity, are notable attributes (role, location, preferences, state) captured?\",\n      \"why_it_matters\": \"Missing attributes for entities makes the memory incomplete and insufficient for detailed downstream queries.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"event_presence\",\n      \"name\": \"Event Presence\",\n      \"question\": \"Does the memory set include the key events and actions that occurred in the conversation? Are notable actions, decisions, and occurrences recorded?\",\n      \"why_it_matters\": \"Missing events means the memory does not capture the important happenings from the conversation.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"relationship_presence\",\n      \"name\": \"Relationship Presence\",\n      \"question\": \"Does the memory set include the key relationships between entities that are mentioned in the conversation? Are notable connections, affiliations, and interpersonal relationships captured?\",\n      \"why_it_matters\": \"Missing relationships leaves the memory structurally incomplete and unable to support relational queries.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"plan_status_presence\",\n      \"name\": \"Plan and Status Presence\",\n      \"question\": \"Does the memory set capture plans, intentions, and scheduled items mentioned in the conversation? Are future-oriented statements and their temporal markers preserved?\",\n      \"why_it_matters\": \"Plans and intentions are memory-worthy content. Missing them loses future-oriented information critical for proactive assistance.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"field_naming_consistency\",\n      \"name\": \"Field Naming Consistency\",\n      \"question\": \"Do memory items use consistent field names or structural patterns for equivalent types of information? For example, are entity identifiers consistently named across items?\",\n      \"why_it_matters\": \"Inconsistent field names make the memory schema unpredictable and harder to query reliably.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"referent_form_consistency\",\n      \"name\": \"Referent Form Consistency\",\n      \"question\": \"Does each memory item use a consistent form of referring to entities throughout the item? Are there no mixed references like 'Alice' then 'she' then 'Dr. Smith' within the same item?\",\n      \"why_it_matters\": \"Mixed referent forms within an item create ambiguity about which entity is being discussed.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"temporal_format_consistency\",\n      \"name\": \"Temporal Format Consistency\",\n      \"question\": \"Does the memory set use consistent formats for representing temporal information? For example, are dates formatted consistently and are relative times converted consistently?\",\n      \"why_it_matters\": \"Inconsistent temporal formats make it hard to compare time across items and can cause parsing errors in automated processing.\",\n      \"failure_examples\": \n      \"source_trace\"\n    },\n    {\n      \"id\": \"concision_per_item\",\n      \"name\": \"Concision Per Item\",\n      \"question\": \"Is each memory item concise and free of unnecessary elaboration? Does the item contain only the fact itself without verbose context or filler that does not add factual value?\",\n      \"why_it_matters\": \"Verbose items waste storage and make retrieval noisy. Concise items are faster to process and less likely to contain distracting information.\",\n      \"failure_examples\": \n      \"source_trace\"\n    }\n  ]\n}",
+    "required_key": "consolidated_rubrics",
+    "required_key_attempt_index": 1
+  }
+}

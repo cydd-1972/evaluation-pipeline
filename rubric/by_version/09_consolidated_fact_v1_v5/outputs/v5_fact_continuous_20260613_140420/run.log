@@ -1,0 +1,49 @@
+[2026-06-13 14:04:20] run_name=v5_fact_continuous_20260613_140420
+[2026-06-13 14:04:20] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 14:04:20] models=['deepseek', 'gemini']
+[2026-06-13 14:04:20] conversation_indices=all
+[2026-06-13 14:04:20] rubric_path=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\rubrics\consolidated_fact_rubrics_v1.json
+[2026-06-13 14:04:20] prompt_path=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\prompts\prompt_consolidated_fact_rubrics_v1_strict.txt
+[2026-06-13 14:04:20] score model=deepseek conv=0 memory_items=228
+[2026-06-13 14:05:03] done model=deepseek conv=0 score=0.8692 mean=0.8692
+[2026-06-13 14:05:03] score model=deepseek conv=1 memory_items=173
+[2026-06-13 14:05:42] done model=deepseek conv=1 score=0.8500 mean=0.8500
+[2026-06-13 14:05:42] score model=deepseek conv=2 memory_items=336
+[2026-06-13 14:06:17] done model=deepseek conv=2 score=0.8846 mean=0.8846
+[2026-06-13 14:06:17] score model=deepseek conv=3 memory_items=321
+[2026-06-13 14:06:56] done model=deepseek conv=3 score=0.8038 mean=0.8038
+[2026-06-13 14:06:56] score model=deepseek conv=4 memory_items=364
+[2026-06-13 14:07:32] done model=deepseek conv=4 score=0.8846 mean=0.8846
+[2026-06-13 14:07:32] score model=deepseek conv=5 memory_items=282
+[2026-06-13 14:08:06] done model=deepseek conv=5 score=0.8885 mean=0.8885
+[2026-06-13 14:08:06] score model=deepseek conv=6 memory_items=390
+[2026-06-13 14:08:55] done model=deepseek conv=6 score=0.8346 mean=0.8346
+[2026-06-13 14:08:55] score model=deepseek conv=7 memory_items=326
+[2026-06-13 14:09:42] done model=deepseek conv=7 score=0.8846 mean=0.8846
+[2026-06-13 14:09:42] score model=deepseek conv=8 memory_items=233
+[2026-06-13 14:10:38] done model=deepseek conv=8 score=0.8154 mean=0.8154
+[2026-06-13 14:10:38] score model=deepseek conv=9 memory_items=309
+[2026-06-13 14:11:33] done model=deepseek conv=9 score=0.8192 mean=0.8192
+[2026-06-13 14:11:33] score model=gemini conv=0 memory_items=149
+[2026-06-13 14:12:16] done model=gemini conv=0 score=0.8731 mean=0.8731
+[2026-06-13 14:12:16] score model=gemini conv=1 memory_items=103
+[2026-06-13 14:13:10] done model=gemini conv=1 score=0.9769 mean=0.9769
+[2026-06-13 14:13:10] score model=gemini conv=2 memory_items=302
+[2026-06-13 14:14:16] done model=gemini conv=2 score=0.8115 mean=0.8115
+[2026-06-13 14:14:16] score model=gemini conv=3 memory_items=201
+[2026-06-13 14:15:28] done model=gemini conv=3 score=0.8808 mean=0.8808
+[2026-06-13 14:15:28] score model=gemini conv=4 memory_items=219
+[2026-06-13 14:16:45] done model=gemini conv=4 score=0.8962 mean=0.8962
+[2026-06-13 14:16:45] score model=gemini conv=5 memory_items=186
+[2026-06-13 14:17:44] done model=gemini conv=5 score=0.8423 mean=0.8423
+[2026-06-13 14:17:44] score model=gemini conv=6 memory_items=261
+[2026-06-13 14:18:44] done model=gemini conv=6 score=0.8500 mean=0.8500
+[2026-06-13 14:18:44] score model=gemini conv=7 memory_items=207
+[2026-06-13 14:19:29] done model=gemini conv=7 score=0.7962 mean=0.7962
+[2026-06-13 14:19:29] score model=gemini conv=8 memory_items=185
+[2026-06-13 14:20:09] done model=gemini conv=8 score=0.8846 mean=0.8846
+[2026-06-13 14:20:09] score model=gemini conv=9 memory_items=171
+[2026-06-13 14:20:39] done model=gemini conv=9 score=0.8115 mean=0.8115
+[2026-06-13 14:20:39] final model=deepseek fact_score=0.8534 mean=0.8534
+[2026-06-13 14:20:39] final model=gemini fact_score=0.8623 mean=0.8623
+[2026-06-13 14:20:39] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\v5_fact_continuous_20260613_140420

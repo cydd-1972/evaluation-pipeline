@@ -1,0 +1,68 @@
+You are designing a better rubric set for evaluating memory-writing systems.
+
+Task background:
+- We study a multi-session memory writing task over a full conversation.
+- A model reads many sessions in one conversation and writes memory items incrementally over time.
+- At evaluation time, we look at the final accumulated fact memory for the whole conversation.
+- The evaluation target is not a summary in general; it is a set of memory items intended to support future use.
+- Memory items should be factual, sourceable from the conversation, temporally correct, concise, non-redundant, and structured in a reusable way.
+
+Current baseline rubric set:
+{baseline_rubrics_json}
+
+Your job:
+- Use the 8 baseline rubrics only as a starting point.
+- Rewrite them into a more detailed, more fine-grained rubric set for this exact memory-writing task.
+- The new rubric set should be stricter and more diagnostic.
+- Break broad criteria into smaller criteria when useful.
+- Avoid vague high-level items that are hard to judge.
+- Prefer criteria that can be judged directly from:
+  1. the original conversation text
+  2. the final fact memory items
+- Do not depend on external tools, token counting, pre-extracted salient facts, or outside knowledge.
+
+Design principles:
+- The rubrics should be tailored to evaluating final fact memory for a conversation-level memory-writing task.
+- Each rubric should focus on one narrow property as much as possible.
+- Rubrics should be understandable by another evaluator model.
+- Try to make failure modes explicit.
+- Favor operational wording over abstract wording.
+- Avoid duplicating the same idea under different names.
+
+What good rubrics look like here:
+- A rubric can ask whether every memory item has explicit textual support.
+- A rubric can ask whether multiple speakers' attributes are mixed up.
+- A rubric can ask whether future plans are incorrectly stated as completed facts.
+- A rubric can ask whether one memory item improperly bundles multiple unrelated facts.
+
+What to avoid:
+- Do not output only small rephrasings of the old 8 items.
+- Do not output criteria that require hidden reasoning artifacts or intermediate extraction pipelines.
+- Do not output criteria that are really about downstream QA performance.
+- Do not output criteria that are too broad to diagnose.
+
+Output goals:
+- Produce between 12 and 20 rubrics.
+- Include a short rationale for the rubric set as a whole.
+- For each rubric, include:
+  - `id`
+  - `name`
+  - `question`
+  - `why_it_matters`
+  - `failure_examples`
+- `failure_examples` should be a short list of 1 to 3 concrete failure patterns, not long prose.
+
+Return exactly one JSON object with this schema:
+{{
+  "task_summary": "<short task-specific summary>",
+  "design_rationale": "<short rationale for how you refined the rubric set>",
+  "rubrics": [
+    {{
+      "id": "<snake_case_id>",
+      "name": "<short name>",
+      "question": "<rubric question>",
+      "why_it_matters": "<short explanation>",
+      "failure_examples": ["<failure 1>", "<failure 2>"]
+    }}
+  ]
+}}

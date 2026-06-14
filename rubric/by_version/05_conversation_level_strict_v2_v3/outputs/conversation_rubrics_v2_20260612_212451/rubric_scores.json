@@ -1,0 +1,460 @@
+{
+  "run_name": "conversation_rubrics_v2_20260612_212451",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "results": [
+    {
+      "add_model": "minimax",
+      "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+      "conversation_count": 6,
+      "model_score": 1.0,
+      "conversations": [
+        {
+          "conversation_idx": 4,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly traceable to explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present; all information aligns with what was stated in the conversation."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "All memory items correctly reflect the past, current, or future status as mentioned in the conversation."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is a distinct, atomic fact without bundling multiple facts together."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "There is no obvious redundancy or repeated near-duplicate information in the memory set."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The memory set captures all important and memory-worthy information from the conversation without clear omissions."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory set is concise, avoiding low-value or overly verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "The memory set follows a consistent structure across all items, with clear identifiers and timestamps."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set fully satisfies all rubrics with no issues detected.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly traceable to explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present; all information aligns with what was stated in the conversation.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items correctly reflect the past, current, or future status as mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is a distinct, atomic fact without bundling multiple facts together.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"There is no obvious redundancy or repeated near-duplicate information in the memory set.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set captures all important and memory-worthy information from the conversation without clear omissions.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set is concise, avoiding low-value or overly verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set follows a consistent structure across all items, with clear identifiers and timestamps.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set fully satisfies all rubrics with no issues detected.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 405
+        },
+        {
+          "conversation_idx": 5,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly supported by explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "The final memory accurately reflects the conversation without any factual errors."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "The memory correctly preserves the past, current, and future status of events and relationships."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is reasonably atomic and captures distinct facts."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "The memory avoids obvious redundancy and repeated information."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The memory captures all important and memory-worthy information from the conversation."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory is concise and avoids unnecessary verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "The memory follows a consistent structure across all items."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set is fully satisfactory across all rubrics, accurately reflecting the conversation with no errors or redundancies.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly supported by explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"The final memory accurately reflects the conversation without any factual errors.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory correctly preserves the past, current, and future status of events and relationships.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is reasonably atomic and captures distinct facts.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"The memory avoids obvious redundancy and repeated information.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The memory captures all important and memory-worthy information from the conversation.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory is concise and avoids unnecessary verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"The memory follows a consistent structure across all items.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set is fully satisfactory across all rubrics, accurately reflecting the conversation with no errors or redundancies.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 374
+        },
+        {
+          "conversation_idx": 6,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly traceable to explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present in the memory items; all information aligns with the conversation."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "All memory items correctly reflect the past, current, and future status as mentioned in the conversation."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is a single, distinct fact without bundling multiple facts together."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "There is no obvious redundancy or repeated near-duplicate information in the memory items."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The memory captures all memory-worthy information from the conversation without clear important omissions."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory is concise and avoids low-value or overly verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "All memory items follow a consistent, reusable structure across the set."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set fully satisfies all rubrics with no issues detected.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly traceable to explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present in the memory items; all information aligns with the conversation.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items correctly reflect the past, current, and future status as mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is a single, distinct fact without bundling multiple facts together.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"There is no obvious redundancy or repeated near-duplicate information in the memory items.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The memory captures all memory-worthy information from the conversation without clear important omissions.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory is concise and avoids low-value or overly verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items follow a consistent, reusable structure across the set.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set fully satisfies all rubrics with no issues detected.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 448
+        },
+        {
+          "conversation_idx": 7,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly supported by explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present in the memory items; all details align with the conversation."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "Temporal details are accurately preserved, including past, current, and future events."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is a single, distinct fact without bundling multiple facts together."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "No obvious redundancy or near-duplicate information is present in the memory items."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The memory captures all significant and memory-worthy information from the conversation."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory is concise, avoiding low-value or overly verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "All memory items follow a consistent structure with clear identifiers and timestamps."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set is fully satisfactory, with all items directly supported by the conversation, no factual errors, accurate temporal details, atomic facts, no redundancy, full coverage of memory-worthy content, concise, and structurally consistent.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly supported by explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present in the memory items; all details align with the conversation.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"Temporal details are accurately preserved, including past, current, and future events.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is a single, distinct fact without bundling multiple facts together.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"No obvious redundancy or near-duplicate information is present in the memory items.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The memory captures all significant and memory-worthy information from the conversation.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory is concise, avoiding low-value or overly verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items follow a consistent structure with clear identifiers and timestamps.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set is fully satisfactory, with all items directly supported by the conversation, no factual errors, accurate temporal details, atomic facts, no redundancy, full coverage of memory-worthy content, concise, and structurally consistent.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 454
+        },
+        {
+          "conversation_idx": 8,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly traceable to explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present in the memory items."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "Temporal references are accurate and consistent with the conversation."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is a single, distinct fact without bundling."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "No obvious redundancy or repeated information is present in the memory."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "All memory-worthy information from the conversation is preserved without clear omissions."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory is concise and avoids low-value or overly verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "The memory follows a consistent structure across all items."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set fully satisfies all rubrics with no issues detected.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly traceable to explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present in the memory items.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"Temporal references are accurate and consistent with the conversation.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is a single, distinct fact without bundling.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"No obvious redundancy or repeated information is present in the memory.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"All memory-worthy information from the conversation is preserved without clear omissions.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory is concise and avoids low-value or overly verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"The memory follows a consistent structure across all items.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set fully satisfies all rubrics with no issues detected.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 316
+        },
+        {
+          "conversation_idx": 9,
+          "add_model": "minimax",
+          "rubrics": [
+            {
+              "id": "sourceability",
+              "name": "Sourceability",
+              "question": "To what extent can the final memory items be traced back to explicit support in the original conversation?",
+              "score": 1.0,
+              "reason": "All memory items are directly supported by explicit statements in the conversation."
+            },
+            {
+              "id": "factual_correctness",
+              "name": "Factual Correctness",
+              "question": "To what extent does the final memory avoid factual errors about people, events, relationships, or attributes stated in the conversation?",
+              "score": 1.0,
+              "reason": "No factual errors are present; all information aligns with the conversation."
+            },
+            {
+              "id": "temporal_correctness",
+              "name": "Temporal Correctness",
+              "question": "To what extent does the final memory preserve past, current, and future status correctly?",
+              "score": 1.0,
+              "reason": "All memory items correctly reflect the past, current, and future status as mentioned in the conversation."
+            },
+            {
+              "id": "atomicity",
+              "name": "Atomicity",
+              "question": "To what extent are memory items reasonably atomic rather than bundling many distinct facts together?",
+              "score": 1.0,
+              "reason": "Each memory item is a distinct and reasonably atomic fact, not bundling multiple facts together."
+            },
+            {
+              "id": "nonredundancy",
+              "name": "Nonredundancy",
+              "question": "To what extent does the final memory avoid obvious redundancy or repeated near-duplicate information?",
+              "score": 1.0,
+              "reason": "The memory set avoids obvious redundancy or repeated near-duplicate information."
+            },
+            {
+              "id": "coverage_of_memory_worthy_content",
+              "name": "Coverage Of Memory-Worthy Content",
+              "question": "To what extent does the final memory preserve the memory-worthy information from the conversation without clear important omissions?",
+              "score": 1.0,
+              "reason": "The memory set preserves all memory-worthy information from the conversation without clear important omissions."
+            },
+            {
+              "id": "conciseness",
+              "name": "Conciseness",
+              "question": "To what extent is the final memory reasonably concise rather than bloated with low-value or overly verbose content?",
+              "score": 1.0,
+              "reason": "The memory set is concise and avoids bloating with low-value or overly verbose content."
+            },
+            {
+              "id": "structural_consistency",
+              "name": "Structural Consistency",
+              "question": "To what extent does the final memory follow a consistent, reusable structure across items?",
+              "score": 1.0,
+              "reason": "The memory set follows a consistent, reusable structure across all items."
+            }
+          ],
+          "conversation_score": 1.0,
+          "summary": "The final memory set fully satisfies all rubrics with no issues detected.",
+          "evaluator_meta": {
+            "model": "Qwen/Qwen3-14B",
+            "attempt_index": 0,
+            "response_format": "json_object",
+            "raw_text": "{\n  \"rubrics\": [\n    {\n      \"id\": \"sourceability\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items are directly supported by explicit statements in the conversation.\"\n    },\n    {\n      \"id\": \"factual_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"No factual errors are present; all information aligns with the conversation.\"\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"score\": 1.0,\n      \"reason\": \"All memory items correctly reflect the past, current, and future status as mentioned in the conversation.\"\n    },\n    {\n      \"id\": \"atomicity\",\n      \"score\": 1.0,\n      \"reason\": \"Each memory item is a distinct and reasonably atomic fact, not bundling multiple facts together.\"\n    },\n    {\n      \"id\": \"nonredundancy\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set avoids obvious redundancy or repeated near-duplicate information.\"\n    },\n    {\n      \"id\": \"coverage_of_memory_worthy_content\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set preserves all memory-worthy information from the conversation without clear important omissions.\"\n    },\n    {\n      \"id\": \"conciseness\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set is concise and avoids bloating with low-value or overly verbose content.\"\n    },\n    {\n      \"id\": \"structural_consistency\",\n      \"score\": 1.0,\n      \"reason\": \"The memory set follows a consistent, reusable structure across all items.\"\n    }\n  ],\n  \"conversation_score\": 1.0,\n  \"summary\": \"The final memory set fully satisfies all rubrics with no issues detected.\"\n}",
+            "required_key": "rubrics",
+            "required_key_attempt_index": 0
+          },
+          "workspace_dir": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\v5\\workspaces\\allconv_v5_minimax",
+          "memory_count": 414
+        }
+      ]
+    }
+  ],
+  "missing": [],
+  "final_score": 1.0
+}

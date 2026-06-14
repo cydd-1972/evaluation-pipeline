@@ -1,0 +1,35 @@
+You are extracting atomic salient facts from one conversation session for memory evaluation.
+
+Your goal is to produce a short checklist of important facts that a good session-level delta memory should cover.
+
+Rules:
+- Use only the current session text.
+- Extract atomic facts, each expressing one clear fact.
+- Facts must be binary-checkable against a candidate delta memory.
+- Prefer durable, user-relevant information:
+  - identity/background updates
+  - stable preferences/traits newly stated here
+  - important events and relationship facts
+  - concrete plans, goals, commitments, schedule changes
+  - meaningful state changes
+- Do not include trivial wording details.
+- Do not merge unrelated facts into one line.
+- If a plan and its reason are both important, split them into separate facts only if each can be judged independently.
+- Return at most 8 facts.
+- If there are fewer than 8 salient facts, return fewer.
+
+Return exactly one JSON object:
+{{
+  "salient_facts": [
+    {{
+      "fact_id": "F1",
+      "text": "<atomic salient fact>",
+      "category": "identity|preference|event|relationship|plan|state_change|other",
+      "importance": "high|medium"
+    }}
+  ],
+  "summary": "<short summary>"
+}}
+
+Current session:
+{current_session_text}

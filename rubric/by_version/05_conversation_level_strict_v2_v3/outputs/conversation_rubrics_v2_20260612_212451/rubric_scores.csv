@@ -1,0 +1,7 @@
+add_model,workspace_dir,conversation_idx,memory_count,conversation_score,rubric_sourceability,rubric_factual_correctness,rubric_temporal_correctness,rubric_atomicity,rubric_nonredundancy,rubric_coverage_of_memory_worthy_content,rubric_conciseness,rubric_structural_consistency
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,4,405,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,5,374,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,6,448,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,7,454,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,8,316,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0
+minimax,E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\v5\workspaces\allconv_v5_minimax,9,414,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0

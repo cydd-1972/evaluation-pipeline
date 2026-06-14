@@ -1,0 +1,12 @@
+{
+  "run_name": "generate_finer_fact_rubrics_20260613_122952",
+  "models": {
+    "minimax": {
+      "generator_model_name": "MiniMax-M2.7",
+      "rubric_count": 20,
+      "output_file": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122952\\minimax_finer_fact_rubrics.json"
+    }
+  },
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_generate_finer_fact_rubrics.txt",
+  "baseline_rubric_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\rubrics\\conversation_fact_rubrics_continuous.json"
+}

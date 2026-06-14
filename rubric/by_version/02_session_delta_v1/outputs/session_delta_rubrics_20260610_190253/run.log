@@ -1,0 +1,125 @@
+[2026-06-10 19:02:53] run_name=session_delta_rubrics_20260610_190253
+[2026-06-10 19:02:53] evaluator_model=Qwen/Qwen3-14B
+[2026-06-10 19:02:53] targets=['minimax']
+[2026-06-10 19:02:53] score model=minimax conv=0 session=1 delta_items=11
+[2026-06-10 19:03:13] done model=minimax conv=0 session=1 score=1.0000
+[2026-06-10 19:03:13] score model=minimax conv=0 session=2 delta_items=14
+[2026-06-10 19:03:24] done model=minimax conv=0 session=2 score=1.0000
+[2026-06-10 19:03:24] score model=minimax conv=0 session=3 delta_items=9
+[2026-06-10 19:03:36] done model=minimax conv=0 session=3 score=1.0000
+[2026-06-10 19:03:36] score model=minimax conv=0 session=4 delta_items=17
+[2026-06-10 19:03:47] done model=minimax conv=0 session=4 score=1.0000
+[2026-06-10 19:03:47] score model=minimax conv=0 session=5 delta_items=13
+[2026-06-10 19:04:02] done model=minimax conv=0 session=5 score=1.0000
+[2026-06-10 19:04:02] score model=minimax conv=0 session=6 delta_items=16
+[2026-06-10 19:04:15] done model=minimax conv=0 session=6 score=1.0000
+[2026-06-10 19:04:15] score model=minimax conv=0 session=7 delta_items=32
+[2026-06-10 19:04:37] done model=minimax conv=0 session=7 score=1.0000
+[2026-06-10 19:04:37] score model=minimax conv=0 session=8 delta_items=36
+[2026-06-10 19:04:48] done model=minimax conv=0 session=8 score=1.0000
+[2026-06-10 19:04:48] score model=minimax conv=0 session=9 delta_items=8
+[2026-06-10 19:04:58] done model=minimax conv=0 session=9 score=1.0000
+[2026-06-10 19:04:58] score model=minimax conv=0 session=10 delta_items=22
+[2026-06-10 19:05:08] done model=minimax conv=0 session=10 score=1.0000
+[2026-06-10 19:05:08] score model=minimax conv=0 session=11 delta_items=9
+[2026-06-10 19:05:17] done model=minimax conv=0 session=11 score=1.0000
+[2026-06-10 19:05:17] score model=minimax conv=0 session=12 delta_items=13
+[2026-06-10 19:05:28] done model=minimax conv=0 session=12 score=1.0000
+[2026-06-10 19:05:28] score model=minimax conv=0 session=13 delta_items=16
+[2026-06-10 19:05:42] done model=minimax conv=0 session=13 score=1.0000
+[2026-06-10 19:05:42] score model=minimax conv=0 session=14 delta_items=15
+[2026-06-10 19:05:56] done model=minimax conv=0 session=14 score=1.0000
+[2026-06-10 19:05:56] score model=minimax conv=0 session=15 delta_items=17
+[2026-06-10 19:06:09] done model=minimax conv=0 session=15 score=1.0000
+[2026-06-10 19:06:09] score model=minimax conv=0 session=16 delta_items=27
+[2026-06-10 19:06:21] done model=minimax conv=0 session=16 score=1.0000
+[2026-06-10 19:06:21] score model=minimax conv=0 session=17 delta_items=25
+[2026-06-10 19:06:31] done model=minimax conv=0 session=17 score=1.0000
+[2026-06-10 19:06:31] score model=minimax conv=0 session=18 delta_items=18
+[2026-06-10 19:06:46] done model=minimax conv=0 session=18 score=1.0000
+[2026-06-10 19:06:46] score model=minimax conv=0 session=19 delta_items=14
+[2026-06-10 19:06:54] done model=minimax conv=0 session=19 score=1.0000
+[2026-06-10 19:06:54] score model=minimax conv=1 session=1 delta_items=16
+[2026-06-10 19:07:04] done model=minimax conv=1 session=1 score=1.0000
+[2026-06-10 19:07:04] score model=minimax conv=1 session=2 delta_items=10
+[2026-06-10 19:07:14] done model=minimax conv=1 session=2 score=1.0000
+[2026-06-10 19:07:14] score model=minimax conv=1 session=3 delta_items=8
+[2026-06-10 19:07:24] done model=minimax conv=1 session=3 score=1.0000
+[2026-06-10 19:07:24] score model=minimax conv=1 session=4 delta_items=5
+[2026-06-10 19:07:32] done model=minimax conv=1 session=4 score=1.0000
+[2026-06-10 19:07:32] score model=minimax conv=1 session=5 delta_items=13
+[2026-06-10 19:07:44] done model=minimax conv=1 session=5 score=1.0000
+[2026-06-10 19:07:44] score model=minimax conv=1 session=6 delta_items=4
+[2026-06-10 19:07:56] done model=minimax conv=1 session=6 score=1.0000
+[2026-06-10 19:07:56] score model=minimax conv=1 session=7 delta_items=5
+[2026-06-10 19:08:05] done model=minimax conv=1 session=7 score=1.0000
+[2026-06-10 19:08:05] score model=minimax conv=1 session=8 delta_items=26
+[2026-06-10 19:08:14] done model=minimax conv=1 session=8 score=1.0000
+[2026-06-10 19:08:14] score model=minimax conv=1 session=9 delta_items=15
+[2026-06-10 19:08:22] done model=minimax conv=1 session=9 score=1.0000
+[2026-06-10 19:08:22] score model=minimax conv=1 session=10 delta_items=16
+[2026-06-10 19:08:30] done model=minimax conv=1 session=10 score=1.0000
+[2026-06-10 19:08:30] score model=minimax conv=1 session=11 delta_items=9
+[2026-06-10 19:08:41] done model=minimax conv=1 session=11 score=1.0000
+[2026-06-10 19:08:41] score model=minimax conv=1 session=12 delta_items=16
+[2026-06-10 19:08:51] done model=minimax conv=1 session=12 score=1.0000
+[2026-06-10 19:08:51] score model=minimax conv=1 session=13 delta_items=12
+[2026-06-10 19:09:01] done model=minimax conv=1 session=13 score=1.0000
+[2026-06-10 19:09:01] score model=minimax conv=1 session=14 delta_items=16
+[2026-06-10 19:09:12] done model=minimax conv=1 session=14 score=1.0000
+[2026-06-10 19:09:12] score model=minimax conv=1 session=15 delta_items=8
+[2026-06-10 19:09:19] done model=minimax conv=1 session=15 score=1.0000
+[2026-06-10 19:09:19] score model=minimax conv=1 session=16 delta_items=10
+[2026-06-10 19:09:29] done model=minimax conv=1 session=16 score=1.0000
+[2026-06-10 19:09:29] score model=minimax conv=1 session=17 delta_items=13
+[2026-06-10 19:09:44] done model=minimax conv=1 session=17 score=0.7778
+[2026-06-10 19:09:44] score model=minimax conv=1 session=18 delta_items=11
+[2026-06-10 19:10:01] done model=minimax conv=1 session=18 score=1.0000
+[2026-06-10 19:10:01] score model=minimax conv=1 session=19 delta_items=8
+[2026-06-10 19:10:26] done model=minimax conv=1 session=19 score=1.0000
+[2026-06-10 19:10:26] final_score=0.9942
+[2026-06-10 19:10:26] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\session_delta_rubrics_20260610_190253
+[2026-06-10 20:15:08] run_name=session_delta_rubrics_20260610_190253
+[2026-06-10 20:15:08] evaluator_model=Qwen/Qwen3-14B
+[2026-06-10 20:15:08] resume_completed_sessions=38
+[2026-06-10 20:15:08] targets=['minimax']
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=1 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=2 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=3 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=4 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=5 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=6 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=7 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=8 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=9 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=10 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=11 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=12 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=13 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=14 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=15 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=16 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=17 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=18 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=0 session=19 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=1 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=2 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=3 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=4 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=5 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=6 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=7 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=8 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=9 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=10 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=11 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=12 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=13 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=14 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=15 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=16 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=17 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=18 (already completed)
+[2026-06-10 20:15:08] skip model=minimax conv=1 session=19 (already completed)
+[2026-06-10 20:15:08] final_score=0.9942
+[2026-06-10 20:15:08] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\session_delta_rubrics_20260610_190253

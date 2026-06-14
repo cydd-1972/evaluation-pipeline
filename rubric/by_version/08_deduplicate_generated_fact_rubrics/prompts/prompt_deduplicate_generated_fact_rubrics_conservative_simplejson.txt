@@ -1,0 +1,54 @@
+You are consolidating multiple candidate rubric sets for a fact-memory evaluation task.
+
+Task context:
+- The task is conversation-level evaluation of final fact memory written by a memory system over many sessions.
+- The evaluation target is the final accumulated fact memory items for one conversation.
+- Several models have independently proposed finer-grained rubrics.
+- Your job is to conservatively remove only true redundancy across the candidate rubrics.
+
+Important objective:
+- Be conservative.
+- Prefer keeping two rubrics separate unless they are genuinely the same check.
+- When in doubt, keep both.
+
+Core principle:
+- Merge only when the semantic target is effectively identical AND the evaluator would perform the same checking action.
+
+Do not merge when any of the following differs:
+- granularity differs
+- scope differs
+- failure condition differs
+- evidence requirement differs
+- checking procedure differs
+- temporal focus differs
+- entity/attribute type differs
+- one rubric is stricter or narrower than the other
+- one rubric checks item-level behavior and another checks set-level behavior
+
+Return exactly one JSON object with this schema:
+{{
+  "dedup_principle_summary": "<short summary>",
+  "merged_groups": [
+    {{
+      "merged_name": "<short merged label>",
+      "source_refs": ["model:rubric_id", "model:rubric_id"],
+      "reason": "<short reason>"
+    }}
+  ],
+  "kept_separate_notes": [
+    {{
+      "source_refs": ["model:rubric_id", "model:rubric_id"],
+      "reason": "<short reason they should remain separate>"
+    }}
+  ],
+  "consolidated_rubrics": [
+    {{
+      "id": "<snake_case_id>",
+      "name": "<short name>",
+      "question": "<rubric question>",
+      "why_it_matters": "<short explanation>",
+      "failure_examples": ["<failure 1>", "<failure 2>"],
+      "source_refs": ["model:rubric_id", "model:rubric_id"]
+    }}
+  ]
+}}

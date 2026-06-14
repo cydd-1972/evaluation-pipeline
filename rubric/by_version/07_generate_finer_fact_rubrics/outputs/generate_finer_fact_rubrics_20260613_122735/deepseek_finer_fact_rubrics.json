@@ -1,0 +1,191 @@
+{
+  "generator_model_id": "deepseek",
+  "generator_model_name": "deepseek-v4-flash",
+  "api_base": "https://api.deepseek.com",
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_generate_finer_fact_rubrics.txt",
+  "baseline_rubric_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\rubrics\\conversation_fact_rubrics_continuous.json",
+  "result": {
+    "task_summary": "Evaluate final fact memory items from a multi-session conversation for factual accuracy, sourceability, temporal correctness, atomicity, non-redundancy, coverage, conciseness, and structural consistency.",
+    "design_rationale": "The baseline rubrics were refined by splitting broad criteria into more specific, directly judgeable sub-criteria. For example, 'fact_sourceability' was split into explicit textual support and correct attribution. 'fact_temporal_correctness' was split into tense consistency and plan/event distinction. 'fact_atomicity' was split into single-fact focus and no bundling. 'fact_nonredundancy' was split into exact duplicates and near-duplicates. 'fact_coverage' was split into key entity coverage and key event coverage. 'fact_conciseness' was split into verbosity and irrelevant details. 'fact_structural_consistency' was split into format consistency and field completeness. New rubrics were added for hallucination, contradiction, and pronoun clarity. The goal is to make each rubric narrow, operational, and evaluable from the conversation and memory items alone.",
+    "rubrics": [
+      {
+        "id": "explicit_textual_support",
+        "name": "Explicit Textual Support",
+        "question": "Does every fact memory item have a direct, explicit textual span in the conversation that supports it?",
+        "why_it_matters": "Ensures facts are grounded and not fabricated.",
+        "failure_examples": [
+          "Memory item states 'Alice likes cats' but conversation never mentions cats.",
+          "Memory item says 'Bob is 30 years old' but conversation only says 'Bob is in his thirties'."
+        ]
+      },
+      {
+        "id": "correct_attribution",
+        "name": "Correct Attribution",
+        "question": "Are facts correctly attributed to the right speaker or entity mentioned in the conversation?",
+        "why_it_matters": "Prevents mixing up who said or did what.",
+        "failure_examples": [
+          "Memory item says 'Alice is moving to New York' but conversation shows Bob is moving.",
+          "Memory item attributes a quote to Charlie when it was actually said by Dana."
+        ]
+      },
+      {
+        "id": "no_hallucination",
+        "name": "No Hallucination",
+        "question": "Are there any fact memory items that contain information not present or implied in the conversation?",
+        "why_it_matters": "Hallucinations introduce false information.",
+        "failure_examples": [
+          "Memory item says 'Eve has a PhD' but conversation never mentions education.",
+          "Memory item says 'Frank is married' but conversation only mentions his girlfriend."
+        ]
+      },
+      {
+        "id": "tense_consistency",
+        "name": "Tense Consistency",
+        "question": "Do fact memory items use the correct tense (past, present, future) as indicated by the conversation?",
+        "why_it_matters": "Temporal errors misrepresent the timeline.",
+        "failure_examples": [
+          "Memory item says 'Grace is living in Chicago' but conversation says she moved away.",
+          "Memory item says 'Henry will buy a car' but conversation says he already bought it."
+        ]
+      },
+      {
+        "id": "plan_vs_event_distinction",
+        "name": "Plan vs Event Distinction",
+        "question": "Are future plans, intentions, or hypotheticals clearly distinguished from completed events?",
+        "why_it_matters": "Prevents treating plans as facts.",
+        "failure_examples": [
+          "Memory item says 'Ivy is going to Paris' as a fact when conversation says she is planning a trip.",
+          "Memory item says 'Jack is learning Spanish' but conversation says he wants to learn."
+        ]
+      },
+      {
+        "id": "single_fact_focus",
+        "name": "Single Fact Focus",
+        "question": "Does each memory item contain exactly one atomic fact, not multiple distinct facts?",
+        "why_it_matters": "Atomicity improves reusability and clarity.",
+        "failure_examples": [
+          "Memory item 'Kate is 25 and works at Google' bundles age and employer.",
+          "Memory item 'Leo likes hiking and skiing' bundles two hobbies."
+        ]
+      },
+      {
+        "id": "no_bundling_of_unrelated_facts",
+        "name": "No Bundling of Unrelated Facts",
+        "question": "Are facts that are not directly related kept in separate memory items?",
+        "why_it_matters": "Prevents confusing combinations.",
+        "failure_examples": [
+          "Memory item 'Mia is allergic to peanuts and her birthday is in June' combines unrelated facts.",
+          "Memory item 'Noah is a doctor and his car is red'."
+        ]
+      },
+      {
+        "id": "no_exact_duplicates",
+        "name": "No Exact Duplicates",
+        "question": "Are there no two memory items that are identical in content?",
+        "why_it_matters": "Redundancy wastes space and causes confusion.",
+        "failure_examples": [
+          "Two items both say 'Olivia has a dog named Max'.",
+          "Two items both say 'Peter is from Canada'."
+        ]
+      },
+      {
+        "id": "no_near_duplicates",
+        "name": "No Near Duplicates",
+        "question": "Are there no memory items that convey the same fact with slightly different wording?",
+        "why_it_matters": "Near-duplicates are redundant and may cause inconsistency.",
+        "failure_examples": [
+          "Item A: 'Quinn is a vegetarian.' Item B: 'Quinn does not eat meat.'",
+          "Item A: 'Rachel's phone number is 555-1234.' Item B: 'Rachel can be reached at 555-1234.'"
+        ]
+      },
+      {
+        "id": "key_entity_coverage",
+        "name": "Key Entity Coverage",
+        "question": "Are all key entities (people, places, organizations) mentioned in the conversation represented in the memory items with their essential attributes?",
+        "why_it_matters": "Missing entities lead to incomplete memory.",
+        "failure_examples": [
+          "Conversation introduces 'Sam' as a main character but memory has no item about Sam.",
+          "Conversation mentions 'Company X' but memory omits it."
+        ]
+      },
+      {
+        "id": "key_event_coverage",
+        "name": "Key Event Coverage",
+        "question": "Are all significant events, changes, or decisions from the conversation captured in the memory items?",
+        "why_it_matters": "Missing events cause loss of important information.",
+        "failure_examples": [
+          "Conversation discusses a job change but memory does not record it.",
+          "Conversation mentions a move to a new city but memory omits it."
+        ]
+      },
+      {
+        "id": "no_verbosity",
+        "name": "No Verbosity",
+        "question": "Are memory items free of unnecessary words, explanations, or commentary beyond the core fact?",
+        "why_it_matters": "Verbose items are harder to parse and reuse.",
+        "failure_examples": [
+          "Memory item 'Tina is a very talented artist who loves painting landscapes' could be 'Tina is an artist'.",
+          "Memory item 'Ulysses enjoys reading books, especially science fiction novels' could be 'Ulysses enjoys reading'."
+        ]
+      },
+      {
+        "id": "no_irrelevant_details",
+        "name": "No Irrelevant Details",
+        "question": "Do memory items avoid including details that are not relevant to the fact or not memory-worthy?",
+        "why_it_matters": "Irrelevant details clutter memory.",
+        "failure_examples": [
+          "Memory item 'Victor is 35 years old and his favorite color is blue' includes favorite color if not relevant.",
+          "Memory item 'Wendy works at a bank and she had a sandwich for lunch' includes lunch detail."
+        ]
+      },
+      {
+        "id": "consistent_format",
+        "name": "Consistent Format",
+        "question": "Do all memory items follow a consistent syntactic structure (e.g., subject-verb-object, consistent use of articles)?",
+        "why_it_matters": "Consistency aids parsing and retrieval.",
+        "failure_examples": [
+          "Some items use 'X is Y' and others use 'Y is X'.",
+          "Some items include articles ('the', 'a') while others omit them inconsistently."
+        ]
+      },
+      {
+        "id": "complete_fields",
+        "name": "Complete Fields",
+        "question": "If the memory schema expects certain fields (e.g., subject, relation, object), are all fields present and non-empty?",
+        "why_it_matters": "Missing fields break structure.",
+        "failure_examples": [
+          "Memory item 'Xavier likes' missing object.",
+          "Memory item 'Yvonne' with no relation or object."
+        ]
+      },
+      {
+        "id": "no_contradiction",
+        "name": "No Contradiction",
+        "question": "Are there no two memory items that directly contradict each other?",
+        "why_it_matters": "Contradictions make memory unreliable.",
+        "failure_examples": [
+          "Item A: 'Zoe is 30.' Item B: 'Zoe is 35.'",
+          "Item A: 'Adam lives in Boston.' Item B: 'Adam lives in New York.'"
+        ]
+      },
+      {
+        "id": "pronoun_clarity",
+        "name": "Pronoun Clarity",
+        "question": "Are pronouns in memory items resolved to specific entities rather than left ambiguous?",
+        "why_it_matters": "Ambiguous pronouns cause confusion.",
+        "failure_examples": [
+          "Memory item 'He is a doctor' without specifying who 'he' is.",
+          "Memory item 'She likes cats' without antecedent."
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "model": "deepseek-v4-flash",
+    "attempt_index": 0,
+    "response_format": "json_object",
+    "raw_text": "{\n  \"task_summary\": \"Evaluate final fact memory items from a multi-session conversation for factual accuracy, sourceability, temporal correctness, atomicity, non-redundancy, coverage, conciseness, and structural consistency.\",\n  \"design_rationale\": \"The baseline rubrics were refined by splitting broad criteria into more specific, directly judgeable sub-criteria. For example, 'fact_sourceability' was split into explicit textual support and correct attribution. 'fact_temporal_correctness' was split into tense consistency and plan/event distinction. 'fact_atomicity' was split into single-fact focus and no bundling. 'fact_nonredundancy' was split into exact duplicates and near-duplicates. 'fact_coverage' was split into key entity coverage and key event coverage. 'fact_conciseness' was split into verbosity and irrelevant details. 'fact_structural_consistency' was split into format consistency and field completeness. New rubrics were added for hallucination, contradiction, and pronoun clarity. The goal is to make each rubric narrow, operational, and evaluable from the conversation and memory items alone.\",\n  \"rubrics\": [\n    {\n      \"id\": \"explicit_textual_support\",\n      \"name\": \"Explicit Textual Support\",\n      \"question\": \"Does every fact memory item have a direct, explicit textual span in the conversation that supports it?\",\n      \"why_it_matters\": \"Ensures facts are grounded and not fabricated.\",\n      \"failure_examples\": [\"Memory item states 'Alice likes cats' but conversation never mentions cats.\", \"Memory item says 'Bob is 30 years old' but conversation only says 'Bob is in his thirties'.\"]\n    },\n    {\n      \"id\": \"correct_attribution\",\n      \"name\": \"Correct Attribution\",\n      \"question\": \"Are facts correctly attributed to the right speaker or entity mentioned in the conversation?\",\n      \"why_it_matters\": \"Prevents mixing up who said or did what.\",\n      \"failure_examples\": [\"Memory item says 'Alice is moving to New York' but conversation shows Bob is moving.\", \"Memory item attributes a quote to Charlie when it was actually said by Dana.\"]\n    },\n    {\n      \"id\": \"no_hallucination\",\n      \"name\": \"No Hallucination\",\n      \"question\": \"Are there any fact memory items that contain information not present or implied in the conversation?\",\n      \"why_it_matters\": \"Hallucinations introduce false information.\",\n      \"failure_examples\": [\"Memory item says 'Eve has a PhD' but conversation never mentions education.\", \"Memory item says 'Frank is married' but conversation only mentions his girlfriend.\"]\n    },\n    {\n      \"id\": \"tense_consistency\",\n      \"name\": \"Tense Consistency\",\n      \"question\": \"Do fact memory items use the correct tense (past, present, future) as indicated by the conversation?\",\n      \"why_it_matters\": \"Temporal errors misrepresent the timeline.\",\n      \"failure_examples\": [\"Memory item says 'Grace is living in Chicago' but conversation says she moved away.\", \"Memory item says 'Henry will buy a car' but conversation says he already bought it.\"]\n    },\n    {\n      \"id\": \"plan_vs_event_distinction\",\n      \"name\": \"Plan vs Event Distinction\",\n      \"question\": \"Are future plans, intentions, or hypotheticals clearly distinguished from completed events?\",\n      \"why_it_matters\": \"Prevents treating plans as facts.\",\n      \"failure_examples\": [\"Memory item says 'Ivy is going to Paris' as a fact when conversation says she is planning a trip.\", \"Memory item says 'Jack is learning Spanish' but conversation says he wants to learn.\"]\n    },\n    {\n      \"id\": \"single_fact_focus\",\n      \"name\": \"Single Fact Focus\",\n      \"question\": \"Does each memory item contain exactly one atomic fact, not multiple distinct facts?\",\n      \"why_it_matters\": \"Atomicity improves reusability and clarity.\",\n      \"failure_examples\": [\"Memory item 'Kate is 25 and works at Google' bundles age and employer.\", \"Memory item 'Leo likes hiking and skiing' bundles two hobbies.\"]\n    },\n    {\n      \"id\": \"no_bundling_of_unrelated_facts\",\n      \"name\": \"No Bundling of Unrelated Facts\",\n      \"question\": \"Are facts that are not directly related kept in separate memory items?\",\n      \"why_it_matters\": \"Prevents confusing combinations.\",\n      \"failure_examples\": [\"Memory item 'Mia is allergic to peanuts and her birthday is in June' combines unrelated facts.\", \"Memory item 'Noah is a doctor and his car is red'.\"]\n    },\n    {\n      \"id\": \"no_exact_duplicates\",\n      \"name\": \"No Exact Duplicates\",\n      \"question\": \"Are there no two memory items that are identical in content?\",\n      \"why_it_matters\": \"Redundancy wastes space and causes confusion.\",\n      \"failure_examples\": [\"Two items both say 'Olivia has a dog named Max'.\", \"Two items both say 'Peter is from Canada'.\"]\n    },\n    {\n      \"id\": \"no_near_duplicates\",\n      \"name\": \"No Near Duplicates\",\n      \"question\": \"Are there no memory items that convey the same fact with slightly different wording?\",\n      \"why_it_matters\": \"Near-duplicates are redundant and may cause inconsistency.\",\n      \"failure_examples\": [\"Item A: 'Quinn is a vegetarian.' Item B: 'Quinn does not eat meat.'\", \"Item A: 'Rachel's phone number is 555-1234.' Item B: 'Rachel can be reached at 555-1234.'\"]\n    },\n    {\n      \"id\": \"key_entity_coverage\",\n      \"name\": \"Key Entity Coverage\",\n      \"question\": \"Are all key entities (people, places, organizations) mentioned in the conversation represented in the memory items with their essential attributes?\",\n      \"why_it_matters\": \"Missing entities lead to incomplete memory.\",\n      \"failure_examples\": [\"Conversation introduces 'Sam' as a main character but memory has no item about Sam.\", \"Conversation mentions 'Company X' but memory omits it.\"]\n    },\n    {\n      \"id\": \"key_event_coverage\",\n      \"name\": \"Key Event Coverage\",\n      \"question\": \"Are all significant events, changes, or decisions from the conversation captured in the memory items?\",\n      \"why_it_matters\": \"Missing events cause loss of important information.\",\n      \"failure_examples\": [\"Conversation discusses a job change but memory does not record it.\", \"Conversation mentions a move to a new city but memory omits it.\"]\n    },\n    {\n      \"id\": \"no_verbosity\",\n      \"name\": \"No Verbosity\",\n      \"question\": \"Are memory items free of unnecessary words, explanations, or commentary beyond the core fact?\",\n      \"why_it_matters\": \"Verbose items are harder to parse and reuse.\",\n      \"failure_examples\": [\"Memory item 'Tina is a very talented artist who loves painting landscapes' could be 'Tina is an artist'.\", \"Memory item 'Ulysses enjoys reading books, especially science fiction novels' could be 'Ulysses enjoys reading'.\"]\n    },\n    {\n      \"id\": \"no_irrelevant_details\",\n      \"name\": \"No Irrelevant Details\",\n      \"question\": \"Do memory items avoid including details that are not relevant to the fact or not memory-worthy?\",\n      \"why_it_matters\": \"Irrelevant details clutter memory.\",\n      \"failure_examples\": [\"Memory item 'Victor is 35 years old and his favorite color is blue' includes favorite color if not relevant.\", \"Memory item 'Wendy works at a bank and she had a sandwich for lunch' includes lunch detail.\"]\n    },\n    {\n      \"id\": \"consistent_format\",\n      \"name\": \"Consistent Format\",\n      \"question\": \"Do all memory items follow a consistent syntactic structure (e.g., subject-verb-object, consistent use of articles)?\",\n      \"why_it_matters\": \"Consistency aids parsing and retrieval.\",\n      \"failure_examples\": [\"Some items use 'X is Y' and others use 'Y is X'.\", \"Some items include articles ('the', 'a') while others omit them inconsistently.\"]\n    },\n    {\n      \"id\": \"complete_fields\",\n      \"name\": \"Complete Fields\",\n      \"question\": \"If the memory schema expects certain fields (e.g., subject, relation, object), are all fields present and non-empty?\",\n      \"why_it_matters\": \"Missing fields break structure.\",\n      \"failure_examples\": [\"Memory item 'Xavier likes' missing object.\", \"Memory item 'Yvonne' with no relation or object.\"]\n    },\n    {\n      \"id\": \"no_contradiction\",\n      \"name\": \"No Contradiction\",\n      \"question\": \"Are there no two memory items that directly contradict each other?\",\n      \"why_it_matters\": \"Contradictions make memory unreliable.\",\n      \"failure_examples\": [\"Item A: 'Zoe is 30.' Item B: 'Zoe is 35.'\", \"Item A: 'Adam lives in Boston.' Item B: 'Adam lives in New York.'\"]\n    },\n    {\n      \"id\": \"pronoun_clarity\",\n      \"name\": \"Pronoun Clarity\",\n      \"question\": \"Are pronouns in memory items resolved to specific entities rather than left ambiguous?\",\n      \"why_it_matters\": \"Ambiguous pronouns cause confusion.\",\n      \"failure_examples\": [\"Memory item 'He is a doctor' without specifying who 'he' is.\", \"Memory item 'She likes cats' without antecedent.\"]\n    }\n  ]\n}",
+    "required_key": "rubrics",
+    "required_key_attempt_index": 0
+  }
+}

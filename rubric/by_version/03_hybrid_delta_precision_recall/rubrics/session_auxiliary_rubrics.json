@@ -1,0 +1,17 @@
+[
+  {
+    "id": "no_internal_contradiction",
+    "name": "No Internal Contradiction",
+    "question": "Do the delta items avoid clear contradictions within the set and against the provided context?"
+  },
+  {
+    "id": "good_plan_state_capture",
+    "name": "Good Plan And State Capture",
+    "question": "Does the delta set adequately capture important plans, goals, intentions, or meaningful state changes from the current session?"
+  },
+  {
+    "id": "good_overall_compactness",
+    "name": "Good Overall Compactness",
+    "question": "Is the overall delta set reasonably compact rather than bloated with repeated or low-value items?"
+  }
+]

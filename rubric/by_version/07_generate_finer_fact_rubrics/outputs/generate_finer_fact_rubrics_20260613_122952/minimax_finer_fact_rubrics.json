@@ -1,0 +1,221 @@
+{
+  "generator_model_id": "minimax",
+  "generator_model_name": "MiniMax-M2.7",
+  "api_base": "https://api.minimaxi.com/v1",
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_generate_finer_fact_rubrics.txt",
+  "baseline_rubric_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\rubrics\\conversation_fact_rubrics_continuous.json",
+  "result": {
+    "task_summary": "Evaluating a multi-session conversation-level memory writing system that incrementally accumulates fact memory items over time, with the goal of producing a final, reusable fact memory set that accurately and comprehensively captures factual content from the entire conversation without errors, redundancy, or structural inconsistency.",
+    "design_rationale": "The baseline rubric set was refined by decomposing broad criteria into specific, judgeable properties. Sourceability was split into explicit textual grounding versus inference/hallucination. Factual correctness was separated into entity consistency, attribute accuracy, relationship accuracy, and event accuracy. Temporal correctness was separated into temporal status accuracy versus temporal value accuracy. Atomicity, redundancy, and coverage were made more granular to target specific failure modes. Structural consistency was decomposed into field naming, temporal format, referent consistency, and verb tense consistency. Each rubric targets one narrow property that can be judged by comparing the final memory items directly against the conversation text without external knowledge or tools.",
+    "rubrics": [
+      {
+        "id": "explicit_textual_grounding",
+        "name": "Explicit Textual Grounding",
+        "question": "Does every memory item have direct textual support in the conversation? For each fact in a memory item, is there an explicit statement or direct quotation in the conversation that supports it?",
+        "why_it_matters": "Memory items must be traceable to the source conversation. If items contain inferred or hallucinated content, downstream use will be unreliable.",
+        "failure_examples": [
+          "Memory item states 'Alice is stressed about the deadline' but the conversation only mentions she 'has a lot of work' with no mention of stress",
+          "Memory item adds the specific date 'March 15' when the conversation only says 'next week'"
+        ]
+      },
+      {
+        "id": "inference_boundary",
+        "name": "Inference Boundary Compliance",
+        "question": "Does the memory item avoid making inferences that go beyond what is stated? Specifically, does it avoid inferring internal states, causation, or character traits that were not explicitly stated?",
+        "why_it_matters": "While some inference is necessary, crossing into unsupported psychological attribution or causal reasoning distorts the source and misleads future users.",
+        "failure_examples": [
+          "Memory item states 'Alice was frustrated because her manager was demanding' when the conversation only shows the manager made a request with no emotional attribution",
+          "Memory item states 'Bob decided to quit his job due to burnout' when the conversation only mentions he 'has been tired lately'"
+        ]
+      },
+      {
+        "id": "entity_name_consistency",
+        "name": "Entity Name Consistency",
+        "question": "Are entity names used consistently throughout the memory items? When the conversation refers to the same person or place using different forms (full name, first name, nickname, pronoun), are these correctly unified to a single consistent referent?",
+        "why_it_matters": "Inconsistent naming creates ambiguity about which entity is being referred to and can cause confusion in downstream retrieval.",
+        "failure_examples": [
+          "Memory item uses 'Robert' in one item and 'Bob' in another to refer to the same person without noting they are the same",
+          "Memory item uses 'the company' in one item and 'Acme Corp' in another without establishing they refer to the same entity"
+        ]
+      },
+      {
+        "id": "entity_attribute_accuracy",
+        "name": "Entity Attribute Accuracy",
+        "question": "Are the attributes assigned to entities (person, place, object) accurate according to the conversation? Does the memory item avoid assigning wrong characteristics like incorrect names, wrong physical descriptions, or incorrect roles?",
+        "why_it_matters": "Wrong attributes about entities are factual errors that corrupt the memory and will cause incorrect answers in downstream tasks.",
+        "failure_examples": [
+          "Memory item states 'Alice has brown hair' when the conversation explicitly states 'she dyed her hair red last month'",
+          "Memory item states 'Bob is a software engineer' when the conversation describes him as a product manager"
+        ]
+      },
+      {
+        "id": "relationship_accuracy",
+        "name": "Relationship Accuracy",
+        "question": "Are the relationships between entities accurate according to the conversation? Does the memory avoid misrepresenting familial, professional, or social relationships?",
+        "why_it_matters": "Relationship errors can fundamentally misrepresent the social structure and context of the conversation.",
+        "failure_examples": [
+          "Memory item states 'Carol is David's wife' when the conversation establishes Carol as David's sister",
+          "Memory item states 'Alice works for Bob' when the conversation shows they are both employed by the same company with no direct reporting relationship"
+        ]
+      },
+      {
+        "id": "event_detail_accuracy",
+        "name": "Event Detail Accuracy",
+        "question": "Are the details of events (what happened, where, when, who did what) accurate according to the conversation? Does the memory item avoid changing locations, outcomes, or participant roles?",
+        "why_it_matters": "Event detail errors corrupt the factual record and will lead to incorrect responses in downstream recall tasks.",
+        "failure_examples": [
+          "Memory item states 'Alice presented the Q3 report to the team' when the conversation shows Bob presented while Alice asked questions",
+          "Memory item states 'the meeting was held in Conference Room B' when the conversation specifies Conference Room A"
+        ]
+      },
+      {
+        "id": "temporal_status_accuracy",
+        "name": "Temporal Status Accuracy",
+        "question": "Does the memory item correctly represent the temporal status of information? Specifically, are future plans distinguished from past completed events, and current states correctly labeled as current?",
+        "why_it_matters": "Representing future intentions as past facts or vice versa fundamentally misrepresents reality and will cause downstream reasoning errors.",
+        "failure_examples": [
+          "Memory item states 'Alice will travel to New York next week' as a past-tense statement when it is a future plan",
+          "Memory item states 'Bob lives in Seattle' when the conversation reveals he moved to Portland last month"
+        ]
+      },
+      {
+        "id": "temporal_value_accuracy",
+        "name": "Temporal Value Accuracy",
+        "question": "Are the specific temporal values (dates, times, durations, sequences) accurate according to the conversation? Does the memory item avoid assigning wrong time periods or incorrect sequences?",
+        "why_it_matters": "Wrong temporal values make the memory temporally unreliable and can cause failures in time-based reasoning.",
+        "failure_examples": [
+          "Memory item states 'the event happened in June' when the conversation specifies 'last January'",
+          "Memory item reverses sequence by stating 'Alice resigned then Bob was hired' when the conversation shows Bob was hired first"
+        ]
+      },
+      {
+        "id": "bundling_unity",
+        "name": "Bundling Unity",
+        "question": "Does each memory item contain a single coherent fact rather than bundling multiple unrelated facts together? Specifically, are facts about different entities, different attributes of the same entity, or different time periods kept separate?",
+        "why_it_matters": "Bundled facts are harder to retrieve precisely, create update anomalies, and make it unclear whether each sub-fact is independently supported.",
+        "failure_examples": [
+          "Memory item combines 'Alice lives in Seattle, works at TechCorp, and prefers coffee' into one item instead of three separate items",
+          "Memory item combines 'Bob was born in 1990 and Alice was born in 1988' into one item"
+        ]
+      },
+      {
+        "id": "exact_duplicate_absence",
+        "name": "Exact Duplicate Absence",
+        "question": "Does the memory set avoid containing two or more items that state the exact same fact? Are there no repeated memory items with identical content?",
+        "why_it_matters": "Exact duplicates waste storage, cause confusion in retrieval, and indicate a failure in the writing process.",
+        "failure_examples": [
+          "Two items both state 'Alice is the project lead' with identical wording",
+          "Two items both state 'The meeting is scheduled for 2pm Thursday' with identical wording"
+        ]
+      },
+      {
+        "id": "near_duplicate_absence",
+        "name": "Near-Duplicate Absence",
+        "question": "Does the memory set avoid containing items that are slight variations of the same fact? Are there no items that restate the same information using different words or slightly different framing?",
+        "why_it_matters": "Near-duplicates indicate inefficiency and create ambiguity about which item represents the canonical fact.",
+        "failure_examples": [
+          "One item states 'Bob is a senior engineer' and another states 'Bob works as a senior software engineer'",
+          "One item states 'Alice lives in Boston' and another states 'Alice's city of residence is Boston'"
+        ]
+      },
+      {
+        "id": "entity_presence",
+        "name": "Entity Presence",
+        "question": "Does the memory set include information about all entities that appear in the conversation? Are persons, places, organizations, and objects with names or distinct identities represented in the memory?",
+        "why_it_matters": "Missing entities creates gaps in the memory that will cause failures when questions require that entity's information.",
+        "failure_examples": [
+          "Conversation mentions 'Carol from the marketing team' but no memory item contains any information about Carol",
+          "Conversation involves a specific project named 'Project Phoenix' but no memory item references it"
+        ]
+      },
+      {
+        "id": "attribute_presence",
+        "name": "Attribute Presence",
+        "question": "Does the memory set include the key attributes of entities that are mentioned in the conversation? For each major entity, are notable attributes (role, location, preferences, state) captured?",
+        "why_it_matters": "Missing attributes for entities makes the memory incomplete and insufficient for detailed downstream queries.",
+        "failure_examples": [
+          "Conversation mentions 'Bob, the team lead' but no memory item captures his role as team lead",
+          "Conversation states 'Alice prefers working remotely' but no memory item records her work preference"
+        ]
+      },
+      {
+        "id": "event_presence",
+        "name": "Event Presence",
+        "question": "Does the memory set include the key events and actions that occurred in the conversation? Are notable actions, decisions, and occurrences recorded?",
+        "why_it_matters": "Missing events means the memory does not capture the important happenings from the conversation.",
+        "failure_examples": [
+          "Conversation describes 'the team decided to delay the launch by two weeks' but no memory item records this decision",
+          "Conversation mentions 'Alice presented the quarterly results' but no memory item captures this event"
+        ]
+      },
+      {
+        "id": "relationship_presence",
+        "name": "Relationship Presence",
+        "question": "Does the memory set include the key relationships between entities that are mentioned in the conversation? Are notable connections, affiliations, and interpersonal relationships captured?",
+        "why_it_matters": "Missing relationships leaves the memory structurally incomplete and unable to support relational queries.",
+        "failure_examples": [
+          "Conversation states 'Carol manages the engineering team' but no memory item records this reporting relationship",
+          "Conversation mentions 'Alice and Bob have collaborated on three projects' but no memory item captures their collaborative history"
+        ]
+      },
+      {
+        "id": "plan_status_presence",
+        "name": "Plan and Status Presence",
+        "question": "Does the memory set capture plans, intentions, and scheduled items mentioned in the conversation? Are future-oriented statements and their temporal markers preserved?",
+        "why_it_matters": "Plans and intentions are memory-worthy content. Missing them loses future-oriented information critical for proactive assistance.",
+        "failure_examples": [
+          "Conversation states 'Alice will follow up on Monday' but no memory item records this plan",
+          "Conversation mentions 'the system upgrade is scheduled for this weekend' but no memory item captures the scheduled upgrade"
+        ]
+      },
+      {
+        "id": "field_naming_consistency",
+        "name": "Field Naming Consistency",
+        "question": "Do memory items use consistent field names or structural patterns for equivalent types of information? For example, are entity identifiers consistently named across items?",
+        "why_it_matters": "Inconsistent field names make the memory schema unpredictable and harder to query reliably.",
+        "failure_examples": [
+          "One item uses 'subject: Alice' and another uses 'person: Alice' for the same semantic field",
+          "One item uses 'date: 2024-01-15' and another uses 'when: January 15, 2024' for dates"
+        ]
+      },
+      {
+        "id": "referent_form_consistency",
+        "name": "Referent Form Consistency",
+        "question": "Does each memory item use a consistent form of referring to entities throughout the item? Are there no mixed references like 'Alice' then 'she' then 'Dr. Smith' within the same item?",
+        "why_it_matters": "Mixed referent forms within an item create ambiguity about which entity is being discussed.",
+        "failure_examples": [
+          "Item starts with 'Alice' then shifts to 'Dr. Smith' within the same sentence without establishing they are the same person",
+          "Item uses 'the company', 'Acme Corp', and 'it' interchangeably without clear referent tracking"
+        ]
+      },
+      {
+        "id": "temporal_format_consistency",
+        "name": "Temporal Format Consistency",
+        "question": "Does the memory set use consistent formats for representing temporal information? For example, are dates formatted consistently and are relative times converted consistently?",
+        "why_it_matters": "Inconsistent temporal formats make it hard to compare time across items and can cause parsing errors in automated processing.",
+        "failure_examples": [
+          "One item uses 'January 15, 2024' and another uses '15/01/2024' for dates",
+          "One item uses 'last Monday' and another uses the specific date '2024-01-15' for the same temporal reference"
+        ]
+      },
+      {
+        "id": "concision_per_item",
+        "name": "Concision Per Item",
+        "question": "Is each memory item concise and free of unnecessary elaboration? Does the item contain only the fact itself without verbose context or filler that does not add factual value?",
+        "why_it_matters": "Verbose items waste storage and make retrieval noisy. Concise items are faster to process and less likely to contain distracting information.",
+        "failure_examples": [
+          "Item states 'Alice told Bob during the meeting which lasted for two hours and was attended by seven people that she would send the document' instead of 'Alice will send the document to Bob'",
+          "Item includes three sentences of backstory about how a decision was reached when only the decision itself is memory-worthy"
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "model": "MiniMax-M2.7",
+    "attempt_index": 0,
+    "response_format": "json_object",
+    "raw_text": "{\"task_summary\": \"Evaluating a multi-session conversation-level memory writing system that incrementally accumulates fact memory items over time, with the goal of producing a final, reusable fact memory set that accurately and comprehensively captures factual content from the entire conversation without errors, redundancy, or structural inconsistency.\", \"design_rationale\": \"The baseline rubric set was refined by decomposing broad criteria into specific, judgeable properties. Sourceability was split into explicit textual grounding versus inference/hallucination. Factual correctness was separated into entity consistency, attribute accuracy, relationship accuracy, and event accuracy. Temporal correctness was separated into temporal status accuracy versus temporal value accuracy. Atomicity, redundancy, and coverage were made more granular to target specific failure modes. Structural consistency was decomposed into field naming, temporal format, referent consistency, and verb tense consistency. Each rubric targets one narrow property that can be judged by comparing the final memory items directly against the conversation text without external knowledge or tools.\", \"rubrics\": [{\"id\": \"explicit_textual_grounding\", \"name\": \"Explicit Textual Grounding\", \"question\": \"Does every memory item have direct textual support in the conversation? For each fact in a memory item, is there an explicit statement or direct quotation in the conversation that supports it?\", \"why_it_matters\": \"Memory items must be traceable to the source conversation. If items contain inferred or hallucinated content, downstream use will be unreliable.\", \"failure_examples\": [\"Memory item states 'Alice is stressed about the deadline' but the conversation only mentions she 'has a lot of work' with no mention of stress\", \"Memory item adds the specific date 'March 15' when the conversation only says 'next week'\"]}, {\"id\": \"inference_boundary\", \"name\": \"Inference Boundary Compliance\", \"question\": \"Does the memory item avoid making inferences that go beyond what is stated? Specifically, does it avoid inferring internal states, causation, or character traits that were not explicitly stated?\", \"why_it_matters\": \"While some inference is necessary, crossing into unsupported psychological attribution or causal reasoning distorts the source and misleads future users.\", \"failure_examples\": [\"Memory item states 'Alice was frustrated because her manager was demanding' when the conversation only shows the manager made a request with no emotional attribution\", \"Memory item states 'Bob decided to quit his job due to burnout' when the conversation only mentions he 'has been tired lately'\"]}, {\"id\": \"entity_name_consistency\", \"name\": \"Entity Name Consistency\", \"question\": \"Are entity names used consistently throughout the memory items? When the conversation refers to the same person or place using different forms (full name, first name, nickname, pronoun), are these correctly unified to a single consistent referent?\", \"why_it_matters\": \"Inconsistent naming creates ambiguity about which entity is being referred to and can cause confusion in downstream retrieval.\", \"failure_examples\": [\"Memory item uses 'Robert' in one item and 'Bob' in another to refer to the same person without noting they are the same\", \"Memory item uses 'the company' in one item and 'Acme Corp' in another without establishing they refer to the same entity\"]}, {\"id\": \"entity_attribute_accuracy\", \"name\": \"Entity Attribute Accuracy\", \"question\": \"Are the attributes assigned to entities (person, place, object) accurate according to the conversation? Does the memory item avoid assigning wrong characteristics like incorrect names, wrong physical descriptions, or incorrect roles?\", \"why_it_matters\": \"Wrong attributes about entities are factual errors that corrupt the memory and will cause incorrect answers in downstream tasks.\", \"failure_examples\": [\"Memory item states 'Alice has brown hair' when the conversation explicitly states 'she dyed her hair red last month'\", \"Memory item states 'Bob is a software engineer' when the conversation describes him as a product manager\"]}, {\"id\": \"relationship_accuracy\", \"name\": \"Relationship Accuracy\", \"question\": \"Are the relationships between entities accurate according to the conversation? Does the memory avoid misrepresenting familial, professional, or social relationships?\", \"why_it_matters\": \"Relationship errors can fundamentally misrepresent the social structure and context of the conversation.\", \"failure_examples\": [\"Memory item states 'Carol is David's wife' when the conversation establishes Carol as David's sister\", \"Memory item states 'Alice works for Bob' when the conversation shows they are both employed by the same company with no direct reporting relationship\"]}, {\"id\": \"event_detail_accuracy\", \"name\": \"Event Detail Accuracy\", \"question\": \"Are the details of events (what happened, where, when, who did what) accurate according to the conversation? Does the memory item avoid changing locations, outcomes, or participant roles?\", \"why_it_matters\": \"Event detail errors corrupt the factual record and will lead to incorrect responses in downstream recall tasks.\", \"failure_examples\": [\"Memory item states 'Alice presented the Q3 report to the team' when the conversation shows Bob presented while Alice asked questions\", \"Memory item states 'the meeting was held in Conference Room B' when the conversation specifies Conference Room A\"]}, {\"id\": \"temporal_status_accuracy\", \"name\": \"Temporal Status Accuracy\", \"question\": \"Does the memory item correctly represent the temporal status of information? Specifically, are future plans distinguished from past completed events, and current states correctly labeled as current?\", \"why_it_matters\": \"Representing future intentions as past facts or vice versa fundamentally misrepresents reality and will cause downstream reasoning errors.\", \"failure_examples\": [\"Memory item states 'Alice will travel to New York next week' as a past-tense statement when it is a future plan\", \"Memory item states 'Bob lives in Seattle' when the conversation reveals he moved to Portland last month\"]}, {\"id\": \"temporal_value_accuracy\", \"name\": \"Temporal Value Accuracy\", \"question\": \"Are the specific temporal values (dates, times, durations, sequences) accurate according to the conversation? Does the memory item avoid assigning wrong time periods or incorrect sequences?\", \"why_it_matters\": \"Wrong temporal values make the memory temporally unreliable and can cause failures in time-based reasoning.\", \"failure_examples\": [\"Memory item states 'the event happened in June' when the conversation specifies 'last January'\", \"Memory item reverses sequence by stating 'Alice resigned then Bob was hired' when the conversation shows Bob was hired first\"]}, {\"id\": \"bundling_unity\", \"name\": \"Bundling Unity\", \"question\": \"Does each memory item contain a single coherent fact rather than bundling multiple unrelated facts together? Specifically, are facts about different entities, different attributes of the same entity, or different time periods kept separate?\", \"why_it_matters\": \"Bundled facts are harder to retrieve precisely, create update anomalies, and make it unclear whether each sub-fact is independently supported.\", \"failure_examples\": [\"Memory item combines 'Alice lives in Seattle, works at TechCorp, and prefers coffee' into one item instead of three separate items\", \"Memory item combines 'Bob was born in 1990 and Alice was born in 1988' into one item\"]}, {\"id\": \"exact_duplicate_absence\", \"name\": \"Exact Duplicate Absence\", \"question\": \"Does the memory set avoid containing two or more items that state the exact same fact? Are there no repeated memory items with identical content?\", \"why_it_matters\": \"Exact duplicates waste storage, cause confusion in retrieval, and indicate a failure in the writing process.\", \"failure_examples\": [\"Two items both state 'Alice is the project lead' with identical wording\", \"Two items both state 'The meeting is scheduled for 2pm Thursday' with identical wording\"]}, {\"id\": \"near_duplicate_absence\", \"name\": \"Near-Duplicate Absence\", \"question\": \"Does the memory set avoid containing items that are slight variations of the same fact? Are there no items that restate the same information using different words or slightly different framing?\", \"why_it_matters\": \"Near-duplicates indicate inefficiency and create ambiguity about which item represents the canonical fact.\", \"failure_examples\": [\"One item states 'Bob is a senior engineer' and another states 'Bob works as a senior software engineer'\", \"One item states 'Alice lives in Boston' and another states 'Alice's city of residence is Boston'\"]}, {\"id\": \"entity_presence\", \"name\": \"Entity Presence\", \"question\": \"Does the memory set include information about all entities that appear in the conversation? Are persons, places, organizations, and objects with names or distinct identities represented in the memory?\", \"why_it_matters\": \"Missing entities creates gaps in the memory that will cause failures when questions require that entity's information.\", \"failure_examples\": [\"Conversation mentions 'Carol from the marketing team' but no memory item contains any information about Carol\", \"Conversation involves a specific project named 'Project Phoenix' but no memory item references it\"]}, {\"id\": \"attribute_presence\", \"name\": \"Attribute Presence\", \"question\": \"Does the memory set include the key attributes of entities that are mentioned in the conversation? For each major entity, are notable attributes (role, location, preferences, state) captured?\", \"why_it_matters\": \"Missing attributes for entities makes the memory incomplete and insufficient for detailed downstream queries.\", \"failure_examples\": [\"Conversation mentions 'Bob, the team lead' but no memory item captures his role as team lead\", \"Conversation states 'Alice prefers working remotely' but no memory item records her work preference\"]}, {\"id\": \"event_presence\", \"name\": \"Event Presence\", \"question\": \"Does the memory set include the key events and actions that occurred in the conversation? Are notable actions, decisions, and occurrences recorded?\", \"why_it_matters\": \"Missing events means the memory does not capture the important happenings from the conversation.\", \"failure_examples\": [\"Conversation describes 'the team decided to delay the launch by two weeks' but no memory item records this decision\", \"Conversation mentions 'Alice presented the quarterly results' but no memory item captures this event\"]}, {\"id\": \"relationship_presence\", \"name\": \"Relationship Presence\", \"question\": \"Does the memory set include the key relationships between entities that are mentioned in the conversation? Are notable connections, affiliations, and interpersonal relationships captured?\", \"why_it_matters\": \"Missing relationships leaves the memory structurally incomplete and unable to support relational queries.\", \"failure_examples\": [\"Conversation states 'Carol manages the engineering team' but no memory item records this reporting relationship\", \"Conversation mentions 'Alice and Bob have collaborated on three projects' but no memory item captures their collaborative history\"]}, {\"id\": \"plan_status_presence\", \"name\": \"Plan and Status Presence\", \"question\": \"Does the memory set capture plans, intentions, and scheduled items mentioned in the conversation? Are future-oriented statements and their temporal markers preserved?\", \"why_it_matters\": \"Plans and intentions are memory-worthy content. Missing them loses future-oriented information critical for proactive assistance.\", \"failure_examples\": [\"Conversation states 'Alice will follow up on Monday' but no memory item records this plan\", \"Conversation mentions 'the system upgrade is scheduled for this weekend' but no memory item captures the scheduled upgrade\"]}, {\"id\": \"field_naming_consistency\", \"name\": \"Field Naming Consistency\", \"question\": \"Do memory items use consistent field names or structural patterns for equivalent types of information? For example, are entity identifiers consistently named across items?\", \"why_it_matters\": \"Inconsistent field names make the memory schema unpredictable and harder to query reliably.\", \"failure_examples\": [\"One item uses 'subject: Alice' and another uses 'person: Alice' for the same semantic field\", \"One item uses 'date: 2024-01-15' and another uses 'when: January 15, 2024' for dates\"]}, {\"id\": \"referent_form_consistency\", \"name\": \"Referent Form Consistency\", \"question\": \"Does each memory item use a consistent form of referring to entities throughout the item? Are there no mixed references like 'Alice' then 'she' then 'Dr. Smith' within the same item?\", \"why_it_matters\": \"Mixed referent forms within an item create ambiguity about which entity is being discussed.\", \"failure_examples\": [\"Item starts with 'Alice' then shifts to 'Dr. Smith' within the same sentence without establishing they are the same person\", \"Item uses 'the company', 'Acme Corp', and 'it' interchangeably without clear referent tracking\"]}, {\"id\": \"temporal_format_consistency\", \"name\": \"Temporal Format Consistency\", \"question\": \"Does the memory set use consistent formats for representing temporal information? For example, are dates formatted consistently and are relative times converted consistently?\", \"why_it_matters\": \"Inconsistent temporal formats make it hard to compare time across items and can cause parsing errors in automated processing.\", \"failure_examples\": [\"One item uses 'January 15, 2024' and another uses '15/01/2024' for dates\", \"One item uses 'last Monday' and another uses the specific date '2024-01-15' for the same temporal reference\"]}, {\"id\": \"concision_per_item\", \"name\": \"Concision Per Item\", \"question\": \"Is each memory item concise and free of unnecessary elaboration? Does the item contain only the fact itself without verbose context or filler that does not add factual value?\", \"why_it_matters\": \"Verbose items waste storage and make retrieval noisy. Concise items are faster to process and less likely to contain distracting information.\", \"failure_examples\": [\"Item states 'Alice told Bob during the meeting which lasted for two hours and was attended by seven people that she would send the document' instead of 'Alice will send the document to Bob'\", \"Item includes three sentences of backstory about how a decision was reached when only the decision itself is memory-worthy\"]}]}",
+    "required_key": "rubrics",
+    "required_key_attempt_index": 0
+  }
+}

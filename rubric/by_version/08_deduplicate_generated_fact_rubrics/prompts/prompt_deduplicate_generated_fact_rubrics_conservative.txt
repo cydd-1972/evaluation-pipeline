@@ -1,0 +1,93 @@
+You are consolidating multiple candidate rubric sets for a fact-memory evaluation task.
+
+Task context:
+- The task is conversation-level evaluation of final fact memory written by a memory system over many sessions.
+- The evaluation target is the final accumulated fact memory items for one conversation.
+- Several models have independently proposed finer-grained rubrics.
+- Your job is not to invent a brand-new framework from scratch.
+- Your job is to conservatively remove only true redundancy across the candidate rubrics.
+
+Important objective:
+- Be conservative.
+- Prefer keeping two rubrics separate unless they are genuinely the same check.
+- When in doubt, keep both.
+
+Core principle:
+- Merge only when the semantic target is effectively identical AND the evaluator would perform the same checking action.
+
+Do not merge when any of the following differs:
+- granularity differs
+- scope differs
+- failure condition differs
+- evidence requirement differs
+- checking procedure differs
+- temporal focus differs
+- entity/attribute type differs
+- one rubric is stricter or narrower than the other
+- one rubric checks item-level behavior and another checks set-level behavior
+
+Examples of differences that usually mean "keep separate":
+- unsupported fact vs weakly implied fact
+- wrong speaker attribution vs wrong relationship attribution
+- past/current/future confusion vs missing time anchor
+- duplicate fact wording vs duplicate semantic content across items
+- bundled unrelated facts vs bundled closely related subfacts
+- omission of important facts vs overcompression of details
+
+Merge only if all of these hold:
+- same evaluation intent
+- same unit of judgment
+- same kind of evidence needed
+- same kind of failure being detected
+- same practical checking action by the evaluator
+
+If two rubrics are mergeable:
+- keep the clearer, more professional, more operational wording
+- preserve the stricter failure boundary if both are otherwise equivalent
+- if metadata such as priority or weight conflicts, keep the higher one
+
+Your job:
+- Read the multiple candidate rubric sets.
+- Group only truly redundant rubrics.
+- Produce one consolidated rubric list with redundancy reduced conservatively.
+- Also document which original rubrics were merged, and why.
+- If two rubrics are close but not identical, keep both and explicitly say they were not merged.
+
+Output requirements:
+- The consolidated set should still be fine-grained and diagnostic.
+- Do not over-compress the rubric list.
+- Preserve important distinctions even if wording overlaps.
+- Prefer operational wording that another evaluator model could apply directly.
+
+Return exactly one JSON object with this schema:
+{{
+  "dedup_principle_summary": "<short summary of the conservative merge policy>",
+  "merge_decisions": [
+    {{
+      "decision": "merged" | "kept_separate",
+      "source_items": [
+        {{
+          "model": "<source model>",
+          "rubric_id": "<source rubric id>",
+          "rubric_name": "<source rubric name>"
+        }}
+      ],
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "consolidated_rubrics": [
+    {{
+      "id": "<snake_case_id>",
+      "name": "<short name>",
+      "question": "<rubric question>",
+      "why_it_matters": "<short explanation>",
+      "failure_examples": ["<failure 1>", "<failure 2>"],
+      "source_trace": [
+        {{
+          "model": "<source model>",
+          "rubric_id": "<source rubric id>"
+        }}
+      ]
+    }}
+  ]
+}}

@@ -1,0 +1,592 @@
+{
+  "run_name": "deduplicate_generated_fact_rubrics_20260613_124743",
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_deduplicate_generated_fact_rubrics_conservative.txt",
+  "input_files": {
+    "gemini": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122735\\gemini_finer_fact_rubrics.json",
+    "deepseek": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122735\\deepseek_finer_fact_rubrics.json",
+    "minimax": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122952\\minimax_finer_fact_rubrics.json"
+  },
+  "result": {
+    "dedup_principle_summary": "Only merge rubrics if they share identical evaluation intent, unit of judgment, evidence requirements, failure conditions, and checking procedures. Prefer keeping separate if there is any difference in granularity, scope, or operational focus.",
+    "merge_decisions": [
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "grounding_verifiability",
+            "rubric_name": "Grounding Verifiability"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "explicit_textual_support",
+            "rubric_name": "Explicit Textual Support"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "explicit_textual_grounding",
+            "rubric_name": "Explicit Textual Grounding"
+          }
+        ],
+        "reason": "All three rubrics check whether memory items are grounded in explicit conversation text and avoid hallucinations. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "entity_attribution_accuracy",
+            "rubric_name": "Entity Attribution Accuracy"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "correct_attribution",
+            "rubric_name": "Correct Attribution"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "entity_name_consistency",
+            "rubric_name": "Entity Name Consistency"
+          }
+        ],
+        "reason": "All three rubrics ensure that entities are correctly attributed and consistently named. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "temporal_state_precision",
+            "rubric_name": "Temporal State Precision"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "tense_consistency",
+            "rubric_name": "Tense Consistency"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "plan_vs_event_distinction",
+            "rubric_name": "Plan vs Event Distinction"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "temporal_status_accuracy",
+            "rubric_name": "Temporal Status Accuracy"
+          }
+        ],
+        "reason": "These rubrics all address temporal correctness, ensuring that events, plans, and current states are represented with the correct tense and distinction. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "fact_atomicity",
+            "rubric_name": "Fact Atomicity"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "single_fact_focus",
+            "rubric_name": "Single Fact Focus"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "bundling_unity",
+            "rubric_name": "Bundling Unity"
+          }
+        ],
+        "reason": "All three rubrics ensure that each memory item contains a single atomic fact and avoids bundling unrelated information. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "redundancy_check",
+            "rubric_name": "Redundancy Check"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_exact_duplicates",
+            "rubric_name": "No Exact Duplicates"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_near_duplicates",
+            "rubric_name": "No Near Duplicates"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "exact_duplicate_absence",
+            "rubric_name": "Exact Duplicate Absence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "near_duplicate_absence",
+            "rubric_name": "Near-Duplicate Absence"
+          }
+        ],
+        "reason": "These rubrics all address the issue of redundancy, including exact and near duplicates. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "information_completeness",
+            "rubric_name": "Information Completeness"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "entity_presence",
+            "rubric_name": "Entity Presence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "attribute_presence",
+            "rubric_name": "Attribute Presence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "event_presence",
+            "rubric_name": "Event Presence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "relationship_presence",
+            "rubric_name": "Relationship Presence"
+          }
+        ],
+        "reason": "These rubrics all ensure that memory items are complete and capture all relevant entities, attributes, events, and relationships. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "conciseness_and_noise",
+            "rubric_name": "Conciseness and Noise"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_verbosity",
+            "rubric_name": "No Verbosity"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_irrelevant_details",
+            "rubric_name": "No Irrelevant Details"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "concision_per_item",
+            "rubric_name": "Concision Per Item"
+          }
+        ],
+        "reason": "These rubrics all ensure that memory items are concise, free of noise, and contain only relevant information. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "deepseek",
+            "rubric_id": "consistent_format",
+            "rubric_name": "Consistent Format"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "field_naming_consistency",
+            "rubric_name": "Field Naming Consistency"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "referent_form_consistency",
+            "rubric_name": "Referent Form Consistency"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "temporal_format_consistency",
+            "rubric_name": "Temporal Format Consistency"
+          }
+        ],
+        "reason": "These rubrics all ensure that memory items follow a consistent format, including field naming, referent forms, and temporal formats. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "merged",
+        "source_items": [
+          {
+            "model": "gemini",
+            "rubric_id": "contradiction_avoidance",
+            "rubric_name": "Contradiction Avoidance"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "no_contradiction",
+            "rubric_name": "No Contradiction"
+          }
+        ],
+        "reason": "Both rubrics ensure that the memory set does not contain mutually exclusive facts. They share the same evaluation intent, failure conditions, and checking procedures."
+      },
+      {
+        "decision": "kept_separate",
+        "source_items": [
+          {
+            "model": "minimax",
+            "rubric_id": "inference_boundary",
+            "rubric_name": "Inference Boundary Compliance"
+          }
+        ],
+        "reason": "This rubric focuses on avoiding unsupported inferences about internal states or causation, which is a more specific and narrower check than the others. It is not redundant with any other rubric."
+      },
+      {
+        "decision": "kept_separate",
+        "source_items": [
+          {
+            "model": "deepseek",
+            "rubric_id": "no_hallucination",
+            "rubric_name": "No Hallucination"
+          }
+        ],
+        "reason": "This rubric explicitly checks for hallucinations, which is a more specific failure mode than the general grounding checks. It is not redundant with any other rubric."
+      },
+      {
+        "decision": "kept_separate",
+        "source_items": [
+          {
+            "model": "minimax",
+            "rubric_id": "plan_status_presence",
+            "rubric_name": "Plan and Status Presence"
+          }
+        ],
+        "reason": "This rubric focuses on capturing plans and intentions, which is a more specific and narrower check than the general temporal or event checks. It is not redundant with any other rubric."
+      },
+      {
+        "decision": "kept_separate",
+        "source_items": [
+          {
+            "model": "minimax",
+            "rubric_id": "relationship_accuracy",
+            "rubric_name": "Relationship Accuracy"
+          }
+        ],
+        "reason": "This rubric focuses on the accuracy of relationships between entities, which is a more specific and narrower check than the general entity or event checks. It is not redundant with any other rubric."
+      }
+    ],
+    "consolidated_rubrics": [
+      {
+        "id": "explicit_textual_grounding",
+        "name": "Explicit Textual Grounding",
+        "question": "Can every claim in the memory item be directly mapped to a specific utterance or segment in the conversation history?",
+        "why_it_matters": "Prevents hallucination and ensures the memory is based on actual user input.",
+        "failure_examples": [
+          "Memory item contains details not mentioned in the text",
+          "Memory item infers a preference the user never explicitly stated"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "grounding_verifiability"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "explicit_textual_support"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "explicit_textual_grounding"
+          }
+        ]
+      },
+      {
+        "id": "entity_attribution_accuracy",
+        "name": "Entity Attribution Accuracy",
+        "question": "Are attributes, preferences, and actions correctly assigned to the specific speaker or entity they belong to?",
+        "why_it_matters": "Prevents cross-talk errors where the model confuses the user's traits with the assistant's or another participant's.",
+        "failure_examples": [
+          "Assigning the user's dietary restriction to the assistant",
+          "Confusing two different people mentioned in the conversation"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "entity_attribution_accuracy"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "correct_attribution"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "entity_name_consistency"
+          }
+        ]
+      },
+      {
+        "id": "temporal_correctness",
+        "name": "Temporal Correctness",
+        "question": "Does the memory item correctly distinguish between past events, current states, and future intentions?",
+        "why_it_matters": "Ensures the model does not treat a past preference as a current one or a future plan as a completed action.",
+        "failure_examples": [
+          "Stating a planned trip as a completed event",
+          "Retaining an outdated address after the user provided a new one"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "temporal_state_precision"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "tense_consistency"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "plan_vs_event_distinction"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "temporal_status_accuracy"
+          }
+        ]
+      },
+      {
+        "id": "fact_atomicity",
+        "name": "Fact Atomicity",
+        "question": "Does each memory item contain exactly one distinct, independent fact?",
+        "why_it_matters": "Atomic facts are easier to update, delete, or retrieve without side effects.",
+        "failure_examples": [
+          "Combining a user's job title and their favorite color in one item",
+          "Bundling a list of three unrelated hobbies into a single entry"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "fact_atomicity"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "single_fact_focus"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "bundling_unity"
+          }
+        ]
+      },
+      {
+        "id": "redundancy_check",
+        "name": "Redundancy Check",
+        "question": "Is the information in this item unique, or is it already covered by another existing memory item?",
+        "why_it_matters": "Redundancy bloats the memory store and increases the risk of conflicting information.",
+        "failure_examples": [
+          "Two items stating the same fact with slightly different wording",
+          "A general item that is entirely contained within a more specific item"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "redundancy_check"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_exact_duplicates"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_near_duplicates"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "exact_duplicate_absence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "near_duplicate_absence"
+          }
+        ]
+      },
+      {
+        "id": "information_completeness",
+        "name": "Information Completeness",
+        "question": "Does the memory item capture the full context necessary to understand the fact without needing the original conversation?",
+        "why_it_matters": "Ensures the memory is self-contained and useful for future sessions.",
+        "failure_examples": [
+          "Storing 'He likes it' without specifying who 'he' is or what 'it' refers to",
+          "Storing a date without the associated event"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "information_completeness"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "entity_presence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "attribute_presence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "event_presence"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "relationship_presence"
+          }
+        ]
+      },
+      {
+        "id": "conciseness_and_noise",
+        "name": "Conciseness and Noise",
+        "question": "Is the memory item free of conversational filler, meta-commentary, or low-value adjectives?",
+        "why_it_matters": "Reduces token usage and improves the signal-to-noise ratio for retrieval.",
+        "failure_examples": [
+          "Including 'The user mentioned that...' in the memory item",
+          "Using flowery language to describe a simple fact"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "conciseness_and_noise"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_verbosity"
+          },
+          {
+            "model": "deepseek",
+            "rubric_id": "no_irrelevant_details"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "concision_per_item"
+          }
+        ]
+      },
+      {
+        "id": "structural_uniformity",
+        "name": "Structural Uniformity",
+        "question": "Does the memory item follow a consistent format (e.g., subject-predicate-object or key-value) across the entire set?",
+        "why_it_matters": "Consistent structure allows for programmatic filtering and better retrieval performance.",
+        "failure_examples": [
+          "Mixing full sentences with bulleted lists",
+          "Inconsistent casing or naming conventions for categories"
+        ],
+        "source_trace": [
+          {
+            "model": "deepseek",
+            "rubric_id": "consistent_format"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "field_naming_consistency"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "referent_form_consistency"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "temporal_format_consistency"
+          }
+        ]
+      },
+      {
+        "id": "contradiction_avoidance",
+        "name": "Contradiction Avoidance",
+        "question": "Does the memory set contain any mutually exclusive facts?",
+        "why_it_matters": "Contradictions render the memory store unreliable for decision-making.",
+        "failure_examples": [
+          "One item saying the user is vegan, another saying they love steak",
+          "Conflicting location data for the same entity"
+        ],
+        "source_trace": [
+          {
+            "model": "gemini",
+            "rubric_id": "contradiction_avoidance"
+          },
+          {
+            "model": "minimax",
+            "rubric_id": "no_contradiction"
+          }
+        ]
+      },
+      {
+        "id": "inference_boundary_compliance",
+        "name": "Inference Boundary Compliance",
+        "question": "Does the memory item avoid making inferences that go beyond what is stated? Specifically, does it avoid inferring internal states, causation, or character traits that were not explicitly stated?",
+        "why_it_matters": "While some inference is necessary, crossing into unsupported psychological attribution or causal reasoning distorts the source and misleads future users.",
+        "failure_examples": [
+          "Memory item states 'Alice was frustrated because her manager was demanding' when the conversation only shows the manager made a request with no emotional attribution",
+          "Memory item states 'Bob decided to quit his job due to burnout' when the conversation only mentions he 'has been tired lately'"
+        ],
+        "source_trace": [
+          {
+            "model": "minimax",
+            "rubric_id": "inference_boundary"
+          }
+        ]
+      },
+      {
+        "id": "no_hallucination",
+        "name": "No Hallucination",
+        "question": "Are there any fact memory items that contain information not present or implied in the conversation?",
+        "why_it_matters": "Hallucinations introduce false information.",
+        "failure_examples": [
+          "Memory item says 'Eve has a PhD' but conversation never mentions education.",
+          "Memory item says 'Frank is married' but conversation only mentions his girlfriend."
+        ],
+        "source_trace": [
+          {
+            "model": "deepseek",
+            "rubric_id": "no_hallucination"
+          }
+        ]
+      },
+      {
+        "id": "plan_status_presence",
+        "name": "Plan and Status Presence",
+        "question": "Does the memory set capture plans, intentions, and scheduled items mentioned in the conversation? Are future-oriented statements and their temporal markers preserved?",
+        "why_it_matters": "Plans and intentions are memory-worthy content. Missing them loses future-oriented information critical for proactive assistance.",
+        "failure_examples": [
+          "Conversation states 'Alice will follow up on Monday' but no memory item records this plan",
+          "Conversation mentions 'the system upgrade is scheduled for this weekend' but no memory item captures the scheduled upgrade"
+        ],
+        "source_trace": [
+          {
+            "model": "minimax",
+            "rubric_id": "plan_status_presence"
+          }
+        ]
+      },
+      {
+        "id": "relationship_accuracy",
+        "name": "Relationship Accuracy",
+        "question": "Are the relationships between entities accurate according to the conversation? Does the memory avoid misrepresenting familial, professional, or social relationships?",
+        "why_it_matters": "Relationship errors can fundamentally misrepresent the social structure and context of the conversation.",
+        "failure_examples": [
+          "Memory item states 'Carol is David's wife' when the conversation establishes Carol as David's sister",
+          "Memory item states 'Alice works for Bob' when the conversation shows they are both employed by the same company with no direct reporting relationship"
+        ],
+        "source_trace": [
+          {
+            "model": "minimax",
+            "rubric_id": "relationship_accuracy"
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "model": "Qwen/Qwen3-14B",
+    "attempt_index": 0,
+    "response_format": "json_object",
+    "raw_text": "{\n  \"dedup_principle_summary\": \"Only merge rubrics if they share identical evaluation intent, unit of judgment, evidence requirements, failure conditions, and checking procedures. Prefer keeping separate if there is any difference in granularity, scope, or operational focus.\",\n  \"merge_decisions\": [\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"grounding_verifiability\",\n          \"rubric_name\": \"Grounding Verifiability\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"explicit_textual_support\",\n          \"rubric_name\": \"Explicit Textual Support\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"explicit_textual_grounding\",\n          \"rubric_name\": \"Explicit Textual Grounding\"\n        }\n      ],\n      \"reason\": \"All three rubrics check whether memory items are grounded in explicit conversation text and avoid hallucinations. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"entity_attribution_accuracy\",\n          \"rubric_name\": \"Entity Attribution Accuracy\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"correct_attribution\",\n          \"rubric_name\": \"Correct Attribution\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"entity_name_consistency\",\n          \"rubric_name\": \"Entity Name Consistency\"\n        }\n      ],\n      \"reason\": \"All three rubrics ensure that entities are correctly attributed and consistently named. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"temporal_state_precision\",\n          \"rubric_name\": \"Temporal State Precision\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"tense_consistency\",\n          \"rubric_name\": \"Tense Consistency\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"plan_vs_event_distinction\",\n          \"rubric_name\": \"Plan vs Event Distinction\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"temporal_status_accuracy\",\n          \"rubric_name\": \"Temporal Status Accuracy\"\n        }\n      ],\n      \"reason\": \"These rubrics all address temporal correctness, ensuring that events, plans, and current states are represented with the correct tense and distinction. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"fact_atomicity\",\n          \"rubric_name\": \"Fact Atomicity\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"single_fact_focus\",\n          \"rubric_name\": \"Single Fact Focus\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"bundling_unity\",\n          \"rubric_name\": \"Bundling Unity\"\n        }\n      ],\n      \"reason\": \"All three rubrics ensure that each memory item contains a single atomic fact and avoids bundling unrelated information. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"redundancy_check\",\n          \"rubric_name\": \"Redundancy Check\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_exact_duplicates\",\n          \"rubric_name\": \"No Exact Duplicates\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_near_duplicates\",\n          \"rubric_name\": \"No Near Duplicates\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"exact_duplicate_absence\",\n          \"rubric_name\": \"Exact Duplicate Absence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"near_duplicate_absence\",\n          \"rubric_name\": \"Near-Duplicate Absence\"\n        }\n      ],\n      \"reason\": \"These rubrics all address the issue of redundancy, including exact and near duplicates. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"information_completeness\",\n          \"rubric_name\": \"Information Completeness\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"entity_presence\",\n          \"rubric_name\": \"Entity Presence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"attribute_presence\",\n          \"rubric_name\": \"Attribute Presence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"event_presence\",\n          \"rubric_name\": \"Event Presence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"relationship_presence\",\n          \"rubric_name\": \"Relationship Presence\"\n        }\n      ],\n      \"reason\": \"These rubrics all ensure that memory items are complete and capture all relevant entities, attributes, events, and relationships. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"conciseness_and_noise\",\n          \"rubric_name\": \"Conciseness and Noise\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_verbosity\",\n          \"rubric_name\": \"No Verbosity\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_irrelevant_details\",\n          \"rubric_name\": \"No Irrelevant Details\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"concision_per_item\",\n          \"rubric_name\": \"Concision Per Item\"\n        }\n      ],\n      \"reason\": \"These rubrics all ensure that memory items are concise, free of noise, and contain only relevant information. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"consistent_format\",\n          \"rubric_name\": \"Consistent Format\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"field_naming_consistency\",\n          \"rubric_name\": \"Field Naming Consistency\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"referent_form_consistency\",\n          \"rubric_name\": \"Referent Form Consistency\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"temporal_format_consistency\",\n          \"rubric_name\": \"Temporal Format Consistency\"\n        }\n      ],\n      \"reason\": \"These rubrics all ensure that memory items follow a consistent format, including field naming, referent forms, and temporal formats. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"merged\",\n      \"source_items\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"contradiction_avoidance\",\n          \"rubric_name\": \"Contradiction Avoidance\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"no_contradiction\",\n          \"rubric_name\": \"No Contradiction\"\n        }\n      ],\n      \"reason\": \"Both rubrics ensure that the memory set does not contain mutually exclusive facts. They share the same evaluation intent, failure conditions, and checking procedures.\"\n    },\n    {\n      \"decision\": \"kept_separate\",\n      \"source_items\": [\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"inference_boundary\",\n          \"rubric_name\": \"Inference Boundary Compliance\"\n        }\n      ],\n      \"reason\": \"This rubric focuses on avoiding unsupported inferences about internal states or causation, which is a more specific and narrower check than the others. It is not redundant with any other rubric.\"\n    },\n    {\n      \"decision\": \"kept_separate\",\n      \"source_items\": [\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_hallucination\",\n          \"rubric_name\": \"No Hallucination\"\n        }\n      ],\n      \"reason\": \"This rubric explicitly checks for hallucinations, which is a more specific failure mode than the general grounding checks. It is not redundant with any other rubric.\"\n    },\n    {\n      \"decision\": \"kept_separate\",\n      \"source_items\": [\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"plan_status_presence\",\n          \"rubric_name\": \"Plan and Status Presence\"\n        }\n      ],\n      \"reason\": \"This rubric focuses on capturing plans and intentions, which is a more specific and narrower check than the general temporal or event checks. It is not redundant with any other rubric.\"\n    },\n    {\n      \"decision\": \"kept_separate\",\n      \"source_items\": [\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"relationship_accuracy\",\n          \"rubric_name\": \"Relationship Accuracy\"\n        }\n      ],\n      \"reason\": \"This rubric focuses on the accuracy of relationships between entities, which is a more specific and narrower check than the general entity or event checks. It is not redundant with any other rubric.\"\n    }\n  ],\n  \"consolidated_rubrics\": [\n    {\n      \"id\": \"explicit_textual_grounding\",\n      \"name\": \"Explicit Textual Grounding\",\n      \"question\": \"Can every claim in the memory item be directly mapped to a specific utterance or segment in the conversation history?\",\n      \"why_it_matters\": \"Prevents hallucination and ensures the memory is based on actual user input.\",\n      \"failure_examples\": [\n        \"Memory item contains details not mentioned in the text\",\n        \"Memory item infers a preference the user never explicitly stated\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"grounding_verifiability\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"explicit_textual_support\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"explicit_textual_grounding\"\n        }\n      ]\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"name\": \"Entity Attribution Accuracy\",\n      \"question\": \"Are attributes, preferences, and actions correctly assigned to the specific speaker or entity they belong to?\",\n      \"why_it_matters\": \"Prevents cross-talk errors where the model confuses the user's traits with the assistant's or another participant's.\",\n      \"failure_examples\": [\n        \"Assigning the user's dietary restriction to the assistant\",\n        \"Confusing two different people mentioned in the conversation\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"entity_attribution_accuracy\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"correct_attribution\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"entity_name_consistency\"\n        }\n      ]\n    },\n    {\n      \"id\": \"temporal_correctness\",\n      \"name\": \"Temporal Correctness\",\n      \"question\": \"Does the memory item correctly distinguish between past events, current states, and future intentions?\",\n      \"why_it_matters\": \"Ensures the model does not treat a past preference as a current one or a future plan as a completed action.\",\n      \"failure_examples\": [\n        \"Stating a planned trip as a completed event\",\n        \"Retaining an outdated address after the user provided a new one\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"temporal_state_precision\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"tense_consistency\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"plan_vs_event_distinction\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"temporal_status_accuracy\"\n        }\n      ]\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"name\": \"Fact Atomicity\",\n      \"question\": \"Does each memory item contain exactly one distinct, independent fact?\",\n      \"why_it_matters\": \"Atomic facts are easier to update, delete, or retrieve without side effects.\",\n      \"failure_examples\": [\n        \"Combining a user's job title and their favorite color in one item\",\n        \"Bundling a list of three unrelated hobbies into a single entry\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"fact_atomicity\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"single_fact_focus\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"bundling_unity\"\n        }\n      ]\n    },\n    {\n      \"id\": \"redundancy_check\",\n      \"name\": \"Redundancy Check\",\n      \"question\": \"Is the information in this item unique, or is it already covered by another existing memory item?\",\n      \"why_it_matters\": \"Redundancy bloats the memory store and increases the risk of conflicting information.\",\n      \"failure_examples\": [\n        \"Two items stating the same fact with slightly different wording\",\n        \"A general item that is entirely contained within a more specific item\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"redundancy_check\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_exact_duplicates\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_near_duplicates\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"exact_duplicate_absence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"near_duplicate_absence\"\n        }\n      ]\n    },\n    {\n      \"id\": \"information_completeness\",\n      \"name\": \"Information Completeness\",\n      \"question\": \"Does the memory item capture the full context necessary to understand the fact without needing the original conversation?\",\n      \"why_it_matters\": \"Ensures the memory is self-contained and useful for future sessions.\",\n      \"failure_examples\": [\n        \"Storing 'He likes it' without specifying who 'he' is or what 'it' refers to\",\n        \"Storing a date without the associated event\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"information_completeness\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"entity_presence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"attribute_presence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"event_presence\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"relationship_presence\"\n        }\n      ]\n    },\n    {\n      \"id\": \"conciseness_and_noise\",\n      \"name\": \"Conciseness and Noise\",\n      \"question\": \"Is the memory item free of conversational filler, meta-commentary, or low-value adjectives?\",\n      \"why_it_matters\": \"Reduces token usage and improves the signal-to-noise ratio for retrieval.\",\n      \"failure_examples\": [\n        \"Including 'The user mentioned that...' in the memory item\",\n        \"Using flowery language to describe a simple fact\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"conciseness_and_noise\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_verbosity\"\n        },\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_irrelevant_details\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"concision_per_item\"\n        }\n      ]\n    },\n    {\n      \"id\": \"structural_uniformity\",\n      \"name\": \"Structural Uniformity\",\n      \"question\": \"Does the memory item follow a consistent format (e.g., subject-predicate-object or key-value) across the entire set?\",\n      \"why_it_matters\": \"Consistent structure allows for programmatic filtering and better retrieval performance.\",\n      \"failure_examples\": [\n        \"Mixing full sentences with bulleted lists\",\n        \"Inconsistent casing or naming conventions for categories\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"consistent_format\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"field_naming_consistency\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"referent_form_consistency\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"temporal_format_consistency\"\n        }\n      ]\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"name\": \"Contradiction Avoidance\",\n      \"question\": \"Does the memory set contain any mutually exclusive facts?\",\n      \"why_it_matters\": \"Contradictions render the memory store unreliable for decision-making.\",\n      \"failure_examples\": [\n        \"One item saying the user is vegan, another saying they love steak\",\n        \"Conflicting location data for the same entity\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"gemini\",\n          \"rubric_id\": \"contradiction_avoidance\"\n        },\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"no_contradiction\"\n        }\n      ]\n    },\n    {\n      \"id\": \"inference_boundary_compliance\",\n      \"name\": \"Inference Boundary Compliance\",\n      \"question\": \"Does the memory item avoid making inferences that go beyond what is stated? Specifically, does it avoid inferring internal states, causation, or character traits that were not explicitly stated?\",\n      \"why_it_matters\": \"While some inference is necessary, crossing into unsupported psychological attribution or causal reasoning distorts the source and misleads future users.\",\n      \"failure_examples\": [\n        \"Memory item states 'Alice was frustrated because her manager was demanding' when the conversation only shows the manager made a request with no emotional attribution\",\n        \"Memory item states 'Bob decided to quit his job due to burnout' when the conversation only mentions he 'has been tired lately'\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"inference_boundary\"\n        }\n      ]\n    },\n    {\n      \"id\": \"no_hallucination\",\n      \"name\": \"No Hallucination\",\n      \"question\": \"Are there any fact memory items that contain information not present or implied in the conversation?\",\n      \"why_it_matters\": \"Hallucinations introduce false information.\",\n      \"failure_examples\": [\n        \"Memory item says 'Eve has a PhD' but conversation never mentions education.\",\n        \"Memory item says 'Frank is married' but conversation only mentions his girlfriend.\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"deepseek\",\n          \"rubric_id\": \"no_hallucination\"\n        }\n      ]\n    },\n    {\n      \"id\": \"plan_status_presence\",\n      \"name\": \"Plan and Status Presence\",\n      \"question\": \"Does the memory set capture plans, intentions, and scheduled items mentioned in the conversation? Are future-oriented statements and their temporal markers preserved?\",\n      \"why_it_matters\": \"Plans and intentions are memory-worthy content. Missing them loses future-oriented information critical for proactive assistance.\",\n      \"failure_examples\": [\n        \"Conversation states 'Alice will follow up on Monday' but no memory item records this plan\",\n        \"Conversation mentions 'the system upgrade is scheduled for this weekend' but no memory item captures the scheduled upgrade\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"plan_status_presence\"\n        }\n      ]\n    },\n    {\n      \"id\": \"relationship_accuracy\",\n      \"name\": \"Relationship Accuracy\",\n      \"question\": \"Are the relationships between entities accurate according to the conversation? Does the memory avoid misrepresenting familial, professional, or social relationships?\",\n      \"why_it_matters\": \"Relationship errors can fundamentally misrepresent the social structure and context of the conversation.\",\n      \"failure_examples\": [\n        \"Memory item states 'Carol is David's wife' when the conversation establishes Carol as David's sister\",\n        \"Memory item states 'Alice works for Bob' when the conversation shows they are both employed by the same company with no direct reporting relationship\"\n      ],\n      \"source_trace\": [\n        {\n          \"model\": \"minimax\",\n          \"rubric_id\": \"relationship_accuracy\"\n        }\n      ]\n    }\n  ]\n}",
+    "required_key": "consolidated_rubrics",
+    "required_key_attempt_index": 0
+  }
+}

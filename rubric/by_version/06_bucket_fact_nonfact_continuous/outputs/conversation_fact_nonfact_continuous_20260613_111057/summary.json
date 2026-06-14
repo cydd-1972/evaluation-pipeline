@@ -1,0 +1,32 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "conversation_count": 10,
+  "missing_conversation_indices": [],
+  "fact_score": 0.8507,
+  "nonfact_score": 0.9195,
+  "combined_score": 0.8722,
+  "fact_weights": {
+    "fact_sourceability": 3.0,
+    "fact_factual_correctness": 3.0,
+    "fact_temporal_correctness": 2.0,
+    "fact_atomicity": 1.0,
+    "fact_nonredundancy": 1.0,
+    "fact_coverage": 2.0,
+    "fact_conciseness": 1.0,
+    "fact_structural_consistency": 1.0
+  },
+  "nonfact_weights": {
+    "summary_sourceability": 3.0,
+    "summary_factual_correctness": 3.0,
+    "summary_temporal_consistency": 2.0,
+    "bucket_schema_fit": 2.0,
+    "summary_abstraction_quality": 2.0,
+    "cross_fact_integration": 2.0,
+    "nonredundancy_across_summaries": 1.0,
+    "conciseness_and_density": 1.0,
+    "structural_consistency": 1.0,
+    "coverage_of_summary_targets": 2.0
+  },
+  "hard_cap_threshold": 0.3,
+  "hard_cap_value": 0.4
+}

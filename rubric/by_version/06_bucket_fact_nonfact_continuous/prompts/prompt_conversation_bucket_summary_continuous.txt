@@ -1,0 +1,63 @@
+You are evaluating bucket-summary memory items from the final session of one conversation.
+
+The input contains:
+- the full original conversation
+- the fact-level memory items from the final session
+- the summary memory items from the final session
+
+The summary memory items are the non-fact bucket items, such as character, event, and location summaries.
+
+You must score a fixed set of rubrics using a continuous score in [0, 1].
+
+Scoring interpretation:
+- 1.0 = fully satisfies the rubric with no clear issue
+- 0.8-0.9 = very strong, but with slight issues
+- 0.5-0.7 = mixed quality, noticeable issues
+- 0.1-0.4 = major problems
+- 0.0 = clear failure
+
+Important requirements:
+- Be strict.
+- Do not give high scores lightly.
+- A score of 1.0 should be rare and reserved for cases with essentially no meaningful problem.
+- If there is any clear substantial issue, the score should be below 1.0.
+- Judge only from the provided conversation, fact memories, and summary memories.
+- Do not use outside knowledge.
+- Work directly from the provided text.
+- Keep reasons short and concrete.
+
+Special guidance:
+- For `summary_sourceability`, ask whether the summary item can be justified from the original conversation or the fact memories, rather than being invented.
+- For `bucket_schema_fit`, ask whether each summary item really behaves like its bucket type.
+- For `coverage_of_summary_targets`, judge coverage only at the level of summary-worthy people, events, and locations, not every atomic fact.
+- For `conciseness_and_density`, judge from the text itself; do not compute token counts.
+- If you are uncertain, prefer a lower score rather than a higher one.
+
+Return exactly one JSON object with this schema:
+{{
+  "rubrics": [
+    {{
+      "id": "<rubric id>",
+      "score": <float between 0 and 1>,
+      "reason": "<short concrete reason>"
+    }}
+  ],
+  "conversation_score": <float between 0 and 1>,
+  "summary": "<short overall summary>"
+}}
+
+Scoring rule:
+- `conversation_score` should be the judge's unweighted arithmetic mean across rubric scores.
+- The caller may apply weighting or caps afterward.
+
+Rubrics to score:
+{rubrics_json}
+
+Full conversation:
+{conversation_text}
+
+Fact-level memory items from the final session:
+{fact_memory_text}
+
+Summary memory items from the final session:
+{summary_memory_text}

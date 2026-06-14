@@ -1,0 +1,307 @@
+{
+  "run_name": "deduplicate_generated_fact_rubrics_qwen_20260613_130535",
+  "evaluator_model": "qwen-plus",
+  "prompt_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\prompts\\prompt_deduplicate_generated_fact_rubrics_conservative_simplejson.txt",
+  "input_files": {
+    "gemini": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122735\\gemini_finer_fact_rubrics.json",
+    "deepseek": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122735\\deepseek_finer_fact_rubrics.json",
+    "minimax": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\generate_finer_fact_rubrics_20260613_122952\\minimax_finer_fact_rubrics.json"
+  },
+  "result": {
+    "dedup_principle_summary": "Merged only when semantic target, checking action, granularity, scope, failure condition, evidence requirement, temporal focus, entity/attribute type, strictness, and item- vs set-level behavior are identical. All other rubrics kept separate.",
+    "merged_groups": [
+      {
+        "merged_name": "Grounding Verifiability",
+        "source_refs": [
+          "gemini:grounding_verifiability",
+          "deepseek:explicit_textual_support",
+          "minimax:explicit_textual_grounding"
+        ],
+        "reason": "All three require direct, explicit textual support for each fact; evaluator checks for verbatim or near-verbatim anchoring in conversation history; same failure condition (ungrounded content); same evidence requirement (span-level traceability)."
+      },
+      {
+        "merged_name": "Entity Attribution Accuracy",
+        "source_refs": [
+          "gemini:entity_attribution_accuracy",
+          "deepseek:correct_attribution",
+          "minimax:entity_attribute_accuracy"
+        ],
+        "reason": "All check correct assignment of attributes/preferences/actions to the right speaker/entity; same checking action (cross-reference speaker ID with utterance source); same failure examples (misattribution across participants); no granularity or scope difference."
+      },
+      {
+        "merged_name": "Temporal State Precision",
+        "source_refs": [
+          "gemini:temporal_state_precision",
+          "deepseek:tense_consistency",
+          "deepseek:plan_vs_event_distinction",
+          "minimax:temporal_status_accuracy"
+        ],
+        "reason": "All target correct representation of time status (past/completed vs present/current vs future/intentional); evaluator distinguishes temporal modality using linguistic cues (tense, modals, adverbials); same failure pattern (e.g., treating plan as fact); 'tense_consistency' and 'plan_vs_event_distinction' are complementary facets of the same core temporal status check and share identical checking procedure and failure conditions."
+      },
+      {
+        "merged_name": "Fact Atomicity",
+        "source_refs": [
+          "gemini:fact_atomicity",
+          "deepseek:single_fact_focus",
+          "deepseek:no_bundling_of_unrelated_facts",
+          "minimax:bundling_unity"
+        ],
+        "reason": "All enforce one independent, coherent fact per item; evaluator inspects whether multiple distinct subjects, predicates, or unrelated domains are conflated; same failure examples (age + employer, location + hobby); 'no_bundling_of_unrelated_facts' and 'bundling_unity' are rephrasings of atomicity with identical scope and checking action."
+      },
+      {
+        "merged_name": "Redundancy Check",
+        "source_refs": [
+          "gemini:redundancy_check",
+          "deepseek:no_exact_duplicates",
+          "deepseek:no_near_duplicates",
+          "minimax:exact_duplicate_absence",
+          "minimax:near_duplicate_absence"
+        ],
+        "reason": "All assess uniqueness of factual content across the memory set; evaluator compares items pairwise for semantic equivalence (exact or near); same failure examples (identical wording, paraphrased equivalents); 'no_exact_duplicates' and 'no_near_duplicates' are subset checks under the broader redundancy principle, but their combined scope matches 'redundancy_check' and all share identical evidence requirement and checking procedure."
+      },
+      {
+        "merged_name": "Information Completeness",
+        "source_refs": [
+          "gemini:information_completeness",
+          "minimax:entity_presence",
+          "minimax:attribute_presence",
+          "minimax:event_presence",
+          "minimax:relationship_presence",
+          "minimax:plan_status_presence"
+        ],
+        "reason": "All address whether essential information is present — 'information_completeness' focuses on self-containment per item (resolving pronouns, specifying referents), while the minimax presence rubrics collectively ensure coverage of entities, attributes, events, relationships, and plans; together they form a unified completeness concern at the set level with shared objective (no missing memory-worthy content) and same evaluator action (audit for omissions against conversation)."
+      },
+      {
+        "merged_name": "Conciseness and Noise",
+        "source_refs": [
+          "gemini:conciseness_and_noise",
+          "deepseek:no_verbosity",
+          "deepseek:no_irrelevant_details",
+          "minimax:concision_per_item"
+        ],
+        "reason": "All target removal of non-factual, low-value language from memory items; evaluator strips filler, meta-commentary, irrelevant adjectives, and elaboration; same failure examples (including 'the user said...' or lunch details); all operate at item-level, same granularity and evidence requirement."
+      },
+      {
+        "merged_name": "Structural Uniformity",
+        "source_refs": [
+          "gemini:structural_uniformity",
+          "deepseek:consistent_format",
+          "minimax:field_naming_consistency",
+          "minimax:referent_form_consistency",
+          "minimax:temporal_format_consistency"
+        ],
+        "reason": "All enforce consistency in representation: syntax, field naming, referent form, and temporal formatting; evaluator checks for uniform patterns across all items; same why-it-matters (enables parsing/retrieval); collectively cover structural dimensions without overlap in failure condition or checking action."
+      },
+      {
+        "merged_name": "Contradiction Avoidance",
+        "source_refs": [
+          "gemini:contradiction_avoidance",
+          "deepseek:no_contradiction",
+          "minimax:relationship_accuracy",
+          "minimax:event_detail_accuracy"
+        ],
+        "reason": "All detect logical inconsistency: 'contradiction_avoidance' and 'no_contradiction' directly flag mutual exclusivity; 'relationship_accuracy' and 'event_detail_accuracy' prevent contradictions via factual fidelity (e.g., 'wife' vs 'sister', 'presented' vs 'asked questions'); all require cross-item comparison for semantic conflict and share identical failure examples and evaluator action."
+      }
+    ],
+    "kept_separate_notes": [
+      {
+        "source_refs": [
+          "gemini:negation_handling",
+          "deepseek:no_hallucination"
+        ],
+        "reason": "Negation handling targets correct representation of negative facts (e.g., 'does not like X'), while no hallucination targets fabrication of positive facts; different failure conditions, evidence requirements, and checking procedures."
+      },
+      {
+        "source_refs": [
+          "gemini:quantifier_accuracy",
+          "minimax:temporal_value_accuracy"
+        ],
+        "reason": "Quantifier accuracy covers frequencies/durations ('sometimes', 'three times'); temporal_value_accuracy covers specific dates/times/sequences; different attribute types, failure conditions, and evidence requirements."
+      },
+      {
+        "source_refs": [
+          "deepseek:key_entity_coverage",
+          "minimax:entity_name_consistency"
+        ],
+        "reason": "Key entity coverage checks presence of entities; entity name consistency checks referential stability *within* items — different scope (set-level presence vs item-level naming) and checking procedure."
+      },
+      {
+        "source_refs": [
+          "gemini:relevance_filtering",
+          "minimax:inference_boundary"
+        ],
+        "reason": "Relevance filtering excludes trivial/transient info; inference boundary restricts unsupported psychological/causal attribution — different failure conditions (trivia vs over-inference) and evidence requirements."
+      },
+      {
+        "source_refs": [
+          "deepseek:pronoun_clarity",
+          "minimax:entity_name_consistency"
+        ],
+        "reason": "Pronoun clarity resolves ambiguity *within an item*; entity name consistency unifies references *across items* — different scope (item-level vs set-level) and checking procedure."
+      },
+      {
+        "source_refs": [
+          "minimax:complete_fields",
+          "gemini:structural_uniformity"
+        ],
+        "reason": "Complete fields checks schema compliance (non-empty required slots); structural uniformity checks syntactic pattern consistency — different failure conditions (missing field vs inconsistent casing) and evidence requirements."
+      }
+    ],
+    "consolidated_rubrics": [
+      {
+        "id": "grounding_verifiability",
+        "name": "Grounding Verifiability",
+        "question": "Can every claim in the memory item be directly mapped to a specific utterance or segment in the conversation history?",
+        "why_it_matters": "Prevents hallucination and ensures the memory is based on actual user input.",
+        "failure_examples": [
+          "Memory item contains details not mentioned in the text",
+          "Memory item infers a preference the user never explicitly stated"
+        ],
+        "source_refs": [
+          "gemini:grounding_verifiability",
+          "deepseek:explicit_textual_support",
+          "minimax:explicit_textual_grounding"
+        ]
+      },
+      {
+        "id": "entity_attribution_accuracy",
+        "name": "Entity Attribution Accuracy",
+        "question": "Are attributes, preferences, and actions correctly assigned to the specific speaker or entity they belong to?",
+        "why_it_matters": "Prevents cross-talk errors where the model confuses the user's traits with the assistant's or another participant's.",
+        "failure_examples": [
+          "Assigning the user's dietary restriction to the assistant",
+          "Confusing two different people mentioned in the conversation"
+        ],
+        "source_refs": [
+          "gemini:entity_attribution_accuracy",
+          "deepseek:correct_attribution",
+          "minimax:entity_attribute_accuracy"
+        ]
+      },
+      {
+        "id": "temporal_state_precision",
+        "name": "Temporal State Precision",
+        "question": "Does the memory item correctly distinguish between past events, current states, and future intentions?",
+        "why_it_matters": "Ensures the model does not treat a past preference as a current one or a future plan as a completed action.",
+        "failure_examples": [
+          "Stating a planned trip as a completed event",
+          "Retaining an outdated address after the user provided a new one"
+        ],
+        "source_refs": [
+          "gemini:temporal_state_precision",
+          "deepseek:tense_consistency",
+          "deepseek:plan_vs_event_distinction",
+          "minimax:temporal_status_accuracy"
+        ]
+      },
+      {
+        "id": "fact_atomicity",
+        "name": "Fact Atomicity",
+        "question": "Does each memory item contain exactly one distinct, independent fact?",
+        "why_it_matters": "Atomic facts are easier to update, delete, or retrieve without side effects.",
+        "failure_examples": [
+          "Combining a user's job title and their favorite color in one item",
+          "Bundling a list of three unrelated hobbies into a single entry"
+        ],
+        "source_refs": [
+          "gemini:fact_atomicity",
+          "deepseek:single_fact_focus",
+          "deepseek:no_bundling_of_unrelated_facts",
+          "minimax:bundling_unity"
+        ]
+      },
+      {
+        "id": "redundancy_check",
+        "name": "Redundancy Check",
+        "question": "Is the information in this item unique, or is it already covered by another existing memory item?",
+        "why_it_matters": "Redundancy bloats the memory store and increases the risk of conflicting information.",
+        "failure_examples": [
+          "Two items stating the same fact with slightly different wording",
+          "A general item that is entirely contained within a more specific item"
+        ],
+        "source_refs": [
+          "gemini:redundancy_check",
+          "deepseek:no_exact_duplicates",
+          "deepseek:no_near_duplicates",
+          "minimax:exact_duplicate_absence",
+          "minimax:near_duplicate_absence"
+        ]
+      },
+      {
+        "id": "information_completeness",
+        "name": "Information Completeness",
+        "question": "Does the memory set capture all key entities, attributes, events, relationships, and plans mentioned in the conversation?",
+        "why_it_matters": "Ensures the memory is self-contained and useful for future sessions.",
+        "failure_examples": [
+          "Conversation introduces 'Sam' as a main character but memory has no item about Sam.",
+          "Conversation mentions 'Company X' but memory omits it."
+        ],
+        "source_refs": [
+          "gemini:information_completeness",
+          "minimax:entity_presence",
+          "minimax:attribute_presence",
+          "minimax:event_presence",
+          "minimax:relationship_presence",
+          "minimax:plan_status_presence"
+        ]
+      },
+      {
+        "id": "conciseness_and_noise",
+        "name": "Conciseness and Noise",
+        "question": "Is the memory item free of conversational filler, meta-commentary, or low-value adjectives?",
+        "why_it_matters": "Reduces token usage and improves the signal-to-noise ratio for retrieval.",
+        "failure_examples": [
+          "Including 'The user mentioned that...' in the memory item",
+          "Using flowery language to describe a simple fact"
+        ],
+        "source_refs": [
+          "gemini:conciseness_and_noise",
+          "deepseek:no_verbosity",
+          "deepseek:no_irrelevant_details",
+          "minimax:concision_per_item"
+        ]
+      },
+      {
+        "id": "structural_uniformity",
+        "name": "Structural Uniformity",
+        "question": "Do all memory items follow a consistent format (e.g., subject-predicate-object or key-value) and use consistent field names, referent forms, and temporal formats?",
+        "why_it_matters": "Consistent structure allows for programmatic filtering and better retrieval performance.",
+        "failure_examples": [
+          "Mixing full sentences with bulleted lists",
+          "Inconsistent casing or naming conventions for categories"
+        ],
+        "source_refs": [
+          "gemini:structural_uniformity",
+          "deepseek:consistent_format",
+          "minimax:field_naming_consistency",
+          "minimax:referent_form_consistency",
+          "minimax:temporal_format_consistency"
+        ]
+      },
+      {
+        "id": "contradiction_avoidance",
+        "name": "Contradiction Avoidance",
+        "question": "Does the memory set contain any mutually exclusive facts or inaccurate relationships/events?",
+        "why_it_matters": "Contradictions render the memory store unreliable for decision-making.",
+        "failure_examples": [
+          "One item saying the user is vegan, another saying they love steak",
+          "Conflicting location data for the same entity"
+        ],
+        "source_refs": [
+          "gemini:contradiction_avoidance",
+          "deepseek:no_contradiction",
+          "minimax:relationship_accuracy",
+          "minimax:event_detail_accuracy"
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "model": "qwen-plus",
+    "attempt_index": 0,
+    "response_format": "json_object",
+    "raw_text": "{\n  \"dedup_principle_summary\": \"Merged only when semantic target, checking action, granularity, scope, failure condition, evidence requirement, temporal focus, entity/attribute type, strictness, and item- vs set-level behavior are identical. All other rubrics kept separate.\",\n  \"merged_groups\": [\n    {\n      \"merged_name\": \"Grounding Verifiability\",\n      \"source_refs\": [\"gemini:grounding_verifiability\", \"deepseek:explicit_textual_support\", \"minimax:explicit_textual_grounding\"],\n      \"reason\": \"All three require direct, explicit textual support for each fact; evaluator checks for verbatim or near-verbatim anchoring in conversation history; same failure condition (ungrounded content); same evidence requirement (span-level traceability).\"\n    },\n    {\n      \"merged_name\": \"Entity Attribution Accuracy\",\n      \"source_refs\": [\"gemini:entity_attribution_accuracy\", \"deepseek:correct_attribution\", \"minimax:entity_attribute_accuracy\"],\n      \"reason\": \"All check correct assignment of attributes/preferences/actions to the right speaker/entity; same checking action (cross-reference speaker ID with utterance source); same failure examples (misattribution across participants); no granularity or scope difference.\"\n    },\n    {\n      \"merged_name\": \"Temporal State Precision\",\n      \"source_refs\": [\"gemini:temporal_state_precision\", \"deepseek:tense_consistency\", \"deepseek:plan_vs_event_distinction\", \"minimax:temporal_status_accuracy\"],\n      \"reason\": \"All target correct representation of time status (past/completed vs present/current vs future/intentional); evaluator distinguishes temporal modality using linguistic cues (tense, modals, adverbials); same failure pattern (e.g., treating plan as fact); 'tense_consistency' and 'plan_vs_event_distinction' are complementary facets of the same core temporal status check and share identical checking procedure and failure conditions.\"\n    },\n    {\n      \"merged_name\": \"Fact Atomicity\",\n      \"source_refs\": [\"gemini:fact_atomicity\", \"deepseek:single_fact_focus\", \"deepseek:no_bundling_of_unrelated_facts\", \"minimax:bundling_unity\"],\n      \"reason\": \"All enforce one independent, coherent fact per item; evaluator inspects whether multiple distinct subjects, predicates, or unrelated domains are conflated; same failure examples (age + employer, location + hobby); 'no_bundling_of_unrelated_facts' and 'bundling_unity' are rephrasings of atomicity with identical scope and checking action.\"\n    },\n    {\n      \"merged_name\": \"Redundancy Check\",\n      \"source_refs\": [\"gemini:redundancy_check\", \"deepseek:no_exact_duplicates\", \"deepseek:no_near_duplicates\", \"minimax:exact_duplicate_absence\", \"minimax:near_duplicate_absence\"],\n      \"reason\": \"All assess uniqueness of factual content across the memory set; evaluator compares items pairwise for semantic equivalence (exact or near); same failure examples (identical wording, paraphrased equivalents); 'no_exact_duplicates' and 'no_near_duplicates' are subset checks under the broader redundancy principle, but their combined scope matches 'redundancy_check' and all share identical evidence requirement and checking procedure.\"\n    },\n    {\n      \"merged_name\": \"Information Completeness\",\n      \"source_refs\": [\"gemini:information_completeness\", \"minimax:entity_presence\", \"minimax:attribute_presence\", \"minimax:event_presence\", \"minimax:relationship_presence\", \"minimax:plan_status_presence\"],\n      \"reason\": \"All address whether essential information is present — 'information_completeness' focuses on self-containment per item (resolving pronouns, specifying referents), while the minimax presence rubrics collectively ensure coverage of entities, attributes, events, relationships, and plans; together they form a unified completeness concern at the set level with shared objective (no missing memory-worthy content) and same evaluator action (audit for omissions against conversation).\"\n    },\n    {\n      \"merged_name\": \"Conciseness and Noise\",\n      \"source_refs\": [\"gemini:conciseness_and_noise\", \"deepseek:no_verbosity\", \"deepseek:no_irrelevant_details\", \"minimax:concision_per_item\"],\n      \"reason\": \"All target removal of non-factual, low-value language from memory items; evaluator strips filler, meta-commentary, irrelevant adjectives, and elaboration; same failure examples (including 'the user said...' or lunch details); all operate at item-level, same granularity and evidence requirement.\"\n    },\n    {\n      \"merged_name\": \"Structural Uniformity\",\n      \"source_refs\": [\"gemini:structural_uniformity\", \"deepseek:consistent_format\", \"minimax:field_naming_consistency\", \"minimax:referent_form_consistency\", \"minimax:temporal_format_consistency\"],\n      \"reason\": \"All enforce consistency in representation: syntax, field naming, referent form, and temporal formatting; evaluator checks for uniform patterns across all items; same why-it-matters (enables parsing/retrieval); collectively cover structural dimensions without overlap in failure condition or checking action.\"\n    },\n    {\n      \"merged_name\": \"Contradiction Avoidance\",\n      \"source_refs\": [\"gemini:contradiction_avoidance\", \"deepseek:no_contradiction\", \"minimax:relationship_accuracy\", \"minimax:event_detail_accuracy\"],\n      \"reason\": \"All detect logical inconsistency: 'contradiction_avoidance' and 'no_contradiction' directly flag mutual exclusivity; 'relationship_accuracy' and 'event_detail_accuracy' prevent contradictions via factual fidelity (e.g., 'wife' vs 'sister', 'presented' vs 'asked questions'); all require cross-item comparison for semantic conflict and share identical failure examples and evaluator action.\"\n    }\n  ],\n  \"kept_separate_notes\": [\n    {\n      \"source_refs\": [\"gemini:negation_handling\", \"deepseek:no_hallucination\"],\n      \"reason\": \"Negation handling targets correct representation of negative facts (e.g., 'does not like X'), while no hallucination targets fabrication of positive facts; different failure conditions, evidence requirements, and checking procedures.\"\n    },\n    {\n      \"source_refs\": [\"gemini:quantifier_accuracy\", \"minimax:temporal_value_accuracy\"],\n      \"reason\": \"Quantifier accuracy covers frequencies/durations ('sometimes', 'three times'); temporal_value_accuracy covers specific dates/times/sequences; different attribute types, failure conditions, and evidence requirements.\"\n    },\n    {\n      \"source_refs\": [\"deepseek:key_entity_coverage\", \"minimax:entity_name_consistency\"],\n      \"reason\": \"Key entity coverage checks presence of entities; entity name consistency checks referential stability *within* items — different scope (set-level presence vs item-level naming) and checking procedure.\"\n    },\n    {\n      \"source_refs\": [\"gemini:relevance_filtering\", \"minimax:inference_boundary\"],\n      \"reason\": \"Relevance filtering excludes trivial/transient info; inference boundary restricts unsupported psychological/causal attribution — different failure conditions (trivia vs over-inference) and evidence requirements.\"\n    },\n    {\n      \"source_refs\": [\"deepseek:pronoun_clarity\", \"minimax:entity_name_consistency\"],\n      \"reason\": \"Pronoun clarity resolves ambiguity *within an item*; entity name consistency unifies references *across items* — different scope (item-level vs set-level) and checking procedure.\"\n    },\n    {\n      \"source_refs\": [\"minimax:complete_fields\", \"gemini:structural_uniformity\"],\n      \"reason\": \"Complete fields checks schema compliance (non-empty required slots); structural uniformity checks syntactic pattern consistency — different failure conditions (missing field vs inconsistent casing) and evidence requirements.\"\n    }\n  ],\n  \"consolidated_rubrics\": [\n    {\n      \"id\": \"grounding_verifiability\",\n      \"name\": \"Grounding Verifiability\",\n      \"question\": \"Can every claim in the memory item be directly mapped to a specific utterance or segment in the conversation history?\",\n      \"why_it_matters\": \"Prevents hallucination and ensures the memory is based on actual user input.\",\n      \"failure_examples\": [\n        \"Memory item contains details not mentioned in the text\",\n        \"Memory item infers a preference the user never explicitly stated\"\n      ],\n      \"source_refs\": [\"gemini:grounding_verifiability\", \"deepseek:explicit_textual_support\", \"minimax:explicit_textual_grounding\"]\n    },\n    {\n      \"id\": \"entity_attribution_accuracy\",\n      \"name\": \"Entity Attribution Accuracy\",\n      \"question\": \"Are attributes, preferences, and actions correctly assigned to the specific speaker or entity they belong to?\",\n      \"why_it_matters\": \"Prevents cross-talk errors where the model confuses the user's traits with the assistant's or another participant's.\",\n      \"failure_examples\": [\n        \"Assigning the user's dietary restriction to the assistant\",\n        \"Confusing two different people mentioned in the conversation\"\n      ],\n      \"source_refs\": [\"gemini:entity_attribution_accuracy\", \"deepseek:correct_attribution\", \"minimax:entity_attribute_accuracy\"]\n    },\n    {\n      \"id\": \"temporal_state_precision\",\n      \"name\": \"Temporal State Precision\",\n      \"question\": \"Does the memory item correctly distinguish between past events, current states, and future intentions?\",\n      \"why_it_matters\": \"Ensures the model does not treat a past preference as a current one or a future plan as a completed action.\",\n      \"failure_examples\": [\n        \"Stating a planned trip as a completed event\",\n        \"Retaining an outdated address after the user provided a new one\"\n      ],\n      \"source_refs\": [\"gemini:temporal_state_precision\", \"deepseek:tense_consistency\", \"deepseek:plan_vs_event_distinction\", \"minimax:temporal_status_accuracy\"]\n    },\n    {\n      \"id\": \"fact_atomicity\",\n      \"name\": \"Fact Atomicity\",\n      \"question\": \"Does each memory item contain exactly one distinct, independent fact?\",\n      \"why_it_matters\": \"Atomic facts are easier to update, delete, or retrieve without side effects.\",\n      \"failure_examples\": [\n        \"Combining a user's job title and their favorite color in one item\",\n        \"Bundling a list of three unrelated hobbies into a single entry\"\n      ],\n      \"source_refs\": [\"gemini:fact_atomicity\", \"deepseek:single_fact_focus\", \"deepseek:no_bundling_of_unrelated_facts\", \"minimax:bundling_unity\"]\n    },\n    {\n      \"id\": \"redundancy_check\",\n      \"name\": \"Redundancy Check\",\n      \"question\": \"Is the information in this item unique, or is it already covered by another existing memory item?\",\n      \"why_it_matters\": \"Redundancy bloats the memory store and increases the risk of conflicting information.\",\n      \"failure_examples\": [\n        \"Two items stating the same fact with slightly different wording\",\n        \"A general item that is entirely contained within a more specific item\"\n      ],\n      \"source_refs\": [\"gemini:redundancy_check\", \"deepseek:no_exact_duplicates\", \"deepseek:no_near_duplicates\", \"minimax:exact_duplicate_absence\", \"minimax:near_duplicate_absence\"]\n    },\n    {\n      \"id\": \"information_completeness\",\n      \"name\": \"Information Completeness\",\n      \"question\": \"Does the memory set capture all key entities, attributes, events, relationships, and plans mentioned in the conversation?\",\n      \"why_it_matters\": \"Ensures the memory is self-contained and useful for future sessions.\",\n      \"failure_examples\": [\n        \"Conversation introduces 'Sam' as a main character but memory has no item about Sam.\",\n        \"Conversation mentions 'Company X' but memory omits it.\"\n      ],\n      \"source_refs\": [\"gemini:information_completeness\", \"minimax:entity_presence\", \"minimax:attribute_presence\", \"minimax:event_presence\", \"minimax:relationship_presence\", \"minimax:plan_status_presence\"]\n    },\n    {\n      \"id\": \"conciseness_and_noise\",\n      \"name\": \"Conciseness and Noise\",\n      \"question\": \"Is the memory item free of conversational filler, meta-commentary, or low-value adjectives?\",\n      \"why_it_matters\": \"Reduces token usage and improves the signal-to-noise ratio for retrieval.\",\n      \"failure_examples\": [\n        \"Including 'The user mentioned that...' in the memory item\",\n        \"Using flowery language to describe a simple fact\"\n      ],\n      \"source_refs\": [\"gemini:conciseness_and_noise\", \"deepseek:no_verbosity\", \"deepseek:no_irrelevant_details\", \"minimax:concision_per_item\"]\n    },\n    {\n      \"id\": \"structural_uniformity\",\n      \"name\": \"Structural Uniformity\",\n      \"question\": \"Do all memory items follow a consistent format (e.g., subject-predicate-object or key-value) and use consistent field names, referent forms, and temporal formats?\",\n      \"why_it_matters\": \"Consistent structure allows for programmatic filtering and better retrieval performance.\",\n      \"failure_examples\": [\n        \"Mixing full sentences with bulleted lists\",\n        \"Inconsistent casing or naming conventions for categories\"\n      ],\n      \"source_refs\": [\"gemini:structural_uniformity\", \"deepseek:consistent_format\", \"minimax:field_naming_consistency\", \"minimax:referent_form_consistency\", \"minimax:temporal_format_consistency\"]\n    },\n    {\n      \"id\": \"contradiction_avoidance\",\n      \"name\": \"Contradiction Avoidance\",\n      \"question\": \"Does the memory set contain any mutually exclusive facts or inaccurate relationships/events?\",\n      \"why_it_matters\": \"Contradictions render the memory store unreliable for decision-making.\",\n      \"failure_examples\": [\n        \"One item saying the user is vegan, another saying they love steak\",\n        \"Conflicting location data for the same entity\"\n      ],\n      \"source_refs\": [\"gemini:contradiction_avoidance\", \"deepseek:no_contradiction\", \"minimax:relationship_accuracy\", \"minimax:event_detail_accuracy\"]\n    }\n  ]\n}",
+    "required_key": "consolidated_rubrics",
+    "required_key_attempt_index": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "evaluator_model": "Qwen/Qwen3-14B",
+  "final_score": 0.8632,
+  "conversation_count": 1,
+  "missing_conversation_indices": [],
+  "weights": {
+    "summary_sourceability": 3.0,
+    "summary_factual_correctness": 3.0,
+    "summary_temporal_consistency": 2.0,
+    "bucket_schema_fit": 2.0,
+    "summary_abstraction_quality": 2.0,
+    "cross_fact_integration": 2.0,
+    "nonredundancy_across_summaries": 1.0,
+    "conciseness_and_density": 1.0,
+    "structural_consistency": 1.0,
+    "coverage_of_summary_targets": 2.0
+  },
+  "hard_cap_rubrics": [
+    "summary_sourceability",
+    "summary_factual_correctness"
+  ],
+  "hard_cap_threshold": 0.3,
+  "hard_cap_value": 0.4
+}

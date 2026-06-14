@@ -1,0 +1,43 @@
+[2026-06-11 15:34:16] run_name=session_delta_originaltext_strict_20260611_153416
+[2026-06-11 15:34:16] evaluator_model=Qwen/Qwen3-14B
+[2026-06-11 15:34:16] targets=['minimax']
+[2026-06-11 15:34:16] score model=minimax conv=0 session=1 delta_items=11
+[2026-06-11 15:34:34] done model=minimax conv=0 session=1 score=0.8182 precision=0.9091 recall=0.9000
+[2026-06-11 15:34:34] score model=minimax conv=0 session=2 delta_items=14
+[2026-06-11 15:35:21] done model=minimax conv=0 session=2 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 15:35:21] score model=minimax conv=0 session=3 delta_items=9
+[2026-06-11 15:35:56] done model=minimax conv=0 session=3 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 15:35:56] score model=minimax conv=0 session=4 delta_items=17
+[2026-06-11 15:36:50] done model=minimax conv=0 session=4 score=0.7000 precision=1.0000 recall=0.7000
+[2026-06-11 15:36:50] score model=minimax conv=0 session=5 delta_items=13
+[2026-06-11 15:37:19] done model=minimax conv=0 session=5 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 15:37:19] score model=minimax conv=0 session=6 delta_items=16
+[2026-06-11 15:37:50] done model=minimax conv=0 session=6 score=0.6125 precision=0.8750 recall=0.7000
+[2026-06-11 15:37:50] score model=minimax conv=0 session=7 delta_items=32
+[2026-06-11 15:39:04] done model=minimax conv=0 session=7 score=0.0000 precision=0.8125 recall=0.0000
+[2026-06-11 15:39:04] score model=minimax conv=0 session=8 delta_items=36
+[2026-06-11 15:40:15] done model=minimax conv=0 session=8 score=0.0000 precision=0.9722 recall=0.0000
+[2026-06-11 15:40:15] score model=minimax conv=0 session=9 delta_items=8
+[2026-06-11 16:08:03] done model=minimax conv=0 session=9 score=0.5834 precision=0.8750 recall=0.6667
+[2026-06-11 16:08:03] score model=minimax conv=0 session=10 delta_items=22
+[2026-06-11 16:09:19] done model=minimax conv=0 session=10 score=0.7159 precision=0.9545 recall=0.7500
+[2026-06-11 16:09:19] score model=minimax conv=0 session=11 delta_items=9
+[2026-06-11 16:09:52] done model=minimax conv=0 session=11 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 16:09:52] score model=minimax conv=0 session=12 delta_items=13
+[2026-06-11 16:10:31] done model=minimax conv=0 session=12 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 16:10:31] score model=minimax conv=0 session=13 delta_items=16
+[2026-06-11 16:11:53] done model=minimax conv=0 session=13 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 16:11:53] score model=minimax conv=0 session=14 delta_items=15
+[2026-06-11 16:12:35] done model=minimax conv=0 session=14 score=0.6788 precision=0.9333 recall=0.7273
+[2026-06-11 16:12:35] score model=minimax conv=0 session=15 delta_items=17
+[2026-06-11 16:13:54] done model=minimax conv=0 session=15 score=0.7843 precision=0.9412 recall=0.8333
+[2026-06-11 16:13:54] score model=minimax conv=0 session=16 delta_items=27
+[2026-06-11 16:15:46] done model=minimax conv=0 session=16 score=0.6837 precision=0.8889 recall=0.7692
+[2026-06-11 16:15:46] score model=minimax conv=0 session=17 delta_items=25
+[2026-06-11 16:17:02] done model=minimax conv=0 session=17 score=0.7000 precision=0.8400 recall=0.8333
+[2026-06-11 16:17:02] score model=minimax conv=0 session=18 delta_items=18
+[2026-06-11 16:17:54] done model=minimax conv=0 session=18 score=0.2121 precision=0.7778 recall=0.2727
+[2026-06-11 16:17:54] score model=minimax conv=0 session=19 delta_items=14
+[2026-06-11 16:18:44] done model=minimax conv=0 session=19 score=1.0000 precision=1.0000 recall=1.0000
+[2026-06-11 16:18:44] final_score=0.7099
+[2026-06-11 16:18:44] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\session_delta_originaltext_strict_20260611_153416

@@ -1,0 +1,7 @@
+[2026-06-13 11:10:22] run_name=conversation_fact_nonfact_continuous_20260613_111022
+[2026-06-13 11:10:22] evaluator_model=Qwen/Qwen3-14B
+[2026-06-13 11:10:22] conversation_indices=[0]
+[2026-06-13 11:10:22] score conv=0 fact_items=228 nonfact_items=105
+[2026-06-13 11:10:49] done conv=0 fact=0.8786 nonfact=0.8737 combined=0.8771
+[2026-06-13 11:10:49] final fact=0.8786 nonfact=0.8737 combined=0.8771
+[2026-06-13 11:10:49] output_dir=E:\cydd_own_products\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\evaluation_pipeline\rubric\outputs\conversation_fact_nonfact_continuous_20260613_111022
