@@ -1,0 +1,927 @@
+{
+  "conversation_idx": 0,
+  "terms": [
+    "acceptance",
+    "adoption",
+    "art",
+    "camping",
+    "colors",
+    "community",
+    "counseling",
+    "difference",
+    "family",
+    "fun",
+    "health",
+    "help",
+    "journey",
+    "joy",
+    "kids",
+    "life",
+    "mental health",
+    "moments",
+    "nature",
+    "others",
+    "paintings",
+    "people",
+    "pottery",
+    "pride",
+    "rights",
+    "self",
+    "stories",
+    "support",
+    "transition",
+    "way",
+    "work"
+  ],
+  "models": {
+    "gemini": {
+      "memory_count": 149,
+      "covered_count": 24,
+      "partial_count": 0,
+      "missing_count": 7,
+      "coverage_rate": 0.7742,
+      "terms": [
+        {
+          "term": "acceptance",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline's adoption goal is to give children a loving home and show love and acceptance.",
+            "The painting 'Embracing Identity' depicts a woman and represents the journey of acceptance."
+          ]
+        },
+        {
+          "term": "adoption",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is researching adoption agencies.",
+            "Caroline's adoption goal is to give children a loving home and show love and acceptance.",
+            "Caroline is looking into an adoption agency that helps LGBTQ+ individuals."
+          ]
+        },
+        {
+          "term": "art",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline started transitioning three years ago.",
+            "Caroline owns a necklace with a cross and a heart.",
+            "Melanie used flowers as part of her wedding decor."
+          ]
+        },
+        {
+          "term": "camping",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie and her children are thinking about going camping next month.",
+            "Melanie went camping in the mountains with her family last week.",
+            "Melanie and her family went camping at the beach."
+          ]
+        },
+        {
+          "term": "colors",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline painted a piece with red and blue colors to represent her path as a trans woman."
+          ]
+        },
+        {
+          "term": "community",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "counseling",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is interested in pursuing a career in counseling or mental health.",
+            "Caroline attended an LGBTQ+ counseling workshop last Friday."
+          ]
+        },
+        {
+          "term": "difference",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "family",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline's support system includes friends, family, and mentors.",
+            "Melanie went camping in the mountains with her family last week.",
+            "Melanie and her family went camping at the beach."
+          ]
+        },
+        {
+          "term": "fun",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "health",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is interested in pursuing a career in counseling or mental health.",
+            "Melanie ran a charity race for mental health last Saturday."
+          ]
+        },
+        {
+          "term": "help",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is looking into an adoption agency that helps LGBTQ+ individuals.",
+            "Caroline wants to work with trans people to help them accept themselves."
+          ]
+        },
+        {
+          "term": "journey",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline talked about her transgender journey at her school event.",
+            "The painting 'Embracing Identity' depicts a woman and represents the journey of acceptance."
+          ]
+        },
+        {
+          "term": "joy",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie's children enjoyed the dinosaur exhibit at the museum.",
+            "Melanie and her family enjoy hiking in the mountains.",
+            "Melanie enjoys classical music by Bach and Mozart."
+          ]
+        },
+        {
+          "term": "kids",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline and the youth center are organizing a talent show for the kids next month."
+          ]
+        },
+        {
+          "term": "life",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "mental health",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is interested in pursuing a career in counseling or mental health.",
+            "Melanie ran a charity race for mental health last Saturday."
+          ]
+        },
+        {
+          "term": "moments",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "nature",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie and her children painted nature-inspired pictures last weekend."
+          ]
+        },
+        {
+          "term": "others",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "paintings",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline will feature her own paintings in her upcoming LGBTQ art show.",
+            "Melanie creates pottery and paintings."
+          ]
+        },
+        {
+          "term": "people",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline wants to work with trans people to help them accept themselves.",
+            "Caroline tried to apologize to a group of people she encountered on a hike last week."
+          ]
+        },
+        {
+          "term": "pottery",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie signed up for a pottery class yesterday.",
+            "Melanie made a bowl with a black and white flower design in her pottery class.",
+            "Melanie took her children to a pottery workshop last Friday."
+          ]
+        },
+        {
+          "term": "pride",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ+ pride parade last week.",
+            "Caroline attended a pride parade a few weeks ago.",
+            "Caroline and her mentee attended an LGBT pride event last month."
+          ]
+        },
+        {
+          "term": "rights",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "self",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline gained the courage to embrace herself.",
+            "Caroline painted a self-portrait last week.",
+            "Caroline's self-portrait features a woman with a blue face."
+          ]
+        },
+        {
+          "term": "stories",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline's library contains children's books, classics, stories from different cultures, and educational books."
+          ]
+        },
+        {
+          "term": "support",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ support group yesterday.",
+            "Caroline felt accepted at the support group.",
+            "Melanie's support system includes her husband and children."
+          ]
+        },
+        {
+          "term": "transition",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline started transitioning three years ago.",
+            "Caroline's friends and family have supported her during her transition.",
+            "Caroline uses art to explore her transition and changing body."
+          ]
+        },
+        {
+          "term": "way",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie uses painting as a way to relax, express her feelings, and be creative."
+          ]
+        },
+        {
+          "term": "work",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ+ counseling workshop last Friday.",
+            "Caroline wants to work with trans people to help them accept themselves.",
+            "Melanie took her children to a pottery workshop last Friday."
+          ]
+        }
+      ]
+    },
+    "deepseek": {
+      "memory_count": 228,
+      "covered_count": 29,
+      "partial_count": 0,
+      "missing_count": 2,
+      "coverage_rate": 0.9355,
+      "terms": [
+        {
+          "term": "acceptance",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline's friends and family have been supporting her transition with love, guidance, and acceptance.",
+            "The book taught Caroline self-acceptance and how to find support.",
+            "Caroline uses her art to speak up for the LGBTQ+ community and push for acceptance."
+          ]
+        },
+        {
+          "term": "adoption",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is researching adoption agencies.",
+            "Caroline chose an adoption agency that helps LGBTQ+ folks with adoption.",
+            "Caroline went to a council meeting for adoption last Friday."
+          ]
+        },
+        {
+          "term": "art",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline started transitioning three years ago.",
+            "Flowers were an important part of Melanie's wedding decor.",
+            "Melanie's favorite part of her wedding was marrying her partner and promising to be together forever."
+          ]
+        },
+        {
+          "term": "camping",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie is thinking about going camping next month.",
+            "Melanie went camping with her kids a few weeks ago.",
+            "Melanie's family went camping at the beach."
+          ]
+        },
+        {
+          "term": "colors",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie is obsessed with colors and patterns.",
+            "The mix of colors in Caroline's painting means smashing rigid thinking."
+          ]
+        },
+        {
+          "term": "community",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline encouraged students to get involved in the LGBTQ community at the school event.",
+            "Caroline is thankful for the LGBTQ community.",
+            "Caroline uses her art to speak up for the LGBTQ+ community and push for acceptance."
+          ]
+        },
+        {
+          "term": "counseling",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is still looking into counseling and mental health jobs.",
+            "Caroline attended an LGBTQ+ counseling workshop last Friday.",
+            "Caroline's own journey and support motivated her to pursue counseling."
+          ]
+        },
+        {
+          "term": "difference",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is inspired by seeing her work make a difference for the LGBTQ+ community."
+          ]
+        },
+        {
+          "term": "family",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is excited to make a family for kids who need one.",
+            "Caroline's friends, family, and mentors helped her through her transition.",
+            "Caroline had a picnic with her friends and family last week."
+          ]
+        },
+        {
+          "term": "fun",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "health",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is still looking into counseling and mental health jobs.",
+            "Melanie ran a charity race for mental health last Saturday.",
+            "Caroline struggled with mental health in the past."
+          ]
+        },
+        {
+          "term": "help",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline chose an adoption agency that helps LGBTQ+ folks with adoption.",
+            "Caroline's friends, family, and mentors helped her through her transition.",
+            "Caroline wants to help people who have gone through the same things as her."
+          ]
+        },
+        {
+          "term": "journey",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline talked about her transgender journey at a school event last week.",
+            "Caroline's own journey and support motivated her to pursue counseling.",
+            "The woman in 'Embracing Identity' stands for the journey of acceptance."
+          ]
+        },
+        {
+          "term": "joy",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie and her family enjoy hiking in the mountains and exploring forests.",
+            "Melanie's wedding day was full of love and joy.",
+            "Caroline finds joy in bringing others comfort and helping them grow."
+          ]
+        },
+        {
+          "term": "kids",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie went swimming with her kids.",
+            "Melanie's kids are excited about summer break.",
+            "Caroline is excited to make a family for kids who need one."
+          ]
+        },
+        {
+          "term": "life",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie's favorite art types are painting landscapes and still life."
+          ]
+        },
+        {
+          "term": "mental health",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is still looking into counseling and mental health jobs.",
+            "Melanie ran a charity race for mental health last Saturday.",
+            "Caroline struggled with mental health in the past."
+          ]
+        },
+        {
+          "term": "moments",
+          "status": "missing",
+          "covered": false,
+          "matching_memories": []
+        },
+        {
+          "term": "nature",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie bonds with her family over stories, campfires, and nature during camping.",
+            "Melanie finds peace and serenity in nature."
+          ]
+        },
+        {
+          "term": "others",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline wants to live authentically and help others to do the same.",
+            "Caroline is grateful to share her journey and help others with theirs.",
+            "Caroline finds joy in bringing others comfort and helping them grow."
+          ]
+        },
+        {
+          "term": "paintings",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline will show her paintings at the LGBTQ art show.",
+            "Melanie is planning autumn-inspired paintings."
+          ]
+        },
+        {
+          "term": "people",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is thinking of working with trans people.",
+            "Caroline wants to help people who have gone through the same things as her.",
+            "Caroline is passionate about helping people and making a positive impact."
+          ]
+        },
+        {
+          "term": "pottery",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie signed up for a pottery class yesterday.",
+            "Melanie made a bowl with a black and white flower design in her pottery class.",
+            "Melanie took her kids to a pottery workshop last Friday."
+          ]
+        },
+        {
+          "term": "pride",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline felt accepted and happy at the pride parade.",
+            "Caroline went to an LGBTQ+ pride parade a few weeks ago.",
+            "Caroline felt inspired by the pride parade."
+          ]
+        },
+        {
+          "term": "rights",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline wants to fight for trans rights and spread awareness.",
+            "Caroline thought about how much work there is for LGBTQ rights."
+          ]
+        },
+        {
+          "term": "self",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline gained courage to embrace herself.",
+            "The book taught Caroline self-acceptance and how to find support.",
+            "Caroline realized she can be herself without fear and had the courage to transition."
+          ]
+        },
+        {
+          "term": "stories",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline has kids' books including classics, stories from different cultures, and educational books.",
+            "Melanie's family roasted marshmallows and shared stories around the campfire.",
+            "Melanie bonds with her family over stories, campfires, and nature during camping."
+          ]
+        },
+        {
+          "term": "support",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ support group yesterday.",
+            "Caroline felt accepted at the support group.",
+            "Caroline's own journey and support motivated her to pursue counseling."
+          ]
+        },
+        {
+          "term": "transition",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline started transitioning three years ago.",
+            "Caroline's friends, family, and mentors helped her through her transition.",
+            "Caroline's friends and family have been supporting her transition with love, guidance, and acceptance."
+          ]
+        },
+        {
+          "term": "way",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie finds painting a way to relax after a long day.",
+            "Art has been a great way for Caroline to work through stuff she is going through.",
+            "Caroline has always had a love for horses."
+          ]
+        },
+        {
+          "term": "work",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ+ counseling workshop last Friday.",
+            "Caroline is thinking of working with trans people.",
+            "Melanie took her kids to a pottery workshop last Friday."
+          ]
+        }
+      ]
+    },
+    "minimax": {
+      "memory_count": 324,
+      "covered_count": 31,
+      "partial_count": 0,
+      "missing_count": 0,
+      "coverage_rate": 1.0,
+      "terms": [
+        {
+          "term": "acceptance",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline's support network gives her love, guidance, and acceptance.",
+            "'Becoming Nicole' taught Caroline self-acceptance.",
+            "The painting 'Embracing Identity' depicts a woman representing the journey of acceptance."
+          ]
+        },
+        {
+          "term": "adoption",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is researching adoption agencies.",
+            "The adoption agency Caroline chose has inclusivity and support.",
+            "Caroline chose an adoption agency that helps LGBTQ+ folks with adoption."
+          ]
+        },
+        {
+          "term": "art",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline started transitioning three years ago.",
+            "The bowl reminds Caroline of art and self-expression.",
+            "Caroline received a necklace with a cross and heart from her grandma in Sweden."
+          ]
+        },
+        {
+          "term": "camping",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie's family is thinking about going camping next month.",
+            "Melanie's family went on a hike during the camping trip.",
+            "Melanie's family roasted marshmallows around the campfire during the camping trip."
+          ]
+        },
+        {
+          "term": "colors",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "The mix of colors in Caroline's painting symbolizes smashing rigid thinking.",
+            "Melanie's sunset painting colors make her feel calm."
+          ]
+        },
+        {
+          "term": "community",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline gave a school talk last week about her transgender journey and encouraged students to get involved in the LGBTQ community.",
+            "Caroline is excited to meet other people in the community and learn more about advocacy.",
+            "The rainbow flag mural reflects the courage and strength of the trans community."
+          ]
+        },
+        {
+          "term": "counseling",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is still interested in counseling and mental health as a career.",
+            "Caroline attended an LGBTQ+ counseling workshop last Friday.",
+            "Caroline's own journey and the support she received motivated her to pursue counseling."
+          ]
+        },
+        {
+          "term": "difference",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline finds it empowering to make a positive difference in someone's life.",
+            "Caroline is inspired by her work making a difference for the LGBTQ+ community."
+          ]
+        },
+        {
+          "term": "family",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie's family is thinking about going camping next month.",
+            "Caroline wants to have a family and give a loving home to kids who need it.",
+            "Caroline is thrilled to make a family for kids who need one."
+          ]
+        },
+        {
+          "term": "fun",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline and Melanie had fun at Pride fest last year."
+          ]
+        },
+        {
+          "term": "health",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is still interested in counseling and mental health as a career.",
+            "Melanie ran a charity race for mental health last Saturday.",
+            "Caroline is still looking into counseling and mental health jobs."
+          ]
+        },
+        {
+          "term": "help",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline chose an adoption agency that helps LGBTQ+ folks with adoption.",
+            "Pottery helps Melanie express her feelings and be creative.",
+            "Caroline's friends and family have been helping with her transition."
+          ]
+        },
+        {
+          "term": "journey",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline shared her own journey, struggles, and personal development since coming out.",
+            "Caroline gave a school talk last week about her transgender journey and encouraged students to get involved in the LGBTQ community.",
+            "Caroline's own journey and the support she received motivated her to pursue counseling."
+          ]
+        },
+        {
+          "term": "joy",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Clay brings Melanie joy.",
+            "Pets bring so much joy to Caroline.",
+            "Melanie's family enjoys hiking in the mountains and exploring forests."
+          ]
+        },
+        {
+          "term": "kids",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie is going swimming with the kids.",
+            "Melanie's kids are excited about summer break.",
+            "Caroline wants to have a family and give a loving home to kids who need it."
+          ]
+        },
+        {
+          "term": "life",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline saw how counseling and support groups improved her own life.",
+            "Pottery is a huge part of Melanie's life, not just a hobby.",
+            "Caroline finds it empowering to make a positive difference in someone's life."
+          ]
+        },
+        {
+          "term": "mental health",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline is still interested in counseling and mental health as a career.",
+            "Melanie ran a charity race for mental health last Saturday.",
+            "Caroline is still looking into counseling and mental health jobs."
+          ]
+        },
+        {
+          "term": "moments",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Flowers remind Melanie to appreciate small moments.",
+            "Melanie feels lucky to share moments with her family.",
+            "Special moments make Melanie appreciate life and how lucky she is."
+          ]
+        },
+        {
+          "term": "nature",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie's 2 younger kids love nature.",
+            "Melanie and her kids found purple flowers in nature.",
+            "Melanie and her kids love painting together, especially nature-inspired paintings."
+          ]
+        },
+        {
+          "term": "others",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline wants to help others live authentically.",
+            "Caroline wants to pass on the support she received to others.",
+            "Bringing others comfort and helping them grow brings Caroline joy."
+          ]
+        },
+        {
+          "term": "paintings",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie and her kids love painting together, especially nature-inspired paintings.",
+            "Melanie is feeling inspired by autumn and is planning autumn paintings."
+          ]
+        },
+        {
+          "term": "people",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline wants to work with trans people as a counselor.",
+            "Caroline saw how passionate professionals were about making a safe space for trans people at the workshop.",
+            "Caroline is passionate about creating a safe, inviting place for people to grow."
+          ]
+        },
+        {
+          "term": "pottery",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie finds pottery calming.",
+            "Melanie signed up for a pottery class yesterday.",
+            "Melanie is a fan of pottery."
+          ]
+        },
+        {
+          "term": "pride",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline and her mentee attended an LGBTQ+ pride parade last month.",
+            "Caroline realized she can be herself without fear and felt like she belonged at the pride parade.",
+            "Caroline felt accepted and happy at the pride parade."
+          ]
+        },
+        {
+          "term": "rights",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline wants to fight for trans rights and spread awareness.",
+            "Caroline believes there is still work to be done for LGBTQ rights."
+          ]
+        },
+        {
+          "term": "self",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline gained courage to embrace herself from the support group.",
+            "Melanie realized that self-care is important.",
+            "The bowl reminds Caroline of art and self-expression."
+          ]
+        },
+        {
+          "term": "stories",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "The transgender stories at the support group were inspiring to Caroline.",
+            "Caroline's library includes kids' books such as classics, stories from different cultures, and educational books.",
+            "During camping trips, the family roasts marshmallows, tells stories around the campfire, and enjoys each other's company."
+          ]
+        },
+        {
+          "term": "support",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ support group yesterday.",
+            "Caroline felt accepted at the support group.",
+            "Caroline gained courage to embrace herself from the support group."
+          ]
+        },
+        {
+          "term": "transition",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline started transitioning three years ago.",
+            "Caroline's friends and family have been helping with her transition.",
+            "Caroline's support network has been instrumental in her transition."
+          ]
+        },
+        {
+          "term": "way",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Melanie finds painting a good way to relax after a long day.",
+            "Melanie runs as a way to destress and clear her mind.",
+            "Luna and Oliver brighten up Melanie's day and always make her smile."
+          ]
+        },
+        {
+          "term": "work",
+          "status": "exact",
+          "covered": true,
+          "matching_memories": [
+            "Caroline attended an LGBTQ+ counseling workshop last Friday.",
+            "Caroline wants to work with trans people as a counselor.",
+            "Caroline saw how passionate professionals were about making a safe space for trans people at the workshop."
+          ]
+        }
+      ]
+    }
+  }
+}

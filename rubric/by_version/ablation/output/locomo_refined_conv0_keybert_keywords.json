@@ -1,0 +1,208 @@
+{
+  "conversation_idx": 0,
+  "speaker_a": "Caroline",
+  "speaker_b": "Melanie",
+  "method": "KeyBERT(local all-MiniLM-L6-v2, CountVectorizer max_features=2000 min_df=1, ngram=1..2, MMR diversity=0.7)",
+  "keywords": [
+    {
+      "term": "exciting lgbtq",
+      "score": 0.5174
+    },
+    {
+      "term": "expressing trans",
+      "score": 0.3182
+    },
+    {
+      "term": "counseling mental",
+      "score": 0.2817
+    },
+    {
+      "term": "career options",
+      "score": 0.2652
+    },
+    {
+      "term": "health support",
+      "score": 0.2604
+    },
+    {
+      "term": "tell stories",
+      "score": 0.2512
+    },
+    {
+      "term": "fri finally",
+      "score": 0.224
+    },
+    {
+      "term": "gender system",
+      "score": 0.2189
+    },
+    {
+      "term": "smile",
+      "score": 0.2185
+    },
+    {
+      "term": "concern thoughtful",
+      "score": 0.2086
+    },
+    {
+      "term": "myself",
+      "score": 0.2077
+    },
+    {
+      "term": "congrats both",
+      "score": 0.2064
+    },
+    {
+      "term": "celebrated daughter",
+      "score": 0.1958
+    },
+    {
+      "term": "charlotte web",
+      "score": 0.1897
+    },
+    {
+      "term": "guide motivate",
+      "score": 0.1875
+    },
+    {
+      "term": "group connected",
+      "score": 0.1841
+    },
+    {
+      "term": "bye bye",
+      "score": 0.1803
+    },
+    {
+      "term": "kids loved",
+      "score": 0.1783
+    },
+    {
+      "term": "company highlight",
+      "score": 0.1673
+    },
+    {
+      "term": "chapter dream",
+      "score": 0.1643
+    },
+    {
+      "term": "spread understanding",
+      "score": 0.1558
+    },
+    {
+      "term": "much fun",
+      "score": 0.1528
+    },
+    {
+      "term": "edu",
+      "score": 0.1494
+    },
+    {
+      "term": "drawing flowers",
+      "score": 0.1473
+    },
+    {
+      "term": "inclusivity support",
+      "score": 0.1458
+    },
+    {
+      "term": "ever nope",
+      "score": 0.1346
+    },
+    {
+      "term": "campaigns lately",
+      "score": 0.1242
+    },
+    {
+      "term": "fancy bowl",
+      "score": 0.1227
+    },
+    {
+      "term": "fits journey",
+      "score": 0.1196
+    },
+    {
+      "term": "each such",
+      "score": 0.1145
+    },
+    {
+      "term": "flags",
+      "score": 0.1143
+    },
+    {
+      "term": "friday went",
+      "score": 0.1108
+    },
+    {
+      "term": "during move",
+      "score": 0.1063
+    },
+    {
+      "term": "funniest oliver",
+      "score": 0.1042
+    },
+    {
+      "term": "grand canyon",
+      "score": 0.102
+    },
+    {
+      "term": "roasted marshmallows",
+      "score": 0.0995
+    },
+    {
+      "term": "grateful chance",
+      "score": 0.0981
+    },
+    {
+      "term": "caro found",
+      "score": 0.0915
+    },
+    {
+      "term": "electric energy",
+      "score": 0.0808
+    },
+    {
+      "term": "running running",
+      "score": 0.0699
+    },
+    {
+      "term": "words mean",
+      "score": 0.0565
+    },
+    {
+      "term": "freeing express",
+      "score": 0.0552
+    },
+    {
+      "term": "2023 since",
+      "score": 0.0482
+    },
+    {
+      "term": "ready",
+      "score": 0.0472
+    },
+    {
+      "term": "details horse",
+      "score": 0.0365
+    },
+    {
+      "term": "glass window",
+      "score": 0.0333
+    },
+    {
+      "term": "clarinet started",
+      "score": 0.0271
+    },
+    {
+      "term": "documents references",
+      "score": 0.0107
+    },
+    {
+      "term": "especially tough",
+      "score": -0.0032
+    },
+    {
+      "term": "determination difference",
+      "score": -0.0299
+    }
+  ]
+}

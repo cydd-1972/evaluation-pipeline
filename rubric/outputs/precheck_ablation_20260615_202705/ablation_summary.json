@@ -1,0 +1,506 @@
+{
+  "validation": {
+    "dataset_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\datasets\\locomo_refined.json",
+    "dataset_conversation_count": 10,
+    "models": [
+      "minimax",
+      "deepseek",
+      "gemini"
+    ],
+    "rubric_paths": [
+      "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\v5_fact_continuous_20260613_134804\\rubric_scores.csv",
+      "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\v5_fact_continuous_20260613_140420\\rubric_scores.csv"
+    ],
+    "v9_rows": 30,
+    "memory_models": [
+      "deepseek",
+      "gemini",
+      "minimax"
+    ],
+    "qa_models": [
+      "gemini",
+      "minimax"
+    ],
+    "missing_qa_models": [
+      "deepseek"
+    ]
+  },
+  "summary": {
+    "experiments": {
+      "E0_v9_baseline": {
+        "family": "baseline",
+        "features": [],
+        "model_scores": {
+          "deepseek": 0.8534,
+          "gemini": 0.8623,
+          "minimax": 0.8412
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0,
+          "gemini": 0.0,
+          "minimax": 0.0
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.4774,
+        "qa_spearman_by_conversation": -0.3756,
+        "gemini_minus_minimax_score": 0.0211
+      },
+      "E1_memory_count_token": {
+        "family": "memory_only",
+        "features": [
+          "memory_count_token"
+        ],
+        "model_scores": {
+          "deepseek": 0.8531,
+          "gemini": 0.8584,
+          "minimax": 0.8412
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0004,
+          "gemini": 0.0039,
+          "minimax": 0.0
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.4253,
+        "qa_spearman_by_conversation": -0.3423,
+        "gemini_minus_minimax_score": 0.0172
+      },
+      "E2_exact_duplicate_monitor": {
+        "family": "memory_only_monitor",
+        "features": [],
+        "model_scores": {
+          "deepseek": 0.8534,
+          "gemini": 0.8623,
+          "minimax": 0.8412
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0,
+          "gemini": 0.0,
+          "minimax": 0.0
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.4774,
+        "qa_spearman_by_conversation": -0.3756,
+        "gemini_minus_minimax_score": 0.0211
+      },
+      "E3_near_duplicate_lexical": {
+        "family": "memory_only",
+        "features": [
+          "near_duplicate_lexical"
+        ],
+        "model_scores": {
+          "deepseek": 0.8534,
+          "gemini": 0.8622,
+          "minimax": 0.8407
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0,
+          "gemini": 0.0001,
+          "minimax": 0.0005
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.4803,
+        "qa_spearman_by_conversation": -0.4002,
+        "gemini_minus_minimax_score": 0.0215
+      },
+      "E4_entity_coverage": {
+        "family": "memory_only",
+        "features": [
+          "entity_coverage"
+        ],
+        "model_scores": {
+          "deepseek": 0.8347,
+          "gemini": 0.8354,
+          "minimax": 0.8245
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0188,
+          "gemini": 0.0269,
+          "minimax": 0.0166
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.4106,
+        "qa_spearman_by_conversation": -0.2376,
+        "gemini_minus_minimax_score": 0.0109
+      },
+      "E5_keyword_coverage_tfidf": {
+        "family": "memory_only",
+        "features": [
+          "keyword_coverage_tfidf"
+        ],
+        "model_scores": {
+          "deepseek": 0.8362,
+          "gemini": 0.8343,
+          "minimax": 0.8262
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0173,
+          "gemini": 0.028,
+          "minimax": 0.015
+        },
+        "rank": [
+          "deepseek",
+          "gemini",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.3795,
+        "qa_spearman_by_conversation": -0.2219,
+        "gemini_minus_minimax_score": 0.0081
+      },
+      "E6_pronoun_ambiguity": {
+        "family": "memory_only",
+        "features": [
+          "pronoun_ambiguity"
+        ],
+        "model_scores": {
+          "deepseek": 0.8527,
+          "gemini": 0.8621,
+          "minimax": 0.84
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0008,
+          "gemini": 0.0002,
+          "minimax": 0.0011
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.485,
+        "qa_spearman_by_conversation": -0.3878,
+        "gemini_minus_minimax_score": 0.0221
+      },
+      "E7_answer_span_coverage": {
+        "family": "qa_aware",
+        "features": [
+          "answer_span_coverage"
+        ],
+        "model_scores": {
+          "deepseek": 0.8534,
+          "gemini": 0.8376,
+          "minimax": 0.8229
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0,
+          "gemini": 0.0247,
+          "minimax": 0.0182
+        },
+        "rank": [
+          "deepseek",
+          "gemini",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.4161,
+        "qa_spearman_by_conversation": -0.3061,
+        "gemini_minus_minimax_score": 0.0147
+      },
+      "E8_retrieval_failure": {
+        "family": "qa_aware",
+        "features": [
+          "retrieval_failure"
+        ],
+        "model_scores": {
+          "deepseek": 0.8534,
+          "gemini": 0.8172,
+          "minimax": 0.8076
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0,
+          "gemini": 0.0452,
+          "minimax": 0.0335
+        },
+        "rank": [
+          "deepseek",
+          "gemini",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.3527,
+        "qa_spearman_by_conversation": -0.2316,
+        "gemini_minus_minimax_score": 0.0096
+      },
+      "C1_memory_coverage_combo": {
+        "family": "memory_only",
+        "features": [
+          "memory_count_token",
+          "entity_coverage",
+          "keyword_coverage_tfidf"
+        ],
+        "model_scores": {
+          "deepseek": 0.8171,
+          "gemini": 0.8035,
+          "minimax": 0.8096
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0364,
+          "gemini": 0.0588,
+          "minimax": 0.0316
+        },
+        "rank": [
+          "deepseek",
+          "minimax",
+          "gemini"
+        ],
+        "qa_available_rank": [
+          "minimax",
+          "gemini"
+        ],
+        "rank_match_minimax_over_gemini": true,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.2295,
+        "qa_spearman_by_conversation": -0.1564,
+        "gemini_minus_minimax_score": -0.0061
+      },
+      "C2_efficiency_structure_combo": {
+        "family": "memory_only",
+        "features": [
+          "near_duplicate_lexical",
+          "pronoun_ambiguity"
+        ],
+        "model_scores": {
+          "deepseek": 0.8527,
+          "gemini": 0.862,
+          "minimax": 0.8395
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0008,
+          "gemini": 0.0003,
+          "minimax": 0.0016
+        },
+        "rank": [
+          "gemini",
+          "deepseek",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.488,
+        "qa_spearman_by_conversation": -0.4122,
+        "gemini_minus_minimax_score": 0.0225
+      },
+      "C3_memory_only_all": {
+        "family": "memory_only",
+        "features": [
+          "memory_count_token",
+          "near_duplicate_lexical",
+          "entity_coverage",
+          "keyword_coverage_tfidf",
+          "pronoun_ambiguity"
+        ],
+        "model_scores": {
+          "deepseek": 0.8163,
+          "gemini": 0.8032,
+          "minimax": 0.8079
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0372,
+          "gemini": 0.0591,
+          "minimax": 0.0332
+        },
+        "rank": [
+          "deepseek",
+          "minimax",
+          "gemini"
+        ],
+        "qa_available_rank": [
+          "minimax",
+          "gemini"
+        ],
+        "rank_match_minimax_over_gemini": true,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.2446,
+        "qa_spearman_by_conversation": -0.1865,
+        "gemini_minus_minimax_score": -0.0047
+      },
+      "C4_qa_aware_all": {
+        "family": "qa_aware",
+        "features": [
+          "answer_span_coverage",
+          "retrieval_failure"
+        ],
+        "model_scores": {
+          "deepseek": 0.8534,
+          "gemini": 0.7925,
+          "minimax": 0.7894
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0,
+          "gemini": 0.0698,
+          "minimax": 0.0517
+        },
+        "rank": [
+          "deepseek",
+          "gemini",
+          "minimax"
+        ],
+        "qa_available_rank": [
+          "gemini",
+          "minimax"
+        ],
+        "rank_match_minimax_over_gemini": false,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.2767,
+        "qa_spearman_by_conversation": -0.1714,
+        "gemini_minus_minimax_score": 0.0031
+      },
+      "C5_all_features": {
+        "family": "combined",
+        "features": [
+          "memory_count_token",
+          "exact_duplicate",
+          "near_duplicate_lexical",
+          "entity_coverage",
+          "keyword_coverage_tfidf",
+          "pronoun_ambiguity",
+          "answer_span_coverage",
+          "retrieval_failure"
+        ],
+        "model_scores": {
+          "deepseek": 0.8163,
+          "gemini": 0.7355,
+          "minimax": 0.7562
+        },
+        "model_avg_penalties": {
+          "deepseek": 0.0372,
+          "gemini": 0.1268,
+          "minimax": 0.085
+        },
+        "rank": [
+          "deepseek",
+          "minimax",
+          "gemini"
+        ],
+        "qa_available_rank": [
+          "minimax",
+          "gemini"
+        ],
+        "rank_match_minimax_over_gemini": true,
+        "target_qa_rank_hint": {
+          "minimax": 1,
+          "gemini": 2
+        },
+        "qa_pearson_by_conversation": -0.0615,
+        "qa_spearman_by_conversation": -0.0271,
+        "gemini_minus_minimax_score": -0.0207
+      }
+    },
+    "qa_alignment_note": "QA alignment uses only models with QA details present."
+  }
+}

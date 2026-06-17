@@ -1,0 +1,1250 @@
+{
+  "source_input_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\by_version\\ablation\\output\\high_similarity_memory_pairs.json",
+  "pair_count": 72,
+  "summary_by_model": {
+    "minimax": {
+      "total": 18,
+      "duplicate": 1,
+      "related_but_distinct": 16,
+      "complementary_mergeable": 1
+    },
+    "gemini": {
+      "total": 41,
+      "duplicate": 2,
+      "related_but_distinct": 37,
+      "complementary_mergeable": 2
+    },
+    "deepseek": {
+      "total": 13,
+      "duplicate": 0,
+      "related_but_distinct": 13,
+      "complementary_mergeable": 0
+    }
+  },
+  "pairs": [
+    {
+      "model": "minimax",
+      "conversation_idx": 3,
+      "item_idx_a": 345,
+      "item_idx_b": 351,
+      "text_a": "Joanna's brother wrote her notes when they were kids.",
+      "text_b": "Joanna's brother wrote her cute notes when they were kids.",
+      "jaccard": 0.9091,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "duplicate",
+        "reason": "The two memories are nearly identical, with only a minor descriptive addition ('cute') in Memory B that does not change the underlying fact.",
+        "better_text": "Joanna's brother wrote her notes when they were kids.",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"duplicate\",\n  \"reason\": \"The two memories are nearly identical, with only a minor descriptive addition ('cute') in Memory B that does not change the underlying fact.\",\n  \"better_text\": \"Joanna's brother wrote her notes when they were kids.\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 3,
+      "item_idx_a": 98,
+      "item_idx_b": 231,
+      "text_a": "Nate recommended a book series to Joanna.",
+      "text_b": "Joanna recommended a fantasy book series to Nate.",
+      "jaccard": 0.875,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories involve the same individuals but describe opposite actions (Nate recommending to Joanna vs. Joanna recommending to Nate) and include different details (fantasy genre in Memory B). This could lead to different answers in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories involve the same individuals but describe opposite actions (Nate recommending to Joanna vs. Joanna recommending to Nate) and include different details (fantasy genre in Memory B). This could lead to different answers in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 34,
+      "item_idx_b": 125,
+      "text_a": "The photo shows a group of people sitting around a table with a laptop.",
+      "text_b": "The photo shows a group of people sitting around a table.",
+      "jaccard": 0.8333,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in that Memory A specifies the presence of a laptop, while Memory B does not. This difference could affect the answer to a future QA question about objects in the photo.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in that Memory A specifies the presence of a laptop, while Memory B does not. This difference could affect the answer to a future QA question about objects in the photo.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 13,
+      "item_idx_b": 59,
+      "text_a": "The photo shows a group of people standing around a kitchen table.",
+      "text_b": "The photo shows a large group of people standing around a table.",
+      "jaccard": 0.8333,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in specific details (e.g., 'a group of people' vs. 'a large group of people' and 'kitchen table' vs. 'table'), which could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in specific details (e.g., 'a group of people' vs. 'a large group of people' and 'kitchen table' vs. 'table'), which could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 9,
+      "item_idx_a": 249,
+      "item_idx_b": 252,
+      "text_a": "Calvin believes hard work and dedication are key to reaching goals.",
+      "text_b": "Calvin believes hard work and dedication are key to reaching potential.",
+      "jaccard": 0.8333,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories are similar but differ in the specific phrasing of Calvin's belief, with 'reaching goals' versus 'reaching potential', which could lead to different interpretations in a future QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories are similar but differ in the specific phrasing of Calvin's belief, with 'reaching goals' versus 'reaching potential', which could lead to different interpretations in a future QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 22,
+      "item_idx_b": 174,
+      "text_a": "The photo shows a group of people standing around a field.",
+      "text_b": "The photo shows a group of people standing around a playground.",
+      "jaccard": 0.8182,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in the specific location described (field vs. playground), which could lead to different answers in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in the specific location described (field vs. playground), which could lead to different answers in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 1,
+      "item_idx_b": 2,
+      "text_a": "John is passionate about improving education in his community.",
+      "text_b": "John is passionate about improving infrastructure in his community.",
+      "jaccard": 0.8,
+      "token_overlap": 0.8889,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention John's passion for improving different aspects of his community (education vs. infrastructure), which are related but distinct topics.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention John's passion for improving different aspects of his community (education vs. infrastructure), which are related but distinct topics.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 3,
+      "item_idx_a": 7,
+      "item_idx_b": 55,
+      "text_a": "Nate won his first video game tournament last week.",
+      "text_b": "Nate won his second video game tournament last week.",
+      "jaccard": 0.8,
+      "token_overlap": 0.8889,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories differ in the detail of 'first' vs. 'second' tournament, which could change the answer to a future QA question about the number of tournaments Nate has won.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories differ in the detail of 'first' vs. 'second' tournament, which could change the answer to a future QA question about the number of tournaments Nate has won.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 3,
+      "item_idx_a": 74,
+      "item_idx_b": 136,
+      "text_a": "Nate won a regional video game tournament last week.",
+      "text_b": "Nate won a big video game tournament last week.",
+      "jaccard": 0.8,
+      "token_overlap": 0.8889,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories are similar but differ in the descriptor of the tournament ('regional' vs. 'big'), which could change the answer to a future QA question about the scale or significance of the tournament.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories are similar but differ in the descriptor of the tournament ('regional' vs. 'big'), which could change the answer to a future QA question about the scale or significance of the tournament.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 7,
+      "item_idx_a": 1,
+      "item_idx_b": 191,
+      "text_a": "Deborah visited her mother's old house last week.",
+      "text_b": "Deborah visited her mother's old house last Sunday.",
+      "jaccard": 0.8,
+      "token_overlap": 0.8889,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories differ in the specific time detail ('last week' vs. 'last Sunday'), which could change the answer to a future QA question about the exact day of the visit.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories differ in the specific time detail ('last week' vs. 'last Sunday'), which could change the answer to a future QA question about the exact day of the visit.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 8,
+      "item_idx_a": 161,
+      "item_idx_b": 163,
+      "text_a": "Evan and his family are eating homemade lasagna tonight.",
+      "text_b": "Sam and his family are eating homemade lasagna tonight.",
+      "jaccard": 0.8,
+      "token_overlap": 0.8889,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories involve different individuals (Evan vs. Sam) and thus represent distinct events, even though the structure and content are very similar.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories involve different individuals (Evan vs. Sam) and thus represent distinct events, even though the structure and content are very similar.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 2,
+      "item_idx_a": 5,
+      "item_idx_b": 6,
+      "text_a": "John is passionate about improving education in his community.",
+      "text_b": "John is passionate about improving infrastructure in his community.",
+      "jaccard": 0.8,
+      "token_overlap": 0.8889,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention John's passion for improving different aspects of his community (education vs. infrastructure), which are distinct but related topics.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention John's passion for improving different aspects of his community (education vs. infrastructure), which are distinct but related topics.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 3,
+      "item_idx_a": 13,
+      "item_idx_b": 14,
+      "text_a": "Joanna printed her first full screenplay last Friday.",
+      "text_b": "Joanna finished her first full screenplay last Friday.",
+      "jaccard": 0.7778,
+      "token_overlap": 0.875,
+      "judgment": {
+        "label": "duplicate",
+        "reason": "Both memories refer to the same event (Joanna completing her first full screenplay) on the same day (last Friday) and are very similar in wording.",
+        "better_text": "Joanna completed her first full screenplay last Friday.",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"duplicate\",\n  \"reason\": \"Both memories refer to the same event (Joanna completing her first full screenplay) on the same day (last Friday) and are very similar in wording.\",\n  \"better_text\": \"Joanna completed her first full screenplay last Friday.\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 4,
+      "item_idx_a": 62,
+      "item_idx_b": 155,
+      "text_a": "Tim is learning how to play the piano.",
+      "text_b": "Tim is learning how to play the violin.",
+      "jaccard": 0.7778,
+      "token_overlap": 0.875,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories involve the same person (Tim) learning to play an instrument, but the instruments are different (piano vs. violin), which could lead to different answers in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories involve the same person (Tim) learning to play an instrument, but the instruments are different (piano vs. violin), which could lead to different answers in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 9,
+      "item_idx_a": 26,
+      "item_idx_b": 203,
+      "text_a": "Dave went to a car show last weekend.",
+      "text_b": "Dave went to a car show last Friday.",
+      "jaccard": 0.7778,
+      "token_overlap": 0.875,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories differ in the specific day mentioned (last weekend vs. last Friday), which could change the answer to a future QA question about the exact date.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories differ in the specific day mentioned (last weekend vs. last Friday), which could change the answer to a future QA question about the exact date.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 2,
+      "item_idx_a": 378,
+      "item_idx_b": 384,
+      "text_a": "John and Max hiked during their camping trip.",
+      "text_b": "John and Max swam during their camping trip.",
+      "jaccard": 0.7778,
+      "token_overlap": 0.875,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe different activities (hiking vs. swimming) during the same camping trip, which are distinct facts.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe different activities (hiking vs. swimming) during the same camping trip, which are distinct facts.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 4,
+      "item_idx_a": 336,
+      "item_idx_b": 338,
+      "text_a": "John has seen all the Harry Potter movies.",
+      "text_b": "Tim has seen all the Harry Potter movies.",
+      "jaccard": 0.7778,
+      "token_overlap": 0.875,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories involve different individuals (John vs. Tim) and thus represent distinct facts.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories involve different individuals (John vs. Tim) and thus represent distinct facts.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 9,
+      "item_idx_a": 33,
+      "item_idx_b": 262,
+      "text_a": "Dave went to a car show last weekend.",
+      "text_b": "Dave went to a car show last Friday.",
+      "jaccard": 0.7778,
+      "token_overlap": 0.875,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories differ in the time specified (last weekend vs. last Friday), which could change the answer to a future QA question about when the event occurred.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories differ in the time specified (last weekend vs. last Friday), which could change the answer to a future QA question about when the event occurred.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 13,
+      "item_idx_b": 84,
+      "text_a": "The photo shows a group of people standing around a kitchen table.",
+      "text_b": "The photo shows a group of people standing around a table with food.",
+      "jaccard": 0.7692,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in key details (kitchen table vs. table with food), which could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in key details (kitchen table vs. table with food), which could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 59,
+      "item_idx_b": 84,
+      "text_a": "The photo shows a large group of people standing around a table.",
+      "text_b": "The photo shows a group of people standing around a table with food.",
+      "jaccard": 0.7692,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in detail (presence of food), which could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in detail (presence of food), which could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 13,
+      "item_idx_b": 22,
+      "text_a": "The photo shows a group of people standing around a kitchen table.",
+      "text_b": "The photo shows a group of people standing around a field.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenarios (people standing around something), but the key difference is the location (kitchen table vs. field), which could lead to different answers in a QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenarios (people standing around something), but the key difference is the location (kitchen table vs. field), which could lead to different answers in a QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 13,
+      "item_idx_b": 125,
+      "text_a": "The photo shows a group of people standing around a kitchen table.",
+      "text_b": "The photo shows a group of people sitting around a table.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories describe similar scenes but differ in key details (standing vs. sitting), which could affect the answer to a future QA question about the people's posture.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\"label\": \"related_but_distinct\", \"reason\": \"The two memories describe similar scenes but differ in key details (standing vs. sitting), which could affect the answer to a future QA question about the people's posture.\", \"better_text\": \"\"}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 13,
+      "item_idx_b": 174,
+      "text_a": "The photo shows a group of people standing around a kitchen table.",
+      "text_b": "The photo shows a group of people standing around a playground.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenarios (a group of people standing around something), but the key difference is the location—kitchen table vs. playground—which changes the context and could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenarios (a group of people standing around something), but the key difference is the location—kitchen table vs. playground—which changes the context and could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 22,
+      "item_idx_b": 59,
+      "text_a": "The photo shows a group of people standing around a field.",
+      "text_b": "The photo shows a large group of people standing around a table.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenes but differ in key details (field vs. table), which could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenes but differ in key details (field vs. table), which could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 59,
+      "item_idx_b": 125,
+      "text_a": "The photo shows a large group of people standing around a table.",
+      "text_b": "The photo shows a group of people sitting around a table.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories differ in the action of the people (standing vs. sitting), which could change the answer to a future QA question about the posture of individuals in the photo.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories differ in the action of the people (standing vs. sitting), which could change the answer to a future QA question about the posture of individuals in the photo.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 59,
+      "item_idx_b": 174,
+      "text_a": "The photo shows a large group of people standing around a table.",
+      "text_b": "The photo shows a group of people standing around a playground.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenes (people standing around something), but the specific objects (a table vs. a playground) are different and could lead to different answers in a QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenes (people standing around something), but the specific objects (a table vs. a playground) are different and could lead to different answers in a QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 125,
+      "item_idx_b": 126,
+      "text_a": "The photo shows a group of people sitting around a table.",
+      "text_b": "The photo shows a group of military men sitting around a table.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in a key detail: Memory B specifies that the group consists of 'military men', while Memory A only mentions 'a group of people'. This distinction could affect the answer to a future QA question about the identities of the people in the photo.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in a key detail: Memory B specifies that the group consists of 'military men', while Memory A only mentions 'a group of people'. This distinction could affect the answer to a future QA question about the identities of the people in the photo.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 126,
+      "item_idx_b": 175,
+      "text_a": "The photo shows a group of military men sitting around a table.",
+      "text_b": "The photo shows a group of men sitting around a campfire.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "Both memories describe a group of men in a photo, but the settings are different (table vs. campfire), which could lead to different interpretations in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"Both memories describe a group of men in a photo, but the settings are different (table vs. campfire), which could lead to different interpretations in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 3,
+      "item_idx_a": 77,
+      "item_idx_b": 155,
+      "text_a": "Joanna received a rejection letter from a major company for her screenplay.",
+      "text_b": "Joanna received a rejection from a production company for her screenplay.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "duplicate",
+        "reason": "Both memories convey the same core fact: Joanna received a rejection for her screenplay, with only minor differences in wording ('rejection letter' vs. 'rejection').",
+        "better_text": "Joanna received a rejection from a major production company for her screenplay.",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"duplicate\",\n  \"reason\": \"Both memories convey the same core fact: Joanna received a rejection for her screenplay, with only minor differences in wording ('rejection letter' vs. 'rejection').\",\n  \"better_text\": \"Joanna received a rejection from a major production company for her screenplay.\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 5,
+      "item_idx_a": 85,
+      "item_idx_b": 86,
+      "text_a": "Audrey offered to share her Chicken Pot Pie recipe with Andrew.",
+      "text_b": "Audrey offered to share her Roasted Chicken recipe with Andrew.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories involve the same person (Audrey) and the same action (offering to share a recipe) with the same recipient (Andrew), but the recipes mentioned are different (Chicken Pot Pie vs. Roasted Chicken). This difference could change the answer to a future QA question about which specific recipe was offered.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories involve the same person (Audrey) and the same action (offering to share a recipe) with the same recipient (Andrew), but the recipes mentioned are different (Chicken Pot Pie vs. Roasted Chicken). This difference could change the answer to a future QA question about which specific recipe was offered.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 8,
+      "item_idx_a": 119,
+      "item_idx_b": 127,
+      "text_a": "Evan and Sam plan to go on a kayaking trip together.",
+      "text_b": "Evan and Sam plan to go on a hike together.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories involve Evan and Sam planning an activity together, but the activities are different (kayaking vs. hiking), which could lead to different answers in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories involve Evan and Sam planning an activity together, but the activities are different (kayaking vs. hiking), which could lead to different answers in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 4,
+      "item_idx_a": 42,
+      "item_idx_b": 363,
+      "text_a": "Tim's favorite fantasy series is Lord of the Rings.",
+      "text_b": "Lord of the Rings is John's favorite fantasy film series.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention the same entity (Lord of the Rings) but attribute it to different individuals (Tim and John) and different categories (series vs. film series). This difference could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention the same entity (Lord of the Rings) but attribute it to different individuals (Tim and John) and different categories (series vs. film series). This difference could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 9,
+      "item_idx_a": 109,
+      "item_idx_b": 113,
+      "text_a": "Calvin asked Dave to take lots of pics of his mountain trip.",
+      "text_b": "Dave agreed to take lots of pics of his mountain trip.",
+      "jaccard": 0.75,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories involve different subjects (Calvin vs. Dave) and different actions (asked vs. agreed), which could lead to different interpretations in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories involve different subjects (Calvin vs. Dave) and different actions (asked vs. agreed), which could lead to different interpretations in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 1,
+      "item_idx_a": 2,
+      "item_idx_b": 12,
+      "text_a": "Gina's favorite dance style is contemporary.",
+      "text_b": "Jon's favorite dance style is contemporary.",
+      "jaccard": 0.75,
+      "token_overlap": 0.8571,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention different individuals (Gina vs. Jon) with the same favorite dance style, making them similar but distinct.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention different individuals (Gina vs. Jon) with the same favorite dance style, making them similar but distinct.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 3,
+      "item_idx_a": 22,
+      "item_idx_b": 167,
+      "text_a": "Nate successfully made coconut milk ice cream.",
+      "text_b": "Nate made coconut milk ice cream yesterday.",
+      "jaccard": 0.75,
+      "token_overlap": 0.8571,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories are similar but differ in the temporal detail (yesterday vs. no time specified), which could affect the answer to a future QA question about when the event occurred.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories are similar but differ in the temporal detail (yesterday vs. no time specified), which could affect the answer to a future QA question about when the event occurred.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 7,
+      "item_idx_a": 13,
+      "item_idx_b": 192,
+      "text_a": "Deborah's mother was passionate about travel.",
+      "text_b": "Deborah's mother was passionate about cooking.",
+      "jaccard": 0.75,
+      "token_overlap": 0.8571,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention different passions (travel vs. cooking) for the same person, Deborah's mother. They are similar in structure but represent distinct facts.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention different passions (travel vs. cooking) for the same person, Deborah's mother. They are similar in structure but represent distinct facts.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 9,
+      "item_idx_a": 19,
+      "item_idx_b": 124,
+      "text_a": "Dave attended a car show last weekend.",
+      "text_b": "Dave attended a car show last Friday.",
+      "jaccard": 0.75,
+      "token_overlap": 0.8571,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories differ in the specific day of the event (last weekend vs. last Friday), which could change the answer to a future QA question about the exact date.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories differ in the specific day of the event (last weekend vs. last Friday), which could change the answer to a future QA question about the exact date.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 1,
+      "item_idx_a": 2,
+      "item_idx_b": 13,
+      "text_a": "Gina's favorite dance style is contemporary.",
+      "text_b": "Jon's favorite dance style is contemporary.",
+      "jaccard": 0.75,
+      "token_overlap": 0.8571,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention different individuals (Gina vs. Jon) with the same favorite dance style, making them related but distinct.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention different individuals (Gina vs. Jon) with the same favorite dance style, making them related but distinct.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 2,
+      "item_idx_a": 10,
+      "item_idx_b": 11,
+      "text_a": "John thinks infrastructure should be funded properly.",
+      "text_b": "John thinks schools should be funded properly.",
+      "jaccard": 0.75,
+      "token_overlap": 0.8571,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar in structure but differ in the specific entity mentioned (infrastructure vs. schools), which could lead to different answers in a QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar in structure but differ in the specific entity mentioned (infrastructure vs. schools), which could lead to different answers in a QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 8,
+      "item_idx_a": 280,
+      "item_idx_b": 283,
+      "text_a": "Evan and his partner plan to ski in Canada during their honeymoon.",
+      "text_b": "Evan and his partner plan to try local cuisine in Canada during their honeymoon.",
+      "jaccard": 0.7333,
+      "token_overlap": 0.9167,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar in context (Evan and his partner's honeymoon plans in Canada) but differ in the specific activity mentioned (skiing vs. trying local cuisine). This difference could affect the answer to a future QA question about their specific plans.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar in context (Evan and his partner's honeymoon plans in Canada) but differ in the specific activity mentioned (skiing vs. trying local cuisine). This difference could affect the answer to a future QA question about their specific plans.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 0,
+      "item_idx_a": 201,
+      "item_idx_b": 202,
+      "text_a": "Caroline wants to live authentically.",
+      "text_b": "Caroline wants to help others live authentically.",
+      "jaccard": 0.7143,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in the action Caroline wants to take. Memory A focuses on her own desire to live authentically, while Memory B emphasizes her desire to help others live authentically. This difference in focus changes the answer to a future QA question about her intentions.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in the action Caroline wants to take. Memory A focuses on her own desire to live authentically, while Memory B emphasizes her desire to help others live authentically. This difference in focus changes the answer to a future QA question about her intentions.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 5,
+      "item_idx_a": 68,
+      "item_idx_b": 70,
+      "text_a": "Audrey invited Andrew to join her and her dogs for a walk.",
+      "text_b": "Andrew accepted Audrey's invitation to join her and her dogs for a walk.",
+      "jaccard": 0.7143,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe different actions: one is an invitation, and the other is the acceptance of that invitation.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe different actions: one is an invitation, and the other is the acceptance of that invitation.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 62,
+      "item_idx_b": 84,
+      "text_a": "The photo shows John at a food bank with a group of people standing around a table with boxes of tomatoes.",
+      "text_b": "The photo shows a group of people standing around a table with food.",
+      "jaccard": 0.7059,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in specific details (John is mentioned in Memory A, but not in Memory B; tomatoes are specified in Memory A, but not in Memory B). These differences could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in specific details (John is mentioned in Memory A, but not in Memory B; tomatoes are specified in Memory A, but not in Memory B). These differences could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 22,
+      "item_idx_b": 84,
+      "text_a": "The photo shows a group of people standing around a field.",
+      "text_b": "The photo shows a group of people standing around a table with food.",
+      "jaccard": 0.6923,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenes but differ in key details (field vs. table with food), which could lead to different answers in a QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenes but differ in key details (field vs. table with food), which could lead to different answers in a QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 84,
+      "item_idx_b": 125,
+      "text_a": "The photo shows a group of people standing around a table with food.",
+      "text_b": "The photo shows a group of people sitting around a table.",
+      "jaccard": 0.6923,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenes but differ in key details (standing vs. sitting), which could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenes but differ in key details (standing vs. sitting), which could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 84,
+      "item_idx_b": 174,
+      "text_a": "The photo shows a group of people standing around a table with food.",
+      "text_b": "The photo shows a group of people standing around a playground.",
+      "jaccard": 0.6923,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories describe different settings (a table with food vs. a playground) and thus represent distinct underlying facts.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories describe different settings (a table with food vs. a playground) and thus represent distinct underlying facts.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 8,
+      "item_idx_a": 90,
+      "item_idx_b": 118,
+      "text_a": "Evan painted a painting of a sunset over a body of water.",
+      "text_b": "Evan painted a painting of a sunset.",
+      "jaccard": 0.6667,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories are similar but differ in that Memory A specifies the sunset is over a body of water, while Memory B does not include this detail. This difference could change the answer to a future QA question about the specific scene in the painting.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories are similar but differ in that Memory A specifies the sunset is over a body of water, while Memory B does not include this detail. This difference could change the answer to a future QA question about the specific scene in the painting.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 9,
+      "item_idx_a": 20,
+      "item_idx_b": 21,
+      "text_a": "Calvin's new Ferrari is a black sports car.",
+      "text_b": "Calvin's car is a Ferrari.",
+      "jaccard": 0.6667,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in detail. Memory A specifies that Calvin's Ferrari is a black sports car, while Memory B only mentions that Calvin's car is a Ferrari. The additional details in Memory A (color and type) could change the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in detail. Memory A specifies that Calvin's Ferrari is a black sports car, while Memory B only mentions that Calvin's car is a Ferrari. The additional details in Memory A (color and type) could change the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 8,
+      "item_idx_a": 24,
+      "item_idx_b": 25,
+      "text_a": "Evan had a heart palpitation incident last week.",
+      "text_b": "Evan had a health scare from the heart palpitation incident last week.",
+      "jaccard": 0.6667,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in that Memory B adds the context of it being a 'health scare', which could change the interpretation of the event's severity in a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in that Memory B adds the context of it being a 'health scare', which could change the interpretation of the event's severity in a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 85,
+      "item_idx_b": 125,
+      "text_a": "The photo shows a group of people sitting at a table with plates of food.",
+      "text_b": "The photo shows a group of people sitting around a table.",
+      "jaccard": 0.6429,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "complementary_mergeable",
+        "reason": "Both memories describe a group of people sitting at a table in a photo, with slight differences in wording ('at a table' vs. 'around a table') and additional detail in Memory A about plates of food. These differences do not conflict and can be merged into a single, more complete memory.",
+        "better_text": "The photo shows a group of people sitting around a table with plates of food.",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"complementary_mergeable\",\n  \"reason\": \"Both memories describe a group of people sitting at a table in a photo, with slight differences in wording ('at a table' vs. 'around a table') and additional detail in Memory A about plates of food. These differences do not conflict and can be merged into a single, more complete memory.\",\n  \"better_text\": \"The photo shows a group of people sitting around a table with plates of food.\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 3,
+      "item_idx_a": 67,
+      "item_idx_b": 215,
+      "text_a": "Nate's ice cream is dairy-free.",
+      "text_b": "Nate's favorite dairy-free dessert is coconut milk ice cream.",
+      "jaccard": 0.6364,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but distinct. Memory A states that Nate's ice cream is dairy-free, while Memory B specifies that Nate's favorite dairy-free dessert is coconut milk ice cream. The second provides additional specific information not present in the first.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but distinct. Memory A states that Nate's ice cream is dairy-free, while Memory B specifies that Nate's favorite dairy-free dessert is coconut milk ice cream. The second provides additional specific information not present in the first.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 5,
+      "item_idx_a": 36,
+      "item_idx_b": 115,
+      "text_a": "Andrew went on a hike last weekend with his friends and his girlfriend.",
+      "text_b": "Andrew went on a hike last weekend.",
+      "jaccard": 0.5833,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "Memory B is a subset of Memory A, but Memory A includes additional information about Andrew going on the hike with his friends and his girlfriend, which is not present in Memory B. This difference could affect the answer to a future QA question about who accompanied Andrew.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"Memory B is a subset of Memory A, but Memory A includes additional information about Andrew going on the hike with his friends and his girlfriend, which is not present in Memory B. This difference could affect the answer to a future QA question about who accompanied Andrew.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 9,
+      "item_idx_a": 7,
+      "item_idx_b": 101,
+      "text_a": "Calvin plans to travel to Boston after his trip to Japan.",
+      "text_b": "Calvin plans to travel to Boston.",
+      "jaccard": 0.5556,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "Memory A includes additional context about Calvin's trip to Japan, which is not present in Memory B. This added information could change the answer to a future QA question about Calvin's travel plans.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"Memory A includes additional context about Calvin's trip to Japan, which is not present in Memory B. This added information could change the answer to a future QA question about Calvin's travel plans.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 13,
+      "item_idx_b": 62,
+      "text_a": "The photo shows a group of people standing around a kitchen table.",
+      "text_b": "The photo shows John at a food bank with a group of people standing around a table with boxes of tomatoes.",
+      "jaccard": 0.5556,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in specific details (John at a food bank, boxes of tomatoes) which could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in specific details (John at a food bank, boxes of tomatoes) which could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 59,
+      "item_idx_b": 62,
+      "text_a": "The photo shows a large group of people standing around a table.",
+      "text_b": "The photo shows John at a food bank with a group of people standing around a table with boxes of tomatoes.",
+      "jaccard": 0.5556,
+      "token_overlap": 0.9091,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar in that they both describe a group of people standing around a table in a photo, but they differ in specific details (John at a food bank with boxes of tomatoes). These differences could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar in that they both describe a group of people standing around a table in a photo, but they differ in specific details (John at a food bank with boxes of tomatoes). These differences could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 2,
+      "item_idx_a": 178,
+      "item_idx_b": 181,
+      "text_a": "Maria enjoys aerial yoga.",
+      "text_b": "Maria enjoys upside-down poses in aerial yoga.",
+      "jaccard": 0.5,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories are similar but distinct, as Memory B specifies a particular aspect (upside-down poses) of the activity mentioned in Memory A (aerial yoga). This specificity could change the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories are similar but distinct, as Memory B specifies a particular aspect (upside-down poses) of the activity mentioned in Memory A (aerial yoga). This specificity could change the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 4,
+      "item_idx_a": 92,
+      "item_idx_b": 205,
+      "text_a": "Tim has been busy with assignments and exams this week.",
+      "text_b": "Tim has exams this week.",
+      "jaccard": 0.5,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but differ in detail; Memory A mentions both assignments and exams, while Memory B only mentions exams.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but differ in detail; Memory A mentions both assignments and exams, while Memory B only mentions exams.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 2,
+      "item_idx_a": 238,
+      "item_idx_b": 374,
+      "text_a": "John shared a photo of Max sitting in the grass with a leash.",
+      "text_b": "John shared a photo of Max.",
+      "jaccard": 0.5,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "Memory A includes additional details about Max sitting in the grass with a leash, while Memory B is a simpler statement. The difference in details could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"Memory A includes additional details about Max sitting in the grass with a leash, while Memory B is a simpler statement. The difference in details could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 4,
+      "item_idx_a": 173,
+      "item_idx_b": 293,
+      "text_a": "John's team won a trophy this season.",
+      "text_b": "John won a trophy.",
+      "jaccard": 0.5,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories mention John winning a trophy, but Memory A specifies that it was John's team that won, while Memory B attributes the win directly to John. This difference could change the answer to a future QA question about who exactly won the trophy.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories mention John winning a trophy, but Memory A specifies that it was John's team that won, while Memory B attributes the win directly to John. This difference could change the answer to a future QA question about who exactly won the trophy.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 22,
+      "item_idx_b": 62,
+      "text_a": "The photo shows a group of people standing around a field.",
+      "text_b": "The photo shows John at a food bank with a group of people standing around a table with boxes of tomatoes.",
+      "jaccard": 0.5,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar in that they both describe a photo with a group of people, but they differ in specific details (John at a food bank, table with boxes of tomatoes) that could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar in that they both describe a photo with a group of people, but they differ in specific details (John at a food bank, table with boxes of tomatoes) that could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 62,
+      "item_idx_b": 125,
+      "text_a": "The photo shows John at a food bank with a group of people standing around a table with boxes of tomatoes.",
+      "text_b": "The photo shows a group of people sitting around a table.",
+      "jaccard": 0.5,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe similar scenes but differ in key details: Memory A specifies John is at a food bank with boxes of tomatoes, while Memory B mentions people sitting around a table without these specifics.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe similar scenes but differ in key details: Memory A specifies John is at a food bank with boxes of tomatoes, while Memory B mentions people sitting around a table without these specifics.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 2,
+      "item_idx_a": 62,
+      "item_idx_b": 174,
+      "text_a": "The photo shows John at a food bank with a group of people standing around a table with boxes of tomatoes.",
+      "text_b": "The photo shows a group of people standing around a playground.",
+      "jaccard": 0.5,
+      "token_overlap": 0.9,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories describe different scenes (food bank vs. playground) and involve different objects and activities, which could lead to different answers in a QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories describe different scenes (food bank vs. playground) and involve different objects and activities, which could lead to different answers in a QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 9,
+      "item_idx_a": 371,
+      "item_idx_b": 380,
+      "text_a": "Dave has a rock band.",
+      "text_b": "Dave has been a fan of his rock band for ages.",
+      "jaccard": 0.4545,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention Dave and a rock band, but they express different facts: one states that Dave has a rock band, while the other says he has been a fan of his rock band for ages.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention Dave and a rock band, but they express different facts: one states that Dave has a rock band, while the other says he has been a fan of his rock band for ages.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 5,
+      "item_idx_a": 16,
+      "item_idx_b": 167,
+      "text_a": "Andrew has a girlfriend.",
+      "text_b": "Andrew has a picnic date with his girlfriend on Sunday.",
+      "jaccard": 0.4,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are similar but provide different details. Memory A states Andrew has a girlfriend, while Memory B adds specific information about a picnic date on Sunday.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are similar but provide different details. Memory A states Andrew has a girlfriend, while Memory B adds specific information about a picnic date on Sunday.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "deepseek",
+      "conversation_idx": 5,
+      "item_idx_a": 58,
+      "item_idx_b": 167,
+      "text_a": "Andrew went on a hike last weekend with his friends and his girlfriend at the spot they found recently.",
+      "text_b": "Andrew went on a hike last weekend.",
+      "jaccard": 0.3889,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "Memory A includes additional details about Andrew going on the hike with his friends and girlfriend, and the spot they found recently, which are not present in Memory B. These details could change the answer to a future QA question about who he went with or the location.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"Memory A includes additional details about Andrew going on the hike with his friends and girlfriend, and the spot they found recently, which are not present in Memory B. These details could change the answer to a future QA question about who he went with or the location.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 3,
+      "item_idx_a": 25,
+      "item_idx_b": 28,
+      "text_a": "Nate has had his turtles for 3 years.",
+      "text_b": "Nate has turtles.",
+      "jaccard": 0.375,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "Memory A provides specific information about the duration (3 years) that Nate has had his turtles, while Memory B only states that Nate has turtles. The difference in time detail makes them distinct.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"Memory A provides specific information about the duration (3 years) that Nate has had his turtles, while Memory B only states that Nate has turtles. The difference in time detail makes them distinct.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 8,
+      "item_idx_a": 14,
+      "item_idx_b": 106,
+      "text_a": "Evan recommends that Sam exercise.",
+      "text_b": "Evan recommends that Sam find an exercise he enjoys and get a buddy for accountability.",
+      "jaccard": 0.3333,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "complementary_mergeable",
+        "reason": "Memory B provides additional specific advice (finding an enjoyable exercise and getting a buddy) that complements the general recommendation in Memory A without conflicting.",
+        "better_text": "Evan recommends that Sam find an exercise he enjoys and get a buddy for accountability to help him stay consistent.",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"complementary_mergeable\",\n  \"reason\": \"Memory B provides additional specific advice (finding an enjoyable exercise and getting a buddy) that complements the general recommendation in Memory A without conflicting.\",\n  \"better_text\": \"Evan recommends that Sam find an exercise he enjoys and get a buddy for accountability to help him stay consistent.\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 3,
+      "item_idx_a": 271,
+      "item_idx_b": 281,
+      "text_a": "Joanna loves DIYs.",
+      "text_b": "The lady at Joanna's writing club loves DIYs.",
+      "jaccard": 0.3333,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The two memories refer to different entities (Joanna vs. the lady at Joanna's writing club) and could lead to different answers in a QA context.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The two memories refer to different entities (Joanna vs. the lady at Joanna's writing club) and could lead to different answers in a QA context.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 7,
+      "item_idx_a": 0,
+      "item_idx_b": 51,
+      "text_a": "Deborah teaches yoga.",
+      "text_b": "Deborah meditates, does yoga, and teaches classes in the morning.",
+      "jaccard": 0.3,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories mention Deborah's activities but differ in the specific details. Memory A focuses solely on Deborah teaching yoga, while Memory B includes additional activities (meditates, does yoga) and specifies a time (morning). These differences could affect the answer to a future QA question.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories mention Deborah's activities but differ in the specific details. Memory A focuses solely on Deborah teaching yoga, while Memory B includes additional activities (meditates, does yoga) and specifies a time (morning). These differences could affect the answer to a future QA question.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 3,
+      "item_idx_a": 28,
+      "item_idx_b": 320,
+      "text_a": "Nate has turtles.",
+      "text_b": "Nate has always liked turtles since he was a boy.",
+      "jaccard": 0.3,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are related as they both mention Nate and turtles, but they express different facts: one states a current possession, while the other refers to a long-standing preference.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are related as they both mention Nate and turtles, but they express different facts: one states a current possession, while the other refers to a long-standing preference.\",\n  \"better_text\": \"\"\n}"
+      }
+    },
+    {
+      "model": "minimax",
+      "conversation_idx": 9,
+      "item_idx_a": 287,
+      "item_idx_b": 297,
+      "text_a": "Dave tried ramen in Boston.",
+      "text_b": "Dave shared a photo of a bowl of soup with broccoli and noodles (ramen) that he tried in Boston.",
+      "jaccard": 0.2941,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "complementary_mergeable",
+        "reason": "Memory B adds descriptive details (photo, soup with broccoli and noodles) to the same event described in Memory A without conflicting information.",
+        "better_text": "Dave tried ramen in Boston and shared a photo of a bowl of soup with broccoli and noodles.",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"complementary_mergeable\",\n  \"reason\": \"Memory B adds descriptive details (photo, soup with broccoli and noodles) to the same event described in Memory A without conflicting information.\",\n  \"better_text\": \"Dave tried ramen in Boston and shared a photo of a bowl of soup with broccoli and noodles.\"\n}"
+      }
+    },
+    {
+      "model": "gemini",
+      "conversation_idx": 5,
+      "item_idx_a": 81,
+      "item_idx_b": 96,
+      "text_a": "Audrey has four dogs.",
+      "text_b": "Audrey has a tattoo of her four dogs on her arm, which she recently added more drawings to.",
+      "jaccard": 0.2353,
+      "token_overlap": 1.0,
+      "judgment": {
+        "label": "related_but_distinct",
+        "reason": "The memories are related to Audrey and her dogs but convey different information. Memory A states she has four dogs, while Memory B mentions a tattoo of her four dogs and recent additions to it.",
+        "better_text": "",
+        "judge_model": "Qwen/Qwen3-14B",
+        "raw_text": "{\n  \"label\": \"related_but_distinct\",\n  \"reason\": \"The memories are related to Audrey and her dogs but convey different information. Memory A states she has four dogs, while Memory B mentions a tattoo of her four dogs and recent additions to it.\",\n  \"better_text\": \"\"\n}"
+      }
+    }
+  ]
+}

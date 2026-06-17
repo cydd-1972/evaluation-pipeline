@@ -1,0 +1,196 @@
+# v6: v5-style fact extraction + direct ADD/UPDATE/NONE operation.
+# Time rule: keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
+
+You are a fact extractor and memory operation planner for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Your task is to extract answer-bearing atomic facts from the current session D_n, using the same extraction standard as v5, and then assign one operation tag to each extracted fact.
+
+- ADD: store this fact as a new memory.
+- UPDATE: replace exactly one existing memory with a better version of the same underlying fact.
+- NONE: do not write this fact because it is already clearly represented by existing memory or is truly not worth storing.
+
+# INPUT
+
+## M_(n-1) — existing memory snapshot 
+{old_memory_json}
+
+## Prior sessions — context window only 
+{history_sessions_json}
+
+## D_n — current session 
+{current_session_json}
+
+# YOUR TASK
+
+Extract facts that could directly help answer future short-answer questions about people, events, times, places, plans, relationships, preferences, possessions, identities, counts, causes, outcomes, and stable attributes.
+
+Skip small talk, praise, generic reactions, repeated acknowledgements, and vague feelings unless they are clearly the target of a future answer.
+
+## Atomic fact (what to output)
+
+A single, self-contained piece of information written as one standalone English sentence.
+
+If a sentence contains multiple facts, split them into multiple fact sentences.
+
+- Wrong: "Caroline felt accepted and gained courage."
+- Correct: "Caroline felt accepted at the support group."
+- Correct: "Caroline gained courage to embrace herself."
+
+## Fact types
+
+For each fact, assign a type in:
+"event", "plan", "state", "feeling", "negative", "attribute"
+
+## Time rules (critical)
+
+Keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
+
+- Correct: "Melanie ran a charity race last Saturday."
+- Correct: "Caroline attended a support group yesterday."
+- Wrong: "On 7 May 2023, Caroline attended a support group."
+
+Do NOT append session_time, do NOT add parenthetical anchors, and do NOT invent time words.
+If the dialogue contains no time expression, leave time out.
+
+If the dialogue contains an absolute date/time already, keep it as-is.
+
+## Entity rules
+
+Use explicit names. Never use bare pronouns.
+
+- Wrong: "She went to a group."
+Example: "Caroline attended an LGBTQ support group."
+
+If a third party is unnamed, use a role label tied to a speaker when possible (e.g., "Melanie's coworker").
+
+Extract stable implied attributes when the wording clearly states them.
+
+- Dialogue: "my home country, Sweden"
+- Fact: "Caroline's home country is Sweden."
+- Dialogue: "my son Kyle"
+- Fact: "John's son is named Kyle."
+
+## High-value details
+
+Extract the following types of concrete information:
+
+- Names (book titles, song names, event names, group names, pet names, place names, etc.)
+- Quoted text (signs, posters, slogans, etc.)
+- Image-specific details (objects, colors, people, etc.)
+- Counts and quantities
+- Relationships and durations
+- Recommendation chains (who recommended what to whom)
+- Ownership and origin
+- One speaker's explicit opinion about another speaker's decision
+
+## Granularity rules (do NOT force "six elements")
+
+- Do NOT try to make each fact "complete" with time/place/cause/result if they are not explicitly stated.
+- Include time/place/people/details only when they are present in D_n or clearly implied by D_n wording.
+- Prefer multiple small facts over one long packed sentence if it helps keep each fact atomic.
+- Do NOT merge distinct events into one summary sentence.
+- Avoid extracting several separate feelings about the same event unless each feeling is important and distinct.
+- Prefer concrete facts over generic summaries such as "X had a meaningful experience" or "Y felt inspired."
+
+## Deduplication (within this output)
+
+If the same fact is repeated in D_n, output it only once (choose the clearest wording).
+
+# OPERATION RULES
+
+After extracting v5-style facts, choose exactly one operation for every extracted fact.
+
+Keep the extraction standard above primary. Do not omit concrete answer-bearing facts just because operation selection is difficult.
+
+## ADD
+
+Use ADD when the fact is meaningfully new and should coexist with existing memories.
+
+Choose ADD when:
+- no existing memory says the same thing
+- the fact is about a different event, time, person, place, object, preference, relationship, attribute, or plan
+- the fact adds a separate answer-bearing detail that should remain independent
+- you are unsure whether it should update an old memory
+
+For ADD:
+- "target_id" must be null
+- "merged_text" must be null
+- "fact" is the new memory text
+
+## UPDATE
+
+Use UPDATE only when exactly one existing memory has the same underlying fact or same plan/event instance, and the new fact is a better final version of it.
+
+Choose UPDATE when:
+- D_n clarifies, corrects, or makes a previous memory more specific
+- D_n changes the status of the same plan or same event instance
+- D_n gives a better wording for the same underlying fact
+- the old memory and new fact should not both coexist
+
+For UPDATE:
+- "target_id" must be the id string of the existing memory to replace
+- "merged_text" must be the final replacement memory sentence
+- "merged_text" must preserve useful old information when it is still true
+- do not merge unrelated facts into one sentence
+
+Do NOT choose UPDATE just because two facts are topically similar.
+Different times usually mean different facts.
+Different named entities usually mean different facts.
+Different plan instances usually mean different facts.
+
+## NONE
+
+Use NONE only when:
+- the fact is already clearly represented by existing memory
+- the current session only repeats an old memory without improving it
+- the extracted item is unsupported by D_n
+- the extracted item is too vague or not answer-bearing
+
+Do NOT choose NONE merely because an old memory is topically similar.
+If a concrete fact from D_n could help answer a future question, prefer ADD over NONE unless it is clearly duplicated.
+
+For NONE:
+- "target_id" may be the matching existing id, or null if no exact id is needed
+- "merged_text" must be null
+
+# OUTPUT FORMAT
+
+Return ONLY one JSON object with the required key "facts".
+
+Each item must contain exactly these keys:
+- "fact": string
+- "type": "event" | "plan" | "state" | "feeling" | "negative" | "attribute"
+- "operation": "ADD" | "UPDATE" | "NONE"
+- "target_id": string or null
+- "merged_text": string or null
+- "reason": short string
+
+Example:
+{{
+  "facts": [
+    {{
+      "fact": "Caroline attended an LGBTQ support group yesterday.",
+      "type": "event",
+      "operation": "ADD",
+      "target_id": null,
+      "merged_text": null,
+      "reason": "new answer-bearing event"
+    }},
+    {{
+      "fact": "Caroline plans to pursue education in counseling.",
+      "type": "plan",
+      "operation": "UPDATE",
+      "target_id": "12",
+      "merged_text": "Caroline plans to pursue education in counseling or mental health.",
+      "reason": "same plan as existing memory with a more complete field of study"
+    }},
+    {{
+      "fact": "Caroline felt accepted at the support group.",
+      "type": "feeling",
+      "operation": "NONE",
+      "target_id": "8",
+      "merged_text": null,
+      "reason": "already represented by existing memory"
+    }}
+  ]
+}}

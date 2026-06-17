@@ -1,0 +1,3626 @@
+{
+  "validation": {
+    "dataset_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\datasets\\locomo_refined.json",
+    "dataset_conversation_count": 10,
+    "models": [
+      "minimax",
+      "deepseek",
+      "gemini"
+    ],
+    "rubric_paths": [
+      "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\v5_fact_continuous_20260613_134804\\rubric_scores.csv",
+      "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\outputs\\v5_fact_continuous_20260613_140420\\rubric_scores.csv"
+    ],
+    "v9_rows": 30,
+    "memory_models": [
+      "deepseek",
+      "gemini",
+      "minimax"
+    ],
+    "qa_models": [
+      "gemini",
+      "minimax"
+    ],
+    "missing_qa_models": [
+      "deepseek"
+    ]
+  },
+  "prechecks": {
+    "global_thresholds": {
+      "memory_count_floor": 183.3,
+      "memory_token_floor": 2170.5,
+      "memory_count_median": 305.5,
+      "memory_token_median": 3617.5
+    },
+    "models": {
+      "minimax": {
+        "conversations": {
+          "0": {
+            "memory_count_token": {
+              "memory_count": 324,
+              "memory_token_count": 3837,
+              "avg_item_tokens": 11.8426,
+              "conversation_token_count": 16629,
+              "compression_ratio": 0.2307,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 28,
+              "coverage_rate": 0.7,
+              "missing_entities": [
+                "Wow",
+                "Thanks",
+                "What",
+                "Yeah",
+                "Your",
+                "Glad",
+                "Hey Caroline",
+                "Anything",
+                "Hey Mel",
+                "Yep",
+                "Hey Melanie",
+                "Congrats"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 60,
+              "coverage_rate": 0.75,
+              "missing_keywords": [
+                "mel",
+                "your",
+                "wow",
+                "thanks",
+                "our",
+                "all",
+                "session",
+                "d14",
+                "yeah",
+                "hey",
+                "glad",
+                "d15",
+                "d17",
+                "any",
+                "d18",
+                "d10",
+                "see",
+                "here",
+                "d12",
+                "d16"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 112,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0031,
+              "examples": [
+                {
+                  "item_index": 298,
+                  "id": "298",
+                  "text": "They went on a hike yesterday.",
+                  "pronouns": [
+                    "they"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 138,
+              "qa_llm_score": 0.7101,
+              "answer_span_coverage": 0.5217,
+              "answer_span_partial_rate": 0.2174,
+              "answer_span_not_found_rate": 0.2609,
+              "retrieval_empty_rate": 0.0507,
+              "selected_answer_coverage": 0.4203,
+              "selected_answer_not_found_rate": 0.4348,
+              "selected_noise_high_rate": 0.0362,
+              "full_memory_answer_status_counts": {
+                "not_found": 36,
+                "token_high": 31,
+                "exact_phrase": 41,
+                "token_partial": 30
+              },
+              "selected_answer_status_counts": {
+                "not_found": 60,
+                "token_high": 22,
+                "exact_phrase": 36,
+                "token_partial": 20
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.015000000000000003,
+              "keyword_coverage_tfidf": 0.0125,
+              "pronoun_ambiguity": 0.00155,
+              "answer_span_coverage": 0.023915,
+              "retrieval_failure": 0.036225
+            }
+          },
+          "1": {
+            "memory_count_token": {
+              "memory_count": 212,
+              "memory_token_count": 2459,
+              "avg_item_tokens": 11.5991,
+              "conversation_token_count": 13099,
+              "compression_ratio": 0.1877,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 22,
+              "coverage_rate": 0.55,
+              "missing_entities": [
+                "Wow",
+                "Yeah",
+                "Hey Jon",
+                "Hey Gina",
+                "Don",
+                "Appreciate",
+                "Nice",
+                "Sounds",
+                "Congrats",
+                "Bye",
+                "Check",
+                "Plus",
+                "Gotta",
+                "Definitely",
+                "Way",
+                "Here",
+                "Yeah Jon",
+                "Anything"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 54,
+              "coverage_rate": 0.675,
+              "missing_keywords": [
+                "your",
+                "wow",
+                "yeah",
+                "hey",
+                "dreams",
+                "let",
+                "gonna",
+                "d13",
+                "sure",
+                "d18",
+                "d15",
+                "d11",
+                "means",
+                "d17",
+                "don",
+                "d14",
+                "here",
+                "d12",
+                "quit",
+                "nice",
+                "any",
+                "d16",
+                "appreciate",
+                "pushing",
+                "way",
+                "always"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 91,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 72,
+              "qa_llm_score": 0.5278,
+              "answer_span_coverage": 0.4861,
+              "answer_span_partial_rate": 0.1389,
+              "answer_span_not_found_rate": 0.375,
+              "retrieval_empty_rate": 0.1111,
+              "selected_answer_coverage": 0.2917,
+              "selected_answer_not_found_rate": 0.6111,
+              "selected_noise_high_rate": 0.0694,
+              "full_memory_answer_status_counts": {
+                "not_found": 27,
+                "token_high": 15,
+                "token_partial": 10,
+                "exact_phrase": 20
+              },
+              "selected_answer_status_counts": {
+                "not_found": 44,
+                "token_high": 8,
+                "token_partial": 7,
+                "exact_phrase": 13
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.0225,
+              "keyword_coverage_tfidf": 0.016249999999999997,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.025695000000000003,
+              "retrieval_failure": 0.05
+            }
+          },
+          "2": {
+            "memory_count_token": {
+              "memory_count": 422,
+              "memory_token_count": 4908,
+              "avg_item_tokens": 11.6303,
+              "conversation_token_count": 25284,
+              "compression_ratio": 0.1941,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 26,
+              "coverage_rate": 0.65,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Your",
+                "Hey John",
+                "Hey Maria",
+                "Sounds",
+                "Glad",
+                "Yep",
+                "Definitely",
+                "Anything",
+                "Cool",
+                "Yeah John",
+                "Nice"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 56,
+              "coverage_rate": 0.7,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "yeah",
+                "our",
+                "wow",
+                "keep",
+                "let",
+                "hey",
+                "d31",
+                "d32",
+                "see",
+                "sounds",
+                "d30",
+                "definitely",
+                "d13",
+                "cool",
+                "any",
+                "here",
+                "d21",
+                "glad",
+                "anything",
+                "nice",
+                "d29",
+                "such"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 147,
+              "high_risk_item_count": 2,
+              "pronoun_ambiguity_rate": 0.0047,
+              "examples": [
+                {
+                  "item_index": 81,
+                  "id": "81",
+                  "text": "It makes Maria happy knowing she can brighten somebody's day.",
+                  "pronouns": [
+                    "it",
+                    "she"
+                  ]
+                },
+                {
+                  "item_index": 176,
+                  "id": "176",
+                  "text": "They brainstormed together and stayed motivated at the convention.",
+                  "pronouns": [
+                    "they"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 136,
+              "qa_llm_score": 0.7426,
+              "answer_span_coverage": 0.7279,
+              "answer_span_partial_rate": 0.1176,
+              "answer_span_not_found_rate": 0.1544,
+              "retrieval_empty_rate": 0.0221,
+              "selected_answer_coverage": 0.6029,
+              "selected_answer_not_found_rate": 0.2721,
+              "selected_noise_high_rate": 0.0147,
+              "full_memory_answer_status_counts": {
+                "not_found": 21,
+                "token_high": 41,
+                "exact_phrase": 58,
+                "token_partial": 16
+              },
+              "selected_answer_status_counts": {
+                "not_found": 37,
+                "token_high": 32,
+                "exact_phrase": 50,
+                "token_partial": 17
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.017499999999999998,
+              "keyword_coverage_tfidf": 0.015000000000000003,
+              "pronoun_ambiguity": 0.00235,
+              "answer_span_coverage": 0.013605,
+              "retrieval_failure": 0.019865
+            }
+          },
+          "3": {
+            "memory_count_token": {
+              "memory_count": 395,
+              "memory_token_count": 4891,
+              "avg_item_tokens": 12.3823,
+              "conversation_token_count": 21533,
+              "compression_ratio": 0.2271,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 7,
+              "near_duplicate_pair_count": 4,
+              "near_duplicate_rate": 0.0177,
+              "example_pairs": [
+                {
+                  "left": 9,
+                  "right": 267,
+                  "similarity": 0.875
+                },
+                {
+                  "left": 98,
+                  "right": 105,
+                  "similarity": 0.8333
+                },
+                {
+                  "left": 98,
+                  "right": 231,
+                  "similarity": 0.8333
+                },
+                {
+                  "left": 345,
+                  "right": 351,
+                  "similarity": 0.8333
+                }
+              ]
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 29,
+              "coverage_rate": 0.725,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Hey Nate",
+                "Hey Joanna",
+                "Thanks Nate",
+                "Congrats",
+                "Yep",
+                "Glad",
+                "Anything",
+                "Definitely"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 60,
+              "coverage_rate": 0.75,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "just",
+                "hey",
+                "wow",
+                "d27",
+                "d28",
+                "any",
+                "d23",
+                "yeah",
+                "d25",
+                "d26",
+                "definitely",
+                "looks",
+                "know",
+                "d22",
+                "d14",
+                "glad",
+                "d21",
+                "take"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 167,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0025,
+              "examples": [
+                {
+                  "item_index": 338,
+                  "id": "338",
+                  "text": "It was validating for Joanna to be taken seriously at the producer meetings.",
+                  "pronouns": [
+                    "it"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 179,
+              "qa_llm_score": 0.648,
+              "answer_span_coverage": 0.7039,
+              "answer_span_partial_rate": 0.2067,
+              "answer_span_not_found_rate": 0.0894,
+              "retrieval_empty_rate": 0.0559,
+              "selected_answer_coverage": 0.5028,
+              "selected_answer_not_found_rate": 0.3743,
+              "selected_noise_high_rate": 0.0168,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 72,
+                "token_high": 54,
+                "token_partial": 37,
+                "not_found": 16
+              },
+              "selected_answer_status_counts": {
+                "not_found": 67,
+                "token_partial": 22,
+                "token_high": 34,
+                "exact_phrase": 56
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.00354,
+              "entity_coverage": 0.013750000000000002,
+              "keyword_coverage_tfidf": 0.0125,
+              "pronoun_ambiguity": 0.00125,
+              "answer_span_coverage": 0.014805000000000002,
+              "retrieval_failure": 0.033530000000000004
+            }
+          },
+          "4": {
+            "memory_count_token": {
+              "memory_count": 405,
+              "memory_token_count": 4756,
+              "avg_item_tokens": 11.7432,
+              "conversation_token_count": 24729,
+              "compression_ratio": 0.1923,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 28,
+              "coverage_rate": 0.7,
+              "missing_entities": [
+                "Wow",
+                "Yeah",
+                "Cool",
+                "Hey John",
+                "Hey Tim",
+                "Sounds",
+                "Congrats",
+                "Your",
+                "Definitely",
+                "Glad",
+                "Plus",
+                "Bye"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 54,
+              "coverage_rate": 0.675,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "wow",
+                "yeah",
+                "any",
+                "cool",
+                "d27",
+                "d20",
+                "d26",
+                "our",
+                "hey",
+                "sounds",
+                "definitely",
+                "let",
+                "d15",
+                "such",
+                "know",
+                "something",
+                "those",
+                "d11",
+                "session",
+                "d12",
+                "incredible",
+                "things",
+                "d28",
+                "special"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 148,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 162,
+              "qa_llm_score": 0.6358,
+              "answer_span_coverage": 0.6728,
+              "answer_span_partial_rate": 0.1667,
+              "answer_span_not_found_rate": 0.1605,
+              "retrieval_empty_rate": 0.0185,
+              "selected_answer_coverage": 0.4568,
+              "selected_answer_not_found_rate": 0.3519,
+              "selected_noise_high_rate": 0.0247,
+              "full_memory_answer_status_counts": {
+                "token_high": 48,
+                "not_found": 26,
+                "token_partial": 27,
+                "exact_phrase": 61
+              },
+              "selected_answer_status_counts": {
+                "token_high": 25,
+                "token_partial": 31,
+                "not_found": 57,
+                "exact_phrase": 49
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.015000000000000003,
+              "keyword_coverage_tfidf": 0.016249999999999997,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.016360000000000003,
+              "retrieval_failure": 0.023455
+            }
+          },
+          "5": {
+            "memory_count_token": {
+              "memory_count": 374,
+              "memory_token_count": 4515,
+              "avg_item_tokens": 12.0722,
+              "conversation_token_count": 24016,
+              "compression_ratio": 0.188,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 23,
+              "coverage_rate": 0.575,
+              "missing_entities": [
+                "Yeah",
+                "Thanks",
+                "Wow",
+                "What",
+                "Yep",
+                "Sounds",
+                "Glad",
+                "Haha",
+                "Aww",
+                "Hey Andrew",
+                "Definitely",
+                "Hey Audrey",
+                "Yup",
+                "Your",
+                "Cool",
+                "Sure",
+                "Did"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 53,
+              "coverage_rate": 0.6625,
+              "missing_keywords": [
+                "yeah",
+                "your",
+                "thanks",
+                "d26",
+                "much",
+                "sure",
+                "d20",
+                "wow",
+                "sounds",
+                "any",
+                "our",
+                "wait",
+                "see",
+                "hey",
+                "d11",
+                "looks",
+                "here",
+                "haha",
+                "must",
+                "d23",
+                "definitely",
+                "cool",
+                "d19",
+                "session",
+                "glad",
+                "d10",
+                "yep"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 158,
+              "high_risk_item_count": 3,
+              "pronoun_ambiguity_rate": 0.008,
+              "examples": [
+                {
+                  "item_index": 217,
+                  "id": "217",
+                  "text": "It takes time to form a bond with a pet.",
+                  "pronouns": [
+                    "it"
+                  ]
+                },
+                {
+                  "item_index": 299,
+                  "id": "299",
+                  "text": "It's been a while since Audrey took her dogs out for a walk.",
+                  "pronouns": [
+                    "her",
+                    "it"
+                  ]
+                },
+                {
+                  "item_index": 370,
+                  "id": "370",
+                  "text": "It took a while for Audrey's dogs to calm down after grooming.",
+                  "pronouns": [
+                    "it"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 114,
+              "qa_llm_score": 0.5965,
+              "answer_span_coverage": 0.7105,
+              "answer_span_partial_rate": 0.1228,
+              "answer_span_not_found_rate": 0.1667,
+              "retrieval_empty_rate": 0.0351,
+              "selected_answer_coverage": 0.5351,
+              "selected_answer_not_found_rate": 0.3596,
+              "selected_noise_high_rate": 0.0614,
+              "full_memory_answer_status_counts": {
+                "not_found": 19,
+                "token_partial": 14,
+                "token_high": 35,
+                "exact_phrase": 46
+              },
+              "selected_answer_status_counts": {
+                "not_found": 41,
+                "token_partial": 12,
+                "token_high": 22,
+                "exact_phrase": 39
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.021250000000000005,
+              "keyword_coverage_tfidf": 0.016875,
+              "pronoun_ambiguity": 0.004,
+              "answer_span_coverage": 0.014475,
+              "retrieval_failure": 0.029825
+            }
+          },
+          "6": {
+            "memory_count_token": {
+              "memory_count": 448,
+              "memory_token_count": 5067,
+              "avg_item_tokens": 11.3103,
+              "conversation_token_count": 23817,
+              "compression_ratio": 0.2127,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 26,
+              "coverage_rate": 0.65,
+              "missing_entities": [
+                "Thanks",
+                "Yeah",
+                "Wow",
+                "Hey John",
+                "Hey James",
+                "Sounds",
+                "Congrats",
+                "Glad",
+                "Plus",
+                "Anything",
+                "Bye",
+                "Maybe",
+                "Appreciate",
+                "Yep"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 57,
+              "coverage_rate": 0.7125,
+              "missing_keywords": [
+                "thanks",
+                "hey",
+                "d31",
+                "yeah",
+                "wow",
+                "d28",
+                "sounds",
+                "d17",
+                "definitely",
+                "d14",
+                "d30",
+                "sure",
+                "session",
+                "d25",
+                "here",
+                "d20",
+                "d24",
+                "d23",
+                "d29",
+                "think",
+                "even",
+                "d22",
+                "d21"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 155,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0022,
+              "examples": [
+                {
+                  "item_index": 130,
+                  "id": "130",
+                  "text": "This website project is John's first professional project outside of class.",
+                  "pronouns": [
+                    "this"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 137,
+              "qa_llm_score": 0.6423,
+              "answer_span_coverage": 0.6277,
+              "answer_span_partial_rate": 0.1752,
+              "answer_span_not_found_rate": 0.1971,
+              "retrieval_empty_rate": 0.073,
+              "selected_answer_coverage": 0.5109,
+              "selected_answer_not_found_rate": 0.3723,
+              "selected_noise_high_rate": 0.0219,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 53,
+                "not_found": 27,
+                "token_high": 33,
+                "token_partial": 24
+              },
+              "selected_answer_status_counts": {
+                "exact_phrase": 46,
+                "not_found": 51,
+                "token_high": 24,
+                "token_partial": 16
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.017499999999999998,
+              "keyword_coverage_tfidf": 0.014374999999999999,
+              "pronoun_ambiguity": 0.0011,
+              "answer_span_coverage": 0.018615,
+              "retrieval_failure": 0.03796
+            }
+          },
+          "7": {
+            "memory_count_token": {
+              "memory_count": 454,
+              "memory_token_count": 6130,
+              "avg_item_tokens": 13.5022,
+              "conversation_token_count": 22596,
+              "compression_ratio": 0.2713,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 30,
+              "coverage_rate": 0.75,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Hey Jolene",
+                "Sounds",
+                "Glad",
+                "Bye",
+                "Yep",
+                "Plus",
+                "Anything"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 58,
+              "coverage_rate": 0.725,
+              "missing_keywords": [
+                "your",
+                "deb",
+                "d29",
+                "thanks",
+                "d28",
+                "here",
+                "d15",
+                "d23",
+                "our",
+                "d22",
+                "hey",
+                "d30",
+                "wow",
+                "sounds",
+                "d20",
+                "some",
+                "d26",
+                "d13",
+                "yeah",
+                "d25",
+                "d19",
+                "d10"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 207,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0022,
+              "examples": [
+                {
+                  "item_index": 409,
+                  "id": "409",
+                  "text": "It was comforting for Deborah to reconnect with her mother's friends.",
+                  "pronouns": [
+                    "her",
+                    "it"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 165,
+              "qa_llm_score": 0.6121,
+              "answer_span_coverage": 0.6242,
+              "answer_span_partial_rate": 0.1212,
+              "answer_span_not_found_rate": 0.2545,
+              "retrieval_empty_rate": 0.0545,
+              "selected_answer_coverage": 0.4606,
+              "selected_answer_not_found_rate": 0.4364,
+              "selected_noise_high_rate": 0.0242,
+              "full_memory_answer_status_counts": {
+                "token_partial": 20,
+                "not_found": 42,
+                "exact_phrase": 66,
+                "token_high": 37
+              },
+              "selected_answer_status_counts": {
+                "token_partial": 17,
+                "not_found": 72,
+                "exact_phrase": 53,
+                "token_high": 23
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.0125,
+              "keyword_coverage_tfidf": 0.013750000000000002,
+              "pronoun_ambiguity": 0.0011,
+              "answer_span_coverage": 0.01879,
+              "retrieval_failure": 0.03665500000000001
+            }
+          },
+          "8": {
+            "memory_count_token": {
+              "memory_count": 316,
+              "memory_token_count": 3700,
+              "avg_item_tokens": 11.7089,
+              "conversation_token_count": 18614,
+              "compression_ratio": 0.1988,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 2,
+              "near_duplicate_pair_count": 1,
+              "near_duplicate_rate": 0.0063,
+              "example_pairs": [
+                {
+                  "left": 20,
+                  "right": 71,
+                  "similarity": 1.0
+                }
+              ]
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 25,
+              "coverage_rate": 0.625,
+              "missing_entities": [
+                "Thanks",
+                "Yeah",
+                "Wow",
+                "Hey Sam",
+                "Hey Evan",
+                "Your",
+                "They",
+                "Sounds",
+                "Glad",
+                "Yep",
+                "Cool",
+                "Sorry",
+                "Awesome",
+                "Absolutely",
+                "Bye"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 48,
+              "coverage_rate": 0.6,
+              "missing_keywords": [
+                "thanks",
+                "your",
+                "hey",
+                "yeah",
+                "awesome",
+                "d23",
+                "wow",
+                "know",
+                "any",
+                "amazing",
+                "our",
+                "d24",
+                "d17",
+                "all",
+                "sounds",
+                "hear",
+                "definitely",
+                "d21",
+                "looks",
+                "here",
+                "d22",
+                "d25",
+                "d16",
+                "lot",
+                "cool",
+                "appreciate",
+                "see",
+                "care",
+                "d20",
+                "need"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 125,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 135,
+              "qa_llm_score": 0.6593,
+              "answer_span_coverage": 0.5778,
+              "answer_span_partial_rate": 0.2593,
+              "answer_span_not_found_rate": 0.163,
+              "retrieval_empty_rate": 0.0593,
+              "selected_answer_coverage": 0.4148,
+              "selected_answer_not_found_rate": 0.3704,
+              "selected_noise_high_rate": 0.0667,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 47,
+                "token_high": 31,
+                "token_partial": 35,
+                "not_found": 22
+              },
+              "selected_answer_status_counts": {
+                "exact_phrase": 37,
+                "token_high": 19,
+                "not_found": 50,
+                "token_partial": 29
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.00126,
+              "entity_coverage": 0.018750000000000003,
+              "keyword_coverage_tfidf": 0.020000000000000004,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.021110000000000004,
+              "retrieval_failure": 0.03668
+            }
+          },
+          "9": {
+            "memory_count_token": {
+              "memory_count": 414,
+              "memory_token_count": 4831,
+              "avg_item_tokens": 11.6691,
+              "conversation_token_count": 23060,
+              "compression_ratio": 0.2095,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 30,
+              "coverage_rate": 0.75,
+              "missing_entities": [
+                "Thanks",
+                "Yeah",
+                "Hey Dave",
+                "Hey Calvin",
+                "Congrats",
+                "Seeing",
+                "Glad",
+                "Anything",
+                "Nice",
+                "Wow Dave"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 60,
+              "coverage_rate": 0.75,
+              "missing_keywords": [
+                "thanks",
+                "really",
+                "yeah",
+                "cal",
+                "hey",
+                "d28",
+                "wait",
+                "d30",
+                "let",
+                "d25",
+                "looks",
+                "pic",
+                "hear",
+                "must",
+                "d24",
+                "here",
+                "d29",
+                "our",
+                "definitely",
+                "such"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 125,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 144,
+              "qa_llm_score": 0.6458,
+              "answer_span_coverage": 0.7014,
+              "answer_span_partial_rate": 0.1597,
+              "answer_span_not_found_rate": 0.1389,
+              "retrieval_empty_rate": 0.0417,
+              "selected_answer_coverage": 0.5,
+              "selected_answer_not_found_rate": 0.3472,
+              "selected_noise_high_rate": 0.0625,
+              "full_memory_answer_status_counts": {
+                "not_found": 20,
+                "token_high": 39,
+                "exact_phrase": 62,
+                "token_partial": 23
+              },
+              "selected_answer_status_counts": {
+                "not_found": 50,
+                "token_partial": 22,
+                "exact_phrase": 50,
+                "token_high": 22
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.0125,
+              "keyword_coverage_tfidf": 0.0125,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.014929999999999999,
+              "retrieval_failure": 0.03091
+            }
+          }
+        }
+      },
+      "deepseek": {
+        "conversations": {
+          "0": {
+            "memory_count_token": {
+              "memory_count": 228,
+              "memory_token_count": 2693,
+              "avg_item_tokens": 11.8114,
+              "conversation_token_count": 16629,
+              "compression_ratio": 0.1619,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 25,
+              "coverage_rate": 0.625,
+              "missing_entities": [
+                "Wow",
+                "Thanks",
+                "What",
+                "Yeah",
+                "They",
+                "Glad",
+                "Hey Caroline",
+                "Anything",
+                "Hey Mel",
+                "Did",
+                "Cool",
+                "Good",
+                "Yep",
+                "Hey Melanie",
+                "Congrats"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 52,
+              "coverage_rate": 0.65,
+              "missing_keywords": [
+                "mel",
+                "your",
+                "really",
+                "wow",
+                "thanks",
+                "awesome",
+                "amazing",
+                "all",
+                "session",
+                "d14",
+                "yeah",
+                "hey",
+                "glad",
+                "d15",
+                "lot",
+                "d17",
+                "any",
+                "cool",
+                "d18",
+                "d10",
+                "see",
+                "such",
+                "here",
+                "d12",
+                "fun",
+                "d16",
+                "moments",
+                "inspiring"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 79,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.018750000000000003,
+              "keyword_coverage_tfidf": 0.017499999999999998,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "1": {
+            "memory_count_token": {
+              "memory_count": 173,
+              "memory_token_count": 2011,
+              "avg_item_tokens": 11.6243,
+              "conversation_token_count": 13099,
+              "compression_ratio": 0.1535,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": true
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 21,
+              "coverage_rate": 0.525,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Let",
+                "Hey Jon",
+                "Hey Gina",
+                "Glad",
+                "Don",
+                "Appreciate",
+                "Sounds",
+                "Congrats",
+                "Sure",
+                "Bye",
+                "Check",
+                "Plus",
+                "Gotta",
+                "Definitely",
+                "Yeah Jon",
+                "Anything"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 51,
+              "coverage_rate": 0.6375,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "awesome",
+                "really",
+                "wow",
+                "yeah",
+                "tough",
+                "hey",
+                "lot",
+                "let",
+                "gonna",
+                "d13",
+                "sure",
+                "d18",
+                "d15",
+                "d11",
+                "session",
+                "means",
+                "d17",
+                "don",
+                "d14",
+                "here",
+                "d12",
+                "any",
+                "d16",
+                "appreciate",
+                "starting",
+                "pushing",
+                "glad"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 76,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0036742686017046766,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.02375,
+              "keyword_coverage_tfidf": 0.018125000000000002,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "2": {
+            "memory_count_token": {
+              "memory_count": 336,
+              "memory_token_count": 3892,
+              "avg_item_tokens": 11.5833,
+              "conversation_token_count": 25284,
+              "compression_ratio": 0.1539,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 26,
+              "coverage_rate": 0.65,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Your",
+                "Keep",
+                "Hey John",
+                "Hey Maria",
+                "Glad",
+                "Yep",
+                "Definitely",
+                "Seeing",
+                "Just",
+                "Anything",
+                "Yeah John"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 54,
+              "coverage_rate": 0.675,
+              "missing_keywords": [
+                "really",
+                "your",
+                "thanks",
+                "yeah",
+                "our",
+                "wow",
+                "keep",
+                "let",
+                "hey",
+                "amazing",
+                "d31",
+                "d32",
+                "see",
+                "all",
+                "d30",
+                "know",
+                "definitely",
+                "just",
+                "d13",
+                "any",
+                "here",
+                "d21",
+                "glad",
+                "anything",
+                "d29",
+                "such"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 111,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.017499999999999998,
+              "keyword_coverage_tfidf": 0.016249999999999997,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "3": {
+            "memory_count_token": {
+              "memory_count": 321,
+              "memory_token_count": 3907,
+              "avg_item_tokens": 12.1713,
+              "conversation_token_count": 21533,
+              "compression_ratio": 0.1814,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 24,
+              "coverage_rate": 0.6,
+              "missing_entities": [
+                "Thanks",
+                "What",
+                "Wow",
+                "Yeah",
+                "Hey Nate",
+                "Hey Joanna",
+                "Sounds",
+                "Your",
+                "Thanks Nate",
+                "Congrats",
+                "Yep",
+                "Glad",
+                "Anything",
+                "Definitely",
+                "Having",
+                "Appreciate"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 57,
+              "coverage_rate": 0.7125,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "hey",
+                "wow",
+                "sure",
+                "see",
+                "d27",
+                "sounds",
+                "d28",
+                "d23",
+                "yeah",
+                "d25",
+                "something",
+                "d26",
+                "definitely",
+                "looks",
+                "know",
+                "d22",
+                "hear",
+                "d14",
+                "glad",
+                "d21",
+                "support"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 129,
+              "high_risk_item_count": 3,
+              "pronoun_ambiguity_rate": 0.0093,
+              "examples": [
+                {
+                  "item_index": 9,
+                  "id": "9",
+                  "text": "That romantic drama is one of Joanna's favorite movies.",
+                  "pronouns": [
+                    "that"
+                  ]
+                },
+                {
+                  "item_index": 86,
+                  "id": "86",
+                  "text": "It will be Nate's 4th gaming tournament.",
+                  "pronouns": [
+                    "it"
+                  ]
+                },
+                {
+                  "item_index": 165,
+                  "id": "165",
+                  "text": "6 of the attendees said they would want to do it again next month.",
+                  "pronouns": [
+                    "it",
+                    "they"
+                  ]
+                }
+              ]
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.020000000000000004,
+              "keyword_coverage_tfidf": 0.014374999999999999,
+              "pronoun_ambiguity": 0.00465,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "4": {
+            "memory_count_token": {
+              "memory_count": 364,
+              "memory_token_count": 4108,
+              "avg_item_tokens": 11.2857,
+              "conversation_token_count": 24729,
+              "compression_ratio": 0.1661,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 27,
+              "coverage_rate": 0.675,
+              "missing_entities": [
+                "Wow",
+                "Yeah",
+                "Hey John",
+                "Hey Tim",
+                "Sounds",
+                "Congrats",
+                "Your",
+                "Definitely",
+                "Glad",
+                "Plus",
+                "Nice",
+                "Bye",
+                "Appreciate"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 54,
+              "coverage_rate": 0.675,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "wow",
+                "yeah",
+                "any",
+                "d27",
+                "d20",
+                "d26",
+                "our",
+                "hey",
+                "sounds",
+                "definitely",
+                "let",
+                "d15",
+                "such",
+                "know",
+                "something",
+                "fun",
+                "much",
+                "those",
+                "d11",
+                "session",
+                "d12",
+                "things",
+                "d28",
+                "special"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 102,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.016249999999999997,
+              "keyword_coverage_tfidf": 0.016249999999999997,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "5": {
+            "memory_count_token": {
+              "memory_count": 282,
+              "memory_token_count": 3513,
+              "avg_item_tokens": 12.4574,
+              "conversation_token_count": 24016,
+              "compression_ratio": 0.1463,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 23,
+              "coverage_rate": 0.575,
+              "missing_entities": [
+                "Yeah",
+                "Thanks",
+                "Wow",
+                "What",
+                "Let",
+                "Yep",
+                "Sounds",
+                "Glad",
+                "Haha",
+                "Aww",
+                "Hey Andrew",
+                "Definitely",
+                "Nice",
+                "Seeing",
+                "Hey Audrey",
+                "Yup",
+                "Did"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 50,
+              "coverage_rate": 0.625,
+              "missing_keywords": [
+                "really",
+                "yeah",
+                "fun",
+                "thanks",
+                "d26",
+                "much",
+                "d20",
+                "nice",
+                "wow",
+                "sounds",
+                "let",
+                "our",
+                "joy",
+                "look",
+                "wait",
+                "see",
+                "know",
+                "hey",
+                "d11",
+                "looks",
+                "here",
+                "haha",
+                "must",
+                "d23",
+                "definitely",
+                "d19",
+                "session",
+                "glad",
+                "d10",
+                "yep"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 120,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0035,
+              "examples": [
+                {
+                  "item_index": 177,
+                  "id": "177",
+                  "text": "It is difficult for Andrew to hike with Toby because Toby is still young.",
+                  "pronouns": [
+                    "it"
+                  ]
+                }
+              ]
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.021250000000000005,
+              "keyword_coverage_tfidf": 0.018750000000000003,
+              "pronoun_ambiguity": 0.00175,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "6": {
+            "memory_count_token": {
+              "memory_count": 390,
+              "memory_token_count": 4450,
+              "avg_item_tokens": 11.4103,
+              "conversation_token_count": 23817,
+              "compression_ratio": 0.1868,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 25,
+              "coverage_rate": 0.625,
+              "missing_entities": [
+                "What",
+                "Thanks",
+                "Yeah",
+                "Wow",
+                "Hey John",
+                "Hey James",
+                "Sounds",
+                "Congrats",
+                "Glad",
+                "Plus",
+                "Anything",
+                "Bye",
+                "Maybe",
+                "Appreciate",
+                "Yep"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 54,
+              "coverage_rate": 0.675,
+              "missing_keywords": [
+                "really",
+                "thanks",
+                "hey",
+                "d31",
+                "yeah",
+                "wow",
+                "d28",
+                "sounds",
+                "d17",
+                "definitely",
+                "d14",
+                "d30",
+                "sure",
+                "session",
+                "d25",
+                "keep",
+                "just",
+                "here",
+                "d20",
+                "d24",
+                "d23",
+                "looks",
+                "d29",
+                "think",
+                "d22",
+                "d21"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 121,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.018750000000000003,
+              "keyword_coverage_tfidf": 0.016249999999999997,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "7": {
+            "memory_count_token": {
+              "memory_count": 326,
+              "memory_token_count": 4257,
+              "avg_item_tokens": 13.0583,
+              "conversation_token_count": 22596,
+              "compression_ratio": 0.1884,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 28,
+              "coverage_rate": 0.7,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Hey Jolene",
+                "Sounds",
+                "Your",
+                "Glad",
+                "Bye",
+                "Yep",
+                "Plus",
+                "Anything",
+                "Just"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 50,
+              "coverage_rate": 0.625,
+              "missing_keywords": [
+                "your",
+                "deb",
+                "d29",
+                "thanks",
+                "d28",
+                "here",
+                "d15",
+                "d23",
+                "our",
+                "just",
+                "d22",
+                "awesome",
+                "hey",
+                "d30",
+                "wow",
+                "sounds",
+                "amazing",
+                "d20",
+                "d26",
+                "d13",
+                "all",
+                "yeah",
+                "need",
+                "know",
+                "d25",
+                "d19",
+                "d10",
+                "too",
+                "something",
+                "much"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 128,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0031,
+              "examples": [
+                {
+                  "item_index": 285,
+                  "id": "285",
+                  "text": "In the card game about cats, players take cards one by one from a deck and can attack their opponent with them.",
+                  "pronouns": [
+                    "their",
+                    "them"
+                  ]
+                }
+              ]
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.015000000000000003,
+              "keyword_coverage_tfidf": 0.018750000000000003,
+              "pronoun_ambiguity": 0.00155,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "8": {
+            "memory_count_token": {
+              "memory_count": 233,
+              "memory_token_count": 2760,
+              "avg_item_tokens": 11.8455,
+              "conversation_token_count": 18614,
+              "compression_ratio": 0.1483,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 24,
+              "coverage_rate": 0.6,
+              "missing_entities": [
+                "Thanks",
+                "Yeah",
+                "Wow",
+                "Hey Sam",
+                "Hey Evan",
+                "Your",
+                "But",
+                "Sounds",
+                "Glad",
+                "Yep",
+                "Cool",
+                "Sorry",
+                "Awesome",
+                "Absolutely",
+                "Making",
+                "Bye"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 46,
+              "coverage_rate": 0.575,
+              "missing_keywords": [
+                "thanks",
+                "your",
+                "really",
+                "hey",
+                "yeah",
+                "awesome",
+                "d23",
+                "wow",
+                "know",
+                "amazing",
+                "our",
+                "d24",
+                "d17",
+                "sounds",
+                "session",
+                "hear",
+                "definitely",
+                "d21",
+                "looks",
+                "d22",
+                "d25",
+                "life",
+                "d16",
+                "lot",
+                "cool",
+                "appreciate",
+                "things",
+                "see",
+                "care",
+                "d20"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 87,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.020000000000000004,
+              "keyword_coverage_tfidf": 0.021250000000000005,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          },
+          "9": {
+            "memory_count_token": {
+              "memory_count": 309,
+              "memory_token_count": 3535,
+              "avg_item_tokens": 11.4401,
+              "conversation_token_count": 23060,
+              "compression_ratio": 0.1533,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 27,
+              "coverage_rate": 0.675,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Hey Dave",
+                "Let",
+                "Hey Calvin",
+                "Appreciate",
+                "Congrats",
+                "Seeing",
+                "Glad",
+                "Anything",
+                "Nice",
+                "Wow Dave"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 56,
+              "coverage_rate": 0.7,
+              "missing_keywords": [
+                "thanks",
+                "wow",
+                "really",
+                "yeah",
+                "cal",
+                "hey",
+                "d28",
+                "d30",
+                "let",
+                "good",
+                "any",
+                "d25",
+                "looks",
+                "pic",
+                "experience",
+                "must",
+                "soon",
+                "appreciate",
+                "d24",
+                "here",
+                "d29",
+                "our",
+                "definitely",
+                "such"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 95,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.016249999999999997,
+              "keyword_coverage_tfidf": 0.015000000000000003,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.0,
+              "retrieval_failure": 0.0
+            }
+          }
+        }
+      },
+      "gemini": {
+        "conversations": {
+          "0": {
+            "memory_count_token": {
+              "memory_count": 149,
+              "memory_token_count": 1750,
+              "avg_item_tokens": 11.745,
+              "conversation_token_count": 16629,
+              "compression_ratio": 0.1052,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": true
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 19,
+              "coverage_rate": 0.475,
+              "missing_entities": [
+                "Wow",
+                "Thanks",
+                "What",
+                "Yeah",
+                "They",
+                "Your",
+                "Glad",
+                "Hey Caroline",
+                "Anything",
+                "Here",
+                "Those",
+                "Hey Mel",
+                "Seeing",
+                "Appreciate",
+                "Did",
+                "Cool",
+                "Life",
+                "Good",
+                "Yep",
+                "Hey Melanie",
+                "Congrats"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 37,
+              "coverage_rate": 0.4625,
+              "missing_keywords": [
+                "mel",
+                "great",
+                "your",
+                "really",
+                "wow",
+                "thanks",
+                "awesome",
+                "amazing",
+                "make",
+                "our",
+                "community",
+                "much",
+                "all",
+                "session",
+                "d14",
+                "yeah",
+                "those",
+                "hey",
+                "glad",
+                "d15",
+                "life",
+                "just",
+                "special",
+                "lot",
+                "d17",
+                "any",
+                "cool",
+                "feel",
+                "d18",
+                "d10"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 55,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 138,
+              "qa_llm_score": 0.558,
+              "answer_span_coverage": 0.3986,
+              "answer_span_partial_rate": 0.3986,
+              "answer_span_not_found_rate": 0.2029,
+              "retrieval_empty_rate": 0.1232,
+              "selected_answer_coverage": 0.2826,
+              "selected_answer_not_found_rate": 0.6159,
+              "selected_noise_high_rate": 0.0072,
+              "full_memory_answer_status_counts": {
+                "token_high": 21,
+                "not_found": 28,
+                "exact_phrase": 34,
+                "token_partial": 55
+              },
+              "selected_answer_status_counts": {
+                "not_found": 85,
+                "exact_phrase": 27,
+                "token_partial": 14,
+                "token_high": 12
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.009686708131766876,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.026250000000000002,
+              "keyword_coverage_tfidf": 0.026875,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.03007,
+              "retrieval_failure": 0.05
+            }
+          },
+          "1": {
+            "memory_count_token": {
+              "memory_count": 103,
+              "memory_token_count": 1161,
+              "avg_item_tokens": 11.2718,
+              "conversation_token_count": 13099,
+              "compression_ratio": 0.0886,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": true
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 16,
+              "coverage_rate": 0.4,
+              "missing_entities": [
+                "Thanks",
+                "Your",
+                "Wow",
+                "Yeah",
+                "Let",
+                "Can",
+                "Hey Jon",
+                "Hey Gina",
+                "Glad",
+                "Don",
+                "Appreciate",
+                "Nice",
+                "Sounds",
+                "Congrats",
+                "Sure",
+                "Bye",
+                "Check",
+                "Plus",
+                "Gotta",
+                "Definitely",
+                "Here",
+                "Yeah Jon",
+                "Good",
+                "Anything"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 29,
+              "coverage_rate": 0.3625,
+              "missing_keywords": [
+                "your",
+                "thanks",
+                "biz",
+                "great",
+                "make",
+                "awesome",
+                "really",
+                "wow",
+                "yeah",
+                "tough",
+                "hey",
+                "dreams",
+                "lot",
+                "let",
+                "gonna",
+                "customers",
+                "support",
+                "get",
+                "some",
+                "see",
+                "hard",
+                "d13",
+                "sure",
+                "d18",
+                "d15",
+                "d11",
+                "cool",
+                "means",
+                "d17",
+                "will"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 46,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 72,
+              "qa_llm_score": 0.3889,
+              "answer_span_coverage": 0.2917,
+              "answer_span_partial_rate": 0.125,
+              "answer_span_not_found_rate": 0.5833,
+              "retrieval_empty_rate": 0.1528,
+              "selected_answer_coverage": 0.25,
+              "selected_answer_not_found_rate": 0.6806,
+              "selected_noise_high_rate": 0.0556,
+              "full_memory_answer_status_counts": {
+                "not_found": 42,
+                "token_high": 8,
+                "token_partial": 9,
+                "exact_phrase": 13
+              },
+              "selected_answer_status_counts": {
+                "not_found": 49,
+                "token_high": 7,
+                "token_partial": 5,
+                "exact_phrase": 11
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.023255010366275055,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.03,
+              "keyword_coverage_tfidf": 0.031875,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.035414999999999995,
+              "retrieval_failure": 0.05
+            }
+          },
+          "2": {
+            "memory_count_token": {
+              "memory_count": 302,
+              "memory_token_count": 3717,
+              "avg_item_tokens": 12.3079,
+              "conversation_token_count": 25284,
+              "compression_ratio": 0.147,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 2,
+              "near_duplicate_pair_count": 1,
+              "near_duplicate_rate": 0.0066,
+              "example_pairs": [
+                {
+                  "left": 34,
+                  "right": 125,
+                  "similarity": 0.875
+                }
+              ]
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 20,
+              "coverage_rate": 0.5,
+              "missing_entities": [
+                "Wow",
+                "Yeah",
+                "What",
+                "Your",
+                "Keep",
+                "Hey John",
+                "Hey Maria",
+                "Sounds",
+                "Glad",
+                "Yep",
+                "Definitely",
+                "Just",
+                "Anything",
+                "Sure",
+                "Cool",
+                "Yeah John",
+                "Appreciate",
+                "But",
+                "Nice",
+                "There"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 38,
+              "coverage_rate": 0.475,
+              "missing_keywords": [
+                "really",
+                "your",
+                "thanks",
+                "yeah",
+                "our",
+                "wow",
+                "difference",
+                "keep",
+                "awesome",
+                "let",
+                "hey",
+                "amazing",
+                "d31",
+                "tough",
+                "important",
+                "d32",
+                "way",
+                "see",
+                "all",
+                "sounds",
+                "d30",
+                "kindness",
+                "know",
+                "definitely",
+                "just",
+                "d13",
+                "cool",
+                "something",
+                "here",
+                "appreciate"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 91,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 136,
+              "qa_llm_score": 0.6471,
+              "answer_span_coverage": 0.6103,
+              "answer_span_partial_rate": 0.2574,
+              "answer_span_not_found_rate": 0.1324,
+              "retrieval_empty_rate": 0.0588,
+              "selected_answer_coverage": 0.4853,
+              "selected_answer_not_found_rate": 0.4044,
+              "selected_noise_high_rate": 0.0074,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 51,
+                "not_found": 18,
+                "token_high": 32,
+                "token_partial": 35
+              },
+              "selected_answer_status_counts": {
+                "exact_phrase": 39,
+                "not_found": 55,
+                "token_high": 27,
+                "token_partial": 15
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.00132,
+              "entity_coverage": 0.025,
+              "keyword_coverage_tfidf": 0.026250000000000002,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.019485000000000002,
+              "retrieval_failure": 0.03529
+            }
+          },
+          "3": {
+            "memory_count_token": {
+              "memory_count": 201,
+              "memory_token_count": 2474,
+              "avg_item_tokens": 12.3085,
+              "conversation_token_count": 21533,
+              "compression_ratio": 0.1149,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 17,
+              "coverage_rate": 0.425,
+              "missing_entities": [
+                "Thanks",
+                "What",
+                "Wow",
+                "Yeah",
+                "They",
+                "Hey Nate",
+                "Hey Joanna",
+                "Sounds",
+                "Your",
+                "Thanks Nate",
+                "Congrats",
+                "See",
+                "Yep",
+                "Great",
+                "Sure",
+                "Glad",
+                "Anything",
+                "Here",
+                "Definitely",
+                "Having",
+                "Take",
+                "Awesome",
+                "Appreciate"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 42,
+              "coverage_rate": 0.525,
+              "missing_keywords": [
+                "your",
+                "great",
+                "thanks",
+                "really",
+                "awesome",
+                "just",
+                "hey",
+                "wow",
+                "sure",
+                "see",
+                "d27",
+                "cool",
+                "sounds",
+                "keep",
+                "d28",
+                "any",
+                "always",
+                "d23",
+                "yeah",
+                "way",
+                "d25",
+                "something",
+                "d26",
+                "much",
+                "definitely",
+                "fun",
+                "looks",
+                "know",
+                "d22",
+                "hear"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 90,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 179,
+              "qa_llm_score": 0.5531,
+              "answer_span_coverage": 0.5587,
+              "answer_span_partial_rate": 0.1397,
+              "answer_span_not_found_rate": 0.3017,
+              "retrieval_empty_rate": 0.0615,
+              "selected_answer_coverage": 0.419,
+              "selected_answer_not_found_rate": 0.4525,
+              "selected_noise_high_rate": 0.0223,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 66,
+                "token_partial": 25,
+                "not_found": 54,
+                "token_high": 34
+              },
+              "selected_answer_status_counts": {
+                "token_partial": 23,
+                "not_found": 81,
+                "token_high": 21,
+                "exact_phrase": 54
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.028749999999999998,
+              "keyword_coverage_tfidf": 0.02375,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.022065,
+              "retrieval_failure": 0.039115000000000004
+            }
+          },
+          "4": {
+            "memory_count_token": {
+              "memory_count": 219,
+              "memory_token_count": 2418,
+              "avg_item_tokens": 11.0411,
+              "conversation_token_count": 24729,
+              "compression_ratio": 0.0978,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 16,
+              "coverage_rate": 0.4,
+              "missing_entities": [
+                "Wow",
+                "Yeah",
+                "What",
+                "Have",
+                "Cool",
+                "Hey John",
+                "Hey Tim",
+                "Let",
+                "Sounds",
+                "Congrats",
+                "They",
+                "Your",
+                "Great",
+                "Definitely",
+                "Glad",
+                "Here",
+                "Having",
+                "Awesome",
+                "Plus",
+                "Nice",
+                "Bye",
+                "There",
+                "Being",
+                "Appreciate"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 34,
+              "coverage_rate": 0.425,
+              "missing_keywords": [
+                "great",
+                "awesome",
+                "your",
+                "thanks",
+                "really",
+                "amazing",
+                "wow",
+                "yeah",
+                "all",
+                "any",
+                "cool",
+                "d27",
+                "d20",
+                "d26",
+                "our",
+                "hey",
+                "sounds",
+                "some",
+                "see",
+                "definitely",
+                "must",
+                "got",
+                "let",
+                "good",
+                "d15",
+                "such",
+                "know",
+                "something",
+                "other",
+                "fun"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 62,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 162,
+              "qa_llm_score": 0.5185,
+              "answer_span_coverage": 0.5247,
+              "answer_span_partial_rate": 0.1914,
+              "answer_span_not_found_rate": 0.284,
+              "retrieval_empty_rate": 0.0617,
+              "selected_answer_coverage": 0.4074,
+              "selected_answer_not_found_rate": 0.4259,
+              "selected_noise_high_rate": 0.037,
+              "full_memory_answer_status_counts": {
+                "token_high": 31,
+                "not_found": 46,
+                "token_partial": 31,
+                "exact_phrase": 54
+              },
+              "selected_answer_status_counts": {
+                "token_high": 19,
+                "token_partial": 27,
+                "not_found": 69,
+                "exact_phrase": 47
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.03,
+              "keyword_coverage_tfidf": 0.028749999999999998,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.023764999999999998,
+              "retrieval_failure": 0.03857
+            }
+          },
+          "5": {
+            "memory_count_token": {
+              "memory_count": 186,
+              "memory_token_count": 2315,
+              "avg_item_tokens": 12.4462,
+              "conversation_token_count": 24016,
+              "compression_ratio": 0.0964,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 16,
+              "coverage_rate": 0.4,
+              "missing_entities": [
+                "They",
+                "Yeah",
+                "Thanks",
+                "Wow",
+                "What",
+                "Let",
+                "Here",
+                "Yep",
+                "Sounds",
+                "Glad",
+                "Haha",
+                "Aww",
+                "Hey Andrew",
+                "Definitely",
+                "Hey",
+                "Nice",
+                "Seeing",
+                "Hey Audrey",
+                "Yup",
+                "Your",
+                "Cool",
+                "Sure",
+                "Did",
+                "Awesome"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 33,
+              "coverage_rate": 0.4125,
+              "missing_keywords": [
+                "great",
+                "really",
+                "yeah",
+                "pups",
+                "awesome",
+                "your",
+                "fun",
+                "thanks",
+                "furry",
+                "some",
+                "d26",
+                "much",
+                "all",
+                "happy",
+                "time",
+                "sure",
+                "good",
+                "d20",
+                "nice",
+                "wow",
+                "sounds",
+                "let",
+                "just",
+                "any",
+                "our",
+                "joy",
+                "wait",
+                "see",
+                "cute",
+                "know"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 92,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 114,
+              "qa_llm_score": 0.5702,
+              "answer_span_coverage": 0.5526,
+              "answer_span_partial_rate": 0.1404,
+              "answer_span_not_found_rate": 0.307,
+              "retrieval_empty_rate": 0.114,
+              "selected_answer_coverage": 0.4211,
+              "selected_answer_not_found_rate": 0.4912,
+              "selected_noise_high_rate": 0.0351,
+              "full_memory_answer_status_counts": {
+                "not_found": 35,
+                "token_partial": 16,
+                "token_high": 24,
+                "exact_phrase": 39
+              },
+              "selected_answer_status_counts": {
+                "not_found": 56,
+                "token_partial": 10,
+                "exact_phrase": 35,
+                "token_high": 13
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.03,
+              "keyword_coverage_tfidf": 0.029375000000000002,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.02237,
+              "retrieval_failure": 0.05
+            }
+          },
+          "6": {
+            "memory_count_token": {
+              "memory_count": 261,
+              "memory_token_count": 2822,
+              "avg_item_tokens": 10.8123,
+              "conversation_token_count": 23817,
+              "compression_ratio": 0.1185,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 19,
+              "coverage_rate": 0.475,
+              "missing_entities": [
+                "What",
+                "Thanks",
+                "Yeah",
+                "Wow",
+                "Hey John",
+                "Have",
+                "Hey James",
+                "Sounds",
+                "Your",
+                "Congrats",
+                "Keep",
+                "Glad",
+                "Did",
+                "Great",
+                "Nice",
+                "Plus",
+                "Anything",
+                "Bye",
+                "Maybe",
+                "Appreciate",
+                "Yep"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 38,
+              "coverage_rate": 0.475,
+              "missing_keywords": [
+                "great",
+                "your",
+                "really",
+                "awesome",
+                "thanks",
+                "hey",
+                "any",
+                "d31",
+                "yeah",
+                "wow",
+                "love",
+                "see",
+                "d28",
+                "way",
+                "fun",
+                "sounds",
+                "help",
+                "something",
+                "d17",
+                "much",
+                "definitely",
+                "all",
+                "always",
+                "d14",
+                "d30",
+                "sure",
+                "d25",
+                "amazing",
+                "keep",
+                "just"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 85,
+              "high_risk_item_count": 1,
+              "pronoun_ambiguity_rate": 0.0038,
+              "examples": [
+                {
+                  "item_index": 254,
+                  "id": "254",
+                  "text": "FIFA 23 is a football game that allows online play with players worldwide.",
+                  "pronouns": [
+                    "that"
+                  ]
+                }
+              ]
+            },
+            "qa_aware": {
+              "qa_count": 137,
+              "qa_llm_score": 0.6058,
+              "answer_span_coverage": 0.5182,
+              "answer_span_partial_rate": 0.1898,
+              "answer_span_not_found_rate": 0.292,
+              "retrieval_empty_rate": 0.0803,
+              "selected_answer_coverage": 0.4234,
+              "selected_answer_not_found_rate": 0.4818,
+              "selected_noise_high_rate": 0.0146,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 49,
+                "not_found": 40,
+                "token_high": 22,
+                "token_partial": 26
+              },
+              "selected_answer_status_counts": {
+                "exact_phrase": 42,
+                "not_found": 66,
+                "token_high": 16,
+                "token_partial": 13
+              },
+              "qa_aware_floor_risk": false
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.026250000000000002,
+              "keyword_coverage_tfidf": 0.026250000000000002,
+              "pronoun_ambiguity": 0.0019,
+              "answer_span_coverage": 0.02409,
+              "retrieval_failure": 0.044895
+            }
+          },
+          "7": {
+            "memory_count_token": {
+              "memory_count": 207,
+              "memory_token_count": 2686,
+              "avg_item_tokens": 12.9758,
+              "conversation_token_count": 22596,
+              "compression_ratio": 0.1189,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 25,
+              "coverage_rate": 0.625,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Hey Jolene",
+                "Sounds",
+                "Your",
+                "They",
+                "See",
+                "Glad",
+                "Bye",
+                "Having",
+                "Yep",
+                "Plus",
+                "Anything",
+                "Just"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 31,
+              "coverage_rate": 0.3875,
+              "missing_keywords": [
+                "your",
+                "deb",
+                "really",
+                "great",
+                "d29",
+                "mom",
+                "make",
+                "thanks",
+                "d28",
+                "lot",
+                "here",
+                "d15",
+                "any",
+                "d23",
+                "our",
+                "just",
+                "d22",
+                "awesome",
+                "way",
+                "hey",
+                "d30",
+                "wow",
+                "sounds",
+                "help",
+                "get",
+                "amazing",
+                "d20",
+                "some",
+                "tough",
+                "feel"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 98,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 165,
+              "qa_llm_score": 0.5333,
+              "answer_span_coverage": 0.4848,
+              "answer_span_partial_rate": 0.1576,
+              "answer_span_not_found_rate": 0.3576,
+              "retrieval_empty_rate": 0.0667,
+              "selected_answer_coverage": 0.3636,
+              "selected_answer_not_found_rate": 0.497,
+              "selected_noise_high_rate": 0.0424,
+              "full_memory_answer_status_counts": {
+                "token_partial": 26,
+                "not_found": 59,
+                "exact_phrase": 57,
+                "token_high": 23
+              },
+              "selected_answer_status_counts": {
+                "token_partial": 23,
+                "not_found": 82,
+                "exact_phrase": 45,
+                "token_high": 15
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.018750000000000003,
+              "keyword_coverage_tfidf": 0.030625000000000003,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.02576,
+              "retrieval_failure": 0.043644999999999996
+            }
+          },
+          "8": {
+            "memory_count_token": {
+              "memory_count": 185,
+              "memory_token_count": 2294,
+              "avg_item_tokens": 12.4,
+              "conversation_token_count": 18614,
+              "compression_ratio": 0.1232,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": false
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 20,
+              "coverage_rate": 0.5,
+              "missing_entities": [
+                "Thanks",
+                "Yeah",
+                "Wow",
+                "You",
+                "Hey Sam",
+                "Hey Evan",
+                "Your",
+                "Sounds",
+                "Glad",
+                "Yep",
+                "Life",
+                "Cool",
+                "Sorry",
+                "Awesome",
+                "Hope",
+                "Absolutely",
+                "Where",
+                "Making",
+                "Bye",
+                "Here"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 41,
+              "coverage_rate": 0.5125,
+              "missing_keywords": [
+                "thanks",
+                "your",
+                "really",
+                "hey",
+                "yeah",
+                "awesome",
+                "tough",
+                "d23",
+                "wow",
+                "support",
+                "something",
+                "know",
+                "amazing",
+                "our",
+                "d24",
+                "d17",
+                "all",
+                "sounds",
+                "hear",
+                "definitely",
+                "d21",
+                "looks",
+                "here",
+                "fun",
+                "d22",
+                "d25",
+                "life",
+                "d16",
+                "lot",
+                "cool"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 85,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 135,
+              "qa_llm_score": 0.5852,
+              "answer_span_coverage": 0.5778,
+              "answer_span_partial_rate": 0.2444,
+              "answer_span_not_found_rate": 0.1778,
+              "retrieval_empty_rate": 0.1111,
+              "selected_answer_coverage": 0.3778,
+              "selected_answer_not_found_rate": 0.4444,
+              "selected_noise_high_rate": 0.0444,
+              "full_memory_answer_status_counts": {
+                "exact_phrase": 47,
+                "token_high": 31,
+                "not_found": 24,
+                "token_partial": 33
+              },
+              "selected_answer_status_counts": {
+                "exact_phrase": 38,
+                "token_high": 13,
+                "not_found": 60,
+                "token_partial": 24
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.0,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.025,
+              "keyword_coverage_tfidf": 0.024375000000000004,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.021110000000000004,
+              "retrieval_failure": 0.05
+            }
+          },
+          "9": {
+            "memory_count_token": {
+              "memory_count": 171,
+              "memory_token_count": 1913,
+              "avg_item_tokens": 11.1871,
+              "conversation_token_count": 23060,
+              "compression_ratio": 0.083,
+              "memory_count_floor": 183.3,
+              "memory_token_floor": 2170.5,
+              "coverage_floor_risk": true
+            },
+            "exact_duplicate": {
+              "duplicate_item_count": 0,
+              "duplicate_group_count": 0,
+              "duplicate_rate": 0.0,
+              "examples": []
+            },
+            "near_duplicate_lexical": {
+              "near_duplicate_item_count": 0,
+              "near_duplicate_pair_count": 0,
+              "near_duplicate_rate": 0.0,
+              "example_pairs": []
+            },
+            "entity_coverage": {
+              "salient_count": 40,
+              "covered_count": 17,
+              "coverage_rate": 0.425,
+              "missing_entities": [
+                "Thanks",
+                "Wow",
+                "Yeah",
+                "Can",
+                "Keep",
+                "Hey Dave",
+                "What",
+                "Cool",
+                "Have",
+                "Let",
+                "Hey Calvin",
+                "Your",
+                "Appreciate",
+                "See",
+                "Here",
+                "Congrats",
+                "Seeing",
+                "Glad",
+                "Anything",
+                "Check",
+                "Nice",
+                "Got",
+                "Wow Dave"
+              ]
+            },
+            "keyword_coverage_tfidf": {
+              "keyword_count": 80,
+              "covered_count": 29,
+              "coverage_rate": 0.3625,
+              "missing_keywords": [
+                "your",
+                "great",
+                "awesome",
+                "thanks",
+                "wow",
+                "see",
+                "keep",
+                "amazing",
+                "really",
+                "yeah",
+                "take",
+                "cool",
+                "cal",
+                "hey",
+                "d28",
+                "wait",
+                "some",
+                "got",
+                "going",
+                "all",
+                "d30",
+                "something",
+                "let",
+                "get",
+                "good",
+                "any",
+                "d25",
+                "looks",
+                "lot",
+                "pic"
+              ]
+            },
+            "pronoun_ambiguity": {
+              "items_with_pronoun": 54,
+              "high_risk_item_count": 0,
+              "pronoun_ambiguity_rate": 0.0,
+              "examples": []
+            },
+            "qa_aware": {
+              "qa_count": 144,
+              "qa_llm_score": 0.5139,
+              "answer_span_coverage": 0.5486,
+              "answer_span_partial_rate": 0.2361,
+              "answer_span_not_found_rate": 0.2153,
+              "retrieval_empty_rate": 0.125,
+              "selected_answer_coverage": 0.3125,
+              "selected_answer_not_found_rate": 0.5139,
+              "selected_noise_high_rate": 0.0764,
+              "full_memory_answer_status_counts": {
+                "token_partial": 34,
+                "token_high": 29,
+                "exact_phrase": 50,
+                "not_found": 31
+              },
+              "selected_answer_status_counts": {
+                "not_found": 74,
+                "exact_phrase": 38,
+                "token_high": 7,
+                "token_partial": 25
+              },
+              "qa_aware_floor_risk": true
+            },
+            "feature_penalties": {
+              "memory_count_token": 0.005931812946325731,
+              "exact_duplicate": 0.0,
+              "near_duplicate_lexical": 0.0,
+              "entity_coverage": 0.028749999999999998,
+              "keyword_coverage_tfidf": 0.031875,
+              "pronoun_ambiguity": 0.0,
+              "answer_span_coverage": 0.022570000000000003,
+              "retrieval_failure": 0.05
+            }
+          }
+        }
+      }
+    }
+  }
+}

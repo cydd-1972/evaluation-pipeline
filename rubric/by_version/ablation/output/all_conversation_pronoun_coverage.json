@@ -1,0 +1,1156 @@
+{
+  "metric_definition": {
+    "pronoun_item": "memory item text contains at least one pronoun from a fixed list",
+    "anchored_pronoun_item": "pronoun item also contains a likely named entity anchor such as a capitalized proper name or ALL CAPS token",
+    "ambiguous_pronoun_item": "pronoun item contains pronoun but no anchor entity in the same item"
+  },
+  "pronoun_list": [
+    "he",
+    "him",
+    "his",
+    "she",
+    "her",
+    "hers",
+    "they",
+    "them",
+    "their",
+    "theirs",
+    "it",
+    "its",
+    "this",
+    "that",
+    "these",
+    "those"
+  ],
+  "conversations": [
+    {
+      "conversation_idx": 0,
+      "models": {
+        "gemini": {
+          "memory_count": 149,
+          "pronoun_item_count": 55,
+          "anchored_pronoun_item_count": 55,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3691,
+          "anchored_pronoun_rate": 0.3691,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 49,
+            "it": 1,
+            "she": 5,
+            "that": 1,
+            "them": 1,
+            "this": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Caroline plans to continue her education.",
+            "Melanie plans to go swimming with her children.",
+            "Melanie uses painting as a way to relax, express her feelings, and be creative.",
+            "Caroline is looking into an adoption agency that helps LGBTQ+ individuals.",
+            "Melanie and her children are thinking about going camping next month.",
+            "Melanie's support system includes her husband and children.",
+            "Caroline has known her friends for 4 years.",
+            "Caroline moved from her home country 4 years ago.",
+            "Caroline talked about her transgender journey at her school event.",
+            "Melanie went camping in the mountains with her family last week."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 228,
+          "pronoun_item_count": 79,
+          "anchored_pronoun_item_count": 79,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3465,
+          "anchored_pronoun_rate": 0.3465,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 63,
+            "his": 1,
+            "it": 3,
+            "she": 8,
+            "that": 4,
+            "their": 3,
+            "theirs": 1,
+            "them": 2,
+            "this": 4,
+            "those": 3
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Caroline plans to continue her education.",
+            "Melanie went swimming with her kids.",
+            "Caroline chose an adoption agency that helps LGBTQ+ folks with adoption.",
+            "Caroline's friends, family, and mentors helped her through her transition.",
+            "Caroline has known her friends for 4 years.",
+            "Melanie's husband and kids motivate her.",
+            "Caroline moved from her home country 4 years ago.",
+            "Caroline talked about her transgender journey at a school event last week.",
+            "Melanie went camping with her kids a few weeks ago.",
+            "Caroline's own journey and support motivated her to pursue counseling."
+          ]
+        },
+        "minimax": {
+          "memory_count": 324,
+          "pronoun_item_count": 112,
+          "anchored_pronoun_item_count": 112,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3457,
+          "anchored_pronoun_rate": 0.3457,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 85,
+            "his": 1,
+            "it": 4,
+            "she": 15,
+            "that": 9,
+            "their": 8,
+            "them": 7,
+            "they": 3,
+            "this": 4,
+            "those": 3
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Caroline plans to continue her education.",
+            "Caroline wants to have a family and give a loving home to kids who need it.",
+            "Melanie realized that self-care is important.",
+            "Caroline chose an adoption agency that helps LGBTQ+ folks with adoption.",
+            "Melanie's me-time activities include running, reading, or playing her violin.",
+            "Caroline has known her support friends for 4 years.",
+            "Melanie's husband and kids motivate her.",
+            "Caroline moved from her home country and met her support friends after moving.",
+            "Caroline shared her own journey, struggles, and personal development since coming out.",
+            "Caroline's friends, family, and mentors motivate her and give her strength."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 1,
+      "models": {
+        "gemini": {
+          "memory_count": 103,
+          "pronoun_item_count": 46,
+          "anchored_pronoun_item_count": 46,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4466,
+          "anchored_pronoun_rate": 0.4466,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 1,
+            "her": 15,
+            "him": 1,
+            "his": 28,
+            "it": 1,
+            "that": 5,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Gina lost her job at Door Dash this month.",
+            "Jon has been passionate about dancing since he was a kid.",
+            "Jon lost his job as a banker yesterday.",
+            "Jon prefers Marley flooring for his dance studio.",
+            "Jon is searching for a location for his dance studio.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina expanded her clothing store to a new location.",
+            "Gina found a new fashion piece for her store.",
+            "Gina got her tattoo a few years ago.",
+            "Gina got the idea for her new clothing designs from a fashion magazine."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 173,
+          "pronoun_item_count": 76,
+          "anchored_pronoun_item_count": 76,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4393,
+          "anchored_pronoun_rate": 0.4393,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 5,
+            "her": 29,
+            "his": 41,
+            "it": 6,
+            "she": 3,
+            "that": 8,
+            "their": 1,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Gina lost her job at Door Dash this month.",
+            "Gina's dance team won first place at a regional competition when she was fifteen.",
+            "Jon has been into dancing since he was a kid.",
+            "Jon lost his job.",
+            "Jon is turning his love of dance into a business.",
+            "Jon wants Marley flooring for his dance studio.",
+            "Gina opened an online clothing store after losing her job.",
+            "Jon found a place with great natural light for his dance studio.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina can expand her clothing store."
+          ]
+        },
+        "minimax": {
+          "memory_count": 212,
+          "pronoun_item_count": 91,
+          "anchored_pronoun_item_count": 91,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4292,
+          "anchored_pronoun_rate": 0.4292,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 1,
+            "her": 32,
+            "him": 7,
+            "his": 51,
+            "it": 9,
+            "she": 7,
+            "that": 6,
+            "their": 2,
+            "they": 1,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Gina lost her job at DoorDash this month.",
+            "Gina's dance team won first place at regionals when she was fifteen.",
+            "Jon lost his job as a banker, which motivated him to pursue dance professionally.",
+            "Jon showed a photo of his dance crew winning first place in a local competition last year.",
+            "Jon wants to teach others the joy that dancing brings him.",
+            "Jon wants his dance studio to be downtown.",
+            "Jon wants Marley flooring for his dance studio.",
+            "Jon found a place with great natural light for his dance studio.",
+            "Gina is starting her own clothing store.",
+            "Gina finds starting her own store both scary and rewarding."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 2,
+      "models": {
+        "gemini": {
+          "memory_count": 302,
+          "pronoun_item_count": 92,
+          "anchored_pronoun_item_count": 92,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3046,
+          "anchored_pronoun_rate": 0.3046,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 4,
+            "her": 18,
+            "his": 56,
+            "it": 10,
+            "its": 1,
+            "she": 4,
+            "that": 7,
+            "their": 5,
+            "they": 2,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "John is passionate about improving education in his community.",
+            "John is passionate about improving infrastructure in his community.",
+            "John is actively looking into local politics as part of his plan to get involved.",
+            "John saw a school last year after it received funding.",
+            "Maria donated her old car to a homeless shelter yesterday.",
+            "John and his family made pizza together.",
+            "The photo shows a table with pizzas and salads on it.",
+            "John has been networking with people to get input for his campaign.",
+            "John talked to someone who shared stories that fired up his passion to improve education.",
+            "John and his service group went to a homeless shelter to give out food and supplies."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 336,
+          "pronoun_item_count": 111,
+          "anchored_pronoun_item_count": 111,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3304,
+          "anchored_pronoun_rate": 0.3304,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 7,
+            "her": 26,
+            "him": 5,
+            "his": 57,
+            "it": 7,
+            "she": 8,
+            "that": 7,
+            "their": 9,
+            "them": 1,
+            "they": 4,
+            "this": 1,
+            "those": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "John is passionate about improving education in his community.",
+            "John is passionate about improving infrastructure in his community.",
+            "John saw how crumbling infrastructure affected his neighborhood growing up.",
+            "John saw how lack of education affected his neighborhood growing up.",
+            "John and his family made pizza together.",
+            "Maria donated her old car to a homeless shelter she volunteers at yesterday.",
+            "John and his family had dinner together.",
+            "John has been networking with people to get their input on his campaign.",
+            "John talked to someone who shared stories that fired up his passion to make education better in his area.",
+            "John's family motivates him."
+          ]
+        },
+        "minimax": {
+          "memory_count": 422,
+          "pronoun_item_count": 148,
+          "anchored_pronoun_item_count": 148,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3507,
+          "anchored_pronoun_rate": 0.3507,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 3,
+            "her": 33,
+            "him": 5,
+            "his": 68,
+            "it": 5,
+            "she": 7,
+            "that": 11,
+            "their": 20,
+            "them": 1,
+            "they": 17,
+            "this": 1,
+            "those": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "John doesn't want future generations to go through what he experienced.",
+            "John saw growing up how lack of education and crumbling infrastructure affected his neighborhood.",
+            "John shared a photo of a school last year after they got funding.",
+            "Maria donated her old car to a homeless shelter yesterday.",
+            "John has been networking with people to get input on his campaign.",
+            "John's family is his rock in tough times.",
+            "John and his family made pizza together.",
+            "Maria loves spending time with her friends.",
+            "Maria and her friends hike together.",
+            "Maria and her friends have game nights at her place."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 3,
+      "models": {
+        "gemini": {
+          "memory_count": 201,
+          "pronoun_item_count": 90,
+          "anchored_pronoun_item_count": 90,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4478,
+          "anchored_pronoun_rate": 0.4478,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 2,
+            "her": 45,
+            "him": 2,
+            "his": 32,
+            "it": 3,
+            "she": 5,
+            "that": 12,
+            "their": 3,
+            "them": 1,
+            "this": 4
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Joanna owns a physical copy of the romantic drama movie she recommended.",
+            "Nate won his first video game tournament last week.",
+            "Joanna printed her first full screenplay last Friday.",
+            "Joanna finished her first full screenplay last Friday.",
+            "Nate owns tortoises as pets and has had them for over 3 years.",
+            "Nate has started hanging out with people outside of his tournament circle.",
+            "Joanna plans to submit her screenplay to film festivals.",
+            "Nate made a dairy-free chocolate cake with berries on it the other day.",
+            "Joanna's second screenplay was inspired by her personal experiences.",
+            "Nate has a new dairy-free ice cream recipe that is creamy and rich, featuring coconut milk, vanilla extract, sugar, and a pinch of salt."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 321,
+          "pronoun_item_count": 129,
+          "anchored_pronoun_item_count": 128,
+          "ambiguous_pronoun_item_count": 1,
+          "pronoun_item_rate": 0.4019,
+          "anchored_pronoun_rate": 0.3988,
+          "ambiguous_pronoun_rate": 0.0031,
+          "ambiguous_within_pronoun_rate": 0.0078,
+          "pronoun_frequency": {
+            "he": 4,
+            "her": 67,
+            "him": 4,
+            "his": 36,
+            "it": 9,
+            "she": 11,
+            "that": 9,
+            "their": 4,
+            "them": 1,
+            "they": 8,
+            "this": 5
+          },
+          "sample_ambiguous_items": [
+            "6 of the attendees said they would want to do it again next month."
+          ],
+          "sample_anchored_pronoun_items": [
+            "Joanna first watched that romantic drama around 3 years ago.",
+            "Joanna owns a physical copy of that romantic drama.",
+            "Nate played Counter-Strike: Global Offensive with his team.",
+            "Nate won his first video game tournament last week.",
+            "That romantic drama is one of Joanna's favorite movies.",
+            "Joanna finished her first full screenplay last Friday.",
+            "Nate started hanging out with people outside his circle at the tournament.",
+            "Joanna's allergies cause her face to get puffy and itchy.",
+            "Nate has turtles as pets and has had them for 3 years.",
+            "Joanna sent her screenplay to a film festival."
+          ]
+        },
+        "minimax": {
+          "memory_count": 395,
+          "pronoun_item_count": 168,
+          "anchored_pronoun_item_count": 168,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4253,
+          "anchored_pronoun_rate": 0.4253,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 7,
+            "her": 85,
+            "him": 6,
+            "his": 42,
+            "it": 19,
+            "its": 1,
+            "she": 18,
+            "that": 9,
+            "their": 5,
+            "them": 4,
+            "they": 11,
+            "this": 4
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Joanna first watched that movie around 3 years ago.",
+            "Joanna likes the idea and acting of that movie.",
+            "Nate might check out that movie soon.",
+            "Nate won his first video game tournament last week.",
+            "Joanna planned to submit her screenplay to film festivals and sent it.",
+            "Joanna's face gets puffy and itchy when she's around certain animals.",
+            "Joanna hopes to get producers and directors to check out her screenplay.",
+            "Joanna is feeling relief, excitement, and some anxiety about finishing her screenplay.",
+            "Joanna finished her first full screenplay and printed it last Friday.",
+            "Nate started hanging out with people outside his circle at the tournament."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 4,
+      "models": {
+        "gemini": {
+          "memory_count": 219,
+          "pronoun_item_count": 62,
+          "anchored_pronoun_item_count": 62,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.2831,
+          "anchored_pronoun_rate": 0.2831,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 7,
+            "him": 4,
+            "his": 48,
+            "it": 2,
+            "that": 8,
+            "their": 4,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "John's goal is to improve his shooting percentage.",
+            "John is exploring endorsement opportunities to build his brand.",
+            "John celebrated a basketball win at a restaurant with his teammates.",
+            "Tim skyped with a Harry Potter fan he met in California.",
+            "John's basketball team won their game last week by a tight score.",
+            "John started playing basketball when he was ten years old.",
+            "John owns a pair of basketball shoes that he considers lucky.",
+            "John's teammates gave him a basketball with autographs on it.",
+            "John met with his teammates on the 15th.",
+            "The basketball with autographs symbolizes the friendship and bond between John and his teammates."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 364,
+          "pronoun_item_count": 103,
+          "anchored_pronoun_item_count": 103,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.283,
+          "anchored_pronoun_rate": 0.283,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 13,
+            "him": 15,
+            "his": 72,
+            "it": 2,
+            "its": 1,
+            "that": 10,
+            "their": 7,
+            "them": 2,
+            "they": 1,
+            "this": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "John's goal is to improve his shooting percentage.",
+            "Tim and his friend are figuring out ideas for the Harry Potter fan project.",
+            "Tim talked to his friend who is a Harry Potter fan last week.",
+            "Tim's reminders help him escape the daily grind.",
+            "Tim has a picture from MinaLima on his bookshelf.",
+            "John is open to exploring other brands that align with his values and interests.",
+            "Tim skyped with a Harry Potter fan he met in California.",
+            "Tim finds reading a great fantasy book helps him escape and feel free.",
+            "John celebrated his win at a restaurant with his teammates.",
+            "John scored 40 points last week, his highest ever."
+          ]
+        },
+        "minimax": {
+          "memory_count": 405,
+          "pronoun_item_count": 150,
+          "anchored_pronoun_item_count": 150,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3704,
+          "anchored_pronoun_rate": 0.3704,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 16,
+            "him": 18,
+            "his": 108,
+            "it": 7,
+            "its": 1,
+            "that": 10,
+            "their": 8,
+            "them": 5,
+            "these": 1,
+            "they": 4,
+            "this": 4
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "John has been practicing hard to improve his shooting.",
+            "John's goal is to improve his shooting percentage.",
+            "Tim and his friend are planning to discuss characters, spells, and magical creatures for the fan project.",
+            "Tim showed John a photo of his book collection.",
+            "John is open to exploring other brands that align with his values and interests.",
+            "Tim had a great talk about his favorite books on the forum.",
+            "John showed Tim a photo from a basketball game he recently played.",
+            "John had an awesome summer surfing with his friends.",
+            "John and his team celebrated at a restaurant after the win.",
+            "John scored 40 points last week, his highest ever."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 5,
+      "models": {
+        "gemini": {
+          "memory_count": 186,
+          "pronoun_item_count": 92,
+          "anchored_pronoun_item_count": 92,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4946,
+          "anchored_pronoun_rate": 0.4946,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 57,
+            "his": 26,
+            "it": 2,
+            "she": 4,
+            "that": 5,
+            "their": 6,
+            "them": 1,
+            "this": 6
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Audrey has had her dogs for 3 years.",
+            "Audrey's dogs are city dogs that enjoy exploring parks and trails.",
+            "Andrew and his girlfriend visited a new cafe in the city last weekend.",
+            "Audrey has a tattoo of a dog and sunflowers on her arm.",
+            "Audrey's tattoo represents her love for her dogs and nature's beauty.",
+            "Audrey plays fetch with her dogs using a ball or frisbee.",
+            "Audrey uses shoes for her dogs to keep them safe while hiking.",
+            "The dog park Audrey visits is located by the park she usually walks in.",
+            "Andrew plans to go on a road trip with his future dog.",
+            "Audrey took her dogs on a road trip to a national park last Friday."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 282,
+          "pronoun_item_count": 121,
+          "anchored_pronoun_item_count": 121,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4291,
+          "anchored_pronoun_rate": 0.4291,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 4,
+            "her": 75,
+            "him": 1,
+            "his": 29,
+            "it": 9,
+            "she": 2,
+            "that": 11,
+            "their": 3,
+            "them": 1,
+            "they": 3,
+            "this": 6,
+            "those": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Audrey's dogs are city dogs and they explore parks and trails together.",
+            "Andrew used to hike with his family's dog.",
+            "Pepper took a bit to get used to Pixie, but now they are always together.",
+            "Andrew thinks if one is active, consider getting a dog that loves to play and run.",
+            "Andrew misses exploring nature trails with his family's dog.",
+            "Andrew plans to try those websites to find a dog-friendly apartment.",
+            "Audrey has tattoos of her dogs on her arm.",
+            "Audrey has a strong bond with her dogs.",
+            "Andrew and his girlfriend tried out a new cafe in the city last weekend.",
+            "Andrew feels connected when he is in nature."
+          ]
+        },
+        "minimax": {
+          "memory_count": 374,
+          "pronoun_item_count": 159,
+          "anchored_pronoun_item_count": 159,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4251,
+          "anchored_pronoun_rate": 0.4251,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 7,
+            "her": 87,
+            "him": 3,
+            "his": 35,
+            "it": 15,
+            "she": 3,
+            "that": 8,
+            "their": 10,
+            "them": 3,
+            "they": 6,
+            "this": 4,
+            "those": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Andrew spots birds when he hikes.",
+            "Audrey and her dogs often explore new parks and trails together.",
+            "Audrey got new collars and tags for her dogs.",
+            "Audrey has had her dogs for 3 years.",
+            "The photo shows two dogs standing in grass with their mouths open.",
+            "Andrew used to explore nature trails with his family's dog.",
+            "Andrew misses exploring nature trails with his family's dog.",
+            "Andrew wants to find a dog-friendly spot so he can hike with a dog.",
+            "Andrew finds it tough to find a pet-friendly spot in the city.",
+            "Pepper took time to get used to Pixie but now they're always together."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 6,
+      "models": {
+        "gemini": {
+          "memory_count": 261,
+          "pronoun_item_count": 85,
+          "anchored_pronoun_item_count": 85,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3257,
+          "anchored_pronoun_rate": 0.3257,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 9,
+            "her": 1,
+            "him": 3,
+            "his": 70,
+            "it": 2,
+            "that": 9,
+            "their": 2,
+            "they": 1,
+            "this": 2,
+            "those": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "James is developing a computer game based on his childhood comic sketches.",
+            "James records his goals in a notebook.",
+            "John has found bottle caps, coins, and a gold ring with his metal detector.",
+            "John advanced to the next level in his game last week.",
+            "James plays Apex Legends with his team.",
+            "James learned that he should not put his ego above team success.",
+            "James uses voice chat to communicate with his team.",
+            "James learned that he should communicate correctly with his team.",
+            "James plans to try the new RPG after John sends him a link.",
+            "James named his new puppy Ned."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 390,
+          "pronoun_item_count": 121,
+          "anchored_pronoun_item_count": 121,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3103,
+          "anchored_pronoun_rate": 0.3103,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 18,
+            "her": 4,
+            "him": 10,
+            "his": 72,
+            "it": 15,
+            "she": 1,
+            "that": 13,
+            "their": 5,
+            "them": 1,
+            "they": 6,
+            "this": 3,
+            "those": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Creating something and seeing it come to life gives James a great sense of accomplishment.",
+            "James had his wallet stolen while playing slot machines.",
+            "James invited John to help with some things in his game using John's knowledge of HTML.",
+            "James is excited to combine his passions of gaming and storytelling.",
+            "James tried VR gaming and found it crazy how real it feels.",
+            "James writes down all his goals in a notebook.",
+            "John tried VR gaming a few times and finds it immersive.",
+            "The app's personal touch sets it apart from other apps.",
+            "Users can add their pup's preferences and needs to the app.",
+            "James has done lots of training with his dogs."
+          ]
+        },
+        "minimax": {
+          "memory_count": 448,
+          "pronoun_item_count": 157,
+          "anchored_pronoun_item_count": 157,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3504,
+          "anchored_pronoun_rate": 0.3504,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 21,
+            "her": 5,
+            "him": 7,
+            "his": 106,
+            "it": 12,
+            "she": 1,
+            "that": 10,
+            "their": 8,
+            "them": 3,
+            "these": 1,
+            "they": 7,
+            "this": 4,
+            "those": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "James combines his passions of gaming and storytelling in his projects.",
+            "James had his wallet stolen while playing slot machines because he was so engrossed in the game.",
+            "James is motivated by video games, which give him joy and excitement.",
+            "James is working on a computer game project that he has wanted to do since he was a child.",
+            "James made sketches of the main character of his game when he was a child.",
+            "James plans to invite John to help with some things in his game using John's HTML knowledge.",
+            "James plans to keep John updated on his game project progress.",
+            "James tried programming in college and now it is all his life.",
+            "James tried VR gaming and found it crazy how real it feels.",
+            "James writes down all his goals in a notebook."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 7,
+      "models": {
+        "gemini": {
+          "memory_count": 207,
+          "pronoun_item_count": 98,
+          "anchored_pronoun_item_count": 98,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4734,
+          "anchored_pronoun_rate": 0.4734,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 94,
+            "it": 2,
+            "she": 5,
+            "that": 6,
+            "their": 2,
+            "them": 2,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Deborah visited her mother's old house last week.",
+            "Deborah's goal is to keep teaching yoga and supporting her community.",
+            "Jolene owns a heart-shaped pendant with a bird on it.",
+            "Jolene's pendant has a symbol that represents freedom.",
+            "Jolene and her partner played the game Detroit last week.",
+            "Jolene bought her snake one year ago in Paris.",
+            "Deborah and her husband value love and openness in their relationship.",
+            "Deborah received a letter from her yoga group members yesterday.",
+            "Deborah met her new neighbor Anna yesterday.",
+            "Jolene is working on a robotics project for her engineering professor."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 326,
+          "pronoun_item_count": 129,
+          "anchored_pronoun_item_count": 129,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3957,
+          "anchored_pronoun_rate": 0.3957,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 114,
+            "him": 1,
+            "it": 6,
+            "she": 15,
+            "that": 15,
+            "their": 6,
+            "them": 3,
+            "they": 2,
+            "this": 1,
+            "those": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Deborah has a pendant that reminds her of her mother.",
+            "Deborah visited her mother's old house last Sunday.",
+            "Deborah's goal is to keep teaching yoga and supporting her community.",
+            "The pendant has a special symbol that represents freedom for Jolene.",
+            "Deborah goes to her old home now and then for her mother.",
+            "Jolene played the game \"Detroit\" on the console with her partner last week.",
+            "Deborah's old home is a place where she does yoga.",
+            "Deborah received a letter from her yoga group members yesterday.",
+            "Jolene plans to play the console with her partner.",
+            "Deborah met her new neighbor Anna yesterday."
+          ]
+        },
+        "minimax": {
+          "memory_count": 454,
+          "pronoun_item_count": 208,
+          "anchored_pronoun_item_count": 208,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4581,
+          "anchored_pronoun_rate": 0.4581,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "her": 191,
+            "him": 1,
+            "it": 10,
+            "she": 22,
+            "that": 13,
+            "their": 7,
+            "them": 5,
+            "they": 5,
+            "this": 3,
+            "those": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Deborah has a pendant that reminds her of her mother.",
+            "Deborah sits at the bench to stay connected to her mother.",
+            "Deborah teaches yoga and supports her community.",
+            "Deborah visited her mother's old house last week.",
+            "Jolene has a heart-shaped pendant with a bird on it.",
+            "Jolene's mother gave her the pendant in 2010 in Paris.",
+            "Deborah does yoga at her old home.",
+            "Deborah feels her mother's presence when she sits by the window.",
+            "Jolene and her partner played video games last week.",
+            "Jolene and her partner are both crazy about gaming."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 8,
+      "models": {
+        "gemini": {
+          "memory_count": 185,
+          "pronoun_item_count": 85,
+          "anchored_pronoun_item_count": 85,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.4595,
+          "anchored_pronoun_rate": 0.4595,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 5,
+            "him": 5,
+            "his": 63,
+            "it": 7,
+            "that": 22,
+            "their": 5,
+            "they": 1,
+            "this": 3
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Evan and his family hiked the trails in the Rockies last week.",
+            "Evan and his family visited the Rockies.",
+            "Evan sold his old Prius after getting it repaired.",
+            "Sam hiked with his dad when Sam was ten years old.",
+            "Evan and his family drove through the Icefields Parkway.",
+            "Evan took his family on a road trip to Jasper last weekend.",
+            "Sam had a check-up with his doctor a few days ago.",
+            "Evan recommends that Sam exercise.",
+            "Evan recommends that Sam make smarter choices in his diet.",
+            "Evan recommends that Sam find a fitness routine to help with weight management."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 233,
+          "pronoun_item_count": 87,
+          "anchored_pronoun_item_count": 87,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3734,
+          "anchored_pronoun_rate": 0.3734,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 11,
+            "him": 14,
+            "his": 72,
+            "it": 7,
+            "that": 3,
+            "their": 4,
+            "them": 1,
+            "they": 1,
+            "this": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Evan decided to get his old Prius repaired and sell it.",
+            "Evan got back from a trip with his family in his new Prius.",
+            "Evan's friend gave him advice on watercolor painting.",
+            "Evan's friend got him into watercolor painting.",
+            "Sam hiked with his dad when he was ten.",
+            "Evan took his family on a road trip to Jasper last weekend.",
+            "Evan says painting helps him find peace.",
+            "Sam had a check-up with his doctor a few days ago.",
+            "Evan has a fitness routine he enjoys.",
+            "Sam is reducing his soda and candy intake."
+          ]
+        },
+        "minimax": {
+          "memory_count": 316,
+          "pronoun_item_count": 125,
+          "anchored_pronoun_item_count": 125,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3956,
+          "anchored_pronoun_rate": 0.3956,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 10,
+            "her": 1,
+            "him": 15,
+            "his": 103,
+            "it": 8,
+            "that": 10,
+            "their": 6,
+            "them": 1,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Evan and his family hiked the trails last week.",
+            "Evan got his old Prius repaired and sold it.",
+            "Evan went on a trip to the Rockies with his family.",
+            "Sam went on a hike with his dad when Sam was ten.",
+            "Evan took his family on a road trip to Jasper last weekend.",
+            "Sam had a check-up with his doctor a few days ago.",
+            "Evan's painting captures a moment of introspection, helping him find peace.",
+            "Sam found his doctor check-up eye-opening.",
+            "Evan recommends finding an exercise that is enjoyable.",
+            "Evan drove through the Icefields Parkway on his road trip to Jasper."
+          ]
+        }
+      }
+    },
+    {
+      "conversation_idx": 9,
+      "models": {
+        "gemini": {
+          "memory_count": 171,
+          "pronoun_item_count": 54,
+          "anchored_pronoun_item_count": 54,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3158,
+          "anchored_pronoun_rate": 0.3158,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 11,
+            "him": 1,
+            "his": 46,
+            "it": 1,
+            "that": 1,
+            "their": 1,
+            "this": 1
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Calvin plans to travel to Boston after his trip to Japan.",
+            "Calvin plans to visit the park Dave recommended after he returns from his trip.",
+            "Calvin's agent found his place to stay in Japan.",
+            "Calvin plans to head to Boston after his tour ends.",
+            "Dave opened his own car maintenance shop.",
+            "Calvin enjoys taking long drives in his red sports car.",
+            "Calvin is experiencing a creative block with his music.",
+            "Dave opened his car shop last week.",
+            "Calvin saved his music gear and microphone from the flood.",
+            "Calvin is waiting for insurance to cover repairs for his place."
+          ]
+        },
+        "deepseek": {
+          "memory_count": 309,
+          "pronoun_item_count": 95,
+          "anchored_pronoun_item_count": 95,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3074,
+          "anchored_pronoun_rate": 0.3074,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 23,
+            "him": 10,
+            "his": 69,
+            "it": 3,
+            "that": 9,
+            "them": 1,
+            "this": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Calvin has never been to that park.",
+            "Calvin plans to go to Boston after his tour.",
+            "Calvin will check out the park when he is back.",
+            "Calvin's agent found him a place to stay in Japan.",
+            "Calvin took his new car for a ride yesterday.",
+            "Calvin put a lot of work into his car.",
+            "Calvin has heard that the music scene in Boston is awesome.",
+            "Calvin is excited about his upcoming trip to Boston.",
+            "Calvin wants his music to make an impact.",
+            "Dave agreed to grab food and show Calvin his favorite spots in Boston."
+          ]
+        },
+        "minimax": {
+          "memory_count": 414,
+          "pronoun_item_count": 125,
+          "anchored_pronoun_item_count": 125,
+          "ambiguous_pronoun_item_count": 0,
+          "pronoun_item_rate": 0.3019,
+          "anchored_pronoun_rate": 0.3019,
+          "ambiguous_pronoun_rate": 0.0,
+          "ambiguous_within_pronoun_rate": 0.0,
+          "pronoun_frequency": {
+            "he": 15,
+            "him": 14,
+            "his": 83,
+            "it": 10,
+            "that": 8,
+            "their": 3,
+            "them": 3,
+            "they": 3,
+            "this": 2
+          },
+          "sample_ambiguous_items": [],
+          "sample_anchored_pronoun_items": [
+            "Calvin took his new car for a ride yesterday.",
+            "Calvin feels like a rockstar when driving his new car.",
+            "Calvin put a lot of work into his car.",
+            "Calvin is thinking about where he wants his music to go.",
+            "Calvin suggested grabbing a bite with Dave when he is in Boston.",
+            "Calvin hopes his music can reach a global audience and make an impact.",
+            "Dave agreed to show Calvin his favorite spots and grab food in Boston.",
+            "Dave opened his own car maintenance shop.",
+            "Dave works on all kinds of cars at his shop, from regular maintenance to full restorations of classic cars.",
+            "Calvin enjoys driving to clear his head."
+          ]
+        }
+      }
+    }
+  ],
+  "model_summary": {
+    "gemini": {
+      "conversation_count": 10,
+      "avg_memory_count": 198.4,
+      "avg_pronoun_item_rate": 0.392,
+      "avg_anchored_pronoun_rate": 0.392,
+      "avg_ambiguous_pronoun_rate": 0.0,
+      "avg_ambiguous_within_pronoun_rate": 0.0,
+      "total_memory_count": 1984,
+      "total_pronoun_item_count": 759,
+      "total_anchored_pronoun_item_count": 759,
+      "total_ambiguous_pronoun_item_count": 0
+    },
+    "deepseek": {
+      "conversation_count": 10,
+      "avg_memory_count": 296.2,
+      "avg_pronoun_item_rate": 0.3617,
+      "avg_anchored_pronoun_rate": 0.3614,
+      "avg_ambiguous_pronoun_rate": 0.0003,
+      "avg_ambiguous_within_pronoun_rate": 0.0008,
+      "total_memory_count": 2962,
+      "total_pronoun_item_count": 1051,
+      "total_anchored_pronoun_item_count": 1050,
+      "total_ambiguous_pronoun_item_count": 1
+    },
+    "minimax": {
+      "conversation_count": 10,
+      "avg_memory_count": 376.4,
+      "avg_pronoun_item_rate": 0.3852,
+      "avg_anchored_pronoun_rate": 0.3852,
+      "avg_ambiguous_pronoun_rate": 0.0,
+      "avg_ambiguous_within_pronoun_rate": 0.0,
+      "total_memory_count": 3764,
+      "total_pronoun_item_count": 1443,
+      "total_anchored_pronoun_item_count": 1443,
+      "total_ambiguous_pronoun_item_count": 0
+    }
+  }
+}

@@ -1,0 +1,7313 @@
+{
+  "source_dataset": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\datasets\\locomo_refined.json",
+  "method": "pure_python_tfidf",
+  "document_count": 10,
+  "ngram_range": [
+    1,
+    2
+  ],
+  "top_k": 80,
+  "stopword_count": 129,
+  "conversations": [
+    {
+      "conversation_idx": 0,
+      "sample_id": "conv-26",
+      "speaker_a": "Caroline",
+      "speaker_b": "Melanie",
+      "token_count": 4375,
+      "unique_term_count": 5229,
+      "top_keywords": [
+        {
+          "term": "lgbtq",
+          "score": 0.00741959,
+          "tf": 0.00274317,
+          "count": 24,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "art",
+          "score": 0.00735907,
+          "tf": 0.00411476,
+          "count": 36,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "acceptance",
+          "score": 0.00680129,
+          "tf": 0.00251457,
+          "count": 22,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "kids",
+          "score": 0.00576388,
+          "tf": 0.00480055,
+          "count": 42,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "painting",
+          "score": 0.00572372,
+          "tf": 0.00320037,
+          "count": 28,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "family",
+          "score": 0.00538328,
+          "tf": 0.00491485,
+          "count": 43,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00514344,
+          "tf": 0.00514344,
+          "count": 45,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00480055,
+          "tf": 0.00480055,
+          "count": 42,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.004666,
+          "tf": 0.00388616,
+          "count": 34,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "pottery",
+          "score": 0.00463724,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "adoption",
+          "score": 0.00432809,
+          "tf": 0.00160018,
+          "count": 14,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "community",
+          "score": 0.00431496,
+          "tf": 0.00297177,
+          "count": 26,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.00422905,
+          "tf": 0.00422905,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "trans",
+          "score": 0.00370979,
+          "tf": 0.00137159,
+          "count": 12,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "mental health",
+          "score": 0.0032707,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 2
+        },
+        {
+          "term": "glad",
+          "score": 0.00320037,
+          "tf": 0.00320037,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00320037,
+          "tf": 0.00320037,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "counseling",
+          "score": 0.00309149,
+          "tf": 0.00114299,
+          "count": 10,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00308607,
+          "tf": 0.00308607,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "special",
+          "score": 0.00297177,
+          "tf": 0.00297177,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "health",
+          "score": 0.00293727,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00285747,
+          "tf": 0.00285747,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "others",
+          "score": 0.00285747,
+          "tf": 0.00285747,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "mental",
+          "score": 0.00282132,
+          "tf": 0.00194308,
+          "count": 17,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.00274317,
+          "tf": 0.00274317,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00274317,
+          "tf": 0.00274317,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "important",
+          "score": 0.00262887,
+          "tf": 0.00262887,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "show",
+          "score": 0.00262887,
+          "tf": 0.00262887,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pride",
+          "score": 0.00262805,
+          "tf": 0.00114299,
+          "count": 10,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00251457,
+          "tf": 0.00251457,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "together",
+          "score": 0.00251457,
+          "tf": 0.00251457,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "transgender",
+          "score": 0.0024732,
+          "tf": 0.00091439,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "transition",
+          "score": 0.0024732,
+          "tf": 0.00091439,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "since",
+          "score": 0.00240027,
+          "tf": 0.00240027,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "whats",
+          "score": 0.00240027,
+          "tf": 0.00240027,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00228598,
+          "tf": 0.00228598,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "journey",
+          "score": 0.00225347,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "self",
+          "score": 0.00225347,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "difference",
+          "score": 0.00217168,
+          "tf": 0.00217168,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "inspiring",
+          "score": 0.00217168,
+          "tf": 0.00217168,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "moments",
+          "score": 0.00217168,
+          "tf": 0.00217168,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023 december",
+          "score": 0.00216405,
+          "tf": 0.00080009,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "accept",
+          "score": 0.00206931,
+          "tf": 0.00102869,
+          "count": 9,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "happy",
+          "score": 0.00205738,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00205738,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nature",
+          "score": 0.00205738,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00205738,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "part",
+          "score": 0.00205738,
+          "tf": 0.00205738,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "best",
+          "score": 0.00194308,
+          "tf": 0.00194308,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00194308,
+          "tf": 0.00194308,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.00194308,
+          "tf": 0.00194308,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00194308,
+          "tf": 0.00194308,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "colors",
+          "score": 0.00192129,
+          "tf": 0.00160018,
+          "count": 14,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "2023 november",
+          "score": 0.0018549,
+          "tf": 0.00068579,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "blue",
+          "score": 0.0018549,
+          "tf": 0.00068579,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "counseling mental",
+          "score": 0.0018549,
+          "tf": 0.00068579,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "lgbtq community",
+          "score": 0.0018549,
+          "tf": 0.00068579,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "paintings",
+          "score": 0.00183964,
+          "tf": 0.00080009,
+          "count": 7,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "helping",
+          "score": 0.00182878,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pic",
+          "score": 0.00182878,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "seeing",
+          "score": 0.00182878,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "through",
+          "score": 0.00182878,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00182878,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "went",
+          "score": 0.00182878,
+          "tf": 0.00182878,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "camping",
+          "score": 0.00182556,
+          "tf": 0.00125729,
+          "count": 11,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "joy",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "long",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "myself",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "these",
+          "score": 0.00171448,
+          "tf": 0.00171448,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lucky",
+          "score": 0.00164682,
+          "tf": 0.00137159,
+          "count": 12,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "stories",
+          "score": 0.00164682,
+          "tf": 0.00137159,
+          "count": 12,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "december 2023",
+          "score": 0.00160946,
+          "tf": 0.00080009,
+          "count": 7,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 2
+        },
+        {
+          "term": "rights",
+          "score": 0.00160946,
+          "tf": 0.00080009,
+          "count": 7,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "around",
+          "score": 0.00160018,
+          "tf": 0.00160018,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "day",
+          "score": 0.00160018,
+          "tf": 0.00160018,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "each",
+          "score": 0.00160018,
+          "tf": 0.00160018,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 1,
+      "sample_id": "conv-30",
+      "speaker_a": "Jon",
+      "speaker_b": "Gina",
+      "token_count": 3391,
+      "unique_term_count": 3992,
+      "top_keywords": [
+        {
+          "term": "dance",
+          "score": 0.03025856,
+          "tf": 0.01504203,
+          "count": 102,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "studio",
+          "score": 0.0139785,
+          "tf": 0.00781596,
+          "count": 53,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "dance studio",
+          "score": 0.01276389,
+          "tf": 0.00471907,
+          "count": 32,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "business",
+          "score": 0.00919623,
+          "tf": 0.0045716,
+          "count": 31,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "biz",
+          "score": 0.00813785,
+          "tf": 0.0035393,
+          "count": 24,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "fashion",
+          "score": 0.00678082,
+          "tf": 0.002507,
+          "count": 17,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "store",
+          "score": 0.00641631,
+          "tf": 0.00486654,
+          "count": 33,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "dancing",
+          "score": 0.0058024,
+          "tf": 0.00324436,
+          "count": 22,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00545642,
+          "tf": 0.00545642,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dancers",
+          "score": 0.00518533,
+          "tf": 0.00191712,
+          "count": 13,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00471907,
+          "tf": 0.00471907,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dreams",
+          "score": 0.00452274,
+          "tf": 0.00412918,
+          "count": 28,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "customers",
+          "score": 0.00415314,
+          "tf": 0.00206459,
+          "count": 14,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00398171,
+          "tf": 0.00398171,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00383424,
+          "tf": 0.00383424,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hard",
+          "score": 0.0035393,
+          "tf": 0.0035393,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00339183,
+          "tf": 0.00339183,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.00336422,
+          "tf": 0.00280195,
+          "count": 19,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "lets",
+          "score": 0.00324436,
+          "tf": 0.00324436,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stay",
+          "score": 0.00324436,
+          "tf": 0.00324436,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "investors",
+          "score": 0.00319097,
+          "tf": 0.00117977,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "means",
+          "score": 0.00309689,
+          "tf": 0.00309689,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cant wait",
+          "score": 0.00294942,
+          "tf": 0.00294942,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "dont",
+          "score": 0.00294942,
+          "tf": 0.00294942,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "wait",
+          "score": 0.00294942,
+          "tf": 0.00294942,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "will",
+          "score": 0.00294942,
+          "tf": 0.00294942,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "own",
+          "score": 0.00280195,
+          "tf": 0.00280195,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "clothing",
+          "score": 0.0027921,
+          "tf": 0.0010323,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "quit",
+          "score": 0.00263745,
+          "tf": 0.00147471,
+          "count": 10,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "motivated",
+          "score": 0.00258442,
+          "tf": 0.00235953,
+          "count": 16,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "nice",
+          "score": 0.002507,
+          "tf": 0.002507,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "wont",
+          "score": 0.0024789,
+          "tf": 0.00206459,
+          "count": 14,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "clothing store",
+          "score": 0.00239323,
+          "tf": 0.00088483,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "help means",
+          "score": 0.00237354,
+          "tf": 0.0010323,
+          "count": 7,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00235953,
+          "tf": 0.00235953,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "working",
+          "score": 0.00235953,
+          "tf": 0.00235953,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "starting",
+          "score": 0.00235538,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "pushing",
+          "score": 0.00226137,
+          "tf": 0.00206459,
+          "count": 14,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "advice",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "off",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "right",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "show",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "words",
+          "score": 0.00221206,
+          "tf": 0.00221206,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "online",
+          "score": 0.00213877,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "pieces",
+          "score": 0.00207657,
+          "tf": 0.0010323,
+          "count": 7,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "students",
+          "score": 0.00207657,
+          "tf": 0.0010323,
+          "count": 7,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.00206459,
+          "tf": 0.00206459,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "give",
+          "score": 0.00206459,
+          "tf": 0.00206459,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "place",
+          "score": 0.00206459,
+          "tf": 0.00206459,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "moves",
+          "score": 0.00203446,
+          "tf": 0.00088483,
+          "count": 6,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "studios",
+          "score": 0.00203446,
+          "tf": 0.00088483,
+          "count": 6,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "customer",
+          "score": 0.00199436,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "dance studios",
+          "score": 0.00199436,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "media",
+          "score": 0.00199436,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "social media",
+          "score": 0.00199436,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "happen",
+          "score": 0.0019477,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "staying",
+          "score": 0.0019477,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "focused",
+          "score": 0.00194434,
+          "tf": 0.00147471,
+          "count": 10,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "success",
+          "score": 0.00194434,
+          "tf": 0.00147471,
+          "count": 10,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "goals",
+          "score": 0.00193832,
+          "tf": 0.00176965,
+          "count": 12,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "job",
+          "score": 0.00191712,
+          "tf": 0.00191712,
+          "count": 13,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "key",
+          "score": 0.00191712,
+          "tf": 0.00191712,
+          "count": 13,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00191712,
+          "tf": 0.00191712,
+          "count": 13,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tomorrow",
+          "score": 0.00184622,
+          "tf": 0.0010323,
+          "count": 7,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "passion",
+          "score": 0.00176965,
+          "tf": 0.00176965,
+          "count": 12,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "reach",
+          "score": 0.00176965,
+          "tf": 0.00176965,
+          "count": 12,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let anything",
+          "score": 0.00169539,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "losing job",
+          "score": 0.00169539,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "marketing",
+          "score": 0.00169539,
+          "tf": 0.00073735,
+          "count": 5,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "believe yourself",
+          "score": 0.00165801,
+          "tf": 0.0010323,
+          "count": 7,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 2
+        },
+        {
+          "term": "back",
+          "score": 0.00162218,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "congrats",
+          "score": 0.00162218,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "even",
+          "score": 0.00162218,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "helps",
+          "score": 0.00162218,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00162218,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00162218,
+          "tf": 0.00162218,
+          "count": 11,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 2,
+      "sample_id": "conv-41",
+      "speaker_a": "John",
+      "speaker_b": "Maria",
+      "token_count": 6470,
+      "unique_term_count": 7241,
+      "top_keywords": [
+        {
+          "term": "difference",
+          "score": 0.00680114,
+          "tf": 0.00680114,
+          "count": 88,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "community",
+          "score": 0.00662085,
+          "tf": 0.00455986,
+          "count": 59,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00579643,
+          "tf": 0.00579643,
+          "count": 75,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00471443,
+          "tf": 0.00471443,
+          "count": 61,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "together",
+          "score": 0.00463714,
+          "tf": 0.00463714,
+          "count": 60,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "family",
+          "score": 0.00448655,
+          "tf": 0.00409614,
+          "count": 53,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00394157,
+          "tf": 0.00394157,
+          "count": 51,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00386429,
+          "tf": 0.00386429,
+          "count": 50,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "important",
+          "score": 0.00370971,
+          "tf": 0.00370971,
+          "count": 48,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lets",
+          "score": 0.00370971,
+          "tf": 0.00370971,
+          "count": 48,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00370971,
+          "tf": 0.00370971,
+          "count": 48,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00347786,
+          "tf": 0.00347786,
+          "count": 45,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "impact",
+          "score": 0.003246,
+          "tf": 0.003246,
+          "count": 42,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "shelter",
+          "score": 0.00322742,
+          "tf": 0.00200943,
+          "count": 26,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "education",
+          "score": 0.00319863,
+          "tf": 0.00139114,
+          "count": 18,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "kindness",
+          "score": 0.00310936,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "kids",
+          "score": 0.00296943,
+          "tf": 0.00247314,
+          "count": 32,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.00293686,
+          "tf": 0.00293686,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "infrastructure",
+          "score": 0.00292654,
+          "tf": 0.001082,
+          "count": 14,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "veterans",
+          "score": 0.00292654,
+          "tf": 0.001082,
+          "count": 14,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.00278384,
+          "tf": 0.00231857,
+          "count": 30,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00278229,
+          "tf": 0.00278229,
+          "count": 36,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00278229,
+          "tf": 0.00278229,
+          "count": 36,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "need",
+          "score": 0.002705,
+          "tf": 0.002705,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "homeless",
+          "score": 0.00264296,
+          "tf": 0.00131386,
+          "count": 17,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "volunteering",
+          "score": 0.002488,
+          "tf": 0.00139114,
+          "count": 18,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "positive",
+          "score": 0.00247314,
+          "tf": 0.00247314,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "inspiring",
+          "score": 0.00239586,
+          "tf": 0.00239586,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "everyone",
+          "score": 0.00231987,
+          "tf": 0.00193214,
+          "count": 25,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.00231857,
+          "tf": 0.00231857,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00231857,
+          "tf": 0.00231857,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00231857,
+          "tf": 0.00231857,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "homeless shelter",
+          "score": 0.00231012,
+          "tf": 0.00100471,
+          "count": 13,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "those",
+          "score": 0.00224129,
+          "tf": 0.00224129,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "week",
+          "score": 0.002164,
+          "tf": 0.002164,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "find",
+          "score": 0.00208671,
+          "tf": 0.00208671,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.00208671,
+          "tf": 0.00208671,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nice",
+          "score": 0.00208671,
+          "tf": 0.00208671,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "yoga",
+          "score": 0.00207333,
+          "tf": 0.00115929,
+          "count": 15,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00200943,
+          "tf": 0.00200943,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "experience",
+          "score": 0.00200943,
+          "tf": 0.00200943,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00200943,
+          "tf": 0.00200943,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00200943,
+          "tf": 0.00200943,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00200943,
+          "tf": 0.00200943,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "helping",
+          "score": 0.00185486,
+          "tf": 0.00185486,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pic",
+          "score": 0.00185486,
+          "tf": 0.00185486,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "times",
+          "score": 0.00185486,
+          "tf": 0.00185486,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00177757,
+          "tf": 0.00177757,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "joy",
+          "score": 0.00177757,
+          "tf": 0.00177757,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "little",
+          "score": 0.00177757,
+          "tf": 0.00177757,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00177757,
+          "tf": 0.00177757,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "means",
+          "score": 0.00177757,
+          "tf": 0.00177757,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "seeing",
+          "score": 0.00177757,
+          "tf": 0.00177757,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "event",
+          "score": 0.00173226,
+          "tf": 0.00131386,
+          "count": 17,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "moments",
+          "score": 0.00170029,
+          "tf": 0.00170029,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.00170029,
+          "tf": 0.00170029,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "these",
+          "score": 0.00170029,
+          "tf": 0.00170029,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "small",
+          "score": 0.001623,
+          "tf": 0.001623,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "military",
+          "score": 0.00159932,
+          "tf": 0.00069557,
+          "count": 9,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "big",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "even",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "memories",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "must",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "rewarding",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "since",
+          "score": 0.00154571,
+          "tf": 0.00154571,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "better",
+          "score": 0.00146843,
+          "tf": 0.00146843,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "others",
+          "score": 0.00146843,
+          "tf": 0.00146843,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stay",
+          "score": 0.00146843,
+          "tf": 0.00146843,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "taking",
+          "score": 0.00146843,
+          "tf": 0.00146843,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "education infrastructure",
+          "score": 0.00146327,
+          "tf": 0.000541,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "finding",
+          "score": 0.00139114,
+          "tf": 0.00139114,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hard",
+          "score": 0.00139114,
+          "tf": 0.00139114,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "heres",
+          "score": 0.00139114,
+          "tf": 0.00139114,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lately",
+          "score": 0.00139114,
+          "tf": 0.00139114,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "spreading",
+          "score": 0.00136545,
+          "tf": 0.00085014,
+          "count": 11,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "big impact",
+          "score": 0.00134661,
+          "tf": 0.00092743,
+          "count": 12,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 2
+        },
+        {
+          "term": "cause",
+          "score": 0.00134661,
+          "tf": 0.00092743,
+          "count": 12,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "each",
+          "score": 0.00131386,
+          "tf": 0.00131386,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 3,
+      "sample_id": "conv-42",
+      "speaker_a": "Joanna",
+      "speaker_b": "Nate",
+      "token_count": 5461,
+      "unique_term_count": 6480,
+      "top_keywords": [
+        {
+          "term": "dairy",
+          "score": 0.00718228,
+          "tf": 0.00265543,
+          "count": 29,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "dairy free",
+          "score": 0.00693462,
+          "tf": 0.00256387,
+          "count": 28,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "2022",
+          "score": 0.00534167,
+          "tf": 0.00265543,
+          "count": 29,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "writing",
+          "score": 0.00507051,
+          "tf": 0.0038458,
+          "count": 42,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "tournament",
+          "score": 0.00478909,
+          "tf": 0.00238073,
+          "count": 26,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "coconut",
+          "score": 0.00470563,
+          "tf": 0.00173977,
+          "count": 19,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "turtles",
+          "score": 0.00445797,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "gaming",
+          "score": 0.0040523,
+          "tf": 0.00201447,
+          "count": 22,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "movie",
+          "score": 0.00376655,
+          "tf": 0.00210603,
+          "count": 23,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00375423,
+          "tf": 0.00375423,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "script",
+          "score": 0.00371497,
+          "tf": 0.0013735,
+          "count": 15,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "free",
+          "score": 0.00340819,
+          "tf": 0.00283857,
+          "count": 31,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00338797,
+          "tf": 0.00338797,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.0032964,
+          "tf": 0.0032964,
+          "count": 36,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00311327,
+          "tf": 0.00311327,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "recipe",
+          "score": 0.0031115,
+          "tf": 0.00173977,
+          "count": 19,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.0030217,
+          "tf": 0.0030217,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cream",
+          "score": 0.00297198,
+          "tf": 0.0010988,
+          "count": 12,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "milk",
+          "score": 0.00297198,
+          "tf": 0.0010988,
+          "count": 12,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "game",
+          "score": 0.00296842,
+          "tf": 0.0024723,
+          "count": 27,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00293013,
+          "tf": 0.00293013,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.002747,
+          "tf": 0.002747,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ice cream",
+          "score": 0.00272431,
+          "tf": 0.00100723,
+          "count": 11,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "screenplay",
+          "score": 0.00272431,
+          "tf": 0.00100723,
+          "count": 11,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00265543,
+          "tf": 0.00265543,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00265543,
+          "tf": 0.00265543,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00256387,
+          "tf": 0.00256387,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ice",
+          "score": 0.00252645,
+          "tf": 0.0010988,
+          "count": 12,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "pets",
+          "score": 0.00252612,
+          "tf": 0.00173977,
+          "count": 19,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "coconut milk",
+          "score": 0.00247665,
+          "tf": 0.00091567,
+          "count": 10,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "hear",
+          "score": 0.0024723,
+          "tf": 0.0024723,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.0024723,
+          "tf": 0.0024723,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00238073,
+          "tf": 0.00238073,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "desserts",
+          "score": 0.00231592,
+          "tf": 0.00100723,
+          "count": 11,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "hard",
+          "score": 0.00228917,
+          "tf": 0.00228917,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00228917,
+          "tf": 0.00228917,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "try",
+          "score": 0.00228917,
+          "tf": 0.00228917,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "allergic",
+          "score": 0.00222898,
+          "tf": 0.0008241,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "chocolate",
+          "score": 0.00221035,
+          "tf": 0.0010988,
+          "count": 12,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "even",
+          "score": 0.0021976,
+          "tf": 0.0021976,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.0021976,
+          "tf": 0.0021976,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "little",
+          "score": 0.00210603,
+          "tf": 0.00210603,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00210603,
+          "tf": 0.00210603,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00201447,
+          "tf": 0.00201447,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "game tournament",
+          "score": 0.00198132,
+          "tf": 0.00073253,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "appreciate",
+          "score": 0.0019229,
+          "tf": 0.0019229,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "big",
+          "score": 0.0019229,
+          "tf": 0.0019229,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "movies",
+          "score": 0.00191189,
+          "tf": 0.00119037,
+          "count": 13,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "video",
+          "score": 0.00191189,
+          "tf": 0.00119037,
+          "count": 13,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "video game",
+          "score": 0.00189484,
+          "tf": 0.0008241,
+          "count": 9,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "write",
+          "score": 0.00184196,
+          "tf": 0.00091567,
+          "count": 10,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "enjoy",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "favorite",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "must",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nice",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "will",
+          "score": 0.00183133,
+          "tf": 0.00183133,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dont",
+          "score": 0.00173977,
+          "tf": 0.00173977,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "another",
+          "score": 0.001705,
+          "tf": 0.00155663,
+          "count": 17,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "cute",
+          "score": 0.00169017,
+          "tf": 0.00128193,
+          "count": 14,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "screen",
+          "score": 0.0016843,
+          "tf": 0.00073253,
+          "count": 8,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.0016482,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "back",
+          "score": 0.0016482,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "bring",
+          "score": 0.0016482,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "day",
+          "score": 0.0016482,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.0016482,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "friends",
+          "score": 0.0016482,
+          "tf": 0.0016482,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00155663,
+          "tf": 0.00155663,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "long",
+          "score": 0.00155663,
+          "tf": 0.00155663,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "right",
+          "score": 0.00155663,
+          "tf": 0.00155663,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "acting",
+          "score": 0.00147376,
+          "tf": 0.00064097,
+          "count": 7,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "big screen",
+          "score": 0.00147376,
+          "tf": 0.00064097,
+          "count": 7,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "2022 long",
+          "score": 0.00147357,
+          "tf": 0.00073253,
+          "count": 8,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 2
+        },
+        {
+          "term": "flavors",
+          "score": 0.00147357,
+          "tf": 0.00073253,
+          "count": 8,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "series",
+          "score": 0.00147357,
+          "tf": 0.00073253,
+          "count": 8,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "come",
+          "score": 0.00146507,
+          "tf": 0.00146507,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "congrats",
+          "score": 0.00146507,
+          "tf": 0.00146507,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "give",
+          "score": 0.00146507,
+          "tf": 0.00146507,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "joy",
+          "score": 0.00146507,
+          "tf": 0.00146507,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 4,
+      "sample_id": "conv-43",
+      "speaker_a": "Tim",
+      "speaker_b": "John",
+      "token_count": 6551,
+      "unique_term_count": 7494,
+      "top_keywords": [
+        {
+          "term": "basketball",
+          "score": 0.00784524,
+          "tf": 0.00290054,
+          "count": 38,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "fantasy",
+          "score": 0.00552764,
+          "tf": 0.00274788,
+          "count": 36,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "potter",
+          "score": 0.00495489,
+          "tf": 0.00183192,
+          "count": 24,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "harry",
+          "score": 0.00474843,
+          "tf": 0.00175559,
+          "count": 23,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "harry potter",
+          "score": 0.00474843,
+          "tf": 0.00175559,
+          "count": 23,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "court",
+          "score": 0.00412907,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "books",
+          "score": 0.00410071,
+          "tf": 0.00282421,
+          "count": 37,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "team",
+          "score": 0.00362296,
+          "tf": 0.00274788,
+          "count": 36,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "book",
+          "score": 0.0032993,
+          "tf": 0.00274788,
+          "count": 36,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "game",
+          "score": 0.0032993,
+          "tf": 0.00274788,
+          "count": 36,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00312953,
+          "tf": 0.00312953,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00312953,
+          "tf": 0.00312953,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00290054,
+          "tf": 0.00290054,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "reading",
+          "score": 0.00284106,
+          "tf": 0.00236623,
+          "count": 31,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "sports",
+          "score": 0.00276382,
+          "tf": 0.00137394,
+          "count": 18,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00274788,
+          "tf": 0.00274788,
+          "count": 36,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "teammates",
+          "score": 0.0026839,
+          "tf": 0.00099229,
+          "count": 13,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00267155,
+          "tf": 0.00267155,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00267155,
+          "tf": 0.00267155,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "must",
+          "score": 0.00259522,
+          "tf": 0.00259522,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00259522,
+          "tf": 0.00259522,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00259522,
+          "tf": 0.00259522,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.00251889,
+          "tf": 0.00251889,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00244256,
+          "tf": 0.00244256,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00244256,
+          "tf": 0.00244256,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.00238283,
+          "tf": 0.00198458,
+          "count": 26,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "hard",
+          "score": 0.00236623,
+          "tf": 0.00236623,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00236623,
+          "tf": 0.00236623,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "world",
+          "score": 0.0022899,
+          "tf": 0.0022899,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00221357,
+          "tf": 0.00221357,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "favorite",
+          "score": 0.00221357,
+          "tf": 0.00221357,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00221357,
+          "tf": 0.00221357,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "incredible",
+          "score": 0.00217373,
+          "tf": 0.00198458,
+          "count": 26,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "read",
+          "score": 0.00201275,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "series",
+          "score": 0.00199609,
+          "tf": 0.00099229,
+          "count": 13,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00198458,
+          "tf": 0.00198458,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "special",
+          "score": 0.00198458,
+          "tf": 0.00198458,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.00198458,
+          "tf": 0.00198458,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "talk",
+          "score": 0.00198458,
+          "tf": 0.00198458,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "movies",
+          "score": 0.00196154,
+          "tf": 0.00122128,
+          "count": 16,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00190825,
+          "tf": 0.00190825,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00190825,
+          "tf": 0.00190825,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "brands",
+          "score": 0.00185808,
+          "tf": 0.00068697,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "playing",
+          "score": 0.00183931,
+          "tf": 0.00167926,
+          "count": 22,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00183192,
+          "tf": 0.00183192,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stay",
+          "score": 0.00183192,
+          "tf": 0.00183192,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nice",
+          "score": 0.00175559,
+          "tf": 0.00175559,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "these",
+          "score": 0.00175559,
+          "tf": 0.00175559,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "writing",
+          "score": 0.00171084,
+          "tf": 0.00129761,
+          "count": 17,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00167926,
+          "tf": 0.00167926,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00167926,
+          "tf": 0.00167926,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "different",
+          "score": 0.00167926,
+          "tf": 0.00167926,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00167926,
+          "tf": 0.00167926,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "family",
+          "score": 0.0016721,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "games",
+          "score": 0.0016102,
+          "tf": 0.00122128,
+          "count": 16,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "cant wait",
+          "score": 0.00160293,
+          "tf": 0.00160293,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "during",
+          "score": 0.00160293,
+          "tf": 0.00160293,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "inspiring",
+          "score": 0.00160293,
+          "tf": 0.00160293,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "off",
+          "score": 0.00160293,
+          "tf": 0.00160293,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "wait",
+          "score": 0.00160293,
+          "tf": 0.00160293,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "characters",
+          "score": 0.00153546,
+          "tf": 0.0007633,
+          "count": 10,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "important",
+          "score": 0.0015266,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.0015266,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.0015266,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "week",
+          "score": 0.0015266,
+          "tf": 0.0015266,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "journey",
+          "score": 0.00150489,
+          "tf": 0.00137394,
+          "count": 18,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "motivated",
+          "score": 0.00150489,
+          "tf": 0.00137394,
+          "count": 18,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "winning",
+          "score": 0.00150164,
+          "tf": 0.00083963,
+          "count": 11,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.00145027,
+          "tf": 0.00145027,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "enjoy",
+          "score": 0.00145027,
+          "tf": 0.00145027,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "helps",
+          "score": 0.00145027,
+          "tf": 0.00145027,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "makes",
+          "score": 0.00145027,
+          "tf": 0.00145027,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "seeing",
+          "score": 0.00145027,
+          "tf": 0.00145027,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "whats",
+          "score": 0.00145027,
+          "tf": 0.00145027,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "off court",
+          "score": 0.00144517,
+          "tf": 0.00053431,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "goals",
+          "score": 0.00142129,
+          "tf": 0.00129761,
+          "count": 17,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "season",
+          "score": 0.00140404,
+          "tf": 0.00061064,
+          "count": 8,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "magical",
+          "score": 0.00137471,
+          "tf": 0.00114495,
+          "count": 15,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "big",
+          "score": 0.00137394,
+          "tf": 0.00137394,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "congrats",
+          "score": 0.00137394,
+          "tf": 0.00137394,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 5,
+      "sample_id": "conv-44",
+      "speaker_a": "Audrey",
+      "speaker_b": "Andrew",
+      "token_count": 6450,
+      "unique_term_count": 7059,
+      "top_keywords": [
+        {
+          "term": "dogs",
+          "score": 0.01026016,
+          "tf": 0.00573688,
+          "count": 74,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "toby",
+          "score": 0.00670997,
+          "tf": 0.00248081,
+          "count": 32,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "pups",
+          "score": 0.00623885,
+          "tf": 0.00271339,
+          "count": 35,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "dog",
+          "score": 0.00622582,
+          "tf": 0.00387627,
+          "count": 50,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "nature",
+          "score": 0.00573688,
+          "tf": 0.00573688,
+          "count": 74,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00558183,
+          "tf": 0.00558183,
+          "count": 72,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "furry",
+          "score": 0.0053023,
+          "tf": 0.00263586,
+          "count": 34,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.004574,
+          "tf": 0.004574,
+          "count": 59,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.00441895,
+          "tf": 0.00441895,
+          "count": 57,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "happy",
+          "score": 0.00434142,
+          "tf": 0.00434142,
+          "count": 56,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00403132,
+          "tf": 0.00403132,
+          "count": 52,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hike",
+          "score": 0.00400255,
+          "tf": 0.00333359,
+          "count": 43,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "theyre",
+          "score": 0.00379874,
+          "tf": 0.00379874,
+          "count": 49,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00364369,
+          "tf": 0.00364369,
+          "count": 47,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nice",
+          "score": 0.00364369,
+          "tf": 0.00364369,
+          "count": 47,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "furry friends",
+          "score": 0.0033868,
+          "tf": 0.00147298,
+          "count": 19,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "park",
+          "score": 0.00325789,
+          "tf": 0.00271339,
+          "count": 35,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "joy",
+          "score": 0.00325607,
+          "tf": 0.00325607,
+          "count": 42,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "bring",
+          "score": 0.00317854,
+          "tf": 0.00317854,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "look",
+          "score": 0.00317854,
+          "tf": 0.00317854,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "wait",
+          "score": 0.00310102,
+          "tf": 0.00310102,
+          "count": 40,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cute",
+          "score": 0.00306641,
+          "tf": 0.00232576,
+          "count": 30,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "find",
+          "score": 0.00302349,
+          "tf": 0.00302349,
+          "count": 39,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00302349,
+          "tf": 0.00302349,
+          "count": 39,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "city",
+          "score": 0.0029642,
+          "tf": 0.00224824,
+          "count": 29,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "cant wait",
+          "score": 0.00294596,
+          "tf": 0.00294596,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "pets",
+          "score": 0.00292671,
+          "tf": 0.00201566,
+          "count": 26,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "care",
+          "score": 0.00286844,
+          "tf": 0.00286844,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00286844,
+          "tf": 0.00286844,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "haha",
+          "score": 0.0028071,
+          "tf": 0.00139546,
+          "count": 18,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00271339,
+          "tf": 0.00271339,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.00260631,
+          "tf": 0.00217071,
+          "count": 28,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "friends",
+          "score": 0.00255834,
+          "tf": 0.00255834,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "must",
+          "score": 0.00248081,
+          "tf": 0.00248081,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hiking",
+          "score": 0.00245313,
+          "tf": 0.00186061,
+          "count": 24,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00240329,
+          "tf": 0.00240329,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.00232576,
+          "tf": 0.00232576,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00224824,
+          "tf": 0.00224824,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00224824,
+          "tf": 0.00224824,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pup",
+          "score": 0.00224129,
+          "tf": 0.00139546,
+          "count": 18,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "friendly",
+          "score": 0.0021833,
+          "tf": 0.00108536,
+          "count": 14,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "around",
+          "score": 0.00217071,
+          "tf": 0.00217071,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "day",
+          "score": 0.00217071,
+          "tf": 0.00217071,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "heres",
+          "score": 0.00217071,
+          "tf": 0.00217071,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "try",
+          "score": 0.00217071,
+          "tf": 0.00217071,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "trail",
+          "score": 0.00211678,
+          "tf": 0.00131793,
+          "count": 17,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "sushi",
+          "score": 0.00209687,
+          "tf": 0.00077525,
+          "count": 10,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00209319,
+          "tf": 0.00209319,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "yep",
+          "score": 0.00209319,
+          "tf": 0.00209319,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "enjoy",
+          "score": 0.00193813,
+          "tf": 0.00193813,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00193813,
+          "tf": 0.00193813,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "right",
+          "score": 0.00193813,
+          "tf": 0.00193813,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "spot",
+          "score": 0.00193813,
+          "tf": 0.00193813,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "taking",
+          "score": 0.00193813,
+          "tf": 0.00193813,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dog friendly",
+          "score": 0.00188718,
+          "tf": 0.00069773,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "grooming",
+          "score": 0.00188718,
+          "tf": 0.00069773,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "bond",
+          "score": 0.00186165,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "bring much",
+          "score": 0.00186165,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 2
+        },
+        {
+          "term": "give",
+          "score": 0.00186061,
+          "tf": 0.00186061,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00186061,
+          "tf": 0.00186061,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00178308,
+          "tf": 0.00178308,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00178308,
+          "tf": 0.00178308,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "need",
+          "score": 0.00178308,
+          "tf": 0.00178308,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "place",
+          "score": 0.00178308,
+          "tf": 0.00178308,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00178308,
+          "tf": 0.00178308,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00178308,
+          "tf": 0.00178308,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "birds",
+          "score": 0.00171545,
+          "tf": 0.00085278,
+          "count": 11,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00170556,
+          "tf": 0.00170556,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "seeing",
+          "score": 0.00170556,
+          "tf": 0.00170556,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "soon",
+          "score": 0.00170556,
+          "tf": 0.00170556,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dog park",
+          "score": 0.00167749,
+          "tf": 0.0006202,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "running around",
+          "score": 0.00167749,
+          "tf": 0.0006202,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "ttyl",
+          "score": 0.00167749,
+          "tf": 0.0006202,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "adorable",
+          "score": 0.00157592,
+          "tf": 0.00108536,
+          "count": 14,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "girlfriend",
+          "score": 0.0015595,
+          "tf": 0.00077525,
+          "count": 10,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "experience",
+          "score": 0.00155051,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.00155051,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pic",
+          "score": 0.00155051,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "together",
+          "score": 0.00155051,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00155051,
+          "tf": 0.00155051,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 6,
+      "sample_id": "conv-47",
+      "speaker_a": "James",
+      "speaker_b": "John",
+      "token_count": 6348,
+      "unique_term_count": 7426,
+      "top_keywords": [
+        {
+          "term": "gaming",
+          "score": 0.01109193,
+          "tf": 0.00551398,
+          "count": 70,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "game",
+          "score": 0.00917409,
+          "tf": 0.0076408,
+          "count": 97,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "games",
+          "score": 0.00540052,
+          "tf": 0.0040961,
+          "count": 52,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "programming",
+          "score": 0.00507128,
+          "tf": 0.00220559,
+          "count": 28,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "2022",
+          "score": 0.00491214,
+          "tf": 0.00244191,
+          "count": 31,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "coding",
+          "score": 0.00452793,
+          "tf": 0.00196928,
+          "count": 25,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00362347,
+          "tf": 0.00362347,
+          "count": 46,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "playing",
+          "score": 0.00353743,
+          "tf": 0.00322962,
+          "count": 41,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00346593,
+          "tf": 0.00346593,
+          "count": 44,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00322962,
+          "tf": 0.00322962,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00315085,
+          "tf": 0.00315085,
+          "count": 40,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00307208,
+          "tf": 0.00307208,
+          "count": 39,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.0029933,
+          "tf": 0.0029933,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "will",
+          "score": 0.0029933,
+          "tf": 0.0029933,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00291453,
+          "tf": 0.00291453,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tournament",
+          "score": 0.00285221,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "skills",
+          "score": 0.0028472,
+          "tf": 0.00259945,
+          "count": 33,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.00283576,
+          "tf": 0.00283576,
+          "count": 36,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00275699,
+          "tf": 0.00275699,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00267822,
+          "tf": 0.00267822,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dogs",
+          "score": 0.0026767,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.00259945,
+          "tf": 0.00259945,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.00259945,
+          "tf": 0.00259945,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "strategy",
+          "score": 0.0025353,
+          "tf": 0.00126034,
+          "count": 16,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "experience",
+          "score": 0.00236314,
+          "tf": 0.00236314,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "together",
+          "score": 0.00236314,
+          "tf": 0.00236314,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "chess",
+          "score": 0.00235452,
+          "tf": 0.00102403,
+          "count": 13,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "friends",
+          "score": 0.00220559,
+          "tf": 0.00220559,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00196928,
+          "tf": 0.00196928,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00196928,
+          "tf": 0.00196928,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "world",
+          "score": 0.00196928,
+          "tf": 0.00196928,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "graphics",
+          "score": 0.00191751,
+          "tf": 0.00070894,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "even",
+          "score": 0.00181174,
+          "tf": 0.00181174,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "try",
+          "score": 0.00181174,
+          "tf": 0.00181174,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "project",
+          "score": 0.00179699,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "care",
+          "score": 0.00173297,
+          "tf": 0.00173297,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00173297,
+          "tf": 0.00173297,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "play",
+          "score": 0.00172558,
+          "tf": 0.00157542,
+          "count": 20,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "lately",
+          "score": 0.00165419,
+          "tf": 0.00165419,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "need",
+          "score": 0.00165419,
+          "tf": 0.00165419,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00165419,
+          "tf": 0.00165419,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "siblings",
+          "score": 0.00163005,
+          "tf": 0.00070894,
+          "count": 9,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00157542,
+          "tf": 0.00157542,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00157542,
+          "tf": 0.00157542,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "own",
+          "score": 0.00157542,
+          "tf": 0.00157542,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "online",
+          "score": 0.00155784,
+          "tf": 0.00118157,
+          "count": 15,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "ideas",
+          "score": 0.00155302,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "genres",
+          "score": 0.00154967,
+          "tf": 0.00086648,
+          "count": 11,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "days",
+          "score": 0.00149665,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "happy",
+          "score": 0.00149665,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "super",
+          "score": 0.00149665,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "wait",
+          "score": 0.00149665,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "working",
+          "score": 0.00149665,
+          "tf": 0.00149665,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "screenshot",
+          "score": 0.00149139,
+          "tf": 0.0005514,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "played",
+          "score": 0.00145399,
+          "tf": 0.0011028,
+          "count": 14,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "players",
+          "score": 0.00144894,
+          "tf": 0.00063017,
+          "count": 8,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "course",
+          "score": 0.00141867,
+          "tf": 0.00118157,
+          "count": 15,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00141788,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hope",
+          "score": 0.00141788,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "must",
+          "score": 0.00141788,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take care",
+          "score": 0.00141788,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "whats",
+          "score": 0.00141788,
+          "tf": 0.00141788,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "loves",
+          "score": 0.00140879,
+          "tf": 0.00078771,
+          "count": 10,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "resources",
+          "score": 0.00140879,
+          "tf": 0.00078771,
+          "count": 10,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "max",
+          "score": 0.00139169,
+          "tf": 0.00086648,
+          "count": 11,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "bye",
+          "score": 0.00138046,
+          "tf": 0.00126034,
+          "count": 16,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "team",
+          "score": 0.00135013,
+          "tf": 0.00102403,
+          "count": 13,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "check",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dont",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "exciting",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "joy",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "theyre",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00133911,
+          "tf": 0.00133911,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "very",
+          "score": 0.00129418,
+          "tf": 0.00118157,
+          "count": 15,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "samantha",
+          "score": 0.00127834,
+          "tf": 0.00047263,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "witcher",
+          "score": 0.00127834,
+          "tf": 0.00047263,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "2022 long",
+          "score": 0.00126765,
+          "tf": 0.00063017,
+          "count": 8,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 2
+        },
+        {
+          "term": "furry",
+          "score": 0.00126765,
+          "tf": 0.00063017,
+          "count": 8,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 7,
+      "sample_id": "conv-48",
+      "speaker_a": "Deborah",
+      "speaker_b": "Jolene",
+      "token_count": 5810,
+      "unique_term_count": 6889,
+      "top_keywords": [
+        {
+          "term": "yoga",
+          "score": 0.01031299,
+          "tf": 0.00576642,
+          "count": 67,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "meditation",
+          "score": 0.00442295,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "engineering",
+          "score": 0.003982,
+          "tf": 0.00197952,
+          "count": 23,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.00370083,
+          "tf": 0.00370083,
+          "count": 43,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "find",
+          "score": 0.00327051,
+          "tf": 0.00327051,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.00318444,
+          "tf": 0.00318444,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "together",
+          "score": 0.00318444,
+          "tf": 0.00318444,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.00310011,
+          "tf": 0.00258198,
+          "count": 30,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "peace",
+          "score": 0.0030166,
+          "tf": 0.00275411,
+          "count": 32,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "care",
+          "score": 0.00301231,
+          "tf": 0.00301231,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00292624,
+          "tf": 0.00292624,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "mom",
+          "score": 0.00292458,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "partner",
+          "score": 0.00292458,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "retreat",
+          "score": 0.00277046,
+          "tf": 0.00120492,
+          "count": 14,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00275411,
+          "tf": 0.00275411,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00266804,
+          "tf": 0.00266804,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.00258198,
+          "tf": 0.00258198,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00258198,
+          "tf": 0.00258198,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "yoga meditation",
+          "score": 0.00256065,
+          "tf": 0.00094673,
+          "count": 11,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "helps",
+          "score": 0.00249591,
+          "tf": 0.00249591,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00249591,
+          "tf": 0.00249591,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "special",
+          "score": 0.00249591,
+          "tf": 0.00249591,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "memories",
+          "score": 0.00223771,
+          "tf": 0.00223771,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "give",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "need",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "photo",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stay",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00215165,
+          "tf": 0.00215165,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00197952,
+          "tf": 0.00197952,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "favorite",
+          "score": 0.00197952,
+          "tf": 0.00197952,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.00197952,
+          "tf": 0.00197952,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00197952,
+          "tf": 0.00197952,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00197952,
+          "tf": 0.00197952,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lately",
+          "score": 0.00189345,
+          "tf": 0.00189345,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "relax",
+          "score": 0.00188538,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "anna",
+          "score": 0.00186229,
+          "tf": 0.00068853,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "day",
+          "score": 0.00180738,
+          "tf": 0.00180738,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00180738,
+          "tf": 0.00180738,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00180738,
+          "tf": 0.00180738,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "studies",
+          "score": 0.00178101,
+          "tf": 0.00077459,
+          "count": 9,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "game",
+          "score": 0.00175673,
+          "tf": 0.00146312,
+          "count": 17,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "studying",
+          "score": 0.0017313,
+          "tf": 0.00086066,
+          "count": 10,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.00172132,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "bring",
+          "score": 0.00172132,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00172132,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nature",
+          "score": 0.00172132,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00172132,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "place",
+          "score": 0.00172132,
+          "tf": 0.00172132,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "peaceful",
+          "score": 0.00169684,
+          "tf": 0.00154919,
+          "count": 18,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "project",
+          "score": 0.00165339,
+          "tf": 0.00137705,
+          "count": 16,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "nice",
+          "score": 0.00163525,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "other",
+          "score": 0.00163525,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00163525,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take care",
+          "score": 0.00163525,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "whats",
+          "score": 0.00163525,
+          "tf": 0.00163525,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "moms",
+          "score": 0.00162951,
+          "tf": 0.00060246,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "calming",
+          "score": 0.00160257,
+          "tf": 0.00146312,
+          "count": 17,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "pose",
+          "score": 0.00155817,
+          "tf": 0.00077459,
+          "count": 9,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "self care",
+          "score": 0.00155817,
+          "tf": 0.00077459,
+          "count": 9,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 2
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00154919,
+          "tf": 0.00154919,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "even",
+          "score": 0.00154919,
+          "tf": 0.00154919,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "important",
+          "score": 0.00154919,
+          "tf": 0.00154919,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "trying",
+          "score": 0.00154919,
+          "tf": 0.00154919,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "yourself",
+          "score": 0.00154919,
+          "tf": 0.00154919,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "goals",
+          "score": 0.0015083,
+          "tf": 0.00137705,
+          "count": 16,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "play",
+          "score": 0.0015083,
+          "tf": 0.00137705,
+          "count": 16,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "calm",
+          "score": 0.0014996,
+          "tf": 0.00103279,
+          "count": 12,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "community",
+          "score": 0.0014996,
+          "tf": 0.00103279,
+          "count": 12,
+          "idf": 1.45198512,
+          "document_frequency": 6,
+          "ngram": 1
+        },
+        {
+          "term": "difference",
+          "score": 0.00146312,
+          "tf": 0.00146312,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "experience",
+          "score": 0.00146312,
+          "tf": 0.00146312,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00146312,
+          "tf": 0.00146312,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "taking",
+          "score": 0.00146312,
+          "tf": 0.00146312,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "old",
+          "score": 0.00144672,
+          "tf": 0.00120492,
+          "count": 14,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "susie",
+          "score": 0.00139672,
+          "tf": 0.0005164,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "comforting",
+          "score": 0.00138533,
+          "tf": 0.00077459,
+          "count": 9,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "values",
+          "score": 0.00138533,
+          "tf": 0.00077459,
+          "count": 9,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "mindfulness",
+          "score": 0.00138523,
+          "tf": 0.00060246,
+          "count": 7,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "mother",
+          "score": 0.00138523,
+          "tf": 0.00060246,
+          "count": 7,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 8,
+      "sample_id": "conv-49",
+      "speaker_a": "Evan",
+      "speaker_b": "Sam",
+      "token_count": 4835,
+      "unique_term_count": 5765,
+      "top_keywords": [
+        {
+          "term": "painting",
+          "score": 0.00721376,
+          "tf": 0.00403351,
+          "count": 39,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "health",
+          "score": 0.00581392,
+          "tf": 0.00361982,
+          "count": 35,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "healthier",
+          "score": 0.00428039,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "tough",
+          "score": 0.00424036,
+          "tf": 0.00424036,
+          "count": 41,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "diet",
+          "score": 0.00404259,
+          "tf": 0.0017582,
+          "count": 17,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.00403351,
+          "tf": 0.00403351,
+          "count": 39,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00393009,
+          "tf": 0.00393009,
+          "count": 38,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00372324,
+          "tf": 0.00372324,
+          "count": 36,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00361982,
+          "tf": 0.00361982,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00351639,
+          "tf": 0.00351639,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stay",
+          "score": 0.00351639,
+          "tf": 0.00351639,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "healthy",
+          "score": 0.00295949,
+          "tf": 0.00165477,
+          "count": 16,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00289585,
+          "tf": 0.00289585,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00289585,
+          "tf": 0.00289585,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00279243,
+          "tf": 0.00279243,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "2023",
+          "score": 0.0027319,
+          "tf": 0.00227531,
+          "count": 22,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00268901,
+          "tf": 0.00268901,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00268901,
+          "tf": 0.00268901,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "trying",
+          "score": 0.00268901,
+          "tf": 0.00268901,
+          "count": 26,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "more",
+          "score": 0.00248216,
+          "tf": 0.00248216,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "changes",
+          "score": 0.00245446,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00237874,
+          "tf": 0.00237874,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "nature",
+          "score": 0.00237874,
+          "tf": 0.00237874,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "exercises",
+          "score": 0.00237799,
+          "tf": 0.00103423,
+          "count": 10,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "enjoy",
+          "score": 0.00227531,
+          "tf": 0.00227531,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "family",
+          "score": 0.00226561,
+          "tf": 0.00206847,
+          "count": 20,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "low impact",
+          "score": 0.00223787,
+          "tf": 0.00082739,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "care",
+          "score": 0.00217189,
+          "tf": 0.00217189,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00217189,
+          "tf": 0.00217189,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "exercise",
+          "score": 0.00215945,
+          "tf": 0.0013445,
+          "count": 13,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "low",
+          "score": 0.00208046,
+          "tf": 0.00103423,
+          "count": 10,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00206847,
+          "tf": 0.00206847,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "find",
+          "score": 0.00206847,
+          "tf": 0.00206847,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "need",
+          "score": 0.00206847,
+          "tf": 0.00206847,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "started",
+          "score": 0.00206847,
+          "tf": 0.00206847,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "try",
+          "score": 0.00206847,
+          "tf": 0.00206847,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00196504,
+          "tf": 0.00196504,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "give",
+          "score": 0.00196504,
+          "tf": 0.00196504,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "life",
+          "score": 0.00196504,
+          "tf": 0.00196504,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "little",
+          "score": 0.00196504,
+          "tf": 0.00196504,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "impact exercises",
+          "score": 0.00195814,
+          "tf": 0.00072396,
+          "count": 7,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "motivated",
+          "score": 0.00192577,
+          "tf": 0.0017582,
+          "count": 17,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "weight",
+          "score": 0.00187242,
+          "tf": 0.00093081,
+          "count": 9,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "feel",
+          "score": 0.00186162,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "right",
+          "score": 0.00186162,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "small",
+          "score": 0.00186162,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "sorry",
+          "score": 0.00186162,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "taking",
+          "score": 0.00186162,
+          "tf": 0.00186162,
+          "count": 18,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lets",
+          "score": 0.0017582,
+          "tf": 0.0017582,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "means",
+          "score": 0.0017582,
+          "tf": 0.0017582,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "soon",
+          "score": 0.0017582,
+          "tf": 0.0017582,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stress",
+          "score": 0.0017582,
+          "tf": 0.0017582,
+          "count": 17,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lifestyle",
+          "score": 0.0016784,
+          "tf": 0.00062054,
+          "count": 6,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "recipes",
+          "score": 0.00166471,
+          "tf": 0.00093081,
+          "count": 9,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "hard",
+          "score": 0.00165477,
+          "tf": 0.00165477,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "lately",
+          "score": 0.00165477,
+          "tf": 0.00165477,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "long",
+          "score": 0.00165477,
+          "tf": 0.00165477,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "yourself",
+          "score": 0.00165477,
+          "tf": 0.00165477,
+          "count": 16,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "active",
+          "score": 0.00163631,
+          "tf": 0.00124108,
+          "count": 12,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "step",
+          "score": 0.00158593,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "dont",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "glad",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "helps",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "important",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "trip",
+          "score": 0.00155135,
+          "tf": 0.00155135,
+          "count": 15,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "accident",
+          "score": 0.00147975,
+          "tf": 0.00082739,
+          "count": 8,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "snacks",
+          "score": 0.00147975,
+          "tf": 0.00082739,
+          "count": 8,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "anything",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "bit",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "easy",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "few",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "getting",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "impact",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "progress",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "since",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "these",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "through",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "week",
+          "score": 0.00144793,
+          "tf": 0.00144793,
+          "count": 14,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    },
+    {
+      "conversation_idx": 9,
+      "sample_id": "conv-50",
+      "speaker_a": "Calvin",
+      "speaker_b": "Dave",
+      "token_count": 6139,
+      "unique_term_count": 6629,
+      "top_keywords": [
+        {
+          "term": "car",
+          "score": 0.01310809,
+          "tf": 0.00651625,
+          "count": 80,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "music",
+          "score": 0.01073922,
+          "tf": 0.00814531,
+          "count": 100,
+          "idf": 1.31845373,
+          "document_frequency": 7,
+          "ngram": 1
+        },
+        {
+          "term": "boston",
+          "score": 0.00727024,
+          "tf": 0.00268795,
+          "count": 33,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "cars",
+          "score": 0.00597269,
+          "tf": 0.00333958,
+          "count": 41,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "look",
+          "score": 0.00578317,
+          "tf": 0.00578317,
+          "count": 71,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take",
+          "score": 0.00578317,
+          "tf": 0.00578317,
+          "count": 71,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "work",
+          "score": 0.00553881,
+          "tf": 0.00553881,
+          "count": 68,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "cant",
+          "score": 0.00480573,
+          "tf": 0.00480573,
+          "count": 59,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "tokyo",
+          "score": 0.00462651,
+          "tf": 0.00171052,
+          "count": 21,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "cant wait",
+          "score": 0.00456137,
+          "tf": 0.00456137,
+          "count": 56,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "wait",
+          "score": 0.00456137,
+          "tf": 0.00456137,
+          "count": 56,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "take look",
+          "score": 0.00405557,
+          "tf": 0.00252505,
+          "count": 31,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 2
+        },
+        {
+          "term": "working",
+          "score": 0.00350248,
+          "tf": 0.00350248,
+          "count": 43,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "something",
+          "score": 0.00342103,
+          "tf": 0.00342103,
+          "count": 42,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ive",
+          "score": 0.00301377,
+          "tf": 0.00301377,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "looks",
+          "score": 0.00301377,
+          "tf": 0.00301377,
+          "count": 37,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "look photo",
+          "score": 0.00299654,
+          "tf": 0.00130325,
+          "count": 16,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 2
+        },
+        {
+          "term": "2023",
+          "score": 0.00293395,
+          "tf": 0.00244359,
+          "count": 30,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "people",
+          "score": 0.00285086,
+          "tf": 0.00285086,
+          "count": 35,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hear",
+          "score": 0.00276941,
+          "tf": 0.00276941,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "photo",
+          "score": 0.00276941,
+          "tf": 0.00276941,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pic",
+          "score": 0.00276941,
+          "tf": 0.00276941,
+          "count": 34,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "crowd",
+          "score": 0.00274732,
+          "tf": 0.00171052,
+          "count": 21,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "back",
+          "score": 0.00268795,
+          "tf": 0.00268795,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "ill",
+          "score": 0.00268795,
+          "tf": 0.00268795,
+          "count": 33,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "experience",
+          "score": 0.0026065,
+          "tf": 0.0026065,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "hard",
+          "score": 0.0026065,
+          "tf": 0.0026065,
+          "count": 32,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "show",
+          "score": 0.00252505,
+          "tf": 0.00252505,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stay",
+          "score": 0.00252505,
+          "tf": 0.00252505,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "support",
+          "score": 0.00252505,
+          "tf": 0.00252505,
+          "count": 31,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "come",
+          "score": 0.00244359,
+          "tf": 0.00244359,
+          "count": 30,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "performing",
+          "score": 0.00243469,
+          "tf": 0.00105889,
+          "count": 13,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "working cars",
+          "score": 0.00242341,
+          "tf": 0.00089598,
+          "count": 11,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "soon",
+          "score": 0.00236214,
+          "tf": 0.00236214,
+          "count": 29,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "artists",
+          "score": 0.00229392,
+          "tf": 0.00114034,
+          "count": 14,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "appreciate",
+          "score": 0.00228069,
+          "tf": 0.00228069,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "check",
+          "score": 0.00228069,
+          "tf": 0.00228069,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "must",
+          "score": 0.00228069,
+          "tf": 0.00228069,
+          "count": 28,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "japan",
+          "score": 0.00224741,
+          "tf": 0.00097744,
+          "count": 12,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "incredible",
+          "score": 0.00223041,
+          "tf": 0.00203633,
+          "count": 25,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "fixing",
+          "score": 0.0022031,
+          "tf": 0.00081453,
+          "count": 10,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "garage",
+          "score": 0.0022031,
+          "tf": 0.00081453,
+          "count": 10,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "help",
+          "score": 0.00219923,
+          "tf": 0.00219923,
+          "count": 27,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "classic",
+          "score": 0.00213007,
+          "tf": 0.00105889,
+          "count": 13,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "tour",
+          "score": 0.00213007,
+          "tf": 0.00105889,
+          "count": 13,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "frank",
+          "score": 0.00206012,
+          "tf": 0.00089598,
+          "count": 11,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "dream",
+          "score": 0.00205377,
+          "tf": 0.00171052,
+          "count": 21,
+          "idf": 1.2006707,
+          "document_frequency": 8,
+          "ngram": 1
+        },
+        {
+          "term": "fun",
+          "score": 0.00203633,
+          "tf": 0.00203633,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "much",
+          "score": 0.00203633,
+          "tf": 0.00203633,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "such",
+          "score": 0.00203633,
+          "tf": 0.00203633,
+          "count": 25,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "back life",
+          "score": 0.00198279,
+          "tf": 0.00073308,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "frank ocean",
+          "score": 0.00198279,
+          "tf": 0.00073308,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "mansion",
+          "score": 0.00198279,
+          "tf": 0.00073308,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "restoring",
+          "score": 0.00198279,
+          "tf": 0.00073308,
+          "count": 9,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 1
+        },
+        {
+          "term": "shop",
+          "score": 0.00196621,
+          "tf": 0.00097744,
+          "count": 12,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "hard work",
+          "score": 0.00195487,
+          "tf": 0.00195487,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 2
+        },
+        {
+          "term": "life",
+          "score": 0.00195487,
+          "tf": 0.00195487,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "those",
+          "score": 0.00195487,
+          "tf": 0.00195487,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "together",
+          "score": 0.00195487,
+          "tf": 0.00195487,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "way",
+          "score": 0.00195487,
+          "tf": 0.00195487,
+          "count": 24,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "studio",
+          "score": 0.00189378,
+          "tf": 0.00105889,
+          "count": 13,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 1
+        },
+        {
+          "term": "always",
+          "score": 0.00187342,
+          "tf": 0.00187342,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "excited",
+          "score": 0.00187342,
+          "tf": 0.00187342,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "feeling",
+          "score": 0.00187342,
+          "tf": 0.00187342,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "inspiring",
+          "score": 0.00187342,
+          "tf": 0.00187342,
+          "count": 23,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "stage",
+          "score": 0.00180236,
+          "tf": 0.00089598,
+          "count": 11,
+          "idf": 2.01160091,
+          "document_frequency": 3,
+          "ngram": 1
+        },
+        {
+          "term": "lets",
+          "score": 0.00179197,
+          "tf": 0.00179197,
+          "count": 22,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "car looks",
+          "score": 0.00176248,
+          "tf": 0.00065162,
+          "count": 8,
+          "idf": 2.70474809,
+          "document_frequency": 1,
+          "ngram": 2
+        },
+        {
+          "term": "seeing",
+          "score": 0.00171052,
+          "tf": 0.00171052,
+          "count": 21,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "pushing",
+          "score": 0.00169511,
+          "tf": 0.00154761,
+          "count": 19,
+          "idf": 1.09531018,
+          "document_frequency": 9,
+          "ngram": 1
+        },
+        {
+          "term": "japanese",
+          "score": 0.00168555,
+          "tf": 0.00073308,
+          "count": 9,
+          "idf": 2.29928298,
+          "document_frequency": 2,
+          "ngram": 1
+        },
+        {
+          "term": "energy",
+          "score": 0.00162906,
+          "tf": 0.00162906,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "let",
+          "score": 0.00162906,
+          "tf": 0.00162906,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "long",
+          "score": 0.00162906,
+          "tf": 0.00162906,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "since",
+          "score": 0.00162906,
+          "tf": 0.00162906,
+          "count": 20,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "dream come",
+          "score": 0.00160243,
+          "tf": 0.00089598,
+          "count": 11,
+          "idf": 1.78845736,
+          "document_frequency": 4,
+          "ngram": 2
+        },
+        {
+          "term": "artist",
+          "score": 0.0015699,
+          "tf": 0.00097744,
+          "count": 12,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 1
+        },
+        {
+          "term": "come true",
+          "score": 0.0015699,
+          "tf": 0.00097744,
+          "count": 12,
+          "idf": 1.6061358,
+          "document_frequency": 5,
+          "ngram": 2
+        },
+        {
+          "term": "everything",
+          "score": 0.00154761,
+          "tf": 0.00154761,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        },
+        {
+          "term": "makes",
+          "score": 0.00154761,
+          "tf": 0.00154761,
+          "count": 19,
+          "idf": 1.0,
+          "document_frequency": 10,
+          "ngram": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,12 +1,23 @@
 """跨请求 API 失败计数：403/429 等累计达上限后熔断，避免无限重试。"""
 from __future__ import annotations
 
+import os
 import threading
 from typing import Final
 
 from openai import APIConnectionError, APIStatusError, RateLimitError
 
 DEFAULT_MAX_API_FAILURES: Final[int] = 10
+
+
+def _default_max_api_failures() -> int:
+    raw = os.getenv("PIPELINE_API_FAILURE_MAX", "").strip()
+    if not raw:
+        return DEFAULT_MAX_API_FAILURES
+    try:
+        return max(1, int(raw))
+    except ValueError:
+        return DEFAULT_MAX_API_FAILURES
 
 
 class ApiFailureBudgetExceeded(RuntimeError):
@@ -31,7 +42,7 @@ class ApiFailureBudget:
     """线程安全失败预算；成功一次则清零连续失败计数。"""
 
     def __init__(self, *, max_failures: int = DEFAULT_MAX_API_FAILURES) -> None:
-        self.max_failures = max(1, int(max_failures))
+        self.max_failures = max(1, int(max_failures or _default_max_api_failures()))
         self._lock = threading.Lock()
         self._consecutive = 0
 
@@ -63,7 +74,7 @@ class ApiFailureBudget:
 
 
 # eval 阶段全局预算（evaluate_records 开始时 reset）
-_eval_budget = ApiFailureBudget()
+_eval_budget = ApiFailureBudget(max_failures=_default_max_api_failures())
 
 
 def reset_eval_budget() -> None:

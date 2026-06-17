@@ -42,6 +42,16 @@ _model: str = _DEFAULT_MODEL
 _TPM_WINDOW_S = 60.0
 
 
+def _retry_attempts() -> int:
+    raw = os.getenv("PIPELINE_API_FAILURE_MAX", "").strip()
+    if raw:
+        try:
+            return max(1, int(raw))
+        except ValueError:
+            pass
+    return max(1, int(os.getenv("EVALUATOR_RETRY_ATTEMPTS", "").strip() or _RETRY_ATTEMPTS))
+
+
 class EvaluatorTpmGate:
     """按 SiliconFlow TPM 预算主动节流，避免打满 40k input-token/min 后反复 429。"""
 
@@ -381,7 +391,8 @@ async def _create_completion_with_retry(
     budget = eval_budget()
     slot = pool.slot_at(slot_index)
     gate = _tpm_gate_for_slot(slot_index)
-    for attempt in range(_RETRY_ATTEMPTS):
+    retry_attempts = _retry_attempts()
+    for attempt in range(retry_attempts):
         saw_rate_limit = False
         if gate is not None:
             await gate.acquire()
@@ -406,14 +417,14 @@ async def _create_completion_with_retry(
                 except ApiFailureBudgetExceeded:
                     raise
                 raise
-        if last_error is None or attempt >= _RETRY_ATTEMPTS - 1:
+        if last_error is None or attempt >= retry_attempts - 1:
             break
         delay = min(_RETRY_BASE_SEC * (2**attempt), _RETRY_MAX_SEC)
         if saw_rate_limit:
             delay = max(delay, _RETRY_MIN_RATE_LIMIT_SEC)
         print(
             f"[evaluator] {slot.label} failed ({last_error!r}), "
-            f"retry {attempt + 2}/{_RETRY_ATTEMPTS} in {delay:.0f}s ...",
+            f"retry {attempt + 2}/{retry_attempts} in {delay:.0f}s ...",
             flush=True,
         )
         await asyncio.sleep(delay)

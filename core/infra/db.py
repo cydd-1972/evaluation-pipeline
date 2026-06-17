@@ -72,7 +72,7 @@ async def insert_memories(
             "memory_key": memory_key,
             "event": str(item.get("event") or "ADD"),
         }
-        for key in ("source_session_index", "source_session_time", "anchor_time"):
+        for key in ("source_session_index", "source_session_time", "anchor_time", "event_anchor", "type", "fact_type"):
             if item.get(key) is not None and str(item.get(key)).strip():
                 metadata[key] = item[key]
         rows.append(
@@ -150,6 +150,9 @@ async def apply_memory_incremental_writes(
             "source_session_index": int(session.index),
             "source_session_time": str(session.date_time or ""),
             "anchor_time": str(item.get("anchor_time") or ""),
+            "event_anchor": str(item.get("event_anchor") or ""),
+            "type": str(item.get("type") or ""),
+            "fact_type": str(item.get("fact_type") or ""),
         }
         for item in items
         if str(item.get("text") or "").strip()

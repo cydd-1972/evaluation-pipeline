@@ -82,6 +82,10 @@ def _env_float(name: str, default: float) -> float:
         return default
 
 
+def _api_retry_attempts() -> int:
+    return _env_int("PIPELINE_LLM_API_RETRY_ATTEMPTS", _API_RETRY_ATTEMPTS)
+
+
 def _message_text(message: Any) -> str:
     """合并 assistant 正文；MiniMax reasoning_split 时 content 应已是答案部分。"""
     content = _strip_thinking_tags(str(getattr(message, "content", None) or ""))
@@ -116,10 +120,117 @@ def _extract_json_object(text: str) -> dict[str, Any]:
         end = cleaned.rfind("}")
         if start >= 0 and end > start:
             cleaned = cleaned[start : end + 1]
-    payload = json.loads(cleaned)
+    try:
+        payload = json.loads(cleaned)
+    except json.JSONDecodeError:
+        payload = json.loads(_repair_json_object_text(cleaned))
     if not isinstance(payload, dict):
         raise ValueError("LLM response JSON must be an object")
     return payload
+
+
+def _repair_json_object_text(text: str) -> str:
+    cleaned = text.strip()
+
+    def _remove_trailing_commas(value: str) -> str:
+        return re.sub(r",(\s*[\]}])", r"\1", value)
+
+    def _append_missing_closers(value: str) -> str:
+        stack: list[str] = []
+        in_string = False
+        escape = False
+        for ch in value:
+            if in_string:
+                if escape:
+                    escape = False
+                elif ch == "\\":
+                    escape = True
+                elif ch == '"':
+                    in_string = False
+                continue
+            if ch == '"':
+                in_string = True
+                continue
+            if ch in "{[":
+                stack.append(ch)
+            elif ch == "}" and stack and stack[-1] == "{":
+                stack.pop()
+            elif ch == "]" and stack and stack[-1] == "[":
+                stack.pop()
+        closers: list[str] = []
+        for opener in reversed(stack):
+            closers.append("}" if opener == "{" else "]")
+        return value + "".join(closers)
+
+    def _truncate_items_array(value: str) -> str | None:
+        items_index = value.find('"items"')
+        if items_index < 0:
+            return None
+        array_start = value.find("[", items_index)
+        if array_start < 0:
+            return None
+        stack: list[str] = ["{", "["]
+        in_string = False
+        escape = False
+        last_complete_item_end: int | None = None
+        for index in range(array_start + 1, len(value)):
+            ch = value[index]
+            if in_string:
+                if escape:
+                    escape = False
+                elif ch == "\\":
+                    escape = True
+                elif ch == '"':
+                    in_string = False
+                continue
+            if ch == '"':
+                in_string = True
+                continue
+            if ch in "{[":
+                stack.append(ch)
+                continue
+            if ch == "}" and stack and stack[-1] == "{":
+                stack.pop()
+                if stack == ["{", "["]:
+                    last_complete_item_end = index
+                continue
+            if ch == "]" and stack and stack[-1] == "[":
+                stack.pop()
+                continue
+        if last_complete_item_end is None:
+            return None
+        truncated = value[: last_complete_item_end + 1].rstrip()
+        truncated = _remove_trailing_commas(truncated)
+        return truncated + "\n  ]\n}"
+
+    candidates = [
+        cleaned,
+        _remove_trailing_commas(cleaned),
+        _append_missing_closers(_remove_trailing_commas(cleaned)),
+    ]
+    truncated = _truncate_items_array(cleaned)
+    if truncated:
+        candidates.extend(
+            [
+                truncated,
+                _append_missing_closers(_remove_trailing_commas(truncated)),
+            ]
+        )
+    seen: set[str] = set()
+    last_error: Exception | None = None
+    for candidate in candidates:
+        candidate = candidate.strip()
+        if not candidate or candidate in seen:
+            continue
+        seen.add(candidate)
+        try:
+            json.loads(candidate)
+            return candidate
+        except json.JSONDecodeError as exc:
+            last_error = exc
+    if last_error is not None:
+        raise last_error
+    return cleaned
 
 
 class PipelineLLM:
@@ -156,7 +267,7 @@ class PipelineLLM:
     def _create_completion(self, **kwargs: Any) -> Any:
         """带退避的 chat.completions.create。"""
         last_error: Exception | None = None
-        max_attempts = _env_int("PIPELINE_LLM_API_RETRY_ATTEMPTS", _API_RETRY_ATTEMPTS)
+        max_attempts = _api_retry_attempts()
         for attempt in range(max_attempts):
             try:
                 return self._client.chat.completions.create(**kwargs)

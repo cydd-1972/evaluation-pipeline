@@ -1,0 +1,1311 @@
+{
+  "source_tfidf_path": "E:\\cydd_own_products\\memorax-test-locomo-enrichment-append-merge-mmwrite-audit\\evaluation_pipeline\\rubric\\by_version\\ablation\\output\\locomo_refined_tfidf_keywords.json",
+  "conversation_idx": 1,
+  "speaker_a": "Jon",
+  "speaker_b": "Gina",
+  "top_k": 80,
+  "top_tfidf_terms": [
+    "dance",
+    "studio",
+    "dance studio",
+    "business",
+    "biz",
+    "fashion",
+    "store",
+    "dancing",
+    "help",
+    "dancers",
+    "tough",
+    "dreams",
+    "customers",
+    "work",
+    "support",
+    "hard",
+    "cant",
+    "2023",
+    "lets",
+    "stay",
+    "investors",
+    "means",
+    "cant wait",
+    "dont",
+    "wait",
+    "will",
+    "own",
+    "clothing",
+    "quit",
+    "motivated",
+    "nice",
+    "wont",
+    "clothing store",
+    "help means",
+    "appreciate",
+    "working",
+    "starting",
+    "pushing",
+    "advice",
+    "always",
+    "glad",
+    "looks",
+    "off",
+    "right",
+    "show",
+    "way",
+    "words",
+    "online",
+    "pieces",
+    "students",
+    "anything",
+    "give",
+    "place",
+    "moves",
+    "studios",
+    "customer",
+    "dance studios",
+    "media",
+    "social media",
+    "happen",
+    "staying",
+    "focused",
+    "success",
+    "goals",
+    "job",
+    "key",
+    "people",
+    "tomorrow",
+    "passion",
+    "reach",
+    "let anything",
+    "losing job",
+    "marketing",
+    "believe yourself",
+    "back",
+    "congrats",
+    "even",
+    "helps",
+    "ill",
+    "ive"
+  ],
+  "entity_like_terms": [
+    "dance",
+    "studio",
+    "dance studio",
+    "business",
+    "fashion",
+    "store",
+    "dancing",
+    "dancers",
+    "dreams",
+    "customers",
+    "support",
+    "investors",
+    "means",
+    "cant wait",
+    "clothing",
+    "quit",
+    "clothing store",
+    "help means",
+    "starting",
+    "advice",
+    "online",
+    "pieces",
+    "moves",
+    "studios",
+    "customer",
+    "dance studios",
+    "media",
+    "social media",
+    "goals",
+    "passion",
+    "let anything",
+    "losing job",
+    "marketing",
+    "believe yourself"
+  ],
+  "models": {
+    "gemini": {
+      "memory_count": 103,
+      "entity_like_term_count": 34,
+      "covered_count": 20,
+      "partial_count": 2,
+      "missing_count": 12,
+      "coverage_rate": 0.5882,
+      "terms": [
+        {
+          "term": "dance",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dance"
+          ],
+          "matching_memories": [
+            "Gina won first place at a regional dance competition at age fifteen.",
+            "Gina's favorite dance style is contemporary.",
+            "Gina's winning dance piece was a contemporary performance titled \"Finding Freedom.\""
+          ]
+        },
+        {
+          "term": "studio",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "studio"
+          ],
+          "matching_memories": [
+            "Jon's dance studio business is currently active.",
+            "Jon's potential dance studio location is downtown.",
+            "Jon prefers Marley flooring for his dance studio."
+          ]
+        },
+        {
+          "term": "dance studio",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dance",
+            "studio"
+          ],
+          "matching_memories": [
+            "Jon's dance studio business is currently active.",
+            "Jon's potential dance studio location is downtown.",
+            "Jon prefers Marley flooring for his dance studio."
+          ]
+        },
+        {
+          "term": "business",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "business"
+          ],
+          "matching_memories": [
+            "Jon's dance studio business is currently active.",
+            "Gina's online clothing store business involves keeping up with fashion trends.",
+            "Jon's dance studio business involves teaching students."
+          ]
+        },
+        {
+          "term": "fashion",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "fashion"
+          ],
+          "matching_memories": [
+            "Gina found a new fashion piece for her store.",
+            "Gina got the idea for her new clothing designs from a fashion magazine.",
+            "Gina's online clothing store blends her interest in dance and fashion."
+          ]
+        },
+        {
+          "term": "store",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "store"
+          ],
+          "matching_memories": [
+            "Gina started and owns an online clothing store.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina's clothing store features a chandelier."
+          ]
+        },
+        {
+          "term": "dancing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dancing"
+          ],
+          "matching_memories": [
+            "Jon has been passionate about dancing since he was a kid.",
+            "Jon used to be scared of what people would think of his dancing.",
+            "Gina uses dancing as a way to stay motivated."
+          ]
+        },
+        {
+          "term": "dancers",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dancers"
+          ],
+          "matching_memories": [
+            "Jon rehearses with a small group of dancers after work.",
+            "Jon is offering one-on-one mentoring and training to dancers at his studio.",
+            "Jon plans to mentor aspiring dancers."
+          ]
+        },
+        {
+          "term": "dreams",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "customers",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "support",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "investors",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "investors"
+          ],
+          "matching_memories": [
+            "Jon is looking for investors for his dance studio business.",
+            "Jon met investors at the networking event.",
+            "Jon is tweaking his pitch to investors."
+          ]
+        },
+        {
+          "term": "means",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "cant wait",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "clothing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "clothing"
+          ],
+          "matching_memories": [
+            "Gina started and owns an online clothing store.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina's clothing store features a chandelier."
+          ]
+        },
+        {
+          "term": "quit",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "clothing store",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "clothing",
+            "store"
+          ],
+          "matching_memories": [
+            "Gina started and owns an online clothing store.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina's clothing store features a chandelier."
+          ]
+        },
+        {
+          "term": "help means",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "help"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "starting",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "advice",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "online",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "online"
+          ],
+          "matching_memories": [
+            "Gina started and owns an online clothing store.",
+            "Gina's online clothing store is currently active.",
+            "Gina's online clothing store blends her interest in dance and fashion."
+          ]
+        },
+        {
+          "term": "pieces",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "pieces"
+          ],
+          "matching_memories": [
+            "Gina is passionate about fashion trends and finding unique pieces.",
+            "Gina developed a video presentation to teach how to style her fashion pieces.",
+            "Gina acquired new unique pieces for her online clothing store."
+          ]
+        },
+        {
+          "term": "moves",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "studios",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "customer",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "customer"
+          ],
+          "matching_memories": [
+            "Gina is growing the customer base for her online clothing store."
+          ]
+        },
+        {
+          "term": "dance studios",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "dance"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "media",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "media"
+          ],
+          "matching_memories": [
+            "Jon is expanding his dance studio's social media presence.",
+            "Jon posted dance videos on social media.",
+            "Gina recommended that Jon use social media channels and work with influencers for marketing."
+          ]
+        },
+        {
+          "term": "social media",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "social",
+            "media"
+          ],
+          "matching_memories": [
+            "Jon is expanding his dance studio's social media presence.",
+            "Jon posted dance videos on social media.",
+            "Gina recommended that Jon use social media channels and work with influencers for marketing."
+          ]
+        },
+        {
+          "term": "goals",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "goals"
+          ],
+          "matching_memories": [
+            "Jon uses a whiteboard to visualize goals, track progress, and manage ideas for his dance studio business.",
+            "Jon uses a notebook to set goals and track his achievements."
+          ]
+        },
+        {
+          "term": "passion",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "passion"
+          ],
+          "matching_memories": [
+            "Jon has been passionate about dancing since he was a kid.",
+            "Gina is passionate about fashion trends and finding unique pieces.",
+            "Jon believes losing his job gave him the push to pursue his passion for dance."
+          ]
+        },
+        {
+          "term": "let anything",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "losing job",
+          "status": "all_tokens",
+          "covered": true,
+          "matched_tokens": [
+            "losing",
+            "job"
+          ],
+          "matching_memories": [
+            "Jon believes losing his job gave him the push to pursue his passion for dance.",
+            "Gina started her online clothing store after losing her job."
+          ]
+        },
+        {
+          "term": "marketing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "marketing"
+          ],
+          "matching_memories": [
+            "Gina recommended that Jon use social media channels and work with influencers for marketing.",
+            "Jon started learning marketing and analytics tools today."
+          ]
+        },
+        {
+          "term": "believe yourself",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        }
+      ]
+    },
+    "deepseek": {
+      "memory_count": 173,
+      "entity_like_term_count": 34,
+      "covered_count": 27,
+      "partial_count": 3,
+      "missing_count": 4,
+      "coverage_rate": 0.7941,
+      "terms": [
+        {
+          "term": "dance",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dance"
+          ],
+          "matching_memories": [
+            "Gina's dance team won first place at a regional competition when she was fifteen.",
+            "Gina's favorite dance style is contemporary.",
+            "Gina's winning dance piece was called 'Finding Freedom'."
+          ]
+        },
+        {
+          "term": "studio",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "studio"
+          ],
+          "matching_memories": [
+            "Jon is still working on the dance studio.",
+            "Jon's ideal dance studio is by the water.",
+            "Jon wants Marley flooring for his dance studio."
+          ]
+        },
+        {
+          "term": "dance studio",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dance",
+            "studio"
+          ],
+          "matching_memories": [
+            "Jon is still working on the dance studio.",
+            "Jon's ideal dance studio is by the water.",
+            "Jon wants Marley flooring for his dance studio."
+          ]
+        },
+        {
+          "term": "business",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "business"
+          ],
+          "matching_memories": [
+            "Jon is turning his love of dance into a business.",
+            "Jon juggles dancing and running his business.",
+            "Jon advised Gina that brand identity is key for a successful business."
+          ]
+        },
+        {
+          "term": "fashion",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "fashion"
+          ],
+          "matching_memories": [
+            "Gina found a cool new fashion piece for her store.",
+            "Gina got the idea for the designs from a fashion magazine.",
+            "Gina wanted to blend her love for dance and fashion in her store."
+          ]
+        },
+        {
+          "term": "store",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "store"
+          ],
+          "matching_memories": [
+            "Gina opened an online clothing store after losing her job.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina can expand her clothing store."
+          ]
+        },
+        {
+          "term": "dancing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dancing"
+          ],
+          "matching_memories": [
+            "Jon has been into dancing since he was a kid.",
+            "Jon is passionate about dancing.",
+            "Jon juggles dancing and running his business."
+          ]
+        },
+        {
+          "term": "dancers",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dancers"
+          ],
+          "matching_memories": [
+            "Jon rehearses with a small group of dancers after work.",
+            "Jon's studio helps dancers of all ages and levels express themselves.",
+            "Jon's dancers are excited."
+          ]
+        },
+        {
+          "term": "dreams",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dreams"
+          ],
+          "matching_memories": [
+            "Jon is living his dreams after losing his job."
+          ]
+        },
+        {
+          "term": "customers",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "customers"
+          ],
+          "matching_memories": [
+            "Gina wants her customers to feel cozy in her store.",
+            "Gina wants to create a special shopping experience for her customers.",
+            "Gina is keeping up with fashion trends to offer the best pieces to customers."
+          ]
+        },
+        {
+          "term": "support",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "support"
+          ],
+          "matching_memories": [
+            "Gina gets help from people who support her to stay motivated.",
+            "Jon wants the dance studio to be a place of support and encouragement for all dancers.",
+            "Jon feels supported by a solid community."
+          ]
+        },
+        {
+          "term": "investors",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "investors"
+          ],
+          "matching_memories": [
+            "Jon is looking for investors for his dance studio.",
+            "Jon is sprucing up his biz plan and tweaking his pitch to investors.",
+            "Jon attended a networking event and met some investors and got good advice."
+          ]
+        },
+        {
+          "term": "means",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "cant wait",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "wait"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "clothing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "clothing"
+          ],
+          "matching_memories": [
+            "Gina opened an online clothing store after losing her job.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina can expand her clothing store."
+          ]
+        },
+        {
+          "term": "quit",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "quit"
+          ],
+          "matching_memories": [
+            "Jon won't quit and will keep going whatever comes his way."
+          ]
+        },
+        {
+          "term": "clothing store",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "clothing",
+            "store"
+          ],
+          "matching_memories": [
+            "Gina opened an online clothing store after losing her job.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina can expand her clothing store."
+          ]
+        },
+        {
+          "term": "help means",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "help"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "starting",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "advice",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "advice"
+          ],
+          "matching_memories": [
+            "Jon attended a networking event and met some investors and got good advice."
+          ]
+        },
+        {
+          "term": "online",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "online"
+          ],
+          "matching_memories": [
+            "Gina opened an online clothing store after losing her job.",
+            "Gina's online clothes store is open.",
+            "Gina's online clothing store has been a roller coaster but rewarding."
+          ]
+        },
+        {
+          "term": "pieces",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "pieces"
+          ],
+          "matching_memories": [
+            "Gina is always on the hunt for unique, trendy pieces.",
+            "Gina is keeping up with fashion trends to offer the best pieces to customers.",
+            "Gina developed a video presentation to teach how to style her fashion pieces."
+          ]
+        },
+        {
+          "term": "moves",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "moves"
+          ],
+          "matching_memories": [
+            "Jon performed at a festival and received compliments on his dance moves."
+          ]
+        },
+        {
+          "term": "studios",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "customer",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "customer"
+          ],
+          "matching_memories": [
+            "Gina wants her customers to feel cozy in her store.",
+            "Gina wants to create a special shopping experience for her customers.",
+            "Gina is keeping up with fashion trends to offer the best pieces to customers."
+          ]
+        },
+        {
+          "term": "dance studios",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "dance"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "media",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "media"
+          ],
+          "matching_memories": [
+            "Jon is expanding his dance studio's social media presence.",
+            "Jon posted some of his dance videos on social media.",
+            "Gina advised Jon to use social media channels and work with influencers for marketing."
+          ]
+        },
+        {
+          "term": "social media",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "social",
+            "media"
+          ],
+          "matching_memories": [
+            "Jon is expanding his dance studio's social media presence.",
+            "Jon posted some of his dance videos on social media.",
+            "Gina advised Jon to use social media channels and work with influencers for marketing."
+          ]
+        },
+        {
+          "term": "goals",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "goals"
+          ],
+          "matching_memories": [
+            "Jon uses a whiteboard to stay on track, visualize goals, and tokenize successes."
+          ]
+        },
+        {
+          "term": "passion",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "passion"
+          ],
+          "matching_memories": [
+            "Jon is passionate about dancing.",
+            "Gina is passionate about dance and fashion.",
+            "Gina believes Jon is talented and passionate about dance."
+          ]
+        },
+        {
+          "term": "let anything",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "losing job",
+          "status": "all_tokens",
+          "covered": true,
+          "matched_tokens": [
+            "losing",
+            "job"
+          ],
+          "matching_memories": [
+            "Gina opened an online clothing store after losing her job.",
+            "Jon is living his dreams after losing his job.",
+            "Losing his job gave Jon the push to start his dream business: his own dance studio."
+          ]
+        },
+        {
+          "term": "marketing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "marketing"
+          ],
+          "matching_memories": [
+            "Gina advised Jon to use social media channels and work with influencers for marketing.",
+            "Jon started to learn marketing and analytics tools today."
+          ]
+        },
+        {
+          "term": "believe yourself",
+          "status": "all_tokens",
+          "covered": true,
+          "matched_tokens": [
+            "believe",
+            "yourself"
+          ],
+          "matching_memories": []
+        }
+      ]
+    },
+    "minimax": {
+      "memory_count": 212,
+      "entity_like_term_count": 34,
+      "covered_count": 26,
+      "partial_count": 3,
+      "missing_count": 5,
+      "coverage_rate": 0.7647,
+      "terms": [
+        {
+          "term": "dance",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dance"
+          ],
+          "matching_memories": [
+            "Dance is Gina's stress relief.",
+            "Gina loves contemporary dance.",
+            "Gina's dance team won first place at regionals when she was fifteen."
+          ]
+        },
+        {
+          "term": "studio",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "studio"
+          ],
+          "matching_memories": [
+            "Jon has an ideal dance studio with a view of the ocean.",
+            "Jon plans to start a dance studio.",
+            "Jon wants his dance studio to be downtown."
+          ]
+        },
+        {
+          "term": "dance studio",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dance",
+            "studio"
+          ],
+          "matching_memories": [
+            "Jon has an ideal dance studio with a view of the ocean.",
+            "Jon plans to start a dance studio.",
+            "Jon wants his dance studio to be downtown."
+          ]
+        },
+        {
+          "term": "business",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "business"
+          ],
+          "matching_memories": [
+            "Jon is turning his love of dance into a business.",
+            "Jon juggles both dancing and his business goals, which give each other energy.",
+            "Jon believes shutting down his bank account will help his business grow."
+          ]
+        },
+        {
+          "term": "fashion",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "fashion"
+          ],
+          "matching_memories": [
+            "Gina got the idea for the designs from a fashion magazine.",
+            "Gina wanted to blend her love for dance and fashion.",
+            "Gina is passionate about fashion trends and finding unique pieces."
+          ]
+        },
+        {
+          "term": "store",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "store"
+          ],
+          "matching_memories": [
+            "Gina is starting her own clothing store.",
+            "Gina finds starting her own store both scary and rewarding.",
+            "Gina launched an ad campaign for her clothing store."
+          ]
+        },
+        {
+          "term": "dancing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dancing"
+          ],
+          "matching_memories": [
+            "Jon wants to teach others the joy that dancing brings him.",
+            "Jon says good flooring is crucial for dancing safely.",
+            "Dancing brings Jon joy and fulfillment."
+          ]
+        },
+        {
+          "term": "dancers",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "dancers"
+          ],
+          "matching_memories": [
+            "Jon rehearsed with a small group of dancers after work.",
+            "Jon loves running his own studio because it gives him freedom to create a space and help dancers of all ages express themselves.",
+            "The dancers are excited about the progress."
+          ]
+        },
+        {
+          "term": "dreams",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "customers",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "customers"
+          ],
+          "matching_memories": [
+            "Gina wants her customers to feel like they're in a cool oasis.",
+            "Gina has been keeping up with fashion trends to offer the best pieces to customers.",
+            "Customers love Gina's new offers and promotions."
+          ]
+        },
+        {
+          "term": "support",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "support"
+          ],
+          "matching_memories": [
+            "Gina wants to join and show support at Jon's event.",
+            "Gina has a good support system.",
+            "Gina gets help from people who support her."
+          ]
+        },
+        {
+          "term": "investors",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "investors"
+          ],
+          "matching_memories": [
+            "Jon is looking for investors.",
+            "Jon says searching for investors has been tough.",
+            "Jon is staying hopeful about finding investors."
+          ]
+        },
+        {
+          "term": "means",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "cant wait",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "wait"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "clothing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "clothing"
+          ],
+          "matching_memories": [
+            "Gina is starting her own clothing store.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina can now expand her clothing store."
+          ]
+        },
+        {
+          "term": "quit",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "clothing store",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "clothing",
+            "store"
+          ],
+          "matching_memories": [
+            "Gina is starting her own clothing store.",
+            "Gina launched an ad campaign for her clothing store.",
+            "Gina can now expand her clothing store."
+          ]
+        },
+        {
+          "term": "help means",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "help"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "starting",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "starting"
+          ],
+          "matching_memories": [
+            "Gina is starting her own clothing store.",
+            "Gina finds starting her own store both scary and rewarding."
+          ]
+        },
+        {
+          "term": "advice",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "advice"
+          ],
+          "matching_memories": [
+            "Jon got some good advice at a networking event."
+          ]
+        },
+        {
+          "term": "online",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "online"
+          ],
+          "matching_memories": [
+            "Gina has been working hard on her online store.",
+            "Gina's online clothes store is now open.",
+            "Gina's online clothing store has been a roller coaster but rewarding."
+          ]
+        },
+        {
+          "term": "pieces",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "pieces"
+          ],
+          "matching_memories": [
+            "Gina is passionate about fashion trends and finding unique pieces.",
+            "Gina has been keeping up with fashion trends to offer the best pieces to customers.",
+            "Gina developed a video presentation to teach how to style fashion pieces."
+          ]
+        },
+        {
+          "term": "moves",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "moves"
+          ],
+          "matching_memories": [
+            "Jon had a festival performance with many people complimenting his dance moves.",
+            "Jon's dance studio and other schools will bring their best moves to the event."
+          ]
+        },
+        {
+          "term": "studios",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "customer",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "customer"
+          ],
+          "matching_memories": [
+            "Gina wants her customers to feel like they're in a cool oasis.",
+            "Gina has been keeping up with fashion trends to offer the best pieces to customers.",
+            "Growing her customer base is Gina's main focus right now."
+          ]
+        },
+        {
+          "term": "dance studios",
+          "status": "partial",
+          "covered": false,
+          "matched_tokens": [
+            "dance"
+          ],
+          "matching_memories": []
+        },
+        {
+          "term": "media",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "media"
+          ],
+          "matching_memories": [
+            "Jon is expanding his dance studio's social media presence.",
+            "Jon started posting dance videos on social media.",
+            "Gina advised Jon to use social media channels."
+          ]
+        },
+        {
+          "term": "social media",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "social",
+            "media"
+          ],
+          "matching_memories": [
+            "Jon is expanding his dance studio's social media presence.",
+            "Jon started posting dance videos on social media.",
+            "Gina advised Jon to use social media channels."
+          ]
+        },
+        {
+          "term": "goals",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "goals"
+          ],
+          "matching_memories": [
+            "Jon juggles both dancing and his business goals, which give each other energy.",
+            "Jon uses a whiteboard to visualize goals and track successes.",
+            "Jon uses his clipboard to set goals, track achievements, and find areas to improve."
+          ]
+        },
+        {
+          "term": "passion",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "passion"
+          ],
+          "matching_memories": [
+            "Gina's tattoo reminds her to follow her passions and express herself.",
+            "Gina is passionate about fashion trends and finding unique pieces.",
+            "Gina is passionate about dance and fashion."
+          ]
+        },
+        {
+          "term": "let anything",
+          "status": "missing",
+          "covered": false,
+          "matched_tokens": [],
+          "matching_memories": []
+        },
+        {
+          "term": "losing job",
+          "status": "all_tokens",
+          "covered": true,
+          "matched_tokens": [
+            "losing",
+            "job"
+          ],
+          "matching_memories": [
+            "Gina wanted to take control of her own destiny after losing her job.",
+            "Gina became an entrepreneur after losing her job."
+          ]
+        },
+        {
+          "term": "marketing",
+          "status": "exact",
+          "covered": true,
+          "matched_tokens": [
+            "marketing"
+          ],
+          "matching_memories": [
+            "Jon is learning marketing and analytics tools.",
+            "Jon finds learning marketing and analytics tools tricky."
+          ]
+        },
+        {
+          "term": "believe yourself",
+          "status": "all_tokens",
+          "covered": true,
+          "matched_tokens": [
+            "believe",
+            "yourself"
+          ],
+          "matching_memories": [
+            "Gina advised to believe in yourself and keep going."
+          ]
+        }
+      ]
+    }
+  }
+}
