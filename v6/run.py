@@ -104,12 +104,12 @@ def _dashscope_model_spec(model_name: str) -> dict[str, str]:
     }
 
 
-def _siliconflow_qwen_spec(model_name: str) -> dict[str, str]:
+def _siliconflow_model_spec(model_name: str, *, purpose: str) -> dict[str, str]:
     load_runtime_env()
     api_key = os.getenv("EVALUATOR_API_KEY", "").strip()
     api_base = os.getenv("EVALUATOR_API_BASE", "").strip() or "https://api.siliconflow.cn/v1"
     if not (api_key and api_base and model_name):
-        raise ValueError("missing SiliconFlow config for qwen add model")
+        raise ValueError(f"missing SiliconFlow config for {purpose}")
     return {
         "api_key": api_key,
         "api_base": api_base,
@@ -141,13 +141,29 @@ def _resolve_model_spec(
 ) -> dict[str, str]:
     normalized = str(model_id or "").strip().lower()
     if normalized == "qwen3-4b":
-        spec = _siliconflow_qwen_spec(model_name_override or "Qwen/Qwen3-4B")
+        spec = _siliconflow_model_spec(
+            model_name_override or "Qwen/Qwen3-4B",
+            purpose="qwen add model",
+        )
         return {"id": normalized, **spec}
     if normalized == "qwen3-14b":
-        spec = _siliconflow_qwen_spec(model_name_override or "Qwen/Qwen3-14B")
+        spec = _siliconflow_model_spec(
+            model_name_override or "Qwen/Qwen3-14B",
+            purpose="qwen add model",
+        )
         return {"id": normalized, **spec}
     if normalized in {"dpsk-flash", "deepseek-flash", "deepseek"}:
-        spec = _deepseek_env_spec(str(model_name_override or "deepseek-v4-flash").strip())
+        requested_model = str(model_name_override or "").strip()
+        if normalized == "dpsk-flash" and not requested_model:
+            spec = _deepseek_env_spec("deepseek-ai/DeepSeek-V4-Flash")
+        else:
+            siliconflow_model = requested_model or "deepseek-ai/DeepSeek-V4-Flash"
+            if siliconflow_model == "deepseek-v4-flash":
+                siliconflow_model = "deepseek-ai/DeepSeek-V4-Flash"
+            spec = _siliconflow_model_spec(
+                siliconflow_model,
+                purpose="deepseek downstream model",
+            )
         return {"id": "dpsk-flash", **spec}
     raise ValueError("unsupported model_id: use qwen3-4b | qwen3-14b | dpsk-flash")
 
@@ -218,6 +234,14 @@ def _materialize_templates(
     return resolved
 
 
+def _workspace_dir_from_config(config: dict[str, Any]) -> Path:
+    base_raw = str(config.get("workspace_base_dir") or "workspaces")
+    base_path = Path(base_raw)
+    if not base_path.is_absolute():
+        base_path = VERSION_DIR / base_path
+    return base_path / str(config.get("workspace_name") or "smoke")
+
+
 def main() -> None:
     _install_timestamped_logging()
     parser = argparse.ArgumentParser(description="LoCoMo pipeline (v6 summary add)")
@@ -256,6 +280,9 @@ def main() -> None:
         add_model_spec=add_model_spec,
         downstream_model_spec=downstream_model_spec,
     )
+    workspace_dir = _workspace_dir_from_config(config)
+    trace_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    os.environ["PIPELINE_LLM_TRACE_PATH"] = str(workspace_dir / f"llm_trace_{trace_stamp}.jsonl")
 
     if args.print_config:
         payload = {
@@ -263,6 +290,7 @@ def main() -> None:
             "downstream_model": downstream_model_spec,
             "config_path": str(config_path),
             "config": config,
+            "llm_trace_path": os.environ["PIPELINE_LLM_TRACE_PATH"],
         }
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return
@@ -277,6 +305,7 @@ def main() -> None:
         f"search_answer_model={downstream_model_spec['model']}",
         flush=True,
     )
+    print(f"[v6] llm_trace={os.environ['PIPELINE_LLM_TRACE_PATH']}", flush=True)
     print("[v6] retry_policy=8 attempts then stop", flush=True)
 
     import asyncio

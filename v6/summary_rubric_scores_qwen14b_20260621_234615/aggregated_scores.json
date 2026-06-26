@@ -1,0 +1,560 @@
+[
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_explicit_textual_support",
+    "rubric_name": "显式文本支持",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.9534
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_inference_boundary_compliance",
+    "rubric_name": "推断边界合规性",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.9237
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_entity_attribution_accuracy",
+    "rubric_name": "实体归因准确性",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.9992
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_core_trait_extraction",
+    "rubric_name": "核心特质提炼",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.7873
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_motivation_drive_explanation",
+    "rubric_name": "动机/驱动力解释",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.7025
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_evolution_tracking",
+    "rubric_name": "动态演变追踪",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.6661
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_emotional_depth",
+    "rubric_name": "情感温度与真实性",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.6678
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_grounding",
+    "rubric_name": "事实接地性",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.9525
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_conciseness",
+    "rubric_name": "简洁性与可复用性",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.6881
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_contradiction_avoidance",
+    "rubric_name": "矛盾避免",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.9992
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "character",
+    "rubric_id": "character_relevance_filtering",
+    "rubric_name": "相关性过滤",
+    "object_count": 59,
+    "evaluable_count": 59,
+    "avg_score": 0.8271
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_explicit_textual_support",
+    "rubric_name": "显式文本支持",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9956
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_inference_boundary_compliance",
+    "rubric_name": "推断边界合规性",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9943
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_action_dominance",
+    "rubric_name": "动作主导性",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9943
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_temporal_clarity",
+    "rubric_name": "时间清晰度",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9912
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_impact_outcome",
+    "rubric_name": "影响/结果交代",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.6004
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_element_completeness",
+    "rubric_name": "要素完整性",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9885
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_grounding",
+    "rubric_name": "事实接地性",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9956
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_coherence",
+    "rubric_name": "事件连贯性",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9982
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_conciseness",
+    "rubric_name": "简洁性",
+    "object_count": 227,
+    "evaluable_count": 227,
+    "avg_score": 0.9379
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "event",
+    "rubric_id": "event_contradiction_avoidance",
+    "rubric_name": "矛盾避免",
+    "object_count": 227,
+    "evaluable_count": 226,
+    "avg_score": 0.9951
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_explicit_textual_support",
+    "rubric_name": "显式文本支持",
+    "object_count": 11,
+    "evaluable_count": 11,
+    "avg_score": 1.0
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_inference_boundary_compliance",
+    "rubric_name": "推断边界合规性",
+    "object_count": 11,
+    "evaluable_count": 11,
+    "avg_score": 1.0
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_specificity",
+    "rubric_name": "地点具体性",
+    "object_count": 11,
+    "evaluable_count": 11,
+    "avg_score": 1.0
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_function_role",
+    "rubric_name": "功能/角色清晰度",
+    "object_count": 11,
+    "evaluable_count": 10,
+    "avg_score": 0.81
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_emotional_resonance",
+    "rubric_name": "情感关联",
+    "object_count": 11,
+    "evaluable_count": 11,
+    "avg_score": 0.6727
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_event_attachment",
+    "rubric_name": "关联事件/人物挂载",
+    "object_count": 11,
+    "evaluable_count": 10,
+    "avg_score": 0.54
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_frequency_duration",
+    "rubric_name": "频率/持续性",
+    "object_count": 11,
+    "evaluable_count": 10,
+    "avg_score": 0.5
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_grounding",
+    "rubric_name": "事实接地性",
+    "object_count": 11,
+    "evaluable_count": 11,
+    "avg_score": 1.0
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_conciseness",
+    "rubric_name": "简洁性",
+    "object_count": 11,
+    "evaluable_count": 11,
+    "avg_score": 0.9
+  },
+  {
+    "model": "dpsk-flash",
+    "type": "location",
+    "rubric_id": "location_contradiction_avoidance",
+    "rubric_name": "矛盾避免",
+    "object_count": 11,
+    "evaluable_count": 10,
+    "avg_score": 1.0
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_explicit_textual_support",
+    "rubric_name": "显式文本支持",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.9494
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_inference_boundary_compliance",
+    "rubric_name": "推断边界合规性",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.9127
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_entity_attribution_accuracy",
+    "rubric_name": "实体归因准确性",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.9975
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_core_trait_extraction",
+    "rubric_name": "核心特质提炼",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.8582
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_motivation_drive_explanation",
+    "rubric_name": "动机/驱动力解释",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.7772
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_evolution_tracking",
+    "rubric_name": "动态演变追踪",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.6633
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_emotional_depth",
+    "rubric_name": "情感温度与真实性",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.7089
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_grounding",
+    "rubric_name": "事实接地性",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.9481
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_conciseness",
+    "rubric_name": "简洁性与可复用性",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.7646
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_contradiction_avoidance",
+    "rubric_name": "矛盾避免",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.9987
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "character",
+    "rubric_id": "character_relevance_filtering",
+    "rubric_name": "相关性过滤",
+    "object_count": 79,
+    "evaluable_count": 79,
+    "avg_score": 0.8684
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_explicit_textual_support",
+    "rubric_name": "显式文本支持",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9712
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_inference_boundary_compliance",
+    "rubric_name": "推断边界合规性",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9739
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_action_dominance",
+    "rubric_name": "动作主导性",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9673
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_temporal_clarity",
+    "rubric_name": "时间清晰度",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9817
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_impact_outcome",
+    "rubric_name": "影响/结果交代",
+    "object_count": 153,
+    "evaluable_count": 152,
+    "avg_score": 0.7388
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_element_completeness",
+    "rubric_name": "要素完整性",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9725
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_grounding",
+    "rubric_name": "事实接地性",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9755
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_coherence",
+    "rubric_name": "事件连贯性",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9915
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_conciseness",
+    "rubric_name": "简洁性",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9343
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "event",
+    "rubric_id": "event_contradiction_avoidance",
+    "rubric_name": "矛盾避免",
+    "object_count": 153,
+    "evaluable_count": 153,
+    "avg_score": 0.9935
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_explicit_textual_support",
+    "rubric_name": "显式文本支持",
+    "object_count": 41,
+    "evaluable_count": 41,
+    "avg_score": 0.8976
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_inference_boundary_compliance",
+    "rubric_name": "推断边界合规性",
+    "object_count": 41,
+    "evaluable_count": 41,
+    "avg_score": 0.8951
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_specificity",
+    "rubric_name": "地点具体性",
+    "object_count": 41,
+    "evaluable_count": 40,
+    "avg_score": 0.9
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_function_role",
+    "rubric_name": "功能/角色清晰度",
+    "object_count": 41,
+    "evaluable_count": 40,
+    "avg_score": 0.74
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_emotional_resonance",
+    "rubric_name": "情感关联",
+    "object_count": 41,
+    "evaluable_count": 41,
+    "avg_score": 0.6512
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_event_attachment",
+    "rubric_name": "关联事件/人物挂载",
+    "object_count": 41,
+    "evaluable_count": 39,
+    "avg_score": 0.5821
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_frequency_duration",
+    "rubric_name": "频率/持续性",
+    "object_count": 41,
+    "evaluable_count": 39,
+    "avg_score": 0.4256
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_grounding",
+    "rubric_name": "事实接地性",
+    "object_count": 41,
+    "evaluable_count": 41,
+    "avg_score": 0.8659
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_conciseness",
+    "rubric_name": "简洁性",
+    "object_count": 41,
+    "evaluable_count": 41,
+    "avg_score": 0.8049
+  },
+  {
+    "model": "qwen3-14b",
+    "type": "location",
+    "rubric_id": "location_contradiction_avoidance",
+    "rubric_name": "矛盾避免",
+    "object_count": 41,
+    "evaluable_count": 41,
+    "avg_score": 0.961
+  }
+]

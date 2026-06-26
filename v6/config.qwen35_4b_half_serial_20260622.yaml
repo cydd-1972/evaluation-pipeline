@@ -1,0 +1,37 @@
+dataset_path: datasets/locomo_refined.json
+max_conversations: 5
+max_questions_per_conversation: null
+max_sessions_per_conversation: null
+workspace_base_dir: workspaces
+workspace_name: half_v6_summary_qwen35_4b_serial_20260622
+workspace_db_name: half_v6_summary_qwen35_4b_serial_20260622
+database_prefix: eval_v6
+reset_database_on_add: true
+add_backend: global_v6
+search_mode: global
+search_backend: llm
+backfill_embeddings_on_add: true
+memory_decision_prompt: prompts/memory_extract_operation_v6_summary.txt
+memory_prompt_max_items: 0
+search_llm_prompt: prompts/search_llm.txt
+search_llm_require_non_empty: false
+add_history_window: 2
+add_flush_per_session: true
+add_llm_concurrency: 1
+search_llm_concurrency: 1
+search_flush_every: 1
+search_log_every_n: 1
+answer_prompt_mode: history
+search_top_k: 30
+concurrency: 1
+answer_concurrency: 1
+answer_flush_every: 1
+eval_concurrency: 1
+progress_label: v6/qwen3.5-4b-half-serial
+reset_archive_dir: archived_outputs
+eval:
+  metrics:
+  - llm
+  - f1
+  - bleu
+  dataset_name: locomo

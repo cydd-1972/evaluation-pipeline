@@ -1,0 +1,177 @@
+RAW_DELTA_WITH_SUMMARY_PROMPT = """# Memory transition with fact + summary memory
+# Time rule: keep relative time expressions inside the memory text itself, and also output an explicit anchor_time field for each item.
+
+You are a memory writer for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Your task is to read:
+- M_(t-1): existing memory before the current session
+- Prior sessions: context window only
+- D_t: the current session
+
+Then output the memory items caused by the current session.
+
+# INPUT
+
+## M_(t-1) — existing memory before current session
+{old_memory_json}
+
+## Prior sessions — context window only
+{history_sessions_json}
+
+## D_t — current session
+{current_session_json}
+
+# WHAT TO WRITE
+
+Write two kinds of memory:
+
+1. Atomic fact memory
+2. Summary memory
+
+Atomic fact memory should directly help answer future short-answer questions about people, events, times, places, plans, relationships, preferences, possessions, identities, counts, causes, outcomes, and stable attributes.
+
+Summary memory should capture compact higher-level state for:
+- character/person profiles
+- important events or scenes
+- locations or recurring places
+
+Skip small talk, praise, generic reactions, repeated acknowledgements, and vague feelings unless they are clearly useful for future QA.
+
+# ATOMIC FACT RULES
+
+A fact should be a single, self-contained piece of information written as one standalone sentence.
+
+If one sentence contains multiple facts, split them into multiple memory items.
+
+- Wrong: "A person felt accepted and gained courage."
+- Correct: "{speaker_a} felt accepted at the support group."
+- Correct: "{speaker_a} gained courage to embrace themselves."
+
+Use explicit names. Never use bare pronouns.
+
+- Wrong: "She went to a group."
+- Correct: "{speaker_a} attended an LGBTQ support group."
+
+If a third party is unnamed, use a role label tied to a speaker when possible, such as "{speaker_b}'s coworker".
+
+Extract stable implied attributes when the wording clearly states them.
+
+- Dialogue: "my home country, Sweden"
+- Memory: "{speaker_a}'s home country is Sweden."
+- Dialogue: "my son Kyle"
+- Memory: "{speaker_a}'s son is named Kyle."
+
+# HIGH-VALUE DETAILS
+
+Preserve concrete details:
+
+- Names: book titles, song names, event names, group names, pet names, place names
+- Quoted text: signs, posters, slogans
+- Image-specific details when present
+- Counts and quantities
+- Relationships and durations
+- Recommendation chains
+- Ownership and origin
+- One speaker's explicit opinion about another speaker's decision
+
+# GRANULARITY RULES
+
+- Do NOT force every memory to include time/place/cause/result if not explicitly stated.
+- Include time/place/people/details only when present in D_t or clearly implied by D_t.
+- Prefer multiple small facts over one long packed sentence.
+- Do NOT merge distinct events into one generic summary sentence.
+- Avoid several separate feelings about the same event unless each feeling is important and distinct.
+- Prefer concrete facts over generic summaries such as "X had a meaningful experience."
+
+# SUMMARY MEMORY RULES
+
+In addition to atomic facts, write summary memory when D_t updates a durable high-level representation.
+
+Summary memory may describe:
+- a character's stable profile, current state, relationships, goals, or role in the conversation
+- a scene/event summary with involved people and consequences
+- a location/place summary with description, appearance, ownership, or recurring use
+
+Summary memory can be longer than atomic facts, but should still be grounded in D_t and useful for future QA.
+
+# TIME RULES
+
+The "text" field should keep the original time expression as spoken.
+
+Correct:
+- "{speaker_b} ran a charity race last Saturday."
+- "{speaker_a} attended a support group yesterday."
+
+Wrong:
+- "On 7 May 2023, {speaker_a} attended a support group."
+
+Do NOT normalize relative time expressions into absolute dates inside the memory text unless the conversation itself says the absolute date.
+
+Each item must also include an "anchor_time" field.
+
+The "anchor_time" field should be the anchor time of D_t for that item.
+
+The anchor time should come from the structured current session JSON, for example from the current session's `session_time` field.
+Convert it to a clean normalized date string when possible, such as "2023-05-25".
+If D_t has no usable anchor time, output "Unknown".
+Do NOT guess beyond the provided session metadata.
+
+# OPERATION RULES
+
+Choose exactly one operation for every item.
+
+## ADD
+
+Use ADD when the memory is new and should be stored as a new memory item.
+
+For ADD:
+- "id" is the new memory id
+- "operation" is "ADD"
+
+## UPDATE
+
+Use UPDATE when the new memory replaces or enriches an existing memory item in M_(t-1).
+
+For UPDATE:
+- "target_id" must be an existing memory id from M_(t-1)
+- "merged_text" is the updated final memory text after merging old and new information
+- "operation" is "UPDATE"
+
+## NONE
+
+Use NONE when the current session mentions something already adequately covered by an existing memory and no database change should be made.
+
+For NONE:
+- still output the item if it is a legitimate memory candidate
+- "operation" is "NONE"
+- "target_id" may be omitted unless helpful
+- "merged_text" may be omitted
+
+# OUTPUT FORMAT
+
+Return ONLY one JSON object with key "items".
+
+Each item must contain exactly these keys:
+- "id": string
+- "text": string
+- "anchor_time": string
+- "type": "fact" | "character" | "event" | "location"
+- "operation": "ADD" | "UPDATE" | "NONE"
+- "target_id": string or empty string
+- "merged_text": string or empty string
+- "reason": short string explaining why this operation was chosen
+
+Type meanings:
+- "fact": atomic fact memory
+- "character": character/person summary memory
+- "event": event/scene summary memory
+- "location": location/place summary memory
+
+Additional formatting rules:
+- For ADD, put the proposed new memory sentence in "text". You may leave "target_id" and "merged_text" empty.
+- For UPDATE, put the newly observed candidate memory in "text", the memory id being updated in "target_id", and the final merged memory in "merged_text".
+- For NONE, put the candidate memory in "text" and explain in "reason" why no write is needed.
+- Every item must include "anchor_time", even for NONE.
+- Keep "reason" brief and concrete.
+
+Do not output memory_delta, fact, time, bucket, event, reason_codes, or old_memory."""

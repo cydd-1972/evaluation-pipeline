@@ -152,7 +152,6 @@ async def apply_memory_incremental_writes(
             "anchor_time": str(item.get("anchor_time") or ""),
             "event_anchor": str(item.get("event_anchor") or ""),
             "type": str(item.get("type") or ""),
-            "fact_type": str(item.get("fact_type") or ""),
         }
         for item in items
         if str(item.get("text") or "").strip()

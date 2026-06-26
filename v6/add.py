@@ -30,6 +30,7 @@ from core.infra.db import (
 from core.infra.embedding import EmbeddingClient
 from core.infra.ids import build_conversation_user_id
 from core.infra.llm_client import PipelineLLM
+from core.infra.llm_trace import llm_trace_scope
 from core.infra.memory_ops import apply_global_memory_delta
 from core.infra.progress import ProgressBar
 from core.infra.time_resolver import parse_anchor_date
@@ -52,18 +53,13 @@ def _memory_items_from_db(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
             continue
         meta = row.get("meta") if isinstance(row.get("meta"), dict) else {}
         anchor_time = str(meta.get("anchor_time") or meta.get("source_session_time") or "").strip()
-        event_anchor = str(meta.get("event_anchor") or meta.get("event") or "").strip()
         item_type = str(meta.get("type") or "fact").strip().lower() or "fact"
-        fact_type = str(meta.get("fact_type") or "").strip().lower()
         item = {
             "id": str(row.get("id") or len(items)),
             "text": text,
             "event": str(meta.get("operation") or "ADD"),
-            "event_anchor": event_anchor,
             "type": item_type,
         }
-        if fact_type:
-            item["fact_type"] = fact_type
         if anchor_time:
             item["anchor_time"] = anchor_time
         items.append(item)
@@ -79,12 +75,9 @@ def _serialize_memory_snapshot(memory: list[dict[str, Any]]) -> list[dict[str, s
         row = {
             "id": str(item.get("id") or ""),
             "text": text,
-            "event": str(item.get("event_anchor") or ""),
+            "operation": str(item.get("event") or "ADD"),
             "type": str(item.get("type") or "fact"),
         }
-        fact_type = str(item.get("fact_type") or "").strip()
-        if fact_type:
-            row["fact_type"] = fact_type
         anchor_time = str(item.get("anchor_time") or "").strip()
         if anchor_time:
             row["anchor_time"] = anchor_time
@@ -120,25 +113,19 @@ def _coerce_output_items(payload: dict[str, Any]) -> list[dict[str, Any]]:
         if operation not in {"ADD", "UPDATE", "NONE"}:
             continue
         item_id = str(entry.get("id") or "").strip()
+        anchor_time = str(entry.get("anchor_time") or "").strip()
         target_id = str(entry.get("target_id") or "").strip() or None
         merged_text = str(entry.get("merged_text") or "").strip() or None
-        event_anchor = str(entry.get("event") or "").strip()
         reason = str(entry.get("reason") or "").strip()
-        fact_type = ""
-        if item_type == "fact":
-            fact_type = str(entry.get("fact_type") or "").strip().lower()
-            if fact_type not in {"event", "plan", "state", "feeling", "negative", "attribute"}:
-                fact_type = ""
         items.append(
             {
                 "id": item_id,
                 "text": text,
+                "anchor_time": anchor_time,
                 "type": item_type,
-                "fact_type": fact_type,
                 "operation": operation,
                 "target_id": target_id,
                 "merged_text": merged_text,
-                "event_anchor": event_anchor,
                 "reason": reason,
             }
         )
@@ -158,7 +145,6 @@ def _build_delta_from_items(
     *,
     old_memory: list[dict[str, Any]],
     new_items: list[dict[str, Any]],
-    session_anchor_time: str,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     used_ids = {str(item.get("id") or "").strip() for item in old_memory if str(item.get("id") or "").strip()}
     old_ids = set(used_ids)
@@ -186,9 +172,7 @@ def _build_delta_from_items(
             stats["type_location"] += 1
 
         operation = str(item.get("operation") or "").strip().upper()
-        event_anchor = str(item.get("event_anchor") or "").strip()
-        fact_type = str(item.get("fact_type") or "").strip().lower()
-
+        anchor_time = str(item.get("anchor_time") or "").strip()
         if operation == "NONE":
             stats["ops_none"] += 1
             continue
@@ -204,10 +188,8 @@ def _build_delta_from_items(
                     "id": target_id,
                     "text": final_text,
                     "event": "UPDATE",
-                    "event_anchor": event_anchor,
                     "type": item_type,
-                    "fact_type": fact_type,
-                    "anchor_time": session_anchor_time,
+                    "anchor_time": anchor_time,
                 }
             )
             stats["ops_update"] += 1
@@ -229,10 +211,8 @@ def _build_delta_from_items(
                     "id": new_id,
                     "text": text,
                     "event": "ADD",
-                    "event_anchor": event_anchor,
                     "type": item_type,
-                    "fact_type": fact_type,
-                    "anchor_time": session_anchor_time,
+                    "anchor_time": anchor_time,
                 }
             )
             stats["ops_add"] += 1
@@ -280,14 +260,12 @@ def _decide_global_memory_v6_sync(
         history_sessions_json=history_json,
         current_session_json=current_json,
     )
-    session_anchor_time = _normalize_anchor_time_iso(str(getattr(current_session, "date_time", "") or "").strip())
     payload = llm.chat_json_object(prompt, required_key="items", max_attempts=8)
     items = _coerce_output_items(payload)
     meta["items_emitted"] = len(items)
     delta_items, delta_stats = _build_delta_from_items(
         old_memory=old_memory,
         new_items=items,
-        session_anchor_time=session_anchor_time,
     )
     meta.update(delta_stats)
     merged, db_writes, apply_stats = apply_global_memory_delta(old_memory, delta_items)
@@ -317,7 +295,7 @@ async def run_add_global_v6(
     resolved_llm = llm or PipelineLLM()
     version_dir = Path(__file__).resolve().parent
     prompt_path = Path(memory_prompt_path) if memory_prompt_path else (
-        version_dir / "prompts" / "memory_extract_operation_v6_summary.txt"
+        version_dir / "prompts" / "v6_26_6_26.txt"
     )
     if not prompt_path.is_absolute():
         version_candidate = version_dir / prompt_path
@@ -448,17 +426,24 @@ async def run_add_global_v6(
                 cs, session = item
                 hist_start = max(0, session_index - history_window)
                 history_sessions = cs.sessions[hist_start:session_index]
-                updated, db_writes, meta = await asyncio.to_thread(
-                    _decide_global_memory_v6_sync,
-                    resolved_llm,
-                    speaker_a=cs.conversation.speaker_a,
-                    speaker_b=cs.conversation.speaker_b,
-                    old_memory=cs.memory,
-                    history_sessions=history_sessions,
-                    current_session=session,
-                    memory_template=memory_template,
-                    memory_prompt_max_items=memory_prompt_max_items,
-                )
+                with llm_trace_scope(
+                    phase="add",
+                    add_backend="global_v6",
+                    conversation_idx=int(cs.conversation.idx),
+                    session_index=int(session.index),
+                    session_time=str(session.date_time),
+                ):
+                    updated, db_writes, meta = await asyncio.to_thread(
+                        _decide_global_memory_v6_sync,
+                        resolved_llm,
+                        speaker_a=cs.conversation.speaker_a,
+                        speaker_b=cs.conversation.speaker_b,
+                        old_memory=cs.memory,
+                        history_sessions=history_sessions,
+                        current_session=session,
+                        memory_template=memory_template,
+                        memory_prompt_max_items=memory_prompt_max_items,
+                    )
                 return cs, session, updated, db_writes, meta
 
             memory_rows = await _run_batched(session_work, batch_size=llm_batch, worker=_memory_job)

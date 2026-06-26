@@ -25,12 +25,16 @@ def apply_global_memory_delta(
         if not memory_id or not text:
             continue
         anchor_time = str(item.get("anchor_time") or "").strip()
+        event_anchor = str(item.get("event_anchor") or "").strip()
+        item_type = str(item.get("type") or "").strip().lower()
         old_order.append(memory_id)
         by_id[memory_id] = {
             "id": memory_id,
             "text": text,
             "event": str(item.get("event") or "ADD").upper(),
             "anchor_time": anchor_time,
+            "event_anchor": event_anchor,
+            "type": item_type,
         }
 
     db_writes: list[dict[str, Any]] = []
@@ -64,6 +68,8 @@ def apply_global_memory_delta(
             continue
 
         anchor_time = str(raw.get("anchor_time") or "").strip()
+        event_anchor = str(raw.get("event_anchor") or "").strip()
+        item_type = str(raw.get("type") or "").strip().lower()
         if event == "ADD":
             if memory_id in by_id:
                 event = "UPDATE"
@@ -74,9 +80,18 @@ def apply_global_memory_delta(
                     "text": text,
                     "event": "ADD",
                     "anchor_time": anchor_time,
+                    "event_anchor": event_anchor,
+                    "type": item_type,
                 }
                 db_writes.append(
-                    {"id": memory_id, "text": text, "event": "ADD", "anchor_time": anchor_time}
+                    {
+                        "id": memory_id,
+                        "text": text,
+                        "event": "ADD",
+                        "anchor_time": anchor_time,
+                        "event_anchor": event_anchor,
+                        "type": item_type,
+                    }
                 )
                 continue
 
@@ -88,19 +103,32 @@ def apply_global_memory_delta(
                     "text": text,
                     "event": "ADD",
                     "anchor_time": anchor_time,
+                    "event_anchor": event_anchor,
+                    "type": item_type,
                 }
                 db_writes.append(
-                    {"id": memory_id, "text": text, "event": "ADD", "anchor_time": anchor_time}
+                    {
+                        "id": memory_id,
+                        "text": text,
+                        "event": "ADD",
+                        "anchor_time": anchor_time,
+                        "event_anchor": event_anchor,
+                        "type": item_type,
+                    }
                 )
                 continue
             if by_id[memory_id]["text"] != text:
                 stats["delta_updated"] += 1
                 preserved_anchor = str(by_id[memory_id].get("anchor_time") or anchor_time).strip()
+                preserved_event_anchor = str(event_anchor or by_id[memory_id].get("event_anchor") or "").strip()
+                preserved_type = str(item_type or by_id[memory_id].get("type") or "").strip().lower()
                 by_id[memory_id] = {
                     "id": memory_id,
                     "text": text,
                     "event": "UPDATE",
                     "anchor_time": preserved_anchor,
+                    "event_anchor": preserved_event_anchor,
+                    "type": preserved_type,
                 }
                 db_writes.append(
                     {
@@ -108,6 +136,8 @@ def apply_global_memory_delta(
                         "text": text,
                         "event": "UPDATE",
                         "anchor_time": preserved_anchor,
+                        "event_anchor": preserved_event_anchor,
+                        "type": preserved_type,
                     }
                 )
 

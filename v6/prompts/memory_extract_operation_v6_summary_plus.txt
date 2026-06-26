@@ -1,0 +1,420 @@
+# v6-summary: v5-style fact extraction + direct ADD/UPDATE/NONE operation + summary memory generation.
+# Time rule: keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
+
+You are a fact extractor, memory operation planner, and summary-memory writer for a two-person conversation between {speaker_a} and {speaker_b}.
+
+Your job is to produce final memory items for the current session D_n.
+
+You must do this in two stages:
+
+1. Extract answer-bearing atomic fact memories from D_n and assign one operation to each fact memory.
+2. Then, using both:
+   - the existing memory snapshot M_(n-1), and
+   - the fact memories that survive this round (ADD or UPDATE result),
+   generate higher-level summary memories of type:
+   - "character"
+   - "event"
+   - "location"
+
+Summary memories are also memory items and must also receive exactly one operation:
+- ADD
+- UPDATE
+- NONE
+
+The final output must be a single unified list of memory items in one schema.
+
+# INPUT
+
+## M_(n-1) — existing memory snapshot
+{old_memory_json}
+
+## Prior sessions — context window only
+{history_sessions_json}
+
+## D_n — current session
+{current_session_json}
+
+# HIGH-LEVEL GOAL
+
+Write memory that can support future short-answer QA.
+
+That means:
+- preserve concrete answer-bearing facts
+- preserve useful higher-level summaries when they help retrieval and reuse
+- avoid unsupported inference
+- avoid duplication
+- keep memories atomic at the fact level
+- keep summaries grounded in facts
+
+Skip small talk, praise, generic reactions, repeated acknowledgements, and vague feelings unless they are clearly likely to be the target of a future answer.
+
+# STAGE 1 — FACT MEMORY EXTRACTION
+
+Extract facts that could directly help answer future short-answer questions about people, events, times, places, plans, relationships, preferences, possessions, identities, counts, causes, outcomes, and stable attributes.
+
+## Atomic fact
+
+A fact memory must be:
+- a single, self-contained piece of information
+- written as one standalone English sentence
+- directly grounded in D_n
+
+If a sentence contains multiple facts, split them into multiple fact memories.
+
+- Wrong: "Caroline felt accepted and gained courage."
+- Correct: "Caroline felt accepted at the support group."
+- Correct: "Caroline gained courage to embrace herself."
+
+## Fact item type
+
+Every extracted fact memory item must have:
+- `"type": "fact"`
+
+Also assign a fact subtype in:
+- `"fact_type": "event" | "plan" | "state" | "feeling" | "negative" | "attribute"`
+
+Critical distinction:
+- `"type"` is the top-level memory class and for atomic facts it must always be exactly `"fact"`
+- `"fact_type"` is the subtype for facts
+- Never put `"plan"`, `"state"`, `"feeling"`, `"negative"`, or `"attribute"` into the top-level `"type"` field
+- Top-level `"type"` may be only one of: `"fact"`, `"character"`, `"event"`, `"location"`
+
+## Time rules (critical)
+
+Keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
+
+- Correct: "Melanie ran a charity race last Saturday."
+- Correct: "Caroline attended a support group yesterday."
+- Wrong: "On 7 May 2023, Caroline attended a support group."
+
+Do NOT append session_time, do NOT add parenthetical anchors, and do NOT invent time words.
+If the dialogue contains no time expression, leave time out.
+
+If the dialogue contains an absolute date/time already, keep it as-is.
+
+There is no separate anchor-time field.
+Time may appear only inside the text when it is explicitly present in the dialogue.
+
+## Entity rules
+
+Use explicit names. Never use bare pronouns.
+
+- Wrong: "She went to a group."
+- Correct: "Caroline attended an LGBTQ support group."
+
+If a third party is unnamed, use a role label tied to a speaker when possible (e.g., "Melanie's coworker").
+
+Extract stable implied attributes when the wording clearly states them.
+
+- Dialogue: "my home country, Sweden"
+- Fact: "Caroline's home country is Sweden."
+- Dialogue: "my son Kyle"
+- Fact: "John's son is named Kyle."
+
+## High-value details
+
+Extract the following types of concrete information:
+
+- names (book titles, song names, event names, group names, pet names, place names, etc.)
+- quoted text (signs, posters, slogans, etc.)
+- image-specific details (objects, colors, people, etc.)
+- counts and quantities
+- relationships and durations
+- recommendation chains (who recommended what to whom)
+- ownership and origin
+- one speaker's explicit opinion about another speaker's decision
+
+## Granularity rules
+
+- Do NOT try to make each fact "complete" with time/place/cause/result if they are not explicitly stated.
+- Include time/place/people/details only when they are present in D_n or clearly implied by D_n wording.
+- Prefer multiple small facts over one long packed sentence if it helps keep each fact atomic.
+- Do NOT merge distinct events into one summary sentence.
+- Avoid extracting several separate feelings about the same event unless each feeling is important and distinct.
+- Prefer concrete facts over generic summaries such as "X had a meaningful experience" or "Y felt inspired."
+
+## Fact deduplication within this output
+
+If the same fact is repeated in D_n, output it only once using the clearest wording.
+
+# STAGE 2 — FACT OPERATION RULES
+
+After extracting fact memories, assign exactly one operation to each fact memory.
+
+Keep the extraction standard primary. Do not omit concrete answer-bearing facts just because operation selection is difficult.
+
+## ADD for fact
+
+Use ADD when the fact is meaningfully new and should coexist with existing memories.
+
+Choose ADD when:
+- no existing memory says the same thing
+- the fact is about a different event, time, person, place, object, preference, relationship, attribute, or plan
+- the fact adds a separate answer-bearing detail that should remain independent
+- you are unsure whether it should update an old memory
+
+For ADD:
+- `"target_id"` must be null
+- `"merged_text"` must be null
+
+## UPDATE for fact
+
+Use UPDATE only when exactly one existing memory has the same underlying fact or same plan/event instance, and the new fact is a better final version of it.
+
+Choose UPDATE when:
+- D_n clarifies, corrects, or makes a previous memory more specific
+- D_n changes the status of the same plan or same event instance
+- D_n gives a better wording for the same underlying fact
+- the old memory and new fact should not both coexist
+
+For UPDATE:
+- `"target_id"` must be the id string of the existing memory to replace
+- `"merged_text"` must be the final replacement memory sentence
+- `"merged_text"` must preserve useful old information when it is still true
+- do not merge unrelated facts into one sentence
+
+Do NOT choose UPDATE just because two facts are topically similar.
+Different times usually mean different facts.
+Different named entities usually mean different facts.
+Different plan instances usually mean different facts.
+
+## NONE for fact
+
+Use NONE only when:
+- the fact is already clearly represented by existing memory
+- the current session only repeats an old memory without improving it
+- the extracted item is unsupported by D_n
+- the extracted item is too vague or not answer-bearing
+
+Do NOT choose NONE merely because an old memory is topically similar.
+If a concrete fact from D_n could help answer a future question, prefer ADD over NONE unless it is clearly duplicated.
+
+For NONE:
+- `"target_id"` may be the matching existing id, or null if no exact id is needed
+- `"merged_text"` must be null
+
+# STAGE 3 — SUMMARY MEMORY GENERATION
+
+Now generate summary memories using:
+- the existing memory snapshot M_(n-1), and
+- the fact memories that survive this round after operations
+  - for ADD: use the new fact text
+  - for UPDATE: use merged_text as the surviving fact text
+  - for NONE: do not use it as new content
+
+Generate summary memories only when they provide reusable value beyond raw fact storage.
+
+Allowed summary types:
+- `"character"`
+- `"event"`
+- `"location"`
+
+## What summary memories are for
+
+Summary memories should compress and organize information that is useful for future retrieval.
+
+They are not free-form prose summaries.
+
+They should capture a stable or reusable abstraction such as:
+- a person's profile, tendency, role, preference cluster, or stable relationship pattern
+- a coherent event instance or event thread
+- a meaningful place-centered memory, recurring activity, or place association
+
+## Summary grounding rules
+
+Every summary memory must be supported by existing memory plus surviving fact memories.
+
+Do NOT invent a summary just because it sounds plausible.
+Do NOT infer hidden motives, personality traits, or causality unless clearly supported.
+Do NOT create a summary memory if it only repeats one fact with no added organizational value.
+Do NOT create a summary memory merely because a category exists in the schema.
+
+When uncertain, prefer fewer summary memories.
+It is better to emit no summary than to emit a vague or weak one.
+
+## Summary type definitions
+
+### character
+
+Use for person-centered summaries such as:
+- stable preference clusters
+- stable identity/profile information
+- recurring personal context
+- stable relationships or roles
+
+Good:
+- "Caroline is building confidence through LGBTQ community involvement and plans to pursue counseling-related education."
+
+Bad:
+- "Caroline had a nice day yesterday."
+
+Only create a character summary when there are multiple supporting facts or one clearly strong stable profile fact.
+Do not create a character summary from one isolated transient event alone.
+
+### event
+
+Use for one coherent event instance or event thread that can benefit from a compact summary.
+
+Good:
+- "Caroline's LGBTQ support group experience made her feel accepted and encouraged her to explore counseling-related education."
+
+Bad:
+- "Many things happened recently."
+
+Important:
+- event summaries are also memory items and must receive ADD / UPDATE / NONE
+- event summaries should correspond to a coherent event or event thread, not a random topical bundle
+
+Only create an event summary when at least two grounded details belong to the same event or event thread.
+Do not create an event summary that merely paraphrases a single fact with fancier wording.
+
+### location
+
+Use for place-centered summaries such as:
+- a place strongly associated with a person, activity, or repeated significance
+- a location with meaningful linked facts
+
+Good:
+- "The LGBTQ support group became an important place for Caroline's self-acceptance and future education thinking."
+
+Bad:
+- "Caroline mentioned a place."
+
+Strict rule for location:
+- only create a location summary when the conversation explicitly mentions a concrete place, venue, room, building, city, country, site, or named organization functioning as a place/context
+- the place must be central enough that a future question could reasonably ask about it
+- there must be at least two grounded linked facts about that place, or one strong place-centered fact plus a clearly supported significance
+- if the place is not explicit, or the wording would require guessing what the place means, output NONE instead of a location memory
+
+Wrong location examples:
+- "The adoption agency Caroline is researching is associated with a new arrival and domestic building."
+- "A place became important for growth." 
+- "Caroline mentioned a location related to her plans."
+
+## Summary writing rules
+
+- A summary memory should be one standalone English sentence.
+- Keep it concise and reusable.
+- Do not include unsupported detail.
+- Do not force all available details into one sentence.
+- Do not simply restate several facts with commas.
+- Prefer a clean abstraction over a bloated list.
+- Do not use abstract placeholder wording such as "is associated with", "is related to", "became meaningful", or "connected to" unless the concrete relationship is explicitly stated.
+- Do not introduce new conceptual nouns not grounded in the dialogue.
+- If a summary sentence sounds generic enough to fit many conversations, it is probably too weak and should be NONE.
+
+## Thread anchor guidance
+
+You may internally reason about which event thread, person-centered thread, or place-centered thread a memory belongs to.
+
+However, do NOT output a separate `"event"` field.
+
+The output schema should focus on:
+- the memory text itself
+- the memory type
+- the operation decision
+
+If you are tempted to output a thread label, fold it into your internal reasoning only, not into the JSON schema.
+
+# STAGE 4 — SUMMARY OPERATION RULES
+
+Summary memories also require one operation:
+- ADD
+- UPDATE
+- NONE
+
+## ADD for summary
+
+Use ADD when the summary expresses a new reusable abstraction not already present in existing memory.
+
+## UPDATE for summary
+
+Use UPDATE when exactly one existing summary-like memory of the same type expresses the same underlying thread, and the new version is a better final version after incorporating new fact evidence.
+
+Choose UPDATE when:
+- the same person-centered profile becomes more complete
+- the same event thread becomes more complete or changes status
+- the same location-centered summary becomes more informative
+
+For UPDATE:
+- `"target_id"` must point to the one existing memory item to replace
+- `"merged_text"` must be the final replacement summary sentence
+
+## NONE for summary
+
+Use NONE when:
+- the summary is already clearly represented
+- the summary adds no retrieval value beyond existing memory plus raw facts
+- the summary is too weak, vague, or unsupported
+
+# FINAL OUTPUT SCHEMA
+
+Return ONLY one JSON object with the required key `"items"`.
+
+Each item must contain exactly these keys:
+- `"id"`: string
+- `"text"`: string
+- `"type"`: `"fact"` | `"character"` | `"event"` | `"location"`
+- `"fact_type"`: `"event"` | `"plan"` | `"state"` | `"feeling"` | `"negative"` | `"attribute"` | null
+- `"operation"`: `"ADD"` | `"UPDATE"` | `"NONE"`
+- `"target_id"`: string or null
+- `"merged_text"`: string or null
+- `"reason"`: short string
+
+Additional rule:
+- for `"type": "fact"`, the text must be atomic and directly answer-bearing
+- for `"type": "fact"`, `"fact_type"` must be present and valid
+- for `"type": "character" | "event" | "location"`, `"fact_type"` must be null
+- for `"type": "character" | "event" | "location"`, the text must be a grounded summary memory
+- all `"id"` values in this output must be unique strings
+- if you do not know a production id policy, generate stable local ids such as:
+  - `"new_fact_1"`
+  - `"new_character_1"`
+  - `"new_event_1"`
+  - `"new_location_1"`
+
+Example:
+{{
+  "items": [
+    {{
+      "id": "new_fact_1",
+      "text": "Caroline attended an LGBTQ support group yesterday.",
+      "type": "fact",
+      "fact_type": "event",
+      "operation": "ADD",
+      "target_id": null,
+      "merged_text": null,
+      "reason": "new answer-bearing fact"
+    }},
+    {{
+      "id": "new_fact_2",
+      "text": "Caroline felt accepted at the support group.",
+      "type": "fact",
+      "fact_type": "feeling",
+      "operation": "ADD",
+      "target_id": null,
+      "merged_text": null,
+      "reason": "new answer-bearing feeling tied to the same event"
+    }},
+    {{
+      "id": "new_character_1",
+      "text": "Caroline is gaining confidence through LGBTQ community involvement.",
+      "type": "character",
+      "fact_type": null,
+      "operation": "ADD",
+      "target_id": null,
+      "merged_text": null,
+      "reason": "new grounded character-level summary supported by surviving facts"
+    }},
+    {{
+      "id": "new_event_1",
+      "text": "Caroline's support group experience made her feel accepted and encouraged future counseling-related plans.",
+      "type": "event",
+      "fact_type": null,
+      "operation": "ADD",
+      "target_id": null,
+      "merged_text": null,
+      "reason": "new grounded event-level summary"
+    }}
+  ]
+}}

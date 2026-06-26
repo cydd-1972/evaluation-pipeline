@@ -16,6 +16,7 @@ from openai import APIConnectionError, APIStatusError, OpenAI, RateLimitError
 
 from core.infra.env import require_openai_env
 from core.infra.api_failure_budget import is_countable_api_error
+from core.infra.llm_trace import append_llm_trace
 
 # 长跑时 gptplus5 可能 500/429/no_available_key，单请求最多重试 10 次
 _API_RETRY_ATTEMPTS = 10
@@ -391,6 +392,16 @@ class PipelineLLM:
                 continue
 
             last_raw = _message_text_for_json(response.choices[0].message)
+            append_llm_trace(
+                {
+                    "kind": "chat_json_response",
+                    "model": self.model,
+                    "attempt_index": attempt,
+                    "response_format": last_response_format,
+                    "prompt_preview": user_prompt[:1200],
+                    "raw_text": last_raw,
+                }
+            )
             if _BAD_JSON_REPLY.search(last_raw) or "{" not in last_raw:
                 user_prompt = (
                     f"{prompt}\n\n"
@@ -407,6 +418,17 @@ class PipelineLLM:
                     "raw_text": last_raw,
                 }
             except (ValueError, json.JSONDecodeError) as exc:
+                append_llm_trace(
+                    {
+                        "kind": "chat_json_parse_error",
+                        "model": self.model,
+                        "attempt_index": attempt,
+                        "response_format": last_response_format,
+                        "error": str(exc),
+                        "prompt_preview": user_prompt[:1200],
+                        "raw_text": last_raw,
+                    }
+                )
                 last_error = exc
                 user_prompt = (
                     f"{prompt}\n\n"

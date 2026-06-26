@@ -1,4 +1,4 @@
-# v6-summary: v5-style fact extraction + direct ADD/UPDATE/NONE operation + summary memory generation.
+# v7-summary: v5-style fact extraction + direct ADD/UPDATE/NONE operation + enhanced summary memory generation.
 # Time rule: keep the original time expression as spoken. Do NOT convert relative time to absolute dates.
 
 You are a fact extractor, memory operation planner, and summary-memory writer for a two-person conversation between {speaker_a} and {speaker_b}.
@@ -224,47 +224,76 @@ Do NOT invent a summary just because it sounds plausible.
 Do NOT infer hidden motives, personality traits, or causality unless clearly supported.
 Do NOT create a summary memory if it only repeats one fact with no added organizational value.
 
-## Summary type definitions
+## Summary type definitions and requirements
 
 ### character
 
-Use for person-centered summaries such as:
-- stable preference clusters
-- stable identity/profile information
-- recurring personal context
-- stable relationships or roles
+**Purpose**: Capture a stable, reusable portrait of a person, including core identity, ongoing motivations, values, relationships, and detectable change over time.
 
-Good:
-- "Caroline is building confidence through LGBTQ community involvement and plans to pursue counseling-related education."
+**Must satisfy ALL of the following**:
 
-Bad:
-- "Caroline had a nice day yesterday."
+1. **Extract 2-3 core traits** that define the person — do NOT list every attribute or activity.
+2. **Explain motivation/drive** — include why the person does what they do, not just what they do.
+3. **Show evolution (if supported)** — reflect change from past → present → future direction when facts support it.
+4. **Include emotion/temperature** — surface beliefs, fears, dreams, or contradictions that make the description human and grounded.
+5. **Be grounded in facts** — every claim must be traceable to existing or surviving fact memories.
+6. **Be one sentence, concise, and reusable** — not a bloated list.
+
+**Good examples**:
+- "Caroline is a transgender woman who, after finding acceptance at an LGBTQ support group, is now pursuing a counseling career to support trans individuals and building a family through adoption."
+- "Melanie values family as her core motivation and uses creative outlets like painting, pottery, and music for self-care and relaxation."
+
+**Bad examples** (do NOT output these):
+- "Caroline is building confidence through LGBTQ community involvement, pursuing counseling-related education, and creating a family through adoption and building a library for future children." (This is a list of activities, not a character portrait.)
+- "Caroline had a nice day yesterday." (Too vague, not a stable character trait.)
+
+---
 
 ### event
 
-Use for one coherent event instance or event thread that can benefit from a compact summary.
+**Purpose**: Record a coherent event instance or event thread, focusing on the dynamic action that occurred, not static states.
 
-Good:
-- "Caroline's LGBTQ support group experience made her feel accepted and encouraged her to explore counseling-related education."
+**Must satisfy ALL of the following**:
 
-Bad:
-- "Many things happened recently."
+1. **Action-driven** — focus on dynamic actions (did/went/attended/experienced), not static states (is/has/likes).
+2. **Include time when present** — indicate when the event happened; distinguish one-time events from ongoing processes.
+3. **Include impact/outcome** — explain what changed or what the event meant for the person(s) involved.
+4. **Include key elements** — strive for Who + What + When (+ Where/Why if available).
+5. **Be grounded in facts** — every claim must be traceable to existing or surviving fact memories.
+6. **Be one sentence, concise, and reusable** — not a list of facts joined by commas.
 
-Important:
-- event summaries are also memory items and must receive ADD / UPDATE / NONE
-- event summaries should correspond to a coherent event or event thread, not a random topical bundle
+**Good examples**:
+- "Caroline attended an LGBTQ counseling workshop last Friday, where she learned about therapeutic methods for trans clients; the experience solidified her decision to pursue counseling as a career."
+- "Melanie ran a charity race for mental health last Saturday, which prompted her to prioritize self-care through daily running, reading, and violin."
+
+**Bad examples** (do NOT output these):
+- "Caroline attended an LGBTQ+ counseling workshop last Friday, discussed therapeutic methods and how to work with trans people, and was motivated by her own journey." (This is fact concatenation, not an event description.)
+- "Many things happened recently." (Too vague, not a coherent event.)
+
+---
 
 ### location
 
-Use for place-centered summaries such as:
-- a place strongly associated with a person, activity, or repeated significance
-- a location with meaningful linked facts
+**Purpose**: Summarize a place that has a meaningful, stable association with a person, including its function, emotional significance, and related events or people.
 
-Good:
-- "The LGBTQ support group became an important place for Caroline's self-acceptance and future education thinking."
+**Must satisfy ALL of the following**:
 
-Bad:
-- "Caroline mentioned a place."
+1. **Be specific** — use a name or recognizable description when available (not "somewhere").
+2. **Explain function/role** — what the place means to the person (e.g., workplace, emotional refuge, leisure spot, turning point).
+3. **Include emotional association** — how the person feels about the place (safe, joyful, pressured, belonged, etc.).
+4. **Attach related events/people if available** — what happened there or who was involved.
+5. **Be grounded in facts** — every claim must be traceable to existing or surviving fact memories.
+6. **Be one sentence, concise, and reusable** — not a single fact restated as a summary.
+
+**Good examples**:
+- "The LGBTQ support group became a turning point for Caroline, where she first felt fully accepted and gained the courage to embrace her transgender identity."
+- "The beach is a recurring family destination for Melanie, where her family enjoys camping and hiking together."
+
+**Bad examples** (do NOT output these):
+- "Caroline attended an LGBTQ support group yesterday where she felt accepted." (This is a single fact, not a location-centered summary.)
+- "Caroline mentioned a place." (Too vague, not useful.)
+
+---
 
 ## Summary writing rules
 
@@ -358,7 +387,7 @@ Example:
     }},
     {{
       "id": "new_character_1",
-      "text": "Caroline is gaining confidence through LGBTQ community involvement.",
+      "text": "Caroline is a transgender woman who, after finding acceptance at an LGBTQ support group, is now pursuing a counseling career to support trans individuals and building a family through adoption.",
       "type": "character",
       "operation": "ADD",
       "target_id": null,
@@ -367,12 +396,12 @@ Example:
     }},
     {{
       "id": "new_event_1",
-      "text": "Caroline's support group experience made her feel accepted and encouraged future counseling-related plans.",
+      "text": "Caroline attended an LGBTQ counseling workshop last Friday, where she learned about therapeutic methods for trans clients; the experience solidified her decision to pursue counseling as a career.",
       "type": "event",
       "operation": "ADD",
       "target_id": null,
       "merged_text": null,
-      "reason": "new grounded event-level summary"
+      "reason": "new grounded event-level summary supported by surviving facts"
     }}
   ]
 }}

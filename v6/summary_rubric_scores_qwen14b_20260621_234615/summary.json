@@ -1,0 +1,13 @@
+{
+  "rubrics_path": "evaluation_pipeline\\v6\\rubrics_summary.txt",
+  "workspaces": [
+    "evaluation_pipeline/v6/workspaces/allconv_v6_addonly_20260618_qwen3-14b",
+    "evaluation_pipeline/v6/workspaces/allconv_v6_addonly_20260618_dpsk-flash"
+  ],
+  "llm_model": "Qwen/Qwen3-14B",
+  "task_count": 570,
+  "aggregated_rows": 62,
+  "output_dir": "evaluation_pipeline\\v6\\summary_rubric_scores_qwen14b_20260621_234615",
+  "half_only": true,
+  "max_conversations": null
+}

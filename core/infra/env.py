@@ -49,6 +49,8 @@ def _parse_env_file(path: Path) -> None:
             if deduped:
                 os.environ[key] = ",".join(deduped)
             continue
+        if key.startswith("DEEPSEEK_") and os.getenv(key, "").strip():
+            continue
         if any(key.startswith(prefix) for prefix in _PRESERVE_IF_SET_PREFIXES):
             if os.getenv(key, "").strip():
                 continue
